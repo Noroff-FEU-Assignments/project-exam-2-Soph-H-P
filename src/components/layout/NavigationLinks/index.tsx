@@ -1,6 +1,4 @@
 import { Button, Dropdown, Space } from 'antd';
-import React, { useContext } from 'react';
-// import AuthContext from '../../../context/AuthContext';
 import { useUserState } from '../../../context/UserContext';
 import { useAuthState } from '../../../context/AuthContext';
 import DownArrowSvg from '../../../svgs/DownArrowSvg';
@@ -19,7 +17,7 @@ const NavigationLinks = ({
 
   return (
     <NavLinksContainer>
-      <Dropdown overlay={menu} placement="bottomLeft">
+      <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']}>
         <Button>
           <Space>
             Sightings <DownArrowSvg />

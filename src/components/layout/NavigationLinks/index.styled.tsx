@@ -60,7 +60,7 @@ export const NavLinksContainer = styled.div`
     height: 18px;
   }
 
-  .ant-dropdown-menu {
-    border-radius: 10px;
+  .ant-dropdown-menu-item.ant-dropdown-menu-item-active.ant-dropdown-menu-item-only-child {
+    border-radius: 20px !important;
   }
 `;

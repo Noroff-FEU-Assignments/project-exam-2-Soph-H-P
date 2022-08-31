@@ -13,6 +13,24 @@ export const StyledForm = styled.form`
     flex-direction: column;
     align-items: start;
   }
+
+  .ant-input,
+  label {
+    font-size: 18px;
+  }
+
+  .ant-input {
+    font-weight: 300;
+    padding: 15px;
+  }
+
+  .ant-input-affix-wrapper {
+    padding: 15px;
+  }
+
+  .ant-space.ant-space-vertical {
+    width: 100%;
+  }
 `;
 
 export const StyledSubmitButton = styled.button``;

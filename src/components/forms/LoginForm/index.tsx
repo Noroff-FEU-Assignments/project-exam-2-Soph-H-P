@@ -3,12 +3,14 @@ import { useAuthState } from '../../../context/AuthContext';
 import { useUserState } from '../../../context/UserContext';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API, { accessTokenUrlEndpoint } from '../../../constants/api';
 import { StyledForm, StyledSubmitButton } from './index.styled';
 import FormError from '../FormError';
+import { Input, Space } from 'antd';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 const schema = yup.object().shape({
   identifier: yup.string().required('Please enter your username'),
@@ -81,14 +83,34 @@ const LoginForm = () => {
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <fieldset disabled={submitting}>
-        <label htmlFor="identifier">Username</label>
-        <input placeholder="Username" {...register('identifier')} />
-        {errors.username?.message && <FormError>{errors.username.message.toString()}</FormError>}
-        <label htmlFor="password">Password</label>
-        <input placeholder="Password" {...register('password')} type="password" />
-        {errors.password?.message && <FormError>{errors.password.message.toString()}</FormError>}
-        {loginError && <FormError>{loginError}</FormError>}
-        <StyledSubmitButton>{submitting ? 'Logging in...' : 'Login'}</StyledSubmitButton>
+        <Space direction="vertical" size={35}>
+          <Space direction="vertical" size={10}>
+            <label htmlFor="identifier">Username</label>
+
+            <Input placeholder="Username" {...register('identifier')} />
+
+            {/* <input placeholder="Username" {...register('identifier')} /> */}
+            {errors.username?.message && (
+              <FormError>{errors.username.message.toString()}</FormError>
+            )}
+          </Space>
+
+          <Space direction="vertical" size={10}>
+            <label htmlFor="password">Password</label>
+            {/* <input placeholder="Password" {...register('password')} type="password" /> */}
+            <Input.Password
+              {...register('password')}
+              placeholder="input password"
+              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+              onChange={(e) => console.log(e)}
+            />
+            {errors.password?.message && (
+              <FormError>{errors.password.message.toString()}</FormError>
+            )}
+          </Space>
+          {loginError && <FormError>{loginError}</FormError>}
+          <StyledSubmitButton>{submitting ? 'Logging in...' : 'Login'}</StyledSubmitButton>
+        </Space>
       </fieldset>
     </StyledForm>
   );
