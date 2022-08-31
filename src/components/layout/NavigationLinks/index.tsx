@@ -1,6 +1,8 @@
 import { Button, Dropdown, Space } from 'antd';
 import React, { useContext } from 'react';
-import AuthContext from '../../../context/AuthContext';
+// import AuthContext from '../../../context/AuthContext';
+import { useUserState } from '../../../context/UserContext';
+import { useAuthState } from '../../../context/AuthContext';
 import DownArrowSvg from '../../../svgs/DownArrowSvg';
 import menu from '../DropdownMenu';
 import { NavLinksContainer, StyledNavLink } from './index.styled';
@@ -12,7 +14,9 @@ const NavigationLinks = ({
   handleOpenMenu: () => void;
   menuOpen: boolean;
 }) => {
-  const [authToken] = useContext(AuthContext);
+  const { authToken } = useAuthState();
+  const { userInfo } = useUserState();
+
   return (
     <NavLinksContainer>
       <Dropdown overlay={menu} placement="bottomLeft">
@@ -51,6 +55,7 @@ const NavigationLinks = ({
         }}
       >
         {authToken ? 'Logout' : 'Login'}
+        {userInfo ? userInfo.username : ''}
       </StyledNavLink>
     </NavLinksContainer>
   );

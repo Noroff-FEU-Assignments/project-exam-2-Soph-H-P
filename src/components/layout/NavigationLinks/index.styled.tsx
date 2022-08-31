@@ -59,4 +59,8 @@ export const NavLinksContainer = styled.div`
     width: 18px;
     height: 18px;
   }
+
+  .ant-dropdown-menu {
+    border-radius: 10px;
+  }
 `;

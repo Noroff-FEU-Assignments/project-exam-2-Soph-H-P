@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { createContext, useContext, Dispatch, SetStateAction } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
-const AuthContext = React.createContext([null, () => {}]);
+const AuthContext = createContext({
+  authToken: {} as string | null,
+  setAuthToken: {} as Dispatch<SetStateAction<string | null>>,
+});
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+const AuthStateProvider = ({ children }: { children: React.ReactNode }) => {
   const [authToken, setAuthToken] = useLocalStorage('auth', null);
-
-  return <AuthContext.Provider value={[authToken, setAuthToken]}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ authToken, setAuthToken }}>{children}</AuthContext.Provider>
+  );
 };
 
-export default AuthContext;
+const useAuthState = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('UserContext must be used within a GlobalStateContext');
+  }
+  return context;
+};
+
+export { AuthStateProvider, useAuthState };

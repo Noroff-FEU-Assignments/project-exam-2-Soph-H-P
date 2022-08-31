@@ -15,30 +15,36 @@ import SingleSightingPage from './Pages/SingleSightingPage';
 import GlobalStyle from './styles/GlobalStyle';
 import theme from './styles/theme';
 import './antd-theme/antd-customised.css';
+import { AuthStateProvider } from './context/AuthContext';
+import { UserStateProvider } from './context/UserContext';
 
 function App() {
   return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Navagation />
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/add-sighting" element={<AddSighting />} />
-            <Route path="/sighting/:id" element={<SingleSightingPage />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/sightings-map" element={<SightingsMap />} />
-            <Route path="/my-sightings" element={<MySightings />} />
-            <Route path="/admin/moderate-sightings" element={<ModerateSightings />} />
-            <Route path="/admin/edit-users" element={<EditUsers />} />
-            <Route path="/admin/edit-sighting" element={<EditSighting />} />
-          </Routes>
-        </div>
-      </ThemeProvider>
-    </Router>
+    <AuthStateProvider>
+      <UserStateProvider>
+        <Router>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <Navagation />
+            <div className="App">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/add-sighting" element={<AddSighting />} />
+                <Route path="/sighting/:id" element={<SingleSightingPage />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/sightings-map" element={<SightingsMap />} />
+                <Route path="/my-sightings" element={<MySightings />} />
+                <Route path="/admin/moderate-sightings" element={<ModerateSightings />} />
+                <Route path="/admin/edit-users" element={<EditUsers />} />
+                <Route path="/admin/edit-sighting" element={<EditSighting />} />
+              </Routes>
+            </div>
+          </ThemeProvider>
+        </Router>
+      </UserStateProvider>
+    </AuthStateProvider>
   );
 }
 
