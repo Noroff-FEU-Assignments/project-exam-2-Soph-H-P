@@ -1,7 +1,7 @@
 const colors = {
   blueGreen: '#1C5E5E',
-  lightBlueGreen: '#1C5E5E',
-  darkBlueGreen: '#1C5E5E',
+  lightBlueGreen: '#DEF3F3',
+  darkBlueGreen: '#173540',
   green: '#84B026',
   lightGreen: '#F0F6E2',
   brown: '#635142',
