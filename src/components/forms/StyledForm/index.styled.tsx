@@ -1,7 +1,8 @@
+import { Form } from 'antd';
 import styled from 'styled-components';
 import theme from '../../../styles/theme';
 
-export const StyledForm = styled.form`
+export const StyledForm = styled(Form)`
   max-width: 500px;
   margin: 0px auto;
   background: ${theme.colors.brightWhite};

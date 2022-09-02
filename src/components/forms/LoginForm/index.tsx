@@ -1,21 +1,13 @@
 import { useState } from 'react';
 import { useAuthState } from '../../../context/AuthContext';
 import { useUserState } from '../../../context/UserContext';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import API, { accessTokenUrlEndpoint } from '../../../constants/api';
-import { StyledForm, StyledSubmitButton } from './index.styled';
+import { StyledForm } from '../StyledForm/index.styled';
 import FormError from '../FormError';
-import { Input, Space } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-
-const schema = yup.object().shape({
-  identifier: yup.string().required('Please enter your username'),
-  password: yup.string().required('Please enter your password'),
-});
 
 const LoginForm = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -25,15 +17,7 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
-  const onSubmit = async (data: FieldValues) => {
+  const onSubmit = async (data: any) => {
     setSubmitting(true);
     setLoginError(null);
     try {
@@ -68,7 +52,7 @@ const LoginForm = () => {
     return (
       <StyledForm>
         <p style={{ textAlign: 'center' }}>You are already logged in</p>
-        <StyledSubmitButton
+        <Button
           onClick={() => {
             setAuthToken(null);
             setUserInfo(null);
@@ -76,42 +60,50 @@ const LoginForm = () => {
           }}
         >
           Logout
-        </StyledSubmitButton>
+        </Button>
       </StyledForm>
     );
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <fieldset disabled={submitting}>
-        <Space direction="vertical" size={35}>
-          <Space direction="vertical" size={10}>
-            <label htmlFor="identifier">Username</label>
-
-            <Input placeholder="Username" {...register('identifier')} />
-
-            {/* <input placeholder="Username" {...register('identifier')} /> */}
-            {errors.username?.message && (
-              <FormError>{errors.username.message.toString()}</FormError>
-            )}
-          </Space>
-
-          <Space direction="vertical" size={10}>
-            <label htmlFor="password">Password</label>
-            {/* <input placeholder="Password" {...register('password')} type="password" /> */}
-            <Input.Password
-              {...register('password')}
-              placeholder="input password"
-              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-              onChange={(e) => console.log(e)}
-            />
-            {errors.password?.message && (
-              <FormError>{errors.password.message.toString()}</FormError>
-            )}
-          </Space>
-          {loginError && <FormError>{loginError}</FormError>}
-          <StyledSubmitButton>{submitting ? 'Logging in...' : 'Login'}</StyledSubmitButton>
-        </Space>
-      </fieldset>
+    <StyledForm
+      name="normal_login"
+      className="login-form"
+      initialValues={{ remember: true }}
+      onFinish={onSubmit}
+    >
+      <Form.Item
+        name="identifier"
+        rules={[
+          {
+            type: 'email',
+            message: 'This is not valid E-mail!',
+          },
+          { required: true, message: 'Please input your email' },
+        ]}
+      >
+        <Input placeholder="example@gmail.com" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[{ required: true, message: 'Please input your Password' }]}
+      >
+        <Input.Password
+          placeholder="password"
+          iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+        />
+      </Form.Item>
+      {/* <Form.Item>
+        <a className="login-form-forgot" href="">
+          Forgot password
+        </a>
+      </Form.Item> */}
+      {loginError && <FormError>{loginError}</FormError>}
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          {submitting ? 'Logging in...' : 'Login'}
+        </Button>
+        {/* Or <a href="">register now!</a> */}
+      </Form.Item>
     </StyledForm>
   );
 };
