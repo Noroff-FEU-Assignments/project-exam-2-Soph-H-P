@@ -13,11 +13,6 @@ const menu = (
         label: (
           <StyledNavLink
             to="/sightings-map"
-            onClick={() => {
-              // if (menuOpen) {
-              //   handleOpenMenu();
-              // }
-            }}
           >
             <MapIcon />
             Sightings Map
@@ -29,11 +24,6 @@ const menu = (
         label: (
           <StyledNavLink
             to="/add-sighting"
-            onClick={() => {
-              // if (menuOpen) {
-              //   handleOpenMenu();
-              // }
-            }}
           >
             <AddSvg />
             Add Sighting
@@ -45,11 +35,6 @@ const menu = (
         label: (
           <StyledNavLink
             to="/my-sightings"
-            onClick={() => {
-              // if (menuOpen) {
-              //   handleOpenMenu();
-              // }
-            }}
           >
             <BinocularsSvg />
             My Sightings
@@ -61,11 +46,6 @@ const menu = (
         label: (
           <StyledNavLink
             to="/admin/moderate-sightings"
-            onClick={() => {
-              // if (menuOpen) {
-              //   handleOpenMenu();
-              // }
-            }}
           >
             <ModerateSvg />
             Moderate Sightings

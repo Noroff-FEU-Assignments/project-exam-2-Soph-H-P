@@ -15,9 +15,11 @@ const NavigationLinks = ({
   const { authToken } = useAuthState();
   const { userInfo } = useUserState();
 
+  console.log(userInfo);
+
   return (
     <NavLinksContainer>
-      <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']}>
+      <Dropdown overlay={menu} placement="bottomLeft">
         <Button>
           <Space>
             Sightings <DownArrowSvg />

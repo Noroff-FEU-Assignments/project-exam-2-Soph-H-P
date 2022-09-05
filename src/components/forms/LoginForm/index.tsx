@@ -66,11 +66,10 @@ const LoginForm = () => {
 
   return (
     <StyledForm
-      name="normal_login"
-      className="login-form"
       initialValues={{ remember: true }}
       onFinish={onSubmit}
     >
+      <label htmlFor="identifier">Email</label>
       <Form.Item
         name="identifier"
         rules={[
@@ -83,6 +82,7 @@ const LoginForm = () => {
       >
         <Input placeholder="example@gmail.com" />
       </Form.Item>
+      <label htmlFor="password">Password</label>
       <Form.Item
         name="password"
         rules={[{ required: true, message: 'Please input your Password' }]}
