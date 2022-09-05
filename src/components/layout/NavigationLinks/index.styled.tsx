@@ -9,14 +9,10 @@ export const StyledNavLink = styled(NavLink)`
   font-weight: bold;
   color: ${theme.colors.brightWhite} !important;
   padding: 6px 14px;
-  margin: 10px;
   border-radius: 10px;
   display: flex;
   align-items: center;
-
-  svg {
-    margin-right: 10px;
-  }
+  height: min-content;
 
   &:hover,
   &.active,
@@ -27,7 +23,8 @@ export const StyledNavLink = styled(NavLink)`
 
 export const NavLinksContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 
   button {
     margin: auto;
@@ -53,14 +50,17 @@ export const NavLinksContainer = styled.div`
     font-weight: bold;
     display: flex;
     justify-content: center;
-  }
-
-  svg {
-    width: 18px;
-    height: 18px;
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   .ant-dropdown-menu-item.ant-dropdown-menu-item-active.ant-dropdown-menu-item-only-child {
     border-radius: 20px !important;
+  }
+
+  a:not(:last-child), button {
+  margin-right: 20px;
   }
 `;

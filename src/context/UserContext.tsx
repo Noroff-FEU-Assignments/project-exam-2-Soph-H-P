@@ -1,7 +1,7 @@
 import React, { createContext, useContext, Dispatch, SetStateAction } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
-interface userInterface {
+export interface UserInterface {
   blocked: boolean;
   confirmed: boolean;
   createdAt: string;
@@ -11,11 +11,12 @@ interface userInterface {
   sightings: number | null;
   updatedAt: string;
   username: string;
+  userRole: string;
 }
 
 const UserContext = createContext({
-  userInfo: {} as Partial<userInterface | null>,
-  setUserInfo: {} as Dispatch<SetStateAction<Partial<userInterface | null>>>,
+  userInfo: {} as Partial<UserInterface | null>,
+  setUserInfo: {} as Dispatch<SetStateAction<Partial<UserInterface | null>>>,
 });
 
 const UserStateProvider = ({ children }: { children: React.ReactNode }) => {

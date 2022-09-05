@@ -2,8 +2,9 @@ import { Button, Dropdown, Space } from 'antd';
 import { useUserState } from '../../../context/UserContext';
 import { useAuthState } from '../../../context/AuthContext';
 import DownArrowSvg from '../../../svgs/DownArrowSvg';
-import menu from '../DropdownMenu';
+import { menuAdmin, menuMember, menuPublic } from '../DropdownMenu';
 import { NavLinksContainer, StyledNavLink } from './index.styled';
+import ProfileLink from '../ProfileLink';
 
 const NavigationLinks = ({
   handleOpenMenu,
@@ -19,7 +20,12 @@ const NavigationLinks = ({
 
   return (
     <NavLinksContainer>
-      <Dropdown overlay={menu} placement="bottomLeft">
+      <Dropdown
+        overlay={
+          userInfo === null ? menuPublic : userInfo.userRole === 'admin' ? menuAdmin : menuMember
+        }
+        placement="bottomLeft"
+      >
         <Button>
           <Space>
             Sightings <DownArrowSvg />
@@ -54,8 +60,7 @@ const NavigationLinks = ({
           }
         }}
       >
-        {authToken ? 'Logout' : 'Login'}
-        {userInfo ? userInfo.username : ''}
+        {authToken ? <ProfileLink userInfo={userInfo} /> : 'Login'}
       </StyledNavLink>
     </NavLinksContainer>
   );

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 export const NavContainer = styled.div<{ $windowWidth: number }>`
   display: flex;
   justify-content: space-between;
+  margin: 5px;
 `;
 
 export const DesktopNav = styled.nav``;
