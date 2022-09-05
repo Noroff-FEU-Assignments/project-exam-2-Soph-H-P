@@ -10,7 +10,7 @@ import useLoginUser from '../../../hooks/useLoginUser';
 const LoginForm = () => {
   const [form] = Form.useForm();
   const { authToken, setAuthToken } = useAuthState();
-  const { userInfo, setUserInfo } = useUserState();
+  const { setUserInfo } = useUserState();
 
   const { loginError, isSubmitting, submitForm } = useLoginUser(form);
 
