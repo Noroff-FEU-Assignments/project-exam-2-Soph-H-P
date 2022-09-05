@@ -29,6 +29,7 @@ export const menuPublic = (
     ]}
   />
 );
+
 export const menuMember = (
   <Menu
     items={[
@@ -62,6 +63,7 @@ export const menuMember = (
     ]}
   />
 );
+
 export const menuAdmin = (
   <Menu
     items={[

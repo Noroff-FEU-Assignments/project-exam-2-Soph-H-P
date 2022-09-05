@@ -14,6 +14,10 @@ export const StyledNavLink = styled(NavLink)`
   align-items: center;
   height: min-content;
 
+  svg {
+    margin-right: 10px;
+  }
+
   &:hover,
   &.active,
   &:focus {

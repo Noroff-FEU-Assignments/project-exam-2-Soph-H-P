@@ -15,6 +15,6 @@ export const ProfileContainer = styled.div`
   svg {
     height: 28px;
     width: 28x;
-    margin-right: 0;
+    margin-right: 0 !important;
   }
 `;
