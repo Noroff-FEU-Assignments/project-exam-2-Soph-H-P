@@ -5,17 +5,15 @@ import { StyledForm } from '../StyledForm/index.styled';
 import FormError from '../FormError';
 import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import useLoginUser from '../../../hooks/useLoginUser';
+import useRegisterUser from '../../../hooks/useRegisterUser';
 
 const LoginForm = () => {
-  const [form] = Form.useForm();
   const { authToken, setAuthToken } = useAuthState();
-  const { userInfo, setUserInfo } = useUserState();
-
-  const { loginError, isSubmitting, submitForm } = useLoginUser(form);
+  const { setUserInfo } = useUserState();
 
   const navigate = useNavigate();
-
+  const [form] = Form.useForm();
+  const { registerError, isSubmitting, submitForm } = useRegisterUser(form);
 
   if (authToken)
     return (
@@ -34,10 +32,26 @@ const LoginForm = () => {
     );
 
   return (
-    <StyledForm initialValues={{ remember: true }} onFinish={submitForm} form={form}>
-      <label htmlFor="identifier">Email</label>
+    <StyledForm form={form} initialValues={{ remember: true }} onFinish={submitForm}>
+      <label htmlFor="username">Username</label>
       <Form.Item
-        name="identifier"
+        name="username"
+        rules={[
+          {
+            pattern: new RegExp(/^[A-Za-z0-9][A-Za-z0-9]*$/),
+            message: 'Please do not use spaces or symbols in your username',
+          },
+          {
+            required: true,
+            message: 'Please input your username',
+          },
+        ]}
+      >
+        <Input type="text" placeholder="BlueFootedSophie" />
+      </Form.Item>
+      <label htmlFor="email">Email</label>
+      <Form.Item
+        name="email"
         rules={[
           {
             type: 'email',
@@ -58,19 +72,14 @@ const LoginForm = () => {
           iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
         />
       </Form.Item>
-      {/* <Form.Item>
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-      </Form.Item> */}
-      {loginError && <FormError>{loginError}</FormError>}
+      {registerError && <FormError>{registerError}</FormError>}
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
-          {isSubmitting ? 'Logging in...' : 'Login'}
+          {isSubmitting ? 'Registering...' : 'Register'}
         </Button>
         Or{' '}
-        <Button onClick={() => navigate('/register')} type="ghost">
-          Register now
+        <Button onClick={() => navigate('/login')} type="ghost">
+          Sign in
         </Button>
       </Form.Item>
     </StyledForm>

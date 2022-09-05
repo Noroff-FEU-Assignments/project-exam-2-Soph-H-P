@@ -17,6 +17,7 @@ import theme from './styles/theme';
 import './antd-theme/antd-customised.css';
 import { AuthStateProvider } from './context/AuthContext';
 import { UserStateProvider } from './context/UserContext';
+import RegisterUser from './Pages/RegisterUser';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<RegisterUser />} />
                 <Route path="/sightings-map" element={<SightingsMap />} />
                 <Route path="/my-sightings" element={<MySightings />} />
                 <Route path="/admin/moderate-sightings" element={<ModerateSightings />} />
