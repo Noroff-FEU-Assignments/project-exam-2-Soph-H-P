@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { NavLink } from 'react-router-dom';
 import theme from '../../../styles/theme';
@@ -25,7 +25,7 @@ export const StyledNavLink = styled(NavLink)`
   }
 `;
 
-export const NavLinksContainer = styled.div`
+export const NavLinksContainer = styled.div<{ $isMobile?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,7 +64,28 @@ export const NavLinksContainer = styled.div`
     border-radius: 20px !important;
   }
 
-  a:not(:last-child), button {
-  margin-right: 20px;
+  a:not(:last-child),
+  button {
+    margin-right: 20px;
   }
+
+  ${({ $isMobile }) =>
+    $isMobile &&
+    css`
+      a {
+        margin-bottom: 30px;
+      }
+
+      flex-direction: column;
+      align-items: end;
+
+      svg {
+        margin-right: 0px;
+        margin-left: 10px;
+      }
+
+      a:last-child {
+        margin-right: 20px;
+      }
+    `}
 `;

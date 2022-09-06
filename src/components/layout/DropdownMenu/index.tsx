@@ -5,104 +5,52 @@ import MapIcon from '../../../svgs/MapIcon';
 import ModerateSvg from '../../../svgs/ModerateSvg';
 import { StyledNavLink } from '../NavigationLinks/index.styled';
 
-export const menuPublic = (
-  <Menu
-    items={[
-      {
-        key: '1',
-        label: (
-          <StyledNavLink to="/sightings-map">
-            <MapIcon />
-            Sightings Map
-          </StyledNavLink>
-        ),
-      },
-      {
-        key: '2',
-        label: (
-          <StyledNavLink to="/add-sighting">
-            <AddSvg />
-            Add Sighting
-          </StyledNavLink>
-        ),
-      },
-    ]}
-  />
-);
+const menuItems = [
+  {
+    key: '1',
+    visibility: ['public', 'member', 'admin'],
+    label: (
+      <StyledNavLink to="/sightings-map">
+        <MapIcon />
+        Sightings Map
+      </StyledNavLink>
+    ),
+  },
+  {
+    key: '2',
+    visibility: ['public', 'member', 'admin'],
+    label: (
+      <StyledNavLink to="/add-sighting">
+        <AddSvg />
+        Add Sighting
+      </StyledNavLink>
+    ),
+  },
+  {
+    key: '3',
+    visibility: ['member', 'admin'],
+    label: (
+      <StyledNavLink to="/my-sightings">
+        <BinocularsSvg />
+        My Sightings
+      </StyledNavLink>
+    ),
+  },
+  {
+    key: '4',
+    visibility: ['admin'],
+    label: (
+      <StyledNavLink to="/admin/moderate-sightings">
+        <ModerateSvg />
+        Moderate Sightings
+      </StyledNavLink>
+    ),
+  },
+];
 
-export const menuMember = (
-  <Menu
-    items={[
-      {
-        key: '1',
-        label: (
-          <StyledNavLink to="/sightings-map">
-            <MapIcon />
-            Sightings Map
-          </StyledNavLink>
-        ),
-      },
-      {
-        key: '2',
-        label: (
-          <StyledNavLink to="/add-sighting">
-            <AddSvg />
-            Add Sighting
-          </StyledNavLink>
-        ),
-      },
-      {
-        key: '3',
-        label: (
-          <StyledNavLink to="/my-sightings">
-            <BinocularsSvg />
-            My Sightings
-          </StyledNavLink>
-        ),
-      },
-    ]}
-  />
-);
+export const DropdownMenuItems = (userRole: string) => {
+  const itemsArray = menuItems.filter((item) => item.visibility.includes(userRole));
 
-export const menuAdmin = (
-  <Menu
-    items={[
-      {
-        key: '1',
-        label: (
-          <StyledNavLink to="/sightings-map">
-            <MapIcon />
-            Sightings Map
-          </StyledNavLink>
-        ),
-      },
-      {
-        key: '2',
-        label: (
-          <StyledNavLink to="/add-sighting">
-            <AddSvg />
-            Add Sighting
-          </StyledNavLink>
-        ),
-      },
-      {
-        key: '3',
-        label: (
-          <StyledNavLink to="/my-sightings">
-            <BinocularsSvg />
-            My Sightings
-          </StyledNavLink>
-        ),
-      },
-      {
-        key: '4',
-        label: (
-          <StyledNavLink to="/admin/moderate-sightings">
-            <ModerateSvg />
-            Moderate Sightings
-          </StyledNavLink>
-        ),
-      },
-    ]}
-  />
-);
+  return <Menu items={itemsArray} />;
+};
+

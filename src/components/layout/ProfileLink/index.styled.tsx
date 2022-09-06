@@ -14,7 +14,21 @@ export const ProfileContainer = styled.div`
 
   svg {
     height: 28px;
-    width: 28x;
+    width: 28x !important;
     margin-right: 0 !important;
+  }
+
+  @media (max-width: 700px) {
+    flex-direction: row-reverse;
+
+    span {
+      font-family: ${theme.text.headingFont};
+      font-size: 18px;
+    }
+
+    svg {
+      height: 25px;
+      width: 25x;
+    }
   }
 `;

@@ -6,14 +6,22 @@ const RoundButton = ({
   color = theme.colors.primaryColor,
   icon,
   onClick,
+  type,
 }: {
   color?: string;
   icon: React.ReactNode;
   onClick: () => void;
+  type: "link" | "text" | "default" | "ghost" | "primary" | "dashed" | undefined;
 }) => {
   return (
-    <StyledButton onClick={onClick} $color={color}>
-      {icon}
+    <StyledButton
+      onClick={onClick}
+      $color={color}
+      shape="circle"
+      icon={icon}
+      size={'large'}
+      type={type}
+    >
     </StyledButton>
   );
 };

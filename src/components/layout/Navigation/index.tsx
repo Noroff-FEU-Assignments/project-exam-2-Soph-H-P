@@ -1,15 +1,17 @@
+import { Drawer } from 'antd';
 import { useEffect, useState } from 'react';
+import theme from '../../../styles/theme';
 import CloseSvg from '../../../svgs/CloseSvg';
 import MenuSvg from '../../../svgs/MenuSvg';
 import RoundButton from '../../common/buttons/RoundButton';
 import Logo from '../Logo';
-import NavigationLinks from '../NavigationLinks';
+import { DesktopNavigationLinks, MobileNavigationLinks } from '../NavigationLinks';
 
 import { StyledLogo, NavContainer, MobileNav, DesktopNav } from './index.styled';
 
 const Navagation = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleResizeWindow = () => {
     setWindowWidth(window.innerWidth);
@@ -20,38 +22,34 @@ const Navagation = () => {
     return () => window.removeEventListener('resize', handleResizeWindow);
   }, []);
 
-  const handleOpenMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   return (
     <NavContainer $windowWidth={windowWidth}>
-      <StyledLogo
-        to="/"
-        onClick={() => {
-          if (menuOpen) {
-            handleOpenMenu();
-          }
-        }}
-        aria-label="home"
-      >
+      <StyledLogo to="/"  onClick={() => setIsOpen(false)} aria-label="home">
         <Logo />
       </StyledLogo>
 
-      {windowWidth <= 600 && (
-        <MobileNav $isOpen={menuOpen}>
-          <NavigationLinks handleOpenMenu={handleOpenMenu} menuOpen={menuOpen} />
+      {windowWidth <= 700 && (
+        <MobileNav>
+          <RoundButton
+            type="primary"
+            icon={!isOpen ? <MenuSvg /> : <CloseSvg />}
+            onClick={() => setIsOpen(!isOpen)}
+          />
+          <Drawer
+            drawerStyle={{ backgroundColor: theme.colors.primaryColor, padding: '30px 0px' }}
+            headerStyle={{ display: 'none' }}
+            style={{ top: '50px' }}
+            placement="right"
+            onClose={() => setIsOpen(false)}
+            visible={isOpen}
+          >
+            <MobileNavigationLinks setIsOpen={setIsOpen} />
+          </Drawer>
         </MobileNav>
       )}
-      {windowWidth <= 600 && (
-        <RoundButton
-          onClick={handleOpenMenu}
-          icon={menuOpen ? <MenuSvg /> : <CloseSvg />}
-        ></RoundButton>
-      )}
-      {windowWidth >= 601 && (
+      {windowWidth >= 701 && (
         <DesktopNav>
-          <NavigationLinks handleOpenMenu={handleOpenMenu} menuOpen={menuOpen} />
+          <DesktopNavigationLinks setIsOpen={setIsOpen} />
         </DesktopNav>
       )}
     </NavContainer>

@@ -4,6 +4,7 @@ import theme from '../../../styles/theme';
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  padding: 5px;
 
   svg {
     padding-right: 1rem;
@@ -11,8 +12,23 @@ export const LogoContainer = styled.div`
 
   h1 {
     font-size: 24px;
-    max-width: 100px;
+    width: 100px;
     margin: 0px;
     color: ${theme.colors.brightWhite};
+  }
+
+  @media (max-width: 700px) {
+    align-items: end;
+    h1 {
+      font-size: 18px;
+      margin: 0 auto;
+      width: auto;
+    }
+
+    svg {
+      padding-right: 0px;
+      width: 40px;
+      height: 40px;
+    }
   }
 `;

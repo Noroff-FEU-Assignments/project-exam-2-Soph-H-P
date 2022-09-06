@@ -2,27 +2,32 @@ import { Button, Dropdown, Space } from 'antd';
 import { useUserState } from '../../../context/UserContext';
 import { useAuthState } from '../../../context/AuthContext';
 import DownArrowSvg from '../../../svgs/DownArrowSvg';
-import { menuAdmin, menuMember, menuPublic } from '../DropdownMenu';
+import { DropdownMenuItems } from '../DropdownMenu';
 import { NavLinksContainer, StyledNavLink } from './index.styled';
 import ProfileLink from '../ProfileLink';
+import MapIcon from '../../../svgs/MapIcon';
+import AddSvg from '../../../svgs/AddSvg';
+import BinocularsSvg from '../../../svgs/BinocularsSvg';
+import ModerateSvg from '../../../svgs/ModerateSvg';
+import { Dispatch, SetStateAction } from 'react';
 
-const NavigationLinks = ({
-  handleOpenMenu,
-  menuOpen,
+export const DesktopNavigationLinks = ({
+  setIsOpen,
 }: {
-  handleOpenMenu: () => void;
-  menuOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { authToken } = useAuthState();
   const { userInfo } = useUserState();
-
-  console.log(userInfo);
 
   return (
     <NavLinksContainer>
       <Dropdown
         overlay={
-          userInfo === null ? menuPublic : userInfo.userRole === 'admin' ? menuAdmin : menuMember
+          userInfo === null
+            ? DropdownMenuItems('public')
+            : userInfo.userRole === 'admin'
+            ? DropdownMenuItems('admin')
+            : DropdownMenuItems('member')
         }
         placement="bottomLeft"
       >
@@ -32,38 +37,56 @@ const NavigationLinks = ({
           </Space>
         </Button>
       </Dropdown>
-      <StyledNavLink
-        to="/events"
-        onClick={() => {
-          if (menuOpen) {
-            handleOpenMenu();
-          }
-        }}
-      >
-        Events
-      </StyledNavLink>
-      <StyledNavLink
-        to="/contact"
-        onClick={() => {
-          if (menuOpen) {
-            handleOpenMenu();
-          }
-        }}
-      >
-        Contact
-      </StyledNavLink>
-      <StyledNavLink
-        to="/login"
-        onClick={() => {
-          if (menuOpen) {
-            handleOpenMenu();
-          }
-        }}
-      >
+      <StyledNavLink to="/events">Events</StyledNavLink>
+      <StyledNavLink to="/contact">Contact</StyledNavLink>
+      <StyledNavLink to="/login">
         {authToken ? <ProfileLink userInfo={userInfo} /> : 'Login'}
       </StyledNavLink>
     </NavLinksContainer>
   );
 };
 
-export default NavigationLinks;
+export const MobileNavigationLinks = ({
+  setIsOpen,
+}: {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}) => {
+  const { authToken } = useAuthState();
+  const { userInfo } = useUserState();
+
+  console.log(userInfo);
+
+  return (
+    <NavLinksContainer $isMobile={true}>
+      <StyledNavLink to="/sightings-map" onClick={() => setIsOpen(false)}>
+        Sightings Map
+        <MapIcon />
+      </StyledNavLink>
+      <StyledNavLink to="/add-sighting" onClick={() => setIsOpen(false)}>
+        Add Sighting
+        <AddSvg />
+      </StyledNavLink>
+      {(userInfo?.userRole === 'member' || userInfo?.userRole === 'admin') && (
+        <StyledNavLink to="/my-sightings" onClick={() => setIsOpen(false)}>
+          My Sightings
+          <BinocularsSvg />
+        </StyledNavLink>
+      )}
+      {userInfo?.userRole === 'admin' && (
+        <StyledNavLink to="/admin/moderate-sightings" onClick={() => setIsOpen(false)}>
+          Moderate Sightings
+          <ModerateSvg />
+        </StyledNavLink>
+      )}
+      <StyledNavLink to="/events" onClick={() => setIsOpen(false)}>
+        Events
+      </StyledNavLink>
+      <StyledNavLink to="/contact" onClick={() => setIsOpen(false)}>
+        Contact
+      </StyledNavLink>
+      <StyledNavLink to="/login" onClick={() => setIsOpen(false)}>
+        {authToken ? <ProfileLink userInfo={userInfo} /> : 'Login'}
+      </StyledNavLink>
+    </NavLinksContainer>
+  );
+};
