@@ -1,8 +1,9 @@
 import React from 'react'
+import { PageContainer } from '../components/layout/PageContainer/index.styled'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <PageContainer>Home</PageContainer>
   )
 }
 

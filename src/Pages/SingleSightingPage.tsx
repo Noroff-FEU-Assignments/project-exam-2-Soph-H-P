@@ -1,8 +1,9 @@
 import React from 'react'
+import { PageContainer } from '../components/layout/PageContainer/index.styled'
 
 const SingleSightingPage = () => {
   return (
-    <div>SingleSightingPage</div>
+    <PageContainer>SingleSightingPage</PageContainer>
   )
 }
 

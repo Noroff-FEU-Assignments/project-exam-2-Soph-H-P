@@ -18,6 +18,7 @@ import './antd-theme/antd-customised.css';
 import { AuthStateProvider } from './context/AuthContext';
 import { UserStateProvider } from './context/UserContext';
 import RegisterUser from './Pages/RegisterUser';
+import Footer from './components/layout/Footer';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/admin/edit-sighting" element={<EditSighting />} />
               </Routes>
             </div>
+            <Footer />
           </ThemeProvider>
         </Router>
       </UserStateProvider>

@@ -28,10 +28,9 @@ export const StyledNavLink = styled(NavLink)`
 export const NavLinksContainer = styled.div<{ $isMobile?: boolean }>`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: end;
 
   button {
-    margin: auto;
     display: flex;
     justify-content: center;
     height: unset;

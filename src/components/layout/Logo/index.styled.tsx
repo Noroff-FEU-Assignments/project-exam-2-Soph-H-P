@@ -11,7 +11,8 @@ export const LogoContainer = styled.div`
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 21px;
+    line-height: 24px;
     width: 100px;
     margin: 0px;
     color: ${theme.colors.brightWhite};

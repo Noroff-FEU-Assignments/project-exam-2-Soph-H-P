@@ -23,8 +23,8 @@ const Navagation = () => {
   }, []);
 
   return (
-    <NavContainer $windowWidth={windowWidth}>
-      <StyledLogo to="/"  onClick={() => setIsOpen(false)} aria-label="home">
+    <NavContainer>
+      <StyledLogo to="/" onClick={() => setIsOpen(false)} aria-label="home">
         <Logo />
       </StyledLogo>
 

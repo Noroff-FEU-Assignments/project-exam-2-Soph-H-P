@@ -1,8 +1,9 @@
 import React from 'react'
+import { PageContainer } from '../components/layout/PageContainer/index.styled'
 
 const ModerateSightings = () => {
   return (
-    <div>ModerateSightings</div>
+    <PageContainer>ModerateSightings</PageContainer>
   )
 }
 

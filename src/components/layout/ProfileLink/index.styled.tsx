@@ -10,6 +10,7 @@ export const ProfileContainer = styled.div`
   span {
     font-family: ${theme.text.headingFont};
     font-size: 14px;
+    padding-bottom: 3px;
   }
 
   svg {

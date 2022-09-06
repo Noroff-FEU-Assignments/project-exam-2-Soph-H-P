@@ -7,6 +7,24 @@ const GlobalStyle = createGlobalStyle`
         font-family: ${theme.text.paragraphFont};
     }
 
+    html, body  {
+        min-height: 100vh;
+    }
+
+    #root {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+
+     .App {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+
     body {
         background-color: ${theme.colors.primaryColor};
     }
