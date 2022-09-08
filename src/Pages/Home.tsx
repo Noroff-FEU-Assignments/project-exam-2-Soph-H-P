@@ -1,4 +1,3 @@
-import React from 'react';
 import Loader from '../components/common/Loader';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 

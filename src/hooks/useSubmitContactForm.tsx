@@ -4,7 +4,7 @@ import { sendContactFormUrl } from '../constants/api';
 import axios from 'axios';
 import { FormInstance } from 'antd';
 
-const useSubmitForm = (form: FormInstance) => {
+const useSubmitContactForm = (form: FormInstance) => {
   const [messageIsSent, setMessageIsSent] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [isSending, setIsSending] = useState(false);
@@ -36,4 +36,4 @@ const useSubmitForm = (form: FormInstance) => {
   return { messageIsSent, formError, isSending, submitForm };
 };
 
-export default useSubmitForm;
+export default useSubmitContactForm;

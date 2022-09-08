@@ -1,9 +1,11 @@
-import React from 'react'
+import SightingsForm from '../components/forms/SightingsForm';
 
 const AddSighting = () => {
   return (
-    <div>AddSighting</div>
-  )
-}
+    <div>
+      <SightingsForm />
+    </div>
+  );
+};
 
-export default AddSighting
+export default AddSighting;

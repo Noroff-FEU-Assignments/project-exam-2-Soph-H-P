@@ -3,5 +3,7 @@ export const sendContactFormUrl = "https://soph-web-dev.eu/bug-blog/wp-json/cont
 
 export const accessTokenUrlEndpoint = '/auth/local';
 export const registerUrlEndpoint = '/auth/local/register';
+export const addSightingUrlEndpoint = '/sightings';
+export const uploadImageUrlEndpoint = '/upload/';
 
 export default API;

@@ -2,12 +2,12 @@ import { StyledForm } from '../StyledForm/index.styled';
 import FormError from '../FormError';
 import { Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import useSubmitForm from '../../../hooks/useSubmitContactForm';
+import useSubmitContactForm from '../../../hooks/useSubmitContactForm';
 
 const ContectForm = () => {
   const [form] = Form.useForm();
 
-  const { messageIsSent, formError, isSending, submitForm } = useSubmitForm(form);
+  const { messageIsSent, formError, isSending, submitForm } = useSubmitContactForm(form);
 
   return (
     <StyledForm form={form} initialValues={{ remember: true }} onFinish={submitForm}>
