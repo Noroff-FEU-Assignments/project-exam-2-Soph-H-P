@@ -9,7 +9,7 @@ export const StyledForm = styled(Form)`
   border-radius: 20px;
   padding: 40px;
   display: flex;
-flex-direction: column;
+  flex-direction: column;
 
   fieldset {
     display: flex;
@@ -22,7 +22,9 @@ flex-direction: column;
     font-size: 18px;
   }
 
-  .ant-input {
+  .ant-input,
+  .ant-picker {
+    width: 100%;
     font-weight: 300;
     padding: 15px;
   }
@@ -31,15 +33,52 @@ flex-direction: column;
     padding: 15px;
   }
 
-  .ant-space.ant-space-vertical {
-    width: 100%;
-  }
-
-  button[type="submit"] {
+  button[type='submit'] {
     margin: 0 auto;
   }
+
+  .ant-switch-handle {
+    padding: 15px;
+    height: calc(100% - 4px);
+    width: 50%;
+  }
+
+  .ant-switch-handle::after {
+    content: 'Public';
+    font-size: 18px;
+    color: ${theme.colors.darkFontColor};
+    position: relative;
+  }
+
+  .ant-switch {
+    width: 100%;
+    padding: 15px;
+    height: unset;
+    border-radius: 10px;
+    display: flex;
+    justify-content: end;
+    background: ${theme.colors.primaryColor};
+    box-shadow: inset ${theme.effects.modalShadow};
+
+    span {
+      width: 50%;
+      font-size: 18px;
+      font-weight: 300;
+    }
+  }
+
+  .ant-switch-checked {
+    justify-content: start;
+  }
+
+  .ant-switch-checked .ant-switch-handle {
+    left: calc(100% - 50% - 2px);
+  }
+
+  .ant-switch-checked .ant-switch-handle::after {
+    content: 'Members only';
+    font-size: 18px;
+    color: ${theme.colors.darkFontColor};
+    position: relative;
+  }
 `;
-
-export const StyledSubmitButton = styled.button``;
-
-export const FormError = styled.span``;

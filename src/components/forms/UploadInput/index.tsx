@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload, UploadFile, UploadProps } from 'antd';
 import { RcFile } from 'antd/lib/upload';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 const UploadInput = ({
   fileList,

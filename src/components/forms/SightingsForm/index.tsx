@@ -6,7 +6,6 @@ import { RangePickerProps } from 'antd/lib/date-picker';
 import moment from 'moment';
 import { useState } from 'react';
 import UploadInput from '../UploadInput';
-import Loader from '../../common/Loader';
 
 const SightingsForm = () => {
   const [form] = Form.useForm();
