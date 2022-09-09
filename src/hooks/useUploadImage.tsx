@@ -18,8 +18,6 @@ const useUploadImage = () => {
       formData.append('field', 'photos');
 
       const imageUploadResponse = await axios.post(API + uploadImageUrlEndpoint, formData);
-      console.log(imageUploadResponse);
-      console.table(formData);
 
       if (imageUploadResponse.status === 200) {
         setImageIsUploaded(true);

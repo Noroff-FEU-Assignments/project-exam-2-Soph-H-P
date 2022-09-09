@@ -1,24 +1,18 @@
 import { StyledForm } from '../StyledForm/index.styled';
-import { Button, DatePicker, Form, Input, Switch, Upload } from 'antd';
+import { Button, DatePicker, Form, Input, Switch, UploadFile } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import useSubmitSightingsForm from '../../../hooks/useSubmitSightingsForm';
 import { RangePickerProps } from 'antd/lib/date-picker';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import UploadInput from '../UploadInput';
+import Loader from '../../common/Loader';
 
 const SightingsForm = () => {
   const [form] = Form.useForm();
   const [image, setImage] = useState<File | undefined>();
-  const { formIsSubmitted, formError, isSubmitting, submitForm } = useSubmitSightingsForm(form);
-
-  // const handleUploadImage = (data: any, onSuccess: (status: string) => void) => {
-  //   setImage(data.file);
-  //   setTimeout(() => {
-  //     onSuccess('ok');
-  //   }, 0);
-  //   console.log(data.file);
-  // };
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const { isSubmitting, submitForm } = useSubmitSightingsForm(form, setFileList);
 
   const disabledDate: RangePickerProps['disabledDate'] = (current) => {
     // Can not select a future day
@@ -63,12 +57,10 @@ const SightingsForm = () => {
         <Input placeholder="Mute Swan" />
       </Form.Item>
       <label htmlFor="photos">Photo</label>
-      <UploadInput setImage={setImage} />
-      <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
-          {isSubmitting ? 'Sending...' : 'Send'}
-        </Button>
-      </Form.Item>
+      <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
+      <Button loading={isSubmitting} type="primary" htmlType="submit" className="login-form-button">
+        {isSubmitting ? 'Submitting' : 'Submit'}
+      </Button>
     </StyledForm>
   );
 };

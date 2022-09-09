@@ -8,6 +8,8 @@ export const StyledForm = styled(Form)`
   background: ${theme.colors.brightWhite};
   border-radius: 20px;
   padding: 40px;
+  display: flex;
+flex-direction: column;
 
   fieldset {
     display: flex;
@@ -31,6 +33,10 @@ export const StyledForm = styled(Form)`
 
   .ant-space.ant-space-vertical {
     width: 100%;
+  }
+
+  button[type="submit"] {
+    margin: 0 auto;
   }
 `;
 

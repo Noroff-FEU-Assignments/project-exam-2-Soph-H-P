@@ -3,15 +3,19 @@ import { Modal, Upload, UploadFile, UploadProps } from 'antd';
 import { RcFile } from 'antd/lib/upload';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-const UploadInput = ({ setImage }: { setImage: Dispatch<SetStateAction<File | undefined>> }) => {
+const UploadInput = ({
+  fileList,
+  setFileList,
+  setImage,
+}: {
+  fileList: UploadFile<any>[];
+  setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>;
+  setImage: Dispatch<SetStateAction<File | undefined>>;
+}) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  useEffect(() => {
-    console.log(fileList.length);
-  }, [fileList]);
 
   // @ts-ignore: unknown object
   const uploadImageFile = ({ file, onSuccess }) => {

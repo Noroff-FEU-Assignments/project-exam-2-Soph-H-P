@@ -54,8 +54,6 @@ export const MobileNavigationLinks = ({
   const { authToken } = useAuthState();
   const { userInfo } = useUserState();
 
-  console.log(userInfo);
-
   return (
     <NavLinksContainer $isMobile={true}>
       <StyledNavLink to="/sightings-map" onClick={() => setIsOpen(false)}>

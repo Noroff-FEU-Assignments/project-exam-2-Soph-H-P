@@ -17,8 +17,6 @@ const useRegisterUser = (form: FormInstance) => {
     setIsSubmitting(true);
     setRegisterError(null);
 
-    console.log(data);
-
     try {
       const convertToFormData = (data: any) => {
         const formData = new FormData();

@@ -17,8 +17,6 @@ const useLoginUser = (form: FormInstance) => {
     setIsSubmitting(true);
     setLoginError(null);
 
-    console.log(data);
-
     try {
       const response = await axios.post(API + accessTokenUrlEndpoint, data);
       setAuthToken(response.data.jwt);
