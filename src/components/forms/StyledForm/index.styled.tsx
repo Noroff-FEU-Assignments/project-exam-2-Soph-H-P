@@ -43,10 +43,14 @@ export const StyledForm = styled(Form)`
     width: 50%;
   }
 
+  .ant-switch-handle::before {
+    background: ${theme.colors.primaryColor};
+  }
+
   .ant-switch-handle::after {
-    content: 'Public';
+    content: 'Members only';
     font-size: 18px;
-    color: ${theme.colors.darkFontColor};
+    color: ${theme.colors.brightWhite};
     position: relative;
   }
 
@@ -57,13 +61,14 @@ export const StyledForm = styled(Form)`
     border-radius: 10px;
     display: flex;
     justify-content: end;
-    background: ${theme.colors.primaryColor};
-    box-shadow: inset ${theme.effects.modalShadow};
+    background: #f6f6f6;
+    border: 1px solid #d9d9d9;
 
     span {
       width: 50%;
       font-size: 18px;
       font-weight: 300;
+      color: ${theme.colors.darkFontColor};
     }
   }
 
@@ -76,9 +81,9 @@ export const StyledForm = styled(Form)`
   }
 
   .ant-switch-checked .ant-switch-handle::after {
-    content: 'Members only';
+    content: 'Public';
     font-size: 18px;
-    color: ${theme.colors.darkFontColor};
+    color: ${theme.colors.brightWhite};
     position: relative;
   }
 `;

@@ -16,13 +16,13 @@ const useSubmitSightingsForm = (
   const submitForm = async (data: any, image: File | undefined) => {
     setIsSubmitting(true);
     try {
+      const response = await axios.post(API + addSightingUrlEndpoint, { data });
       if (image) {
-        const response = await axios.post(API + addSightingUrlEndpoint, { data });
         await uploadImage(image, response.data.data.id);
-        setFormIsSubmitted(true);
-        form.resetFields();
         setFileList([]);
       }
+      setFormIsSubmitted(true);
+      form.resetFields();
     } catch (error: unknown) {
       setFormError(
         'We seem to be having trouble sending your message at the moment, please try again later'

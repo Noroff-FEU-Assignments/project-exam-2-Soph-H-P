@@ -4,19 +4,38 @@ import TextArea from 'antd/lib/input/TextArea';
 import useSubmitSightingsForm from '../../../hooks/useSubmitSightingsForm';
 import { RangePickerProps } from 'antd/lib/date-picker';
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import UploadInput from '../UploadInput';
+import { useUserState } from '../../../context/UserContext';
+import FormError from '../FormError';
+import LocationInput from '../../common/mapComponents/LocationInput';
+import { LatLngLiteral } from 'leaflet';
 
 const SightingsForm = () => {
   const [form] = Form.useForm();
   const [image, setImage] = useState<File | undefined>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const { isSubmitting, submitForm } = useSubmitSightingsForm(form, setFileList);
+  const [position, setPosition] = useState<LatLngLiteral | null>(null);
+  const { formError, formIsSubmitted, isSubmitting, submitForm } = useSubmitSightingsForm(
+    form,
+    setFileList
+  );
+  const { userInfo } = useUserState();
 
   const disabledDate: RangePickerProps['disabledDate'] = (current) => {
-    // Can not select a future day
+    // Prevents user from selecting a future day
     return current && current > moment().endOf('day');
   };
+
+  useEffect(() => {
+    if (position) {
+      form.setFieldsValue({
+        lat: position.lat,
+        lng: position.lng,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [position]);
 
   return (
     <StyledForm
@@ -40,26 +59,40 @@ const SightingsForm = () => {
         <TextArea rows={4} placeholder="Description character limit 250" maxLength={250} />
       </Form.Item>
       <label htmlFor="public">Who should see this sighting?</label>
-      <Form.Item valuePropName="checked" name="public">
-        <Switch defaultChecked checkedChildren="Public" unCheckedChildren="Members only" />
+      <Form.Item valuePropName="checked" name="public" initialValue={true}>
+        <Switch defaultChecked checkedChildren="Members only" unCheckedChildren="Public" />
       </Form.Item>
-      <label htmlFor="lat">lat</label>
-      <Form.Item name="lat" rules={[{ required: true, message: 'Please tell us the species' }]}>
-        <Input placeholder="Mute Swan" />
+      {userInfo && userInfo.id && (
+        <Form.Item name="userId" initialValue={userInfo.id.toString()} style={{ display: 'none' }}>
+          <Input disabled />
+        </Form.Item>
+      )}
+      {userInfo && userInfo.userRole === 'admin' && (
+        <Form.Item name="varified" initialValue={true} style={{ display: 'none' }}>
+          <Input disabled />
+        </Form.Item>
+      )}
+      <label htmlFor="location">Where did you see it?</label>
+      <LocationInput position={position} setPosition={setPosition} />
+      <Form.Item name="lat" style={{ display: 'none' }}>
+        <Input placeholder="Mute Swan" disabled />
       </Form.Item>
-      <label htmlFor="lng">lng</label>
-      <Form.Item name="lng" rules={[{ required: true, message: 'Please tell us the species' }]}>
-        <Input placeholder="Mute Swan" />
+      <Form.Item name="lng" style={{ display: 'none' }}>
+        <Input placeholder="Mute Swan" disabled />
       </Form.Item>
-      <label htmlFor="userId">userId</label>
-      <Form.Item name="userId" rules={[{ required: true, message: 'Please tell us the species' }]}>
-        <Input placeholder="Mute Swan" />
-      </Form.Item>
-      <label htmlFor="photos">Photo</label>
+      <label htmlFor="photos">Add a photo</label>
       <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
       <Button loading={isSubmitting} type="primary" htmlType="submit" className="login-form-button">
         {isSubmitting ? 'Submitting' : 'Submit'}
       </Button>
+      {formError && <FormError>{formError}</FormError>}
+      {formIsSubmitted && (
+        <p>
+          {userInfo && userInfo.userRole === 'admin'
+            ? 'Your sighting has been submitted'
+            : 'Your sighting has been submitted and will be available after it is accepted by a moderator.'}
+        </p>
+      )}
     </StyledForm>
   );
 };
