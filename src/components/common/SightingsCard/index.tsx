@@ -2,11 +2,21 @@ import findTimeAgo from '../../../utils/findTimeAgo';
 import useNearestLocation from '../../../hooks/useNearestLocation';
 import { SightingInterface } from '../../../hooks/useSightings';
 import StatusIcon from '../StatusIcon';
-import { ImageWrapper, StyledCardContainer } from './index.styled';
+import { ButtonContainer, ImageWrapper, StyledCardContainer } from './index.styled';
+import theme from '../../../styles/theme';
+import CheckSvg from '../../../svgs/CheckSvg';
+import RoundButton from '../buttons/RoundButton';
+import CloseSvg from '../../../svgs/CloseSvg';
 
-const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
+const SightingsCard = ({
+  sighting,
+  moderation,
+}: {
+  sighting: SightingInterface;
+  moderation?: boolean;
+}) => {
   const imageSrc = sighting.attributes.photos.data[0].attributes.url;
-  const { date: when, lat, lng, species, username, userStatus } = sighting.attributes;
+  const { date: when, lat, lng, species, username, userStatus, description } = sighting.attributes;
 
   const { location } = useNearestLocation(lat, lng);
 
@@ -27,8 +37,31 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
       <p>
         <span>Sighted by: </span>
         {username}
-       {username !== 'anonymous' && <StatusIcon status={userStatus} />}
+        {username !== 'anonymous' && <StatusIcon status={userStatus} />}
       </p>
+      {moderation && (
+        <>
+          <p style={{ alignItems: 'start', flexDirection: 'column' }}>
+            <span>Description: </span>
+            {description}
+          </p>
+          <ButtonContainer>
+            <RoundButton
+              type="primary"
+              icon={<CheckSvg />}
+              color={theme.colors.secondaryColor}
+              onClick={() => console.log('check')}
+            />
+            <RoundButton
+              type="primary"
+              icon={<CloseSvg />}
+              onClick={() => console.log('close')}
+              color={theme.colors.errorColor}
+              danger={true}
+            />
+          </ButtonContainer>
+        </>
+      )}
     </StyledCardContainer>
   );
 };

@@ -9,9 +9,10 @@ import Loader from '../../common/Loader';
 import SightingsCard from '../../common/SightingsCard';
 import { StyledGridContainer } from './index.styled';
 
-const SightingsGrid = () => {
+const SightingsGrid = ({ moderation }: { moderation?: boolean }) => {
   const url = API + sightingsEndpoint + includingImagesQuery + andSortByDate + andFilterUnvarified;
-  const { sightings, error, isLoading } = useSightings(url);
+  const moderationUrl = API + sightingsEndpoint + includingImagesQuery + andSortByDate;
+  const { sightings, error, isLoading } = useSightings(moderation ? moderationUrl : url);
 
   if (error) {
     return <p>{error}</p>;
@@ -23,10 +24,10 @@ const SightingsGrid = () => {
 
   if (sightings) {
     return (
-      <StyledGridContainer>
+      <StyledGridContainer $moderation={moderation}>
         {sightings &&
           sightings.map((sighting, index) => (
-            <SightingsCard key={index} sighting={sighting}></SightingsCard>
+            <SightingsCard key={index} sighting={sighting} moderation={moderation}></SightingsCard>
           ))}
       </StyledGridContainer>
     );

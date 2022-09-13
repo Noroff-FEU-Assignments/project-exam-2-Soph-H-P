@@ -7,11 +7,13 @@ const RoundButton = ({
   icon,
   onClick,
   type,
+  danger,
 }: {
   color?: string;
   icon: React.ReactNode;
   onClick: () => void;
-  type: "link" | "text" | "default" | "ghost" | "primary" | "dashed" | undefined;
+  type: 'link' | 'text' | 'default' | 'ghost' | 'primary' | 'dashed' | undefined;
+  danger?: boolean;
 }) => {
   return (
     <StyledButton
@@ -21,8 +23,8 @@ const RoundButton = ({
       icon={icon}
       size={'large'}
       type={type}
-    >
-    </StyledButton>
+      danger={danger}
+    ></StyledButton>
   );
 };
 

@@ -10,6 +10,7 @@ import AddSvg from '../../../svgs/AddSvg';
 import BinocularsSvg from '../../../svgs/BinocularsSvg';
 import ModerateSvg from '../../../svgs/ModerateSvg';
 import { Dispatch, SetStateAction } from 'react';
+import NotificationsIcon from '../../../svgs/NotificationsIcon';
 
 export const DesktopNavigationLinks = ({
   setIsOpen,
@@ -39,6 +40,11 @@ export const DesktopNavigationLinks = ({
       </Dropdown>
       <StyledNavLink to="/events">Events</StyledNavLink>
       <StyledNavLink to="/contact">Contact</StyledNavLink>
+      {userInfo?.userRole === 'admin' && (
+        <StyledNavLink to="/admin/moderate-sightings">
+          <NotificationsIcon />
+        </StyledNavLink>
+      )}
       <StyledNavLink to="/login">
         {authToken ? <ProfileLink userInfo={userInfo} /> : 'Login'}
       </StyledNavLink>

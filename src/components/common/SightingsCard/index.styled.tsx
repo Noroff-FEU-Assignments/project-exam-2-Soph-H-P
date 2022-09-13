@@ -40,3 +40,9 @@ export const ImageWrapper = styled.div<{ $height: number }>`
     height: 100%;
   }
 `;
+
+export const ButtonContainer = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+`;
