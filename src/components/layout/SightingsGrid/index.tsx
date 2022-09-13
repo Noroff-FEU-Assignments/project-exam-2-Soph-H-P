@@ -1,10 +1,17 @@
+import API, {
+  andFilterUnvarified,
+  andSortByDate,
+  includingImagesQuery,
+  sightingsEndpoint,
+} from '../../../constants/api';
 import useSightings from '../../../hooks/useSightings';
 import Loader from '../../common/Loader';
 import SightingsCard from '../../common/SightingsCard';
 import { StyledGridContainer } from './index.styled';
 
 const SightingsGrid = () => {
-  const { sightings, error, isLoading } = useSightings();
+  const url = API + sightingsEndpoint + includingImagesQuery + andSortByDate + andFilterUnvarified;
+  const { sightings, error, isLoading } = useSightings(url);
 
   if (error) {
     return <p>{error}</p>;
@@ -18,7 +25,9 @@ const SightingsGrid = () => {
     return (
       <StyledGridContainer>
         {sightings &&
-          sightings.map((sighting) => <SightingsCard sighting={sighting}></SightingsCard>)}
+          sightings.map((sighting, index) => (
+            <SightingsCard key={index} sighting={sighting}></SightingsCard>
+          ))}
       </StyledGridContainer>
     );
   }

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import API, { sightingsEndpoint, includingImagesQuery } from '../constants/api';
 import axios from 'axios';
 
 export interface SightingInterface {
@@ -41,14 +40,14 @@ export interface SightingInterface {
   };
 }
 
-const useSightings = () => {
+const useSightings = (url: string) => {
   const [sightings, setSightings] = useState<SightingInterface[] | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
-      const url = API + sightingsEndpoint + includingImagesQuery;
+     
       try {
         const response = await axios.get(url);
         if (response.status === 200) {

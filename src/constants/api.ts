@@ -7,6 +7,14 @@ export const registerUrlEndpoint = '/auth/local/register';
 export const sightingsEndpoint = '/sightings';
 export const uploadImageUrlEndpoint = '/upload/';
 export const includingImagesQuery = '?populate=photos';
+export const andSortByDate = '&sort=date%3Adesc';
+export const andFilterUnvarified = '&filters[varified][$eq]=true';
+export const andFilterPublicOnly = '&filters[public][$eq]=true';
+export const createPastDayQuery = () => {
+  const currentDate = new Date().toISOString();
+  const yesterdaysDate = new Date(Date.now() - 86400 * 1000).toISOString();
+  return `&filters[date][$lt]=${currentDate}&filters[date][$gt]=${yesterdaysDate}`;
+};
 
 const reverseLocationToken = '4021193592d34d90ad859fc38004b934';
 const reverseLocationUrl = 'https://api.geoapify.com/v1/geocode/reverse';

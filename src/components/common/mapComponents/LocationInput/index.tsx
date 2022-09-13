@@ -1,10 +1,11 @@
 import L, { LatLngExpression, LatLngLiteral } from 'leaflet';
-import React, { Dispatch, SetStateAction, useRef } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
 import { Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Button } from 'antd';
 import { StyledMapContainer } from './index.styled';
 import mapPin from '../../../../imgs/mapPin.svg';
+
 const LocationMarker = ({
   position,
   setPosition,

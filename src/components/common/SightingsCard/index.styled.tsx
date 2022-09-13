@@ -7,6 +7,7 @@ export const StyledCardContainer = styled.div`
   border-radius: 10px;
   width: 260px;
   padding: 10px;
+  cursor: pointer;
 
   h2 {
     text-transform: capitalize;
