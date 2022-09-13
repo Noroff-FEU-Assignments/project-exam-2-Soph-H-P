@@ -43,8 +43,6 @@ const LocationInput = ({
   const mapRef = useRef<L.Map | null>(null);
 
   const handleFindLocation = () => {
-    console.log('find me');
-    console.log(mapRef.current);
     mapRef?.current?.locate({
       setView: true,
     });

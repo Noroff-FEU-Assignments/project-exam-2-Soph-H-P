@@ -8,5 +8,5 @@ export const StyledFooter = styled.footer`
   justify-content: center;
   color: ${theme.colors.brightWhite};
   font-family: ${theme.text.headingFont};
-  height: 50px;
+  padding: 20px;
 `;

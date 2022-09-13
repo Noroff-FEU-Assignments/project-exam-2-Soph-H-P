@@ -1,9 +1,18 @@
 const API = 'https://bird-finder-norway-api.herokuapp.com/api';
-export const sendContactFormUrl = "https://soph-web-dev.eu/bug-blog/wp-json/contact-form-7/v1/contact-forms/104/feedback";
+export const sendContactFormUrl =
+  'https://soph-web-dev.eu/bug-blog/wp-json/contact-form-7/v1/contact-forms/104/feedback';
 
 export const accessTokenUrlEndpoint = '/auth/local';
 export const registerUrlEndpoint = '/auth/local/register';
-export const addSightingUrlEndpoint = '/sightings';
+export const sightingsEndpoint = '/sightings';
 export const uploadImageUrlEndpoint = '/upload/';
+export const includingImagesQuery = '?populate=photos';
+
+const reverseLocationToken = '4021193592d34d90ad859fc38004b934';
+const reverseLocationUrl = 'https://api.geoapify.com/v1/geocode/reverse';
+
+export const createReverseLocationUrl = (lat: number, lng: number) => {
+  return `${reverseLocationUrl}?lat=${lat}&lon=${lng}&format=json&apiKey=${reverseLocationToken}`;
+};
 
 export default API;

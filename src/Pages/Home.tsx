@@ -1,10 +1,10 @@
-import Loader from '../components/common/Loader';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
+import SightingsGrid from '../components/layout/SightingsGrid';
 
 const Home = () => {
   return (
     <PageContainer>
-      <Loader size={400} light={true} />
+      <SightingsGrid></SightingsGrid>
     </PageContainer>
   );
 };

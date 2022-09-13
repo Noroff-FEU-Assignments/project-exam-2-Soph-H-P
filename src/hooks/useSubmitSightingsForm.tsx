@@ -1,13 +1,15 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import API, { addSightingUrlEndpoint } from '../constants/api';
+import API, { sightingsEndpoint } from '../constants/api';
 
 import axios from 'axios';
 import { FormInstance, UploadFile } from 'antd';
 import useUploadImage from './useUploadImage';
+import { LatLngLiteral } from 'leaflet';
 
 const useSubmitSightingsForm = (
   form: FormInstance,
-  setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>
+  setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>,
+  setPosition: Dispatch<React.SetStateAction<LatLngLiteral | null>>
 ) => {
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -16,10 +18,11 @@ const useSubmitSightingsForm = (
   const submitForm = async (data: any, image: File | undefined) => {
     setIsSubmitting(true);
     try {
-      const response = await axios.post(API + addSightingUrlEndpoint, { data });
+      const response = await axios.post(API + sightingsEndpoint, { data });
       if (image) {
         await uploadImage(image, response.data.data.id);
         setFileList([]);
+        setPosition(null);
       }
       setFormIsSubmitted(true);
       form.resetFields();

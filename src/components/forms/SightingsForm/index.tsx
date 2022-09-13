@@ -18,7 +18,8 @@ const SightingsForm = () => {
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
   const { formError, formIsSubmitted, isSubmitting, submitForm } = useSubmitSightingsForm(
     form,
-    setFileList
+    setFileList,
+    setPosition
   );
   const { userInfo } = useUserState();
 
@@ -34,7 +35,7 @@ const SightingsForm = () => {
         lng: position.lng,
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
   return (
@@ -49,7 +50,7 @@ const SightingsForm = () => {
       </Form.Item>
       <label htmlFor="date">When did you see it?</label>
       <Form.Item name="date" rules={[{ required: true, message: 'Please tell us the species' }]}>
-        <DatePicker showTime disabledDate={disabledDate} />
+        <DatePicker showTime disabledDate={disabledDate} onChange={(e) => console.log(e)} />
       </Form.Item>
       <label htmlFor="description">Description</label>
       <Form.Item
@@ -63,9 +64,18 @@ const SightingsForm = () => {
         <Switch defaultChecked checkedChildren="Members only" unCheckedChildren="Public" />
       </Form.Item>
       {userInfo && userInfo.id && (
-        <Form.Item name="userId" initialValue={userInfo.id.toString()} style={{ display: 'none' }}>
-          <Input disabled />
-        </Form.Item>
+        <>
+          <Form.Item
+            name="userId"
+            initialValue={userInfo.id.toString()}
+            style={{ display: 'none' }}
+          >
+            <Input disabled />
+          </Form.Item>
+          <Form.Item name="username" initialValue={userInfo.username} style={{ display: 'none' }}>
+            <Input disabled />
+          </Form.Item>
+        </>
       )}
       {userInfo && userInfo.userRole === 'admin' && (
         <Form.Item name="varified" initialValue={true} style={{ display: 'none' }}>

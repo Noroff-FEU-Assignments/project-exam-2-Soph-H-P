@@ -9,6 +9,9 @@ const colors = {
   grey: '#89858B',
   black: '#252422',
   red: '#FF0000',
+  bronze: '#FF7A00',
+  silver: '#89858B',
+  gold: '#FFC700',
 };
 
 const shadows = {
@@ -36,6 +39,13 @@ const theme = {
     darkFontColor: colors.black,
     errorColor: colors.red,
   },
+  statusColors: {
+    adminColor: colors.blueGreen,
+    novisColor: colors.green,
+    bronzeColor: colors.bronze,
+    silverColor: colors.silver,
+    goldColor: colors.gold,
+  },
   text: {
     paragraphFont: fonts.openSans,
     headingFont: fonts.comfortaa,
@@ -45,7 +55,7 @@ const theme = {
     modalShadow: shadows.heavyShadow,
     defaultButtonShadow: shadows.blueGreenShadow,
     dangerButtonShadow: shadows.redShadow,
-  }
+  },
 };
 
 export default theme;
