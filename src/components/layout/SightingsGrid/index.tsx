@@ -19,7 +19,7 @@ const SightingsGrid = ({ moderation }: { moderation?: boolean }) => {
   }
 
   if (isLoading) {
-    return <Loader size={400} light={true} />;
+    return <Loader size={300} light={true} />;
   }
 
   if (sightings) {

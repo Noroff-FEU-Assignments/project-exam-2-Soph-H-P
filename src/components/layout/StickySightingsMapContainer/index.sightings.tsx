@@ -7,8 +7,9 @@ export const StickyContainer = styled.div`
   border-radius: 10px;
   width: 40%;
 
-  div {
+  & > div {
     position: sticky;
     top: 10px;
+    width: 100%;
   }
 `;

@@ -2,10 +2,11 @@ import { Marker, Popup, TileLayer } from 'react-leaflet';
 import { StyledMapContainer } from '../LocationInput/index.styled';
 import useSightings from '../../../../hooks/useSightings';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import mapPin from '../../../../imgs/mapPin.svg';
 import findTimeAgo from '../../../../utils/findTimeAgo';
 import API, {
-    andFilterUnvarified,
+  andFilterUnvarified,
   andSortByDate,
   createPastDayQuery,
   includingImagesQuery,
@@ -28,21 +29,27 @@ const LocationMarker = ({
     iconUrl: mapPin,
     iconSize: [30, 30],
     iconAnchor: [15, 30],
+    popupAnchor: [0, -20],
   });
 
   const position = { lat, lng };
+  const popupText = `${species} seen ${findTimeAgo(date)}`;
 
-  return position === null ? null : (
+  return (
     <Marker position={position} icon={myIcon}>
-      <Popup>
-        {species} seen {findTimeAgo(date)}
-      </Popup>
+      <Popup>{popupText}</Popup>
     </Marker>
   );
 };
 
 const MapWithLocationPoints = () => {
-  const url = API + sightingsEndpoint + includingImagesQuery + andSortByDate + andFilterUnvarified + createPastDayQuery();
+  const url =
+    API +
+    sightingsEndpoint +
+    includingImagesQuery +
+    andSortByDate +
+    andFilterUnvarified +
+    createPastDayQuery();
   const { sightings, error, isLoading } = useSightings(url);
 
   if (isLoading) {
@@ -57,7 +64,8 @@ const MapWithLocationPoints = () => {
     <>
       <h2>Sightings in the last 24 hours</h2>
       <StyledMapContainer
-        $height={300}
+        // $height={400}
+        style={{ height: 400, width: '100%' }}
         center={{ lat: 59.464007, lng: 10.6318 }}
         zoom={10}
         scrollWheelZoom={true}
