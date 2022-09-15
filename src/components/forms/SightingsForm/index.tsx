@@ -7,7 +7,7 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import UploadInput from '../UploadInput';
 import { useUserState } from '../../../context/UserContext';
-import FormError from '../FormError';
+import FormMessage from '../FormMessage';
 import LocationInput from '../../common/mapComponents/LocationInput';
 import { LatLngLiteral } from 'leaflet';
 
@@ -61,26 +61,39 @@ const SightingsForm = () => {
       </Form.Item>
       <label htmlFor="public">Who should see this sighting?</label>
       <Form.Item valuePropName="checked" name="public" initialValue={true}>
-        <Switch defaultChecked checkedChildren="Members only" unCheckedChildren="Public" />
+        <Switch
+          defaultChecked
+          checkedChildren="Members only"
+          unCheckedChildren="Public"
+          disabled={userInfo ? false : true}
+        />
       </Form.Item>
-      {userInfo && userInfo.id && (
+      {userInfo && (
         <>
-          <Form.Item
-            name="userId"
-            initialValue={userInfo.id.toString()}
-            style={{ display: 'none' }}
-          >
-            <Input disabled />
-          </Form.Item>
-          <Form.Item name="username" initialValue={userInfo.username} style={{ display: 'none' }}>
-            <Input disabled />
-          </Form.Item>
+          {userInfo.id && (
+            <>
+              <Form.Item
+                name="userId"
+                initialValue={userInfo.id.toString()}
+                style={{ display: 'none' }}
+              >
+                <Input disabled />
+              </Form.Item>
+              <Form.Item
+                name="username"
+                initialValue={userInfo.username}
+                style={{ display: 'none' }}
+              >
+                <Input disabled />
+              </Form.Item>
+            </>
+          )}
+          {userInfo.userRole === 'admin' && (
+            <Form.Item name="varified" initialValue={true} style={{ display: 'none' }}>
+              <Input disabled />
+            </Form.Item>
+          )}
         </>
-      )}
-      {userInfo && userInfo.userRole === 'admin' && (
-        <Form.Item name="varified" initialValue={true} style={{ display: 'none' }}>
-          <Input disabled />
-        </Form.Item>
       )}
       <label htmlFor="location">Where did you see it?</label>
       <LocationInput position={position} setPosition={setPosition} />
@@ -95,13 +108,13 @@ const SightingsForm = () => {
       <Button loading={isSubmitting} type="primary" htmlType="submit" className="login-form-button">
         {isSubmitting ? 'Submitting' : 'Submit'}
       </Button>
-      {formError && <FormError>{formError}</FormError>}
+      {formError && <FormMessage error={true}>{formError}</FormMessage>}
       {formIsSubmitted && (
-        <p>
+        <FormMessage>
           {userInfo && userInfo.userRole === 'admin'
             ? 'Your sighting has been submitted'
-            : 'Your sighting has been submitted and will be available after it is accepted by a moderator.'}
-        </p>
+            : 'Your sighting has been submitted and will be visible after it is accepted by a moderator.'}
+        </FormMessage>
       )}
     </StyledForm>
   );

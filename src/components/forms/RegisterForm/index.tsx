@@ -2,7 +2,7 @@ import { useAuthState } from '../../../context/AuthContext';
 import { useUserState } from '../../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { StyledForm } from '../StyledForm/index.styled';
-import FormError from '../FormError';
+import FormError from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useRegisterUser from '../../../hooks/useRegisterUser';

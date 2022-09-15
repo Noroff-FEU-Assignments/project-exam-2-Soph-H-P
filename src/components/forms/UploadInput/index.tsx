@@ -1,5 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload, UploadFile, UploadProps } from 'antd';
+import ImgCrop from 'antd-img-crop';
 import { RcFile } from 'antd/lib/upload';
 import { Dispatch, SetStateAction, useState } from 'react';
 
@@ -16,14 +17,13 @@ const UploadInput = ({
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
 
-
   // @ts-ignore: unknown object
   const uploadImageFile = ({ file, onSuccess }) => {
     setImage(file);
 
     setTimeout(() => {
       onSuccess('ok');
-    }, 0);
+    }, 10);
   };
 
   const getBase64 = (file: RcFile): Promise<string> =>
@@ -58,16 +58,18 @@ const UploadInput = ({
 
   return (
     <>
-      <Upload
-        // @ts-ignore: unknown object
-        customRequest={uploadImageFile}
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-      >
-        {fileList.length >= 1 ? null : uploadButton}
-      </Upload>
+      <ImgCrop rotate>
+        <Upload
+          // @ts-ignore: unknown object
+          customRequest={uploadImageFile}
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={handlePreview}
+          onChange={handleChange}
+        >
+          {fileList.length >= 1 ? null : uploadButton}
+        </Upload>
+      </ImgCrop>
       <Modal visible={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
         <img alt="example" style={{ width: '100%' }} src={previewImage} />
       </Modal>

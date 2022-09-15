@@ -4,7 +4,7 @@ import StickySightingsMapContainer from '../components/layout/StickySightingsMap
 
 const Home = () => {
   return (
-    <PageContainer style={{ flexDirection: 'row' }}>
+    <PageContainer $isSplit={true} >
       <SightingsGrid />
       <StickySightingsMapContainer />
     </PageContainer>

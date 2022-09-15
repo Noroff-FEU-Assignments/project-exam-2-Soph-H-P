@@ -1,5 +1,5 @@
 import { StyledForm } from '../StyledForm/index.styled';
-import FormError from '../FormError';
+import FormError from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import useSubmitContactForm from '../../../hooks/useSubmitContactForm';

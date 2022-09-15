@@ -7,6 +7,7 @@ export const registerUrlEndpoint = '/auth/local/register';
 export const sightingsEndpoint = '/sightings';
 export const uploadImageUrlEndpoint = '/upload/';
 export const includingImagesQuery = '?populate=photos';
+
 export const andSortByDate = '&sort=date%3Adesc';
 export const andFilterUnvarified = '&filters[varified][$eq]=true';
 export const andFilterPublicOnly = '&filters[public][$eq]=true';
