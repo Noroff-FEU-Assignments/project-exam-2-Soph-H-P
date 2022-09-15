@@ -6,11 +6,12 @@ export const accessTokenUrlEndpoint = '/auth/local';
 export const registerUrlEndpoint = '/auth/local/register';
 export const sightingsEndpoint = '/sightings';
 export const uploadImageUrlEndpoint = '/upload/';
-export const includingImagesQuery = '?populate=photos';
+export const includingImagesQuery = 'populate=photos';
 
-export const andSortByDate = '&sort=date%3Adesc';
-export const andFilterUnvarified = '&filters[varified][$eq]=true';
-export const andFilterPublicOnly = '&filters[public][$eq]=true';
+export const andSortByDate = 'sort=date%3Adesc';
+export const andFilterVarified = 'filters[varified][$eq]=true';
+export const andFilterUnvarified = 'filters[varified][$eq]=false';
+export const andFilterPublicOnly = 'filters[public][$eq]=true';
 export const createPastDayQuery = () => {
   const currentDate = new Date().toISOString();
   const yesterdaysDate = new Date(Date.now() - 86400 * 1000).toISOString();

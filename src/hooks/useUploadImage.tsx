@@ -2,11 +2,17 @@ import { useState } from 'react';
 import API, { uploadImageUrlEndpoint } from '../constants/api';
 
 import axios from 'axios';
+import { useAuthState } from '../context/AuthContext';
 
 const useUploadImage = () => {
   const [imageIsUploaded, setImageIsUploaded] = useState(false);
+  const [imageIsDeleted, setImageIsDeleted] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const { authToken } = useAuthState();
+
   const uploadImage = async (image: any, sightingId: string) => {
     setIsUploading(true);
 
@@ -32,7 +38,32 @@ const useUploadImage = () => {
     }
   };
 
-  return { imageIsUploaded, uploadError, isUploading, uploadImage };
+  const deleteImage = async (imageId: number) => {
+    setIsDeleting(true);
+    const headers = {
+      Authorization: `Bearer ${authToken}`,
+    };
+
+    try {
+      const imageDeleteResponse = await axios.delete(
+        `${API}${uploadImageUrlEndpoint}files/${imageId}`,
+        { headers }
+      );
+
+      if (imageDeleteResponse.status === 200) {
+        setImageIsDeleted(true);
+      }
+    } catch (error: unknown) {
+      setDeleteError(
+        'We seem to be having trouble uploading your image at the moment, please try again later'
+      );
+      console.log(error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  return { imageIsUploaded, uploadError, isUploading, uploadImage, deleteImage, isDeleting };
 };
 
 export default useUploadImage;

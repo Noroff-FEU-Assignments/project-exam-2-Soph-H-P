@@ -6,10 +6,9 @@ import 'leaflet/dist/leaflet.css';
 import mapPin from '../../../../imgs/mapPin.svg';
 import findTimeAgo from '../../../../utils/findTimeAgo';
 import API, {
-  andFilterUnvarified,
+  andFilterVarified,
   andSortByDate,
   createPastDayQuery,
-  includingImagesQuery,
   sightingsEndpoint,
 } from '../../../../constants/api';
 import Loader from '../../Loader';
@@ -34,7 +33,6 @@ const LocationMarker = ({
 
   const position = { lat, lng };
   const popupText = `${species} seen ${findTimeAgo(date)}`;
-
   return (
     <Marker position={position} icon={myIcon}>
       <Popup>{popupText}</Popup>
@@ -43,15 +41,8 @@ const LocationMarker = ({
 };
 
 const MapWithLocationPoints = () => {
-  const url =
-    API +
-    sightingsEndpoint +
-    includingImagesQuery +
-    andSortByDate +
-    andFilterUnvarified +
-    createPastDayQuery();
+  const url = `${API}${sightingsEndpoint}?${andSortByDate}&${andFilterVarified}&${createPastDayQuery()}`;
   const { sightings, error, isLoading } = useSightings(url);
-
   if (isLoading) {
     return <Loader size={100} />;
   }
@@ -64,7 +55,6 @@ const MapWithLocationPoints = () => {
     <>
       <h2>Sightings in the last 24 hours</h2>
       <StyledMapContainer
-        // $height={400}
         style={{ height: 400, width: '100%' }}
         center={{ lat: 59.464007, lng: 10.6318 }}
         zoom={10}

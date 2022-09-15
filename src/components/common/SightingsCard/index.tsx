@@ -7,6 +7,8 @@ import theme from '../../../styles/theme';
 import CheckSvg from '../../../svgs/CheckSvg';
 import RoundButton from '../buttons/RoundButton';
 import CloseSvg from '../../../svgs/CloseSvg';
+import useDeleteSighting from '../../../hooks/useDeleteSighting';
+import useVarifySighting from '../../../hooks/useVarifySighting';
 
 const SightingsCard = ({
   sighting,
@@ -15,14 +17,17 @@ const SightingsCard = ({
   sighting: SightingInterface;
   moderation?: boolean;
 }) => {
-  const imageSrc = sighting.attributes.photos.data[0].attributes.url;
+  const noImage = !sighting.attributes.photos.data;
+  const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
+  const imageId = noImage ? undefined : sighting.attributes.photos.data[0].id;
   const { date: when, lat, lng, species, username, userStatus, description } = sighting.attributes;
 
   const { location } = useNearestLocation(lat, lng);
-
+  const { deleteSighting } = useDeleteSighting();
+  const { varifySighting } = useVarifySighting();
   return (
     <StyledCardContainer>
-      <ImageWrapper $height={200}>
+      <ImageWrapper $height={200} $noImage={noImage}>
         <img src={imageSrc} alt={species} />
       </ImageWrapper>
       <h2>{species}</h2>
@@ -50,12 +55,16 @@ const SightingsCard = ({
               type="primary"
               icon={<CheckSvg />}
               color={theme.colors.secondaryColor}
-              onClick={() => console.log('check')}
+              onClick={() => {
+                varifySighting(sighting.id);
+              }}
             />
             <RoundButton
               type="primary"
               icon={<CloseSvg />}
-              onClick={() => console.log('close')}
+              onClick={() => {
+                deleteSighting(sighting.id, imageId);
+              }}
               color={theme.colors.errorColor}
               danger={true}
             />

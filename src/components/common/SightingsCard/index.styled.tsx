@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from '../../../styles/theme';
+import noImage from '../../../imgs/noImage.png';
 
 export const StyledCardContainer = styled.div`
   display: flex;
@@ -8,6 +9,8 @@ export const StyledCardContainer = styled.div`
   width: 260px;
   padding: 10px;
   cursor: pointer;
+  height: max-content;
+  margin: 10px;
 
   h2 {
     text-transform: capitalize;
@@ -30,14 +33,31 @@ export const StyledCardContainer = styled.div`
   }
 `;
 
-export const ImageWrapper = styled.div<{ $height: number }>`
+export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`
   height: ${({ $height }) => $height}px;
+  width: 100%;
   object-fit: cover;
   overflow: hidden;
   border-radius: 10px;
+  background: url(${noImage}) center / cover no-repeat;
+  position: relative;
+  margin-bottom: 10px;
+
+  ${({ $noImage }) =>
+    $noImage &&
+    css`
+      &::after {
+        content: 'No image available';
+        position: absolute;
+        top: 20px;
+        left: 25px;
+        font-size: 21px;
+        color: ${theme.colors.brightWhite};
+      }
+    `}
 
   img {
-    height: 100%;
+    width: 100%;
   }
 `;
 
