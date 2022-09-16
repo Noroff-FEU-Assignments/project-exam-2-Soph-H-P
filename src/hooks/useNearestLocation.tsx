@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { createReverseLocationUrl } from '../constants/api';
+import createReverseLocationUrl from '../utils/createReverseLocationUrl';
 
 const useNearestLocation = (lat: number, lng: number) => {
   const [location, setLocation] = useState<string | null>(null);

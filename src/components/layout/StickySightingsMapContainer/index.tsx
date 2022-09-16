@@ -1,9 +1,9 @@
 import API, {
   andFilterVarified,
   andSortByDate,
-  createPastDayQuery,
   sightingsEndpoint,
 } from '../../../constants/api';
+import createPastDayQuery from '../../../utils/createPastDayQuery';
 import Cta from '../../common/Cta';
 import MapWithLocationPoints from '../../common/mapComponents/MapWithLocationPoints';
 import { StickyContainer } from './index.sightings';

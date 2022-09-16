@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: column;
         height: 100%;
+        padding: 0px 8px;
     }
 
 
@@ -36,6 +37,12 @@ const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         color: ${theme.colors.darkFontColor};
+    }
+
+    @media (max-width: 700px) {
+        #root {
+            padding: 0px;
+        }
     }
 
 `;

@@ -8,7 +8,7 @@ export const PageContainer = styled.div<{ $isSplit?: boolean }>`
   height: 100%;
   background-color: ${theme.colors.brightWhite};
   border-radius: 20px;
-  margin: 0px 8px;
+  margin: 0px auto;
   padding: 20px;
 
   @media (max-width: 500px) {

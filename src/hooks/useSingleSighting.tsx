@@ -40,26 +40,24 @@ export interface SightingInterface {
   };
 }
 
-const useSightings = (url?: string) => {
-  const [sightings, setSightings] = useState<SightingInterface[] | null>(null);
+const useSingleSighting = (url: string) => {
+  const [sighting, setSightings] = useState<SightingInterface | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const getSightings = async () => {
-    if (url) {
-      try {
-        const response = await axios.get(url);
-        if (response.status === 200) {
-          setSightings(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
-        setError(
-          'We are having trouble finding sightings at the moment, please come back again later'
-        );
-      } finally {
-        setIsLoading(false);
+    try {
+      const response = await axios.get(url);
+      if (response.status === 200) {
+        setSightings(response.data.data);
       }
+    } catch (error) {
+      console.log(error);
+      setError(
+        'We are having trouble finding sightings at the moment, please come back again later'
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -69,7 +67,7 @@ const useSightings = (url?: string) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
-  return { sightings, error, isLoading, getSightings };
+  return { sighting, error, isLoading, getSightings };
 };
 
-export default useSightings;
+export default useSingleSighting;

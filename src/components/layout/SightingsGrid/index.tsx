@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import API, {
   andFilterUnvarified,
   andFilterVarified,
@@ -48,7 +49,13 @@ const SightingsGrid = ({ moderation }: { moderation?: boolean }) => {
       <StyledGridContainer $moderation={moderation}>
         {sightings &&
           sightings.map((sighting, index) => (
-            <SightingsCard key={index} sighting={sighting} moderation={moderation}></SightingsCard>
+            <Link to={`/sighting/${sighting.id}`}>
+              <SightingsCard
+                key={index}
+                sighting={sighting}
+                moderation={moderation}
+              ></SightingsCard>
+            </Link>
           ))}
       </StyledGridContainer>
     );
