@@ -1,5 +1,6 @@
-import { MapContainer } from 'react-leaflet';
+import { MapContainer, Marker } from 'react-leaflet';
 import styled from 'styled-components';
+import theme from '../../../../styles/theme';
 
 export const StyledMapContainer = styled(MapContainer)<{ $height?: number }>`
   border-radius: 10px;
@@ -9,4 +10,8 @@ export const StyledMapContainer = styled(MapContainer)<{ $height?: number }>`
   .leaflet-control-attribution.leaflet-control {
     font-size: 0.4rem;
   }
+`;
+
+export const StyledMarker = styled(Marker)<{ $color?: number }>`
+  opacity: ${({ $color }) => ($color ? $color : 1)};
 `;

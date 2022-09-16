@@ -1,16 +1,10 @@
 import { Marker, Popup, TileLayer } from 'react-leaflet';
-import { StyledMapContainer } from '../LocationInput/index.styled';
-import useSightings from '../../../../hooks/useSightings';
+import { StyledMapContainer, StyledMarker } from '../LocationInput/index.styled';
+import useSightings, { SightingInterface } from '../../../../hooks/useSightings';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import mapPin from '../../../../imgs/mapPin.svg';
+import mapPin from '../../../../svgs/mapPin.svg';
 import findTimeAgo from '../../../../utils/findTimeAgo';
-import API, {
-  andFilterVarified,
-  andSortByDate,
-  createPastDayQuery,
-  sightingsEndpoint,
-} from '../../../../constants/api';
 import Loader from '../../Loader';
 
 const LocationMarker = ({
@@ -34,15 +28,23 @@ const LocationMarker = ({
   const position = { lat, lng };
   const popupText = `${species} seen ${findTimeAgo(date)}`;
   return (
-    <Marker position={position} icon={myIcon}>
+    <StyledMarker position={position} icon={myIcon}>
       <Popup>{popupText}</Popup>
-    </Marker>
+    </StyledMarker>
   );
 };
 
-const MapWithLocationPoints = () => {
-  const url = `${API}${sightingsEndpoint}?${andSortByDate}&${andFilterVarified}&${createPastDayQuery()}`;
+const MapWithLocationPoints = ({
+  url,
+  height,
+  title,
+}: {
+  url: string;
+  height: number | string;
+  title?: string;
+}) => {
   const { sightings, error, isLoading } = useSightings(url);
+
   if (isLoading) {
     return <Loader size={100} />;
   }
@@ -53,9 +55,9 @@ const MapWithLocationPoints = () => {
 
   return (
     <>
-      <h2>Sightings in the last 24 hours</h2>
+      {title && <h2>{title}</h2>}
       <StyledMapContainer
-        style={{ height: 400, width: '100%' }}
+        style={{ height: height, width: '100%' }}
         center={{ lat: 59.464007, lng: 10.6318 }}
         zoom={10}
         scrollWheelZoom={true}

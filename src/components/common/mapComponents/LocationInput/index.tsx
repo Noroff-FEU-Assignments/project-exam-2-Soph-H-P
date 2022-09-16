@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction, useRef } from 'react';
 import { Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Button } from 'antd';
-import { StyledMapContainer } from './index.styled';
-import mapPin from '../../../../imgs/mapPin.svg';
+import { StyledMapContainer, StyledMarker } from './index.styled';
+import mapPin from '../../../../svgs/mapPin.svg';
 
 const LocationMarker = ({
   position,
@@ -28,9 +28,9 @@ const LocationMarker = ({
   });
 
   return position === null ? null : (
-    <Marker position={position} icon={myIcon}>
+    <StyledMarker position={position} icon={myIcon}>
       <Popup>Bird seen here</Popup>
-    </Marker>
+    </StyledMarker>
   );
 };
 

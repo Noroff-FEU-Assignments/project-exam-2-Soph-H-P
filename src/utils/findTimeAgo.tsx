@@ -1,4 +1,4 @@
-const findTimeAgo = (when: string) => {
+const findTimeAgo = (when: string, hours?: boolean) => {
   const whenAsDate = new Date(when);
   const timeNow = new Date();
   const whenAsTime = whenAsDate.getTime();
@@ -9,6 +9,10 @@ const findTimeAgo = (when: string) => {
   const differenceWeeks = parseInt((differenceDays / 7).toFixed(0));
   const differenceMonths = parseInt((differenceWeeks / 4).toFixed(0));
   const differenceYears = parseInt((differenceMonths / 12).toFixed(0));
+
+  if (hours) {
+    return difference;
+  }
 
   if (difference <= 0) {
     return 'Just now';

@@ -45,28 +45,29 @@ const useSightings = (url: string) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    (async () => {
-     
-      try {
-        const response = await axios.get(url);
-        if (response.status === 200) {
-          setSightings(response.data.data);
-        }
-      } catch (error) {
-        console.log(error);
-        setError(
-          'We are having trouble finding sightings at the moment, please come back again later'
-        );
-      } finally {
-        setIsLoading(false);
+  const getSightings = async () => {
+    try {
+      const response = await axios.get(url);
+      if (response.status === 200) {
+        setSightings(response.data.data);
       }
-    })();
+    } catch (error) {
+      console.log(error);
+      setError(
+        'We are having trouble finding sightings at the moment, please come back again later'
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getSightings();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [url]);
 
-  return { sightings, error, isLoading };
+  return { sightings, error, isLoading, getSightings };
 };
 
 export default useSightings;

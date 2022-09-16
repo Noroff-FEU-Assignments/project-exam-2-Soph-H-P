@@ -3,6 +3,7 @@ import theme from '../../../styles/theme';
 
 export const PageContainer = styled.div<{ $isSplit?: boolean }>`
   display: flex;
+  position: relative;
   flex-direction: column;
   height: 100%;
   background-color: ${theme.colors.brightWhite};
