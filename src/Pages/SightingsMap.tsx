@@ -4,7 +4,8 @@ import { PageContainer } from '../components/layout/PageContainer/index.styled';
 
 const SightingsMap = () => {
   return (
-    <PageContainer style={{ padding: '0px' }}>
+    <PageContainer $hasBird={false} style={{ padding: 0, margin: 0, position: 'relative' }}>
+      {/* <PageContainer style={{ padding: '0px', position: 'relative' }}> */}
       <MapWithSearch />
     </PageContainer>
   );

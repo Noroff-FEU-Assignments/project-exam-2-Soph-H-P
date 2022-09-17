@@ -1,11 +1,12 @@
 import React from 'react'
 import ContactForm from '../components/forms/ContactForm'
+import { PageContainer } from '../components/layout/PageContainer/index.styled'
 
 const Contact = () => {
   return (
-    <div>
+    <PageContainer $containsForm={true} $hasBird={true}>
       <ContactForm />
-    </div>
+    </PageContainer>
   )
 }
 

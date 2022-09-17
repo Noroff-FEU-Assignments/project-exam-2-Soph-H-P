@@ -32,13 +32,19 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
             {username}
             {username !== 'anonymous' && <StatusIcon status={userStatus} />}
           </p>
+          <p>
+            <span>Description: </span>
+            {description}
+          </p>
         </div>
-        <MapWithLocationPoints height={200} singleLat={lat} singleLng={lng} singleSpecies={species} singleDate={when}/>
+        <MapWithLocationPoints
+          height={200}
+          singleLat={lat}
+          singleLng={lng}
+          singleSpecies={species}
+          singleDate={when}
+        />
       </SplitCard>
-      <p>
-        <span>Description: </span>
-        {description}
-      </p>
     </StyledCardContainer>
   );
 };

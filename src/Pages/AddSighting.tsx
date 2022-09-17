@@ -1,10 +1,11 @@
 import SightingsForm from '../components/forms/SightingsForm';
+import { PageContainer } from '../components/layout/PageContainer/index.styled';
 
 const AddSighting = () => {
   return (
-    <div>
+    <PageContainer $containsForm={true} $hasBird={true}>
       <SightingsForm />
-    </div>
+    </PageContainer>
   );
 };
 

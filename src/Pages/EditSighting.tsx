@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { PageContainer } from '../components/layout/PageContainer/index.styled';
 
 const EditSighting = () => {
   return (
-    <div>EditSighting</div>
-  )
-}
+    <PageContainer $containsForm={true} $hasBird={true}>
+      EditSighting
+    </PageContainer>
+  );
+};
 
-export default EditSighting
+export default EditSighting;

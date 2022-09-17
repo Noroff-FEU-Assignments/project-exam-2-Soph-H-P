@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import theme from './theme';
 
+
 const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
@@ -10,19 +11,18 @@ const GlobalStyle = createGlobalStyle`
     html, body  {
         min-height: 100vh;
     }
-
+    
     #root {
         display: flex;
         flex-direction: column;
         height: 100%;
-        padding: 0px 8px;
     }
-
-
-     .App {
+    
+    .App {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+        padding: 0px 8px;
     }
 
 
@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     @media (max-width: 700px) {
-        #root {
+        .App {
             padding: 0px;
         }
     }

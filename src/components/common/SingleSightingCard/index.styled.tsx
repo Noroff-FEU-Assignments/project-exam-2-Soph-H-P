@@ -6,10 +6,6 @@ export const StyledCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
-  height: max-content;
-  margin: 10px;
 
   h2 {
     text-transform: capitalize;
@@ -26,25 +22,25 @@ export const StyledCardContainer = styled.div`
     font-weight: 700;
     margin-right: 5px;
   }
-
-  &:hover {
-    box-shadow: ${theme.effects.cardShadow};
-  }
 `;
 
 export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`
   height: ${({ $height }) => $height}px;
-  width: 100%;
-  object-fit: cover;
+  width: 60vw;
+  max-width: 720px;
   overflow: hidden;
   border-radius: 10px;
-  background: url(${noImage}) center / cover no-repeat;
   position: relative;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   ${({ $noImage }) =>
     $noImage &&
     css`
+      background: url(${noImage}) center / cover no-repeat;
+
       &::after {
         content: 'No image available';
         position: absolute;
@@ -58,6 +54,11 @@ export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`
   img {
     width: 100%;
   }
+
+  @media (max-width: 700px) {
+    width: 100%;
+    height: 250px;
+  }
 `;
 
 export const SplitCard = styled.div`
@@ -66,5 +67,13 @@ export const SplitCard = styled.div`
 
   & > div:first-of-type {
     min-width: 60%;
+  }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+
+    & > div:first-of-type {
+      min-width: 100%;
+    }
   }
 `;
