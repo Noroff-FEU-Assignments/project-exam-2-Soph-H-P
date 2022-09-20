@@ -43,6 +43,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
           singleLng={lng}
           singleSpecies={species}
           singleDate={when}
+          sightingId={sighting.id}
         />
       </SplitCard>
     </StyledCardContainer>

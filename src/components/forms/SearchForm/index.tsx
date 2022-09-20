@@ -53,7 +53,6 @@ const SearchForm = ({
           mode="multiple"
           size={'large'}
           placeholder="Search for a bird"
-          defaultValue={[]}
           onChange={handleChange}
           style={{ width: '100%' }}
         >

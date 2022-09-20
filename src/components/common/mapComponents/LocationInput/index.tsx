@@ -1,6 +1,6 @@
 import L, { LatLngExpression, LatLngLiteral } from 'leaflet';
 import { Dispatch, SetStateAction, useRef } from 'react';
-import { Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet';
+import { Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Button } from 'antd';
 import { StyledMapContainer, StyledMarker } from './index.styled';

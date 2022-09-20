@@ -35,7 +35,7 @@ export const PageContainer = styled.div<{
       @media (min-width: ${$containsForm ? '1000px' : '1300px'}) {
         &::after {
           content: '';
-          position: absolute;
+          position: fixed;
           bottom: 0px;
           left: -15px;
           height: 200px;

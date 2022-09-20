@@ -6,17 +6,37 @@ import 'leaflet/dist/leaflet.css';
 import mapPin from '../../../../svgs/mapPin.svg';
 import findTimeAgo from '../../../../utils/findTimeAgo';
 import Loader from '../../Loader';
+import { Link } from 'react-router-dom';
+
+const PopupText = ({
+  species,
+  date,
+  sightingId,
+}: {
+  species: string;
+  date: string;
+  sightingId: number;
+}) => {
+  return (
+    <Popup>
+      <Link to={`/sighting/${sightingId}`}>{species}</Link>
+      <p>Last seen {findTimeAgo(date)}</p>
+    </Popup>
+  );
+};
 
 const LocationMarker = ({
   lat,
   lng,
   species,
   date,
+  sightingId,
 }: {
   lat: number;
   lng: number;
   species: string;
   date: string;
+  sightingId: number;
 }) => {
   const myIcon = L.icon({
     iconUrl: mapPin,
@@ -26,10 +46,9 @@ const LocationMarker = ({
   });
 
   const position = { lat, lng };
-  const popupText = `${species} seen ${findTimeAgo(date)}`;
   return (
     <StyledMarker position={position} icon={myIcon}>
-      <Popup>{popupText}</Popup>
+      <PopupText species={species} date={date} sightingId={sightingId} />
     </StyledMarker>
   );
 };
@@ -42,6 +61,7 @@ const MapWithLocationPoints = ({
   singleLng,
   singleSpecies,
   singleDate,
+  sightingId,
 }: {
   height: number | string;
   url?: string;
@@ -50,6 +70,7 @@ const MapWithLocationPoints = ({
   singleLng?: number;
   singleSpecies?: string;
   singleDate?: string;
+  sightingId?: number;
 }) => {
   const { sightings, error, isLoading } = useSightings(url);
 
@@ -79,14 +100,21 @@ const MapWithLocationPoints = ({
             sightings.map((sighting, index) => {
               const { lat, lng, species, date } = sighting.attributes;
               return (
-                <LocationMarker key={index} lat={lat} lng={lng} species={species} date={date} />
+                <LocationMarker
+                  key={index}
+                  lat={lat}
+                  lng={lng}
+                  species={species}
+                  date={date}
+                  sightingId={sighting.id}
+                />
               );
             })}
         </StyledMapContainer>
       </>
     );
   }
-  if (singleLat && singleLng && singleSpecies && singleDate) {
+  if (singleLat && singleLng && singleSpecies && singleDate && sightingId) {
     return (
       <StyledMapContainer
         style={{ height: height, width: '100%' }}
@@ -98,7 +126,13 @@ const MapWithLocationPoints = ({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
-        <LocationMarker lat={singleLat} lng={singleLng} species={singleSpecies} date={singleDate} />
+        <LocationMarker
+          lat={singleLat}
+          lng={singleLng}
+          species={singleSpecies}
+          date={singleDate}
+          sightingId={sightingId}
+        />
       </StyledMapContainer>
     );
   }

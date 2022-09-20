@@ -1,6 +1,5 @@
 import { MapContainer, Marker } from 'react-leaflet';
 import styled from 'styled-components';
-import theme from '../../../../styles/theme';
 
 export const StyledMapContainer = styled(MapContainer)<{ $height?: number }>`
   border-radius: 10px;

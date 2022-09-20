@@ -22,7 +22,9 @@ const useLoginUser = (form: FormInstance) => {
       setAuthToken(response.data.jwt);
       setUserInfo(response.data.user);
       form.resetFields();
-      navigate('/admin/moderate-sightings');
+      if (response.data.user.userRole === "admin") {
+        navigate('/admin/moderate-sightings');
+      }
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {

@@ -45,10 +45,6 @@ const SightingsForm = () => {
       initialValues={{ remember: true }}
       onFinish={(data) => submitForm(data, image)}
     >
-      {/* <label htmlFor="species">What bird did you see?</label>
-      <Form.Item name="species" rules={[{ required: true, message: 'Please tell us the species' }]}>
-        <Input placeholder="Mute Swan" />
-      </Form.Item> */}
       <SpeciesInput />
       <label htmlFor="date">When did you see it?</label>
       <Form.Item name="date" rules={[{ required: true, message: 'Please tell us the species' }]}>
