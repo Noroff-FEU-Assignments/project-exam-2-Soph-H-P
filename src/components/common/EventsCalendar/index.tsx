@@ -8,6 +8,9 @@ import moment from 'moment';
 import { EventInterface } from '../../../hooks/useEvents';
 import datesAreSame from '../../../utils/datesAreSame';
 import EventModal from '../EventModal';
+import { CalendarContainer } from './index.styled';
+import { useUserState } from '../../../context/UserContext';
+import EditEventModal from '../EditEventModal';
 
 const EventsCalendar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -16,22 +19,22 @@ const EventsCalendar = () => {
   const { events } = useEvents(url);
   const startOfMonth = moment();
   const endOfMonth = moment();
+  const { userInfo } = useUserState();
 
   const getListData = (value: Moment) => {
-    let listData: { type: string; content: string; event: EventInterface }[] | [] = [];
+    const listData: { type: string; content: string; event: EventInterface }[] = [];
     if (events) {
       events.forEach((event) => {
         const date = new Date(event.attributes.date);
         const momentDate = moment(date);
         const eventTime = moment(momentDate).format('hh:mm');
         if (datesAreSame(value, momentDate)) {
-          listData = [
-            {
-              type: 'success',
-              content: `${event.attributes.eventTitle} at ${eventTime}`,
-              event: event,
-            },
-          ];
+          const thing = {
+            type: 'success',
+            content: `${event.attributes.eventTitle} at ${eventTime}`,
+            event: event,
+          };
+          listData.push(thing);
         }
       });
     }
@@ -41,41 +44,49 @@ const EventsCalendar = () => {
   const dateCellRender = (value: Moment) => {
     const listData = getListData(value);
     return (
-      <>
+      <ul className="events">
+        {listData &&
+          listData.length > 0 &&
+          listData.map((item, index) => (
+            <li
+              key={index}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsOpen(true);
+                setCurrentEvent(item.event);
+              }}
+            >
+              <Badge status={item.type as BadgeProps['status']} text={item.content} />
+            </li>
+          ))}
+      </ul>
+    );
+  };
+
+  return (
+    <CalendarContainer>
+      {userInfo?.userRole === 'admin' && isOpen && (
+        <EditEventModal
+          isOpen={isOpen}
+          handleCancel={() => setIsOpen(false)}
+          currentEvent={currentEvent}
+        />
+      )}
+      {userInfo?.userRole !== 'admin' && (
         <EventModal
           isOpen={isOpen}
           handleCancel={() => setIsOpen(false)}
           currentEvent={currentEvent}
         />
-        <ul className="events">
-          {listData &&
-            listData.length > 0 &&
-            listData.map((item, index) => (
-              <li
-                key={index}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setIsOpen(true);
-                  setCurrentEvent(item.event);
-                  console.log('I was clicked');
-                }}
-              >
-                <Badge status={item.type as BadgeProps['status']} text={item.content} />
-              </li>
-            ))}
-        </ul>
-      </>
-    );
-  };
-
-  return (
-    <Calendar
-      dateCellRender={dateCellRender}
-      onSelect={() => console.log('selected but nothing else')}
-      mode={'month'}
-      validRange={isOpen ? [startOfMonth, endOfMonth] : undefined}
-    />
+      )}
+      <Calendar
+        dateCellRender={dateCellRender}
+        onSelect={() => console.log('selected but nothing else')}
+        mode={'month'}
+        validRange={isOpen ? [startOfMonth, endOfMonth] : undefined}
+      />
+    </CalendarContainer>
   );
 };
 

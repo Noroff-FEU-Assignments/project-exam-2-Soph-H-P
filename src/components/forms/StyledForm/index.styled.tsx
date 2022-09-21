@@ -33,8 +33,9 @@ export const StyledForm = styled(Form)`
     padding: 15px;
   }
 
-  button[type='submit'] {
-    margin: 0 auto;
+  button[type='submit'],
+  .ant-btn.ant-btn-ghost.ant-btn-dangerous {
+    margin: 10px auto;
   }
 
   .ant-switch-handle {

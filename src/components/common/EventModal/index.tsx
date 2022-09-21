@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { EventInterface } from '../../../hooks/useEvents';
-import theme from '../../../styles/theme';
 import { StyledModal } from './index.styled';
 
 const EventModal = ({
@@ -19,7 +18,6 @@ const EventModal = ({
       title={null}
       footer={null}
       onCancel={handleCancel}
-      maskStyle={{ backgroundColor: theme.colors.darkFontColor, opacity: 0.03 }}
     >
       {currentEvent && (
         <>

@@ -47,8 +47,16 @@ const SightingsForm = () => {
     >
       <SpeciesInput />
       <label htmlFor="date">When did you see it?</label>
-      <Form.Item name="date" rules={[{ required: true, message: 'Please tell us the species' }]}>
-        <DatePicker showTime disabledDate={disabledDate} onChange={(e) => console.log(e)} />
+      <Form.Item
+        name="date"
+        rules={[{ required: true, message: 'Please tell us when you saw this bird' }]}
+      >
+        <DatePicker
+          format={'dddd Do MM YYYY - HH:mm'}
+          showTime
+          disabledDate={disabledDate}
+          onChange={(e) => console.log(e)}
+        />
       </Form.Item>
       <label htmlFor="description">Description</label>
       <Form.Item
