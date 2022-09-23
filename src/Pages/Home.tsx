@@ -5,7 +5,7 @@ import StickySightingsMapContainer from '../components/layout/StickySightingsMap
 const Home = () => {
   return (
     <PageContainer $isSplit={true} >
-      <SightingsGrid />
+      <SightingsGrid title={'Recent Sightings'}/>
       <StickySightingsMapContainer />
     </PageContainer>
   );

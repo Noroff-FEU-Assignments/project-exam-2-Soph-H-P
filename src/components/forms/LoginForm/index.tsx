@@ -6,6 +6,7 @@ import FormError from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useLoginUser from '../../../hooks/useLoginUser';
+import PageTitle from '../../common/typography/PageTitle';
 
 const LoginForm = () => {
   const [form] = Form.useForm();
@@ -20,6 +21,7 @@ const LoginForm = () => {
   if (authToken)
     return (
       <StyledForm>
+        <PageTitle>Log Out</PageTitle>
         <p style={{ textAlign: 'center' }}>You are already logged in</p>
         <Button
           onClick={() => {
@@ -35,6 +37,7 @@ const LoginForm = () => {
 
   return (
     <StyledForm initialValues={{ remember: true }} onFinish={submitForm} form={form}>
+      <PageTitle>Log in</PageTitle>
       <label htmlFor="identifier">Email</label>
       <Form.Item
         name="identifier"

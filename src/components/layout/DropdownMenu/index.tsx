@@ -7,6 +7,16 @@ import { StyledNavLink } from '../NavigationLinks/index.styled';
 
 const menuItems = [
   {
+    key: '0',
+    visibility: ['public', 'member', 'admin'],
+    label: (
+      <StyledNavLink to="/">
+        <MapIcon />
+        Recent Sightings
+      </StyledNavLink>
+    ),
+  },
+  {
     key: '1',
     visibility: ['public', 'member', 'admin'],
     label: (

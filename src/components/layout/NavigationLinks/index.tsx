@@ -62,6 +62,10 @@ export const MobileNavigationLinks = ({
 
   return (
     <NavLinksContainer $isMobile={true}>
+      <StyledNavLink to="/" onClick={() => setIsOpen(false)}>
+        Recent Sightings
+        <MapIcon />
+      </StyledNavLink>
       <StyledNavLink to="/sightings-map" onClick={() => setIsOpen(false)}>
         Sightings Map
         <MapIcon />

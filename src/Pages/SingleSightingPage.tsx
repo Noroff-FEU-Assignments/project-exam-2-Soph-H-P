@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import ApiErrorMessage from '../components/common/ApiErrorMessage';
 import Loader from '../components/common/Loader';
 import SingleSightingCard from '../components/common/SingleSightingCard';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
@@ -27,7 +28,7 @@ const SingleSightingPage = () => {
   if (error) {
     return (
       <PageContainer>
-        <p>{error}</p>
+        <ApiErrorMessage message={error}></ApiErrorMessage>
       </PageContainer>
     );
   }

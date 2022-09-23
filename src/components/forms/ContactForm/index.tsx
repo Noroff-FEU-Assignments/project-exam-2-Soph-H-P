@@ -3,6 +3,7 @@ import FormError from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import useSubmitContactForm from '../../../hooks/useSubmitContactForm';
+import PageTitle from '../../common/typography/PageTitle';
 
 const ContectForm = () => {
   const [form] = Form.useForm();
@@ -11,6 +12,7 @@ const ContectForm = () => {
 
   return (
     <StyledForm form={form} initialValues={{ remember: true }} onFinish={submitForm}>
+      <PageTitle>Contact</PageTitle>
       <label htmlFor="full-name">Name</label>
       <Form.Item name="full-name" rules={[{ required: true, message: 'Please write your name' }]}>
         <Input placeholder="Newt Scamander" />
@@ -41,7 +43,11 @@ const ContectForm = () => {
       </Form.Item>
 
       {formError && <FormError>{formError}</FormError>}
-      {messageIsSent && <FormError>Your message has been sent. Please expect a reply in 2 - 3 working days.</FormError>}
+      {messageIsSent && (
+        <FormError>
+          Your message has been sent. Please expect a reply in 2 - 3 working days.
+        </FormError>
+      )}
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
           {isSending ? 'Sending...' : 'Send'}

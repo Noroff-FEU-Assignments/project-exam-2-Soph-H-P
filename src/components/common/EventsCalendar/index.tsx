@@ -11,6 +11,7 @@ import EventModal from '../EventModal';
 import { CalendarContainer } from './index.styled';
 import { useUserState } from '../../../context/UserContext';
 import EditEventModal from '../EditEventModal';
+import PageTitle from '../typography/PageTitle';
 
 const EventsCalendar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -66,6 +67,7 @@ const EventsCalendar = () => {
 
   return (
     <CalendarContainer>
+      <PageTitle>Events</PageTitle>
       {userInfo?.userRole === 'admin' && isOpen && (
         <EditEventModal
           isOpen={isOpen}

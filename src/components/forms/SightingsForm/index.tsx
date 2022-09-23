@@ -11,6 +11,7 @@ import FormMessage from '../FormMessage';
 import LocationInput from '../../common/mapComponents/LocationInput';
 import { LatLngLiteral } from 'leaflet';
 import SpeciesInput from '../SpeciesInput';
+import PageTitle from '../../common/typography/PageTitle';
 
 const SightingsForm = () => {
   const [form] = Form.useForm();
@@ -45,6 +46,7 @@ const SightingsForm = () => {
       initialValues={{ remember: true }}
       onFinish={(data) => submitForm(data, image)}
     >
+      <PageTitle>Add Sighting</PageTitle>
       <SpeciesInput />
       <label htmlFor="date">When did you see it?</label>
       <Form.Item

@@ -5,7 +5,7 @@ import SightingsGrid from '../components/layout/SightingsGrid';
 const ModerateSightings = () => {
   return (
     <PageContainer>
-      <SightingsGrid moderation={true}></SightingsGrid>
+      <SightingsGrid moderation={true} title={'Moderate Sightings'}></SightingsGrid>
     </PageContainer>
   );
 };

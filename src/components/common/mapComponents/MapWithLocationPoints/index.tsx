@@ -7,6 +7,7 @@ import mapPin from '../../../../svgs/mapPin.svg';
 import findTimeAgo from '../../../../utils/findTimeAgo';
 import Loader from '../../Loader';
 import { Link } from 'react-router-dom';
+import ApiErrorMessage from '../../ApiErrorMessage';
 
 const PopupText = ({
   species,
@@ -79,7 +80,7 @@ const MapWithLocationPoints = ({
   }
 
   if (error) {
-    return <p>Unable to find recent sightings</p>;
+    return <ApiErrorMessage message="Unable to find recent sightings"></ApiErrorMessage>;
   }
 
   if (url) {
