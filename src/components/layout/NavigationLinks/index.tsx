@@ -11,6 +11,7 @@ import BinocularsSvg from '../../../svgs/BinocularsSvg';
 import ModerateSvg from '../../../svgs/ModerateSvg';
 import { Dispatch, SetStateAction } from 'react';
 import NotificationsIcon from '../../../svgs/NotificationsIcon';
+import RecentSvg from '../../../svgs/RecentSvg';
 
 export const DesktopNavigationLinks = ({
   setIsOpen,
@@ -64,7 +65,7 @@ export const MobileNavigationLinks = ({
     <NavLinksContainer $isMobile={true}>
       <StyledNavLink to="/" onClick={() => setIsOpen(false)}>
         Recent Sightings
-        <MapIcon />
+        <RecentSvg />
       </StyledNavLink>
       <StyledNavLink to="/sightings-map" onClick={() => setIsOpen(false)}>
         Sightings Map

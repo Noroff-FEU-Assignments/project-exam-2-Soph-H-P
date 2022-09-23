@@ -58,9 +58,9 @@ const UploadInput = ({
 
   return (
     <>
-      <ImgCrop rotate>
+      <ImgCrop rotate aspect={3 / 2}>
         <Upload
-          // @ts-ignore: unknown object
+          // @ts-ignore: custom request
           customRequest={uploadImageFile}
           listType="picture-card"
           fileList={fileList}

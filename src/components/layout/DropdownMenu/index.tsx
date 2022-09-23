@@ -3,6 +3,7 @@ import AddSvg from '../../../svgs/AddSvg';
 import BinocularsSvg from '../../../svgs/BinocularsSvg';
 import MapIcon from '../../../svgs/MapIcon';
 import ModerateSvg from '../../../svgs/ModerateSvg';
+import RecentSvg from '../../../svgs/RecentSvg';
 import { StyledNavLink } from '../NavigationLinks/index.styled';
 
 const menuItems = [
@@ -11,7 +12,7 @@ const menuItems = [
     visibility: ['public', 'member', 'admin'],
     label: (
       <StyledNavLink to="/">
-        <MapIcon />
+        <RecentSvg />
         Recent Sightings
       </StyledNavLink>
     ),

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import SightingsGrid from '../components/layout/SightingsGrid';
+import StickySightingsMapContainer from '../components/layout/StickySightingsMapContainer';
 import { useAuthState } from '../context/AuthContext';
 
 const MySightings = () => {
@@ -12,8 +13,9 @@ const MySightings = () => {
   }
 
   return (
-    <PageContainer>
+    <PageContainer $isSplit={true} >
       <SightingsGrid mySightings={true} title={'My sightings'} />
+      <StickySightingsMapContainer isMySightings={true}/>
     </PageContainer>
   );
 };

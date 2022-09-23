@@ -10,6 +10,7 @@ export const CalendarContainer = styled.div`
     padding: 0px;
     list-style: none;
   }
+
   .events .ant-badge-status {
     width: 100%;
     overflow: hidden;
@@ -21,6 +22,7 @@ export const CalendarContainer = styled.div`
     font-size: 28px;
     text-align: center;
   }
+
   .notes-month section {
     font-size: 28px;
   }
@@ -33,6 +35,11 @@ export const CalendarContainer = styled.div`
     border-radius: 10px;
     margin: 12px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-today.ant-picker-cell-selected
+    > .ant-picker-cell-inner.ant-picker-calendar-date.ant-picker-calendar-date-today {
+    background: ${theme.colors.primaryColor};
   }
 
   .ant-picker-cell-inner.ant-picker-calendar-date.ant-picker-calendar-date-today {

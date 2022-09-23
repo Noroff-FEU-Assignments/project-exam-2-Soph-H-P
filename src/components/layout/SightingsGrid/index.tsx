@@ -9,6 +9,7 @@ import API, {
 } from '../../../constants/api';
 import { UserInterface, useUserState } from '../../../context/UserContext';
 import useSightings from '../../../hooks/useSightings';
+import createMySightingsEndpoint from '../../../utils/createMySightingsEndpoint';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Loader from '../../common/Loader';
 import SightingsCard from '../../common/SightingsCard';
@@ -33,9 +34,19 @@ const SightingsGrid = ({
     return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterVarified}`;
   };
 
+  const findMySightingsUrl = () => {
+    if (userInfo?.id) {
+      return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterVarified}&${createMySightingsEndpoint(
+        userInfo.id
+      )}`;
+    }
+  };
+
   const foundUrl = findUrl(userInfo);
   const moderationUrl = `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterUnvarified}`;
-  const { sightings, error, isLoading } = useSightings(moderation ? moderationUrl : foundUrl);
+  const { sightings, error, isLoading } = useSightings(
+    moderation ? moderationUrl : mySightings ? findMySightingsUrl() : foundUrl
+  );
 
   if (error) {
     return (
