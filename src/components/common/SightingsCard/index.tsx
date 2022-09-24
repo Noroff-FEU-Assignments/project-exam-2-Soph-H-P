@@ -27,7 +27,7 @@ const SightingsCard = ({
   const { varifySighting } = useVarifySighting();
   return (
     <StyledCardContainer>
-      <ImageWrapper $height={150} $noImage={noImage}>
+      <ImageWrapper $height={160} $noImage={noImage}>
         <img src={imageSrc} alt={species} />
       </ImageWrapper>
       <h2>{species}</h2>

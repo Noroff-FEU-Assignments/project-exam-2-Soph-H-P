@@ -55,7 +55,7 @@ const useSightings = (url?: string) => {
       } catch (error) {
         console.log(error);
         setError(
-          'We are having trouble finding sightings at the moment, please come back again later'
+          'Oops we seem to be having trouble finding sightings at the moment, please come back again later'
         );
       } finally {
         setIsLoading(false);

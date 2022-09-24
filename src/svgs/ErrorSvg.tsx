@@ -7,7 +7,7 @@ export const ErrorSvg = () => (
         transform="translate(158 158)"
         fill="none"
         stroke="currentColor"
-        stroke-width="10"
+        strokeWidth="10"
       >
         <circle cx="92" cy="92" r="92" stroke="none" />
         <circle cx="92" cy="92" r="87" fill="none" />

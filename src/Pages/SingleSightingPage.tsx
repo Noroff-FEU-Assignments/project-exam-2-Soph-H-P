@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ApiErrorMessage from '../components/common/ApiErrorMessage';
+import Cta from '../components/common/Cta';
 import Loader from '../components/common/Loader';
 import SingleSightingCard from '../components/common/SingleSightingCard';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
@@ -15,9 +16,12 @@ const SingleSightingPage = () => {
 
   const { sighting, isLoading, error } = useSingleSighting(url);
 
-  if (!id) {
-    navigate('/');
-  }
+  useEffect(() => {
+    if (!id) {
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   useEffect(() => {
     if (sighting) {
@@ -28,7 +32,8 @@ const SingleSightingPage = () => {
   if (error) {
     return (
       <PageContainer>
-        <ApiErrorMessage message={error}></ApiErrorMessage>
+        <ApiErrorMessage message={error} hasGif={true} />
+        <Cta toHome={true} />
       </PageContainer>
     );
   }
@@ -42,7 +47,7 @@ const SingleSightingPage = () => {
   }
   if (sighting) {
     return (
-      <PageContainer style={{ maxWidth: 800 }}>
+      <PageContainer $hasBird={true} $notFullHeight={true} style={{ maxWidth: 800 }}>
         <SingleSightingCard sighting={sighting} />
       </PageContainer>
     );

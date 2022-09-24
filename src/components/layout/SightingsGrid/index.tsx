@@ -50,15 +50,20 @@ const SightingsGrid = ({
 
   if (error) {
     return (
-      <>
+      <SightingsContainer>
         <PageTitle>{title}</PageTitle>
-        <ApiErrorMessage message={error}></ApiErrorMessage>
-      </>
+        <ApiErrorMessage hasGif={true} message={error}></ApiErrorMessage>
+      </SightingsContainer>
     );
   }
 
   if (isLoading) {
-    return <Loader size={300} light={true} />;
+    return (
+      <SightingsContainer>
+        <PageTitle>{title}</PageTitle>
+        <Loader size={200} light={true} />
+      </SightingsContainer>
+    );
   }
 
   if (sightings && sightings.length <= 0) {

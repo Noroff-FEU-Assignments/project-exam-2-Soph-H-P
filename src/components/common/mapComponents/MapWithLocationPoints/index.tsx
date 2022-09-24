@@ -80,7 +80,7 @@ const MapWithLocationPoints = ({
   }
 
   if (error) {
-    return <ApiErrorMessage message="Unable to find recent sightings"></ApiErrorMessage>;
+    return <ApiErrorMessage message="Oops something went wrong. Unable to find recent sightings" />;
   }
 
   if (url) {

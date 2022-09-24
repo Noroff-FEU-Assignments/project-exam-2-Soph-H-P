@@ -3,6 +3,7 @@ import { Modal, Upload, UploadFile, UploadProps } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { RcFile } from 'antd/lib/upload';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { StyledFormItem } from './index.styled';
 
 const UploadInput = ({
   fileList,
@@ -57,7 +58,8 @@ const UploadInput = ({
   );
 
   return (
-    <>
+    <StyledFormItem>
+      <label htmlFor="photos">Add a photo</label>
       <ImgCrop rotate aspect={3 / 2}>
         <Upload
           // @ts-ignore: custom request
@@ -73,7 +75,7 @@ const UploadInput = ({
       <Modal visible={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
         <img alt="example" style={{ width: '100%' }} src={previewImage} />
       </Modal>
-    </>
+    </StyledFormItem>
   );
 };
 

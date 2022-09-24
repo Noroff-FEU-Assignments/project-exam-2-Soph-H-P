@@ -54,7 +54,7 @@ const useSingleSighting = (url: string) => {
     } catch (error) {
       console.log(error);
       setError(
-        'We are having trouble finding sightings at the moment, please come back again later'
+        'Oops something went wrong. We are having trouble finding that particular sighting at the moment'
       );
     } finally {
       setIsLoading(false);

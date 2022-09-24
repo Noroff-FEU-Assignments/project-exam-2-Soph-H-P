@@ -4,6 +4,8 @@ import theme from '../../../styles/theme';
 export const StyledMessage = styled.div`
   display: flex;
   align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
 
   h2 {
     padding: 20px;

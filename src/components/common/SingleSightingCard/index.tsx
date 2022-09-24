@@ -5,7 +5,7 @@ import StatusIcon from '../StatusIcon';
 import { ImageWrapper, SplitCard, StyledCardContainer } from './index.styled';
 import MapWithLocationPoints from '../mapComponents/MapWithLocationPoints';
 
-const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
+const Card = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
   const { date: when, lat, lng, species, username, userStatus, description } = sighting.attributes;
@@ -13,7 +13,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
   const { location } = useNearestLocation(lat, lng);
   return (
     <StyledCardContainer>
-      <ImageWrapper $height={400} $noImage={noImage}>
+      <ImageWrapper $height={480} $noImage={noImage}>
         <img src={imageSrc} alt={species} />
       </ImageWrapper>
       <SplitCard>
@@ -50,4 +50,4 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
   );
 };
 
-export default SingleSightingCard;
+export default Card;

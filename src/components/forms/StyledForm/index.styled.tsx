@@ -18,6 +18,7 @@ export const StyledForm = styled(Form)`
   }
 
   .ant-input,
+  .ant-picker-input > input,
   label {
     font-size: 18px;
   }

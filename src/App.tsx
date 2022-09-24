@@ -19,6 +19,7 @@ import { AuthStateProvider } from './context/AuthContext';
 import { UserStateProvider } from './context/UserContext';
 import RegisterUser from './pages/RegisterUser';
 import Footer from './components/layout/Footer';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
                 <Route path="/admin/moderate-sightings" element={<ModerateSightings />} />
                 <Route path="/admin/edit-users" element={<EditUsers />} />
                 <Route path="/admin/edit-sighting" element={<EditSighting />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
             <Footer />

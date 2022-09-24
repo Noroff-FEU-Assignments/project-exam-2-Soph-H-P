@@ -4,8 +4,8 @@ import StickySightingsMapContainer from '../components/layout/StickySightingsMap
 
 const Home = () => {
   return (
-    <PageContainer $isSplit={true} >
-      <SightingsGrid title={'Recent Sightings'}/>
+    <PageContainer $isSplit={true} style={{ width: '100%' }}>
+      <SightingsGrid title={'Recent Sightings'} />
       <StickySightingsMapContainer />
     </PageContainer>
   );

@@ -6,6 +6,7 @@ export const PageContainer = styled.div<{
   $isSplit?: boolean;
   $hasBird?: boolean;
   $containsForm?: boolean;
+  $notFullHeight?: boolean;
 }>`
   display: flex;
   flex-direction: column;
@@ -27,6 +28,11 @@ export const PageContainer = styled.div<{
       margin: 0;
       padding: 0;
       background: none;
+    `}
+  ${({ $notFullHeight }) =>
+    $notFullHeight &&
+    css`
+      height: max-content;
     `}
 
   ${({ $hasBird, $containsForm }) =>

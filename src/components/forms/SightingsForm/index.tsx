@@ -106,12 +106,12 @@ const SightingsForm = () => {
       <label htmlFor="location">Where did you see it?</label>
       <LocationInput position={position} setPosition={setPosition} />
       <Form.Item name="lat" style={{ display: 'none' }}>
-        <Input placeholder="Mute Swan" disabled />
+        <Input placeholder="latitude" disabled />
       </Form.Item>
       <Form.Item name="lng" style={{ display: 'none' }}>
-        <Input placeholder="Mute Swan" disabled />
+        <Input placeholder="longitude" disabled />
       </Form.Item>
-      <label htmlFor="photos">Add a photo</label>
+      
       <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
       <Button loading={isSubmitting} type="primary" htmlType="submit" className="login-form-button">
         {isSubmitting ? 'Submitting' : 'Submit'}
