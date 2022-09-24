@@ -20,7 +20,7 @@ const EventsForm = () => {
       form={form}
       initialValues={{ remember: true }}
       onFinish={(data) => submitForm(data)}
-      style={{ width: '40%', background: theme.colors.primaryHighlightColor }}
+      $isEventsForm={true}
     >
       <h1>Add a new event</h1>
       <label htmlFor="eventTitle">What is the event?</label>

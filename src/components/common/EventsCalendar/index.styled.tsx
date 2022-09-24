@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from '../../../styles/theme';
 
-export const CalendarContainer = styled.div`
+export const CalendarContainer = styled.div<{ $isAdmin?: boolean }>`
   width: 100%;
+  max-width: 1200px;
   padding: 10px;
 
   .events {
@@ -34,7 +35,7 @@ export const CalendarContainer = styled.div`
   .ant-picker-cell-inner.ant-picker-calendar-date {
     border-radius: 10px;
     margin: 12px;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: ${theme.effects.cardShadow};
   }
 
   .ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-today.ant-picker-cell-selected
@@ -57,4 +58,34 @@ export const CalendarContainer = styled.div`
     > .ant-picker-cell-inner.ant-picker-calendar-date {
     background: ${theme.colors.primaryHighlightColor};
   }
+
+  @media (max-width: 800px) {
+    padding: 0px;
+
+    .ant-picker-cell-inner.ant-picker-calendar-date {
+      margin: 2px;
+      height: 100px;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+  }
+
+  ${({ $isAdmin }) =>
+    $isAdmin &&
+    css`
+      @media (max-width: 1000px) {
+        padding: 0px;
+
+        .ant-picker-cell-inner.ant-picker-calendar-date {
+          margin: 2px;
+          height: 100px;
+        }
+
+        h1 {
+          margin-top: 20px;
+        }
+      }
+    `}
 `;

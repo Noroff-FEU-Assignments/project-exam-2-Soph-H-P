@@ -5,24 +5,12 @@ import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import { useUserState } from '../context/UserContext';
 
 const Events = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { userInfo } = useUserState();
 
-  const handleResizeWindow = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResizeWindow);
-    return () => window.removeEventListener('resize', handleResizeWindow);
-  }, []);
-
   return (
-    <PageContainer $isSplit={userInfo?.userRole === 'admin' ? true : false}>
+    <PageContainer $isReversed={true} $isSplit={userInfo?.userRole === 'admin' ? true : false}>
       <EventsCalendar />
-      {userInfo?.userRole === 'admin' && (
-        <EventsForm />
-      )}
+      {userInfo?.userRole === 'admin' && <EventsForm />}
     </PageContainer>
   );
 };

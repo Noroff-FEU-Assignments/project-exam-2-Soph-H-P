@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { BadgeProps } from 'antd';
 import { Badge, Calendar } from 'antd';
 import type { Moment } from 'moment';
@@ -12,6 +12,7 @@ import { CalendarContainer } from './index.styled';
 import { useUserState } from '../../../context/UserContext';
 import EditEventModal from '../EditEventModal';
 import PageTitle from '../typography/PageTitle';
+import EventCard from '../EventCard';
 
 const EventsCalendar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -21,6 +22,16 @@ const EventsCalendar = () => {
   const startOfMonth = moment();
   const endOfMonth = moment();
   const { userInfo } = useUserState();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const handleResizeWindow = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResizeWindow);
+    return () => window.removeEventListener('resize', handleResizeWindow);
+  }, []);
 
   const getListData = (value: Moment) => {
     const listData: { type: string; content: string; event: EventInterface }[] = [];
@@ -66,7 +77,7 @@ const EventsCalendar = () => {
   };
 
   return (
-    <CalendarContainer>
+    <CalendarContainer $isAdmin={userInfo?.userRole === 'admin'}>
       <PageTitle>Events</PageTitle>
       {userInfo?.userRole === 'admin' && isOpen && (
         <EditEventModal
@@ -75,19 +86,33 @@ const EventsCalendar = () => {
           currentEvent={currentEvent}
         />
       )}
-      {userInfo?.userRole !== 'admin' && (
-        <EventModal
-          isOpen={isOpen}
-          handleCancel={() => setIsOpen(false)}
-          currentEvent={currentEvent}
-        />
+      {(userInfo?.userRole === 'admin' && windowWidth >= 800) ||
+      (!userInfo && windowWidth >= 700) ||
+      (userInfo?.userRole !== 'admin' && windowWidth >= 700) ? (
+        <>
+          {userInfo?.userRole !== 'admin' && (
+            <EventModal
+              isOpen={isOpen}
+              handleCancel={() => setIsOpen(false)}
+              currentEvent={currentEvent}
+            />
+          )}
+          <Calendar
+            dateCellRender={dateCellRender}
+            mode={'month'}
+            validRange={isOpen ? [startOfMonth, endOfMonth] : undefined}
+          />
+        </>
+      ) : (
+        <>
+          {events &&
+            events.map((event) => {
+              return (
+                <EventCard event={event} setIsOpen={setIsOpen} setCurrentEvent={setCurrentEvent} />
+              );
+            })}
+        </>
       )}
-      <Calendar
-        dateCellRender={dateCellRender}
-        onSelect={() => console.log('selected but nothing else')}
-        mode={'month'}
-        validRange={isOpen ? [startOfMonth, endOfMonth] : undefined}
-      />
     </CalendarContainer>
   );
 };

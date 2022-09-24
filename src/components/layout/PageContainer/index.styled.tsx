@@ -7,6 +7,7 @@ export const PageContainer = styled.div<{
   $hasBird?: boolean;
   $containsForm?: boolean;
   $notFullHeight?: boolean;
+  $isReversed?: boolean;
 }>`
   display: flex;
   flex-direction: column;
@@ -53,13 +54,15 @@ export const PageContainer = styled.div<{
 
 
 
-  ${({ $isSplit }) =>
+  ${({ $isSplit, $isReversed }) =>
     $isSplit &&
     css`
       flex-direction: row;
 
       @media (max-width: 700px) {
-        flex-direction: column;
+        flex-direction: ${$isReversed ? 'column-reverse' : 'column'};
+
+
 
         & > div {
           width: 100%;

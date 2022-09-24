@@ -1,8 +1,8 @@
 import { Form } from 'antd';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from '../../../styles/theme';
 
-export const StyledForm = styled(Form)`
+export const StyledForm = styled(Form)<{ $isEventsForm?: boolean }>`
   width: max-content;
   max-width: 100%;
   margin: 0px auto;
@@ -22,6 +22,10 @@ export const StyledForm = styled(Form)`
   .ant-picker-input > input,
   label {
     font-size: 18px;
+  }
+
+  .ant-picker-input > input {
+    font-weight: 300;
   }
 
   .ant-input,
@@ -102,6 +106,22 @@ export const StyledForm = styled(Form)`
     label {
       font-size: 14px;
     }
-
   }
+
+  ${({ $isEventsForm }) =>
+    $isEventsForm &&
+    css`
+      width: 40%;
+      background: ${theme.colors.primaryHighlightColor};
+      margin-left: 10px;
+
+      @media (max-width: 800px) {
+        width: 100%;
+        margin-left: 10px;
+      }
+
+      @media (max-width: 700px) {
+        margin-left: 0px;
+      }
+    `}
 `;
