@@ -10,6 +10,13 @@ export const StyledSelect = styled(Select)`
   .ant-select-selector {
     padding: 10px 11px !important;
   }
+
+  @media (max-width: 500px) {
+    .ant-select-selector,
+    .ant-select-selection-search > input {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const NotFoundContainer = styled.div`

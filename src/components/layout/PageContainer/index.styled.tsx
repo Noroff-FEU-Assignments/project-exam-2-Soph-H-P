@@ -18,7 +18,7 @@ export const PageContainer = styled.div<{
 
   @media (max-width: 500px) {
     margin: 0px;
-    padding: 10px;
+    padding: 20px 0px;
   }
 
   ${({ $containsForm }) =>

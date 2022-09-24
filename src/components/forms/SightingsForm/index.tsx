@@ -12,6 +12,7 @@ import LocationInput from '../../common/mapComponents/LocationInput';
 import { LatLngLiteral } from 'leaflet';
 import SpeciesInput from '../SpeciesInput';
 import PageTitle from '../../common/typography/PageTitle';
+import { StyledFormContainer } from './index.styled';
 
 const SightingsForm = () => {
   const [form] = Form.useForm();
@@ -47,72 +48,81 @@ const SightingsForm = () => {
       onFinish={(data) => submitForm(data, image)}
     >
       <PageTitle>Add Sighting</PageTitle>
-      <SpeciesInput />
-      <label htmlFor="date">When did you see it?</label>
-      <Form.Item
-        name="date"
-        rules={[{ required: true, message: 'Please tell us when you saw this bird' }]}
-      >
-        <DatePicker
-          format={'dddd Do MM YYYY - HH:mm'}
-          showTime
-          disabledDate={disabledDate}
-          onChange={(e) => console.log(e)}
-        />
-      </Form.Item>
-      <label htmlFor="description">Description</label>
-      <Form.Item
-        name="description"
-        rules={[{ required: true, message: 'Please tell us about the sighting' }]}
-      >
-        <TextArea rows={4} placeholder="Description character limit 250" maxLength={250} />
-      </Form.Item>
-      <label htmlFor="public">Who should see this sighting?</label>
-      <Form.Item valuePropName="checked" name="public" initialValue={true}>
-        <Switch
-          defaultChecked
-          checkedChildren="Members only"
-          unCheckedChildren="Public"
-          disabled={userInfo ? false : true}
-        />
-      </Form.Item>
-      {userInfo && (
-        <>
-          {userInfo.id && (
+      <StyledFormContainer>
+        <div>
+          <SpeciesInput />
+          <label htmlFor="date">When did you see it?</label>
+          <Form.Item
+            name="date"
+            rules={[{ required: true, message: 'Please tell us when you saw this bird' }]}
+          >
+            <DatePicker
+              format={'dddd Do MM YYYY - HH:mm'}
+              showTime
+              disabledDate={disabledDate}
+              onChange={(e) => console.log(e)}
+            />
+          </Form.Item>
+          <label htmlFor="description">Description</label>
+          <Form.Item
+            name="description"
+            rules={[{ required: true, message: 'Please tell us about the sighting' }]}
+          >
+            <TextArea rows={4} placeholder="Description character limit 250" maxLength={250} />
+          </Form.Item>
+          <label htmlFor="public">Who should see this sighting?</label>
+          <Form.Item valuePropName="checked" name="public" initialValue={true}>
+            <Switch
+              defaultChecked
+              checkedChildren="Members"
+              unCheckedChildren="Public"
+              disabled={userInfo ? false : true}
+            />
+          </Form.Item>
+          {userInfo && (
             <>
-              <Form.Item
-                name="userId"
-                initialValue={userInfo.id.toString()}
-                style={{ display: 'none' }}
-              >
-                <Input disabled />
-              </Form.Item>
-              <Form.Item
-                name="username"
-                initialValue={userInfo.username}
-                style={{ display: 'none' }}
-              >
-                <Input disabled />
-              </Form.Item>
+              {userInfo.id && (
+                <>
+                  <Form.Item
+                    name="userId"
+                    initialValue={userInfo.id.toString()}
+                    style={{ display: 'none' }}
+                  >
+                    <Input disabled />
+                  </Form.Item>
+                  <Form.Item
+                    name="username"
+                    initialValue={userInfo.username}
+                    style={{ display: 'none' }}
+                  >
+                    <Input disabled />
+                  </Form.Item>
+                </>
+              )}
+              {userInfo.userRole === 'admin' && (
+                <Form.Item name="varified" initialValue={true} style={{ display: 'none' }}>
+                  <Input disabled />
+                </Form.Item>
+              )}
             </>
           )}
-          {userInfo.userRole === 'admin' && (
-            <Form.Item name="varified" initialValue={true} style={{ display: 'none' }}>
-              <Input disabled />
-            </Form.Item>
-          )}
-        </>
-      )}
-      <label htmlFor="location">Where did you see it?</label>
-      <LocationInput position={position} setPosition={setPosition} />
-      <Form.Item name="lat" style={{ display: 'none' }}>
-        <Input placeholder="latitude" disabled />
-      </Form.Item>
-      <Form.Item name="lng" style={{ display: 'none' }}>
-        <Input placeholder="longitude" disabled />
-      </Form.Item>
-      
-      <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
+        </div>
+
+        <div>
+          <label htmlFor="location">Where did you see it?</label>
+          <LocationInput position={position} setPosition={setPosition} />
+
+          <Form.Item name="lat" style={{ display: 'none' }}>
+            <Input placeholder="latitude" disabled />
+          </Form.Item>
+
+          <Form.Item name="lng" style={{ display: 'none' }}>
+            <Input placeholder="longitude" disabled />
+          </Form.Item>
+
+          <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
+        </div>
+      </StyledFormContainer>
       <Button loading={isSubmitting} type="primary" htmlType="submit" className="login-form-button">
         {isSubmitting ? 'Submitting' : 'Submit'}
       </Button>

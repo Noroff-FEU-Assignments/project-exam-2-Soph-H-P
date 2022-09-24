@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import theme from '../../../styles/theme';
 
 export const StyledForm = styled(Form)`
-  max-width: 500px;
+  width: max-content;
+  max-width: 100%;
   margin: 0px auto;
   background: ${theme.colors.brightWhite};
   border-radius: 20px;
-  padding: 40px;
+  padding: 35px;
   display: flex;
   flex-direction: column;
 
@@ -40,7 +41,7 @@ export const StyledForm = styled(Form)`
   }
 
   .ant-switch-handle {
-    padding: 15px;
+    padding: 10px;
     height: calc(100% - 4px);
     width: 50%;
   }
@@ -50,7 +51,7 @@ export const StyledForm = styled(Form)`
   }
 
   .ant-switch-handle::after {
-    content: 'Members only';
+    content: 'Members';
     font-size: 18px;
     color: ${theme.colors.brightWhite};
     position: relative;
@@ -58,7 +59,7 @@ export const StyledForm = styled(Form)`
 
   .ant-switch {
     width: 100%;
-    padding: 15px;
+    padding: 10px;
     height: unset;
     border-radius: 10px;
     display: flex;
@@ -87,5 +88,20 @@ export const StyledForm = styled(Form)`
     font-size: 18px;
     color: ${theme.colors.brightWhite};
     position: relative;
+  }
+
+  @media (max-width: 500px) {
+    padding: 20px;
+    width: 100%;
+
+    .ant-switch-checked .ant-switch-handle::after,
+    .ant-switch > span,
+    .ant-switch-handle::after,
+    .ant-input,
+    .ant-picker-input > input,
+    label {
+      font-size: 14px;
+    }
+
   }
 `;

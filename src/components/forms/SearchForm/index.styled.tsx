@@ -13,7 +13,7 @@ export const StyledSearchForm = styled(Form)`
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 10000;
+  z-index: 500;
   display: flex;
   flex-direction: row;
   align-items: center;

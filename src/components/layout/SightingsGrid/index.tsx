@@ -70,10 +70,10 @@ const SightingsGrid = ({
     return (
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
-        <p>
+        <p style={{ padding: 30 }}>
           {moderation
             ? 'There are no sightings to moderate at the moment.'
-            : "There aren't any sightings yet."}
+            : `You haven't got any sightings yet.`}
         </p>
       </SightingsContainer>
     );
