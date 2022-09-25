@@ -45,6 +45,10 @@ const LoginForm = () => {
             required: true,
             message: 'Please input your username',
           },
+          {
+            max: 20,
+            message: 'Cannot be more than 15 characters',
+          },
         ]}
       >
         <Input type="text" placeholder="BlueFootedSophie" />

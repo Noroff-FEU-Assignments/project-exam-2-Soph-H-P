@@ -68,6 +68,13 @@ export const NavLinksContainer = styled.div<{ $isMobile?: boolean }>`
     margin-right: 20px;
   }
 
+  @media (min-width: 700px) and (max-width: 800px) {
+    a:not(:last-child),
+    button {
+      margin-right: 2px;
+    }
+  }
+
   ${({ $isMobile }) =>
     $isMobile &&
     css`

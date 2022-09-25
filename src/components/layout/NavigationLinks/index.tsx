@@ -41,11 +41,11 @@ export const DesktopNavigationLinks = ({
       </Dropdown>
       <StyledNavLink to="/events">Events</StyledNavLink>
       <StyledNavLink to="/contact">Contact</StyledNavLink>
-      {userInfo?.userRole === 'admin' && (
+      {/* {userInfo?.userRole === 'admin' && (
         <StyledNavLink to="/admin/moderate-sightings">
           <NotificationsIcon />
         </StyledNavLink>
-      )}
+      )} */}
       <StyledNavLink to="/login">
         {authToken ? <ProfileLink userInfo={userInfo} /> : 'Login'}
       </StyledNavLink>

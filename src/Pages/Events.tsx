@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import EventsCalendar from '../components/common/EventsCalendar';
 import EventsForm from '../components/forms/EventsForm';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
