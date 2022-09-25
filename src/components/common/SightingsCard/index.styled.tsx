@@ -18,12 +18,6 @@ export const StyledCardContainer = styled.div`
     font-size: 20px;
   }
 
-  p {
-    display: flex;
-    align-items: end;
-    margin-bottom: 5px;
-  }
-
   span {
     font-weight: 700;
     margin-right: 5px;
@@ -70,3 +64,13 @@ export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`
   }
 `;
 
+export const InfoWrapper = styled.div`
+  display: flex;
+  align-items: end;
+  margin-bottom: 5px;
+
+  a {
+    display: flex;
+    align-items: start;
+  }
+`;

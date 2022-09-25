@@ -11,7 +11,6 @@ const useGetUser = () => {
   const { authToken } = useAuthState();
 
   const getUser = async (id: string) => {
-    console.log(user);
     const url = `${API}${userEndpoint}/${id}`;
     try {
       const headers = {
@@ -20,7 +19,6 @@ const useGetUser = () => {
 
       const response = await axios.get(url, { headers: headers });
       if (response.status === 200) {
-        console.log('setting the user: ' + response.data.sightings);
         setUser(response.data);
       } else {
         setError(

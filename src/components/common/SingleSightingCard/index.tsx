@@ -1,14 +1,14 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import useNearestLocation from '../../../hooks/useNearestLocation';
 import { SightingInterface } from '../../../hooks/useSightings';
-import StatusIcon from '../StatusIcon';
 import { ImageWrapper, SplitCard, StyledCardContainer } from './index.styled';
 import MapWithLocationPoints from '../mapComponents/MapWithLocationPoints';
+import VarifiedUsername from '../VarifiedUsername';
 
 const Card = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
-  const { date: when, lat, lng, species, username, userStatus, description } = sighting.attributes;
+  const { date: when, lat, lng, species, userId, description } = sighting.attributes;
 
   const { location } = useNearestLocation(lat, lng);
   return (
@@ -27,11 +27,10 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
             <span>Where: </span>
             {location}
           </p>
-          <p>
+          <div>
             <span>Sighted by: </span>
-            {username}
-            {username !== 'anonymous' && <StatusIcon status={userStatus} />}
-          </p>
+            <VarifiedUsername userId={userId} />
+          </div>
           <p>
             <span>Description: </span>
             {description}

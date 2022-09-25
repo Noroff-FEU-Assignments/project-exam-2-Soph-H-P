@@ -1,7 +1,6 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import useNearestLocation from '../../../hooks/useNearestLocation';
 import { SightingInterface } from '../../../hooks/useSightings';
-import StatusIcon from '../StatusIcon';
 import { ButtonContainer, ImageWrapper, StyledCardContainer } from './index.styled';
 import theme from '../../../styles/theme';
 import CheckSvg from '../../../svgs/CheckSvg';
@@ -10,41 +9,19 @@ import CloseSvg from '../../../svgs/CloseSvg';
 import useDeleteSighting from '../../../hooks/useDeleteSighting';
 import useVarifySighting from '../../../hooks/useVarifySighting';
 import { message, Popconfirm } from 'antd';
-import { Link } from 'react-router-dom';
 import useAddSightingToUser from '../../../hooks/useAddSightingToUser';
-import useGetUser from '../../../hooks/useGetUser';
+import VarifiedUsername from '../VarifiedUsername';
 
 const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
   const imageId = noImage ? undefined : sighting.attributes.photos.data[0].id;
-  const {
-    date: when,
-    lat,
-    lng,
-    species,
-    username,
-    userStatus,
-    description,
-    userId,
-  } = sighting.attributes;
+  const { date: when, lat, lng, species, description, userId } = sighting.attributes;
 
   const { location } = useNearestLocation(lat, lng);
   const { deleteSighting } = useDeleteSighting();
   const { varifySighting } = useVarifySighting();
   const { addSightingToUser } = useAddSightingToUser(userId);
-
-  const getUsername = () => {
-    if (username !== 'anonymous') {
-      return (
-        <Link to={`/admin/edit-users/${userId}`}>
-          {username} <StatusIcon status={userStatus} />
-        </Link>
-      );
-    } else {
-      return username;
-    }
-  };
 
   const text = 'Are you sure you want to delete this sighting?';
 
@@ -74,10 +51,10 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
         <span>Where: </span>
         {location}
       </p>
-      <p>
+      <div>
         <span>Sighted by: </span>
-        {getUsername()}
-      </p>
+        <VarifiedUsername userId={userId} />
+      </div>
       <>
         <p style={{ alignItems: 'start', flexDirection: 'column' }}>
           <span>Description: </span>

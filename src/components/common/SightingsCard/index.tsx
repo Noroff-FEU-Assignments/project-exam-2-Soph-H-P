@@ -2,28 +2,17 @@ import findTimeAgo from '../../../utils/findTimeAgo';
 import useNearestLocation from '../../../hooks/useNearestLocation';
 import { SightingInterface } from '../../../hooks/useSightings';
 import StatusIcon from '../StatusIcon';
-import { ImageWrapper, StyledCardContainer } from './index.styled';
+import { ImageWrapper, InfoWrapper, StyledCardContainer } from './index.styled';
 import { useUserState } from '../../../context/UserContext';
 import { Link } from 'react-router-dom';
+import VarifiedUsername from '../VarifiedUsername';
 
 const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
-  const { date: when, lat, lng, species, username, userStatus, userId } = sighting.attributes;
-  const { userInfo } = useUserState();
-  const { location } = useNearestLocation(lat, lng);
+  const { date: when, lat, lng, species, userId } = sighting.attributes;
 
-  const getUsername = () => {
-    if (username !== 'anonymous' && userInfo?.userRole === 'admin') {
-      return (
-        <Link to={`/admin/edit-users/${userId}`}>
-          {username} <StatusIcon status={userStatus} />
-        </Link>
-      );
-    } else {
-      return username;
-    }
-  };
+  const { location } = useNearestLocation(lat, lng);
 
   return (
     <StyledCardContainer>
@@ -31,18 +20,17 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
         <img src={imageSrc} alt={species} />
       </ImageWrapper>
       <h2>{species}</h2>
-      <p>
+      <InfoWrapper>
         <span>Sighted: </span>
         {findTimeAgo(when)}
-      </p>
-      <p>
+      </InfoWrapper>
+      <InfoWrapper>
         <span>Where: </span>
         {location}
-      </p>
-      <p>
-        <span>Sighted by: </span>
-        {getUsername()}
-      </p>
+      </InfoWrapper>
+      <InfoWrapper>
+        <VarifiedUsername userId={userId} />
+      </InfoWrapper>
     </StyledCardContainer>
   );
 };
