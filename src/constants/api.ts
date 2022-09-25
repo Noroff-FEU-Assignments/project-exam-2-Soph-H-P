@@ -6,6 +6,7 @@ export const accessTokenUrlEndpoint = '/auth/local';
 export const registerUrlEndpoint = '/auth/local/register';
 export const sightingsEndpoint = '/sightings';
 export const eventsEndpoint = '/events';
+export const userEndpoint = '/users';
 export const uploadImageUrlEndpoint = '/upload/';
 export const birdsOnlyUrl = `${API}${sightingsEndpoint}?fields[0]=species`;
 

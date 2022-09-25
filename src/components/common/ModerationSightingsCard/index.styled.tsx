@@ -8,7 +8,6 @@ export const StyledCardContainer = styled.div`
   border-radius: 10px;
   width: 260px;
   padding: 10px;
-  cursor: pointer;
   height: max-content;
   margin: 10px;
   color: ${theme.colors.darkFontColor};
@@ -70,3 +69,8 @@ export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`
   }
 `;
 
+export const ButtonContainer = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+`;

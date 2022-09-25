@@ -19,10 +19,6 @@ const useDeleteEvent = () => {
         headers: headers,
       });
       console.log(response);
-
-      // if (response.status === 200 && imageId) {
-      //   deleteImage(imageId);
-      // }
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {

@@ -1,11 +1,12 @@
 import React from 'react';
 import RegisterForm from '../components/forms/RegisterForm';
+import { PageContainer } from '../components/layout/PageContainer/index.styled';
 
 const RegisterUser = () => {
   return (
-    <div>
+    <PageContainer $containsForm={true} $hasBird={true}>
       <RegisterForm />
-    </div>
+    </PageContainer>
   );
 };
 

@@ -12,7 +12,7 @@ const ApiErrorMessage = ({ message, hasGif }: { message: string; hasGif?: boolea
         <h2>{message}</h2>
       </StyledMessage>
       {hasGif && (
-        <ImageWithWrapper height="" width="" src={fallingBird} alt={'bird crash landing'} />
+        <ImageWithWrapper height="" width="400px" src={fallingBird} alt={'bird crash landing'} />
       )}
     </>
   );

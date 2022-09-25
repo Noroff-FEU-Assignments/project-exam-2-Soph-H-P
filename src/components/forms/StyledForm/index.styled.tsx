@@ -2,7 +2,7 @@ import { Form } from 'antd';
 import styled, { css } from 'styled-components';
 import theme from '../../../styles/theme';
 
-export const StyledForm = styled(Form)<{ $isEventsForm?: boolean }>`
+export const StyledForm = styled(Form)<{ $isEventsForm?: boolean; $isUserEdit?: boolean }>`
   width: max-content;
   max-width: 100%;
   margin: 0px auto;
@@ -122,6 +122,18 @@ export const StyledForm = styled(Form)<{ $isEventsForm?: boolean }>`
 
       @media (max-width: 700px) {
         margin-left: 0px;
+      }
+    `}
+
+  ${({ $isUserEdit }) =>
+    $isUserEdit &&
+    css`
+      .ant-switch-checked .ant-switch-handle::after {
+        content: 'Admin';
+      }
+
+      .ant-switch-handle::after {
+        content: 'Member';
       }
     `}
 `;

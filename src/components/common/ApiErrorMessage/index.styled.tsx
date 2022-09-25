@@ -19,4 +19,8 @@ export const StyledMessage = styled.div`
     color: ${theme.colors.primaryColor};
     flex-shrink: 0;
   }
+
+  @media (min-width: 700px) {
+    font-size: 18px;
+  }
 `;

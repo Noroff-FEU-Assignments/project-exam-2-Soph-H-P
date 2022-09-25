@@ -7,7 +7,7 @@ import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useRegisterUser from '../../../hooks/useRegisterUser';
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const { authToken, setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();
 
@@ -90,4 +90,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

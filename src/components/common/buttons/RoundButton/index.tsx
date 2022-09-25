@@ -11,7 +11,7 @@ const RoundButton = ({
 }: {
   color?: string;
   icon: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   type: 'link' | 'text' | 'default' | 'ghost' | 'primary' | 'dashed' | undefined;
   danger?: boolean;
 }) => {

@@ -12,6 +12,7 @@ import useSightings from '../../../hooks/useSightings';
 import createMySightingsEndpoint from '../../../utils/createMySightingsEndpoint';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Loader from '../../common/Loader';
+import ModerationSightingsCard from '../../common/ModerationSightingsCard';
 import SightingsCard from '../../common/SightingsCard';
 import PageTitle from '../../common/typography/PageTitle';
 import { SightingsContainer, StyledGridContainer } from './index.styled';
@@ -87,11 +88,10 @@ const SightingsGrid = ({
           {sightings &&
             moderation &&
             sightings.map((sighting, index) => (
-              <SightingsCard
+              <ModerationSightingsCard
                 key={index}
                 sighting={sighting}
-                moderation={moderation}
-              ></SightingsCard>
+              ></ModerationSightingsCard>
             ))}
           {sightings &&
             !moderation &&
@@ -100,7 +100,6 @@ const SightingsGrid = ({
                 <SightingsCard
                   key={index}
                   sighting={sighting}
-                  moderation={moderation}
                 ></SightingsCard>
               </Link>
             ))}
