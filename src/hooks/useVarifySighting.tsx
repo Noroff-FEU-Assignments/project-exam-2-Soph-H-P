@@ -7,10 +7,10 @@ const useVarifySighting = () => {
   const [error, setError] = useState<string | null>('');
   const [isVarifying, setIsVarifying] = useState(true);
   const { authToken } = useAuthState();
+
   const varifySighting = async (id: number) => {
     setIsVarifying(true);
     setError(null);
-
     try {
       const headers = {
         Authorization: `Bearer ${authToken}`,
@@ -19,7 +19,8 @@ const useVarifySighting = () => {
         varified: true,
       };
 
-      const response = await axios.put(`${API}${sightingsEndpoint}/${id} `, { data }, { headers });
+     
+      const response = await axios.put(`${API}${sightingsEndpoint}/${id}`, { data }, { headers });
       console.log(response);
     } catch (error: unknown) {
       console.log('error', error);

@@ -11,6 +11,8 @@ import useDeleteSighting from '../../../hooks/useDeleteSighting';
 import useVarifySighting from '../../../hooks/useVarifySighting';
 import { message, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
+import useAddSightingToUser from '../../../hooks/useAddSightingToUser';
+import useGetUser from '../../../hooks/useGetUser';
 
 const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
@@ -30,6 +32,7 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
   const { location } = useNearestLocation(lat, lng);
   const { deleteSighting } = useDeleteSighting();
   const { varifySighting } = useVarifySighting();
+  const { addSightingToUser } = useAddSightingToUser(userId);
 
   const getUsername = () => {
     if (username !== 'anonymous') {
@@ -48,6 +51,13 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
   const confirm = () => {
     message.info('Sighting deleted');
     deleteSighting(sighting.id, imageId);
+  };
+
+  const handleVarifySighting = () => {
+    varifySighting(sighting.id);
+    if (userId !== null) {
+      addSightingToUser(userId);
+    }
   };
 
   return (
@@ -78,9 +88,7 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
             type="primary"
             icon={<CheckSvg />}
             color={theme.colors.secondaryColor}
-            onClick={() => {
-              varifySighting(sighting.id);
-            }}
+            onClick={handleVarifySighting}
           />
           <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Yes" cancelText="No">
             <RoundButton

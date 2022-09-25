@@ -4,14 +4,15 @@ import API, { userEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
 import { UserInterface } from '../context/UserContext';
 
-const useGetUser = (id: string) => {
-  const url = `${API}${userEndpoint}/${id}`;
+const useGetUser = () => {
   const [user, setUser] = useState<UserInterface | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const { authToken } = useAuthState();
 
-  const getUser = async () => {
+  const getUser = async (id: string) => {
+    console.log(user);
+    const url = `${API}${userEndpoint}/${id}`;
     try {
       const headers = {
         Authorization: `Bearer ${authToken}`,
@@ -19,6 +20,7 @@ const useGetUser = (id: string) => {
 
       const response = await axios.get(url, { headers: headers });
       if (response.status === 200) {
+        console.log('setting the user: ' + response.data.sightings);
         setUser(response.data);
       } else {
         setError(
@@ -32,12 +34,6 @@ const useGetUser = (id: string) => {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    getUser();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
 
   return { user, error, isLoading, getUser };
 };

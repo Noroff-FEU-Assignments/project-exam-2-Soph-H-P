@@ -8,11 +8,18 @@ import Loader from '../../common/Loader';
 import { PageContainer } from '../../layout/PageContainer/index.styled';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Cta from '../../common/Cta';
+import { useEffect } from 'react';
 
 const EditUserForm = ({ userId }: { userId: string }) => {
   const [form] = Form.useForm();
 
-  const { user, error, isLoading } = useGetUser(userId);
+  const { user, error, isLoading, getUser } = useGetUser();
+
+  useEffect(() => {
+    getUser(userId);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
 
   const { formIsSubmitted, formError, isSubmitting, submitUpdateForm, deleteUser, isDeleting } =
     useUser(form);
