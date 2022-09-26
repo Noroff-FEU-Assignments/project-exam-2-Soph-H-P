@@ -56,6 +56,13 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 
+
+      @media (max-width: 500px) {
+        .ant-picker-datetime-panel {
+          flex-direction: column;
+        }
+      }
+
 `;
 
 export default GlobalStyle;

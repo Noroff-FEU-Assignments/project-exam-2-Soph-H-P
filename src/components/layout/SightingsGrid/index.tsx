@@ -65,7 +65,7 @@ const SightingsGrid = ({
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
         <div>
-          <StyledGridContainer>
+          <StyledGridContainer $moderation={moderation}>
             {sightings &&
               moderation &&
               sightings.map((sighting, index) => (

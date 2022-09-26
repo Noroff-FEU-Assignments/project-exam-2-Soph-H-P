@@ -1,4 +1,4 @@
-import { Form } from 'antd';
+import { DatePicker, Form } from 'antd';
 import styled, { css } from 'styled-components';
 import theme from '../../../styles/theme';
 
@@ -48,7 +48,6 @@ export const StyledForm = styled(Form)<{ $isEventsForm?: boolean; $isUserEdit?: 
       justify-content: space-between;
       align-items: center;
     }
-
   }
 
   button {
@@ -148,3 +147,4 @@ export const StyledForm = styled(Form)<{ $isEventsForm?: boolean; $isUserEdit?: 
       }
     `}
 `;
+

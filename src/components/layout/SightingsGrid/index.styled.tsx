@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const StyledGridContainer = styled.div`
+export const StyledGridContainer = styled.div<{ $moderation?: boolean }>`
   display: grid;
   height: fit-content;
   margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(max(260px, 200px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(max(260px, 200px), ${({ $moderation }) => $moderation ? '300px' : '1fr'}));
   gap: 10px;
 
   h1 {

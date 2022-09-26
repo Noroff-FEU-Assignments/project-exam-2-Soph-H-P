@@ -13,9 +13,9 @@ const MySightings = () => {
   }
 
   return (
-    <PageContainer $isSplit={true} >
+    <PageContainer $isSplit={true} style={{ width: '100%' }}>
       <SightingsGrid mySightings={true} title={'My sightings'} />
-      <StickySightingsMapContainer isMySightings={true}/>
+      <StickySightingsMapContainer isMySightings={true} />
     </PageContainer>
   );
 };
