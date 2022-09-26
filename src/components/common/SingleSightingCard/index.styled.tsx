@@ -77,3 +77,14 @@ export const SplitCard = styled.div`
     }
   }
 `;
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  align-items: end;
+  margin-bottom: 5px;
+
+  a {
+    display: flex;
+    align-items: start;
+  }
+`;

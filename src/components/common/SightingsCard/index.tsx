@@ -1,10 +1,7 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import useNearestLocation from '../../../hooks/useNearestLocation';
 import { SightingInterface } from '../../../hooks/useSightings';
-import StatusIcon from '../StatusIcon';
 import { ImageWrapper, InfoWrapper, StyledCardContainer } from './index.styled';
-import { useUserState } from '../../../context/UserContext';
-import { Link } from 'react-router-dom';
 import VarifiedUsername from '../VarifiedUsername';
 
 const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {

@@ -11,25 +11,29 @@ const useGetUser = () => {
   const { authToken } = useAuthState();
 
   const getUser = async (id: string) => {
-    const url = `${API}${userEndpoint}/${id}`;
-    try {
-      const headers = {
-        Authorization: `Bearer ${authToken}`,
-      };
+    if (id) {
+      const url = `${API}${userEndpoint}/${id}`;
+      try {
+        const headers = {
+          Authorization: `Bearer ${authToken}`,
+        };
 
-      const response = await axios.get(url, { headers: headers });
-      if (response.status === 200) {
-        setUser(response.data);
-      } else {
+        const response = await axios.get(url, { headers: headers });
+        if (response.status === 200) {
+          setUser(response.data);
+        } else {
+          setError(
+            'Oops something went wrong. We are having trouble finding that user at the moment'
+          );
+        }
+      } catch (error) {
+        console.log(error);
         setError(
           'Oops something went wrong. We are having trouble finding that user at the moment'
         );
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.log(error);
-      setError('Oops something went wrong. We are having trouble finding that user at the moment');
-    } finally {
-      setIsLoading(false);
     }
   };
 

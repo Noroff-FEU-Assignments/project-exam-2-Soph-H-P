@@ -1,7 +1,7 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import useNearestLocation from '../../../hooks/useNearestLocation';
 import { SightingInterface } from '../../../hooks/useSightings';
-import { ImageWrapper, SplitCard, StyledCardContainer } from './index.styled';
+import { ImageWrapper, InfoWrapper, SplitCard, StyledCardContainer } from './index.styled';
 import MapWithLocationPoints from '../mapComponents/MapWithLocationPoints';
 import VarifiedUsername from '../VarifiedUsername';
 
@@ -19,18 +19,17 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
       <SplitCard>
         <div>
           <h2>{species}</h2>
-          <p>
+          <InfoWrapper>
             <span>Sighted: </span>
             {findTimeAgo(when)}
-          </p>
-          <p>
+          </InfoWrapper>
+          <InfoWrapper>
             <span>Where: </span>
             {location}
-          </p>
-          <div>
-            <span>Sighted by: </span>
+          </InfoWrapper>
+          <InfoWrapper>
             <VarifiedUsername userId={userId} />
-          </div>
+          </InfoWrapper>
           <p>
             <span>Description: </span>
             {description}

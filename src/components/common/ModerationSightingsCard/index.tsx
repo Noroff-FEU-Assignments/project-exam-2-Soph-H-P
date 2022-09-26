@@ -1,7 +1,7 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import useNearestLocation from '../../../hooks/useNearestLocation';
 import { SightingInterface } from '../../../hooks/useSightings';
-import { ButtonContainer, ImageWrapper, StyledCardContainer } from './index.styled';
+import { ButtonContainer, ImageWrapper, InfoWrapper, StyledCardContainer } from './index.styled';
 import theme from '../../../styles/theme';
 import CheckSvg from '../../../svgs/CheckSvg';
 import RoundButton from '../buttons/RoundButton';
@@ -51,10 +51,9 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
         <span>Where: </span>
         {location}
       </p>
-      <div>
-        <span>Sighted by: </span>
+      <InfoWrapper>
         <VarifiedUsername userId={userId} />
-      </div>
+      </InfoWrapper>
       <>
         <p style={{ alignItems: 'start', flexDirection: 'column' }}>
           <span>Description: </span>

@@ -74,3 +74,14 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  align-items: end;
+  margin-bottom: 5px;
+
+  a {
+    display: flex;
+    align-items: start;
+  }
+`;
