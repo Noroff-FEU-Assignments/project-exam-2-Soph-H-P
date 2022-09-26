@@ -36,7 +36,7 @@ export interface SightingInterface {
     userId: string;
     varified: boolean;
     username: string;
-    userStatus: 'admin' | 'novis' | 'bronze' | 'silver' | 'gold';
+    nearestLocation: string;
   };
 }
 

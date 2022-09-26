@@ -5,6 +5,7 @@ import axios from 'axios';
 import { FormInstance, UploadFile } from 'antd';
 import useUploadImage from './useUploadImage';
 import { LatLngLiteral } from 'leaflet';
+import useNearestLocation from './useNearestLocation';
 
 const useSubmitSightingsForm = (
   form: FormInstance,
@@ -15,17 +16,26 @@ const useSubmitSightingsForm = (
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { uploadImage } = useUploadImage();
+  const { location, findNearestLocation, locationError } = useNearestLocation();
+
   const submitForm = async (data: any, image: File | undefined) => {
     setIsSubmitting(true);
+
     try {
-      const response = await axios.post(API + sightingsEndpoint, { data });
-      if (image) {
-        await uploadImage(image, response.data.data.id);
-        setFileList([]);
-        setPosition(null);
+      //finds and adds nearest location to the sighting
+      findNearestLocation(data.lat, data.lng);
+      data.nearestLocation = location;
+      if (!locationError) {
+        const response = await axios.post(API + sightingsEndpoint, { data });
+        console.log(response);
+        if (image) {
+          await uploadImage(image, response.data.data.id);
+          setFileList([]);
+          setPosition(null);
+        }
+        setFormIsSubmitted(true);
+        form.resetFields();
       }
-      setFormIsSubmitted(true);
-      form.resetFields();
     } catch (error: unknown) {
       setFormError(
         'We seem to be having trouble sending your message at the moment, please try again later'

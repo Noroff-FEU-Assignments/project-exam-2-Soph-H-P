@@ -21,7 +21,6 @@ const useVarifySighting = () => {
 
      
       const response = await axios.put(`${API}${sightingsEndpoint}/${id}`, { data }, { headers });
-      console.log(response);
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {

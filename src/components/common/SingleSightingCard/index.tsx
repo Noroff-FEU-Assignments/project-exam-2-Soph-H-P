@@ -1,5 +1,4 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
-import useNearestLocation from '../../../hooks/useNearestLocation';
 import { SightingInterface } from '../../../hooks/useSightings';
 import { ImageWrapper, InfoWrapper, SplitCard, StyledCardContainer } from './index.styled';
 import MapWithLocationPoints from '../mapComponents/MapWithLocationPoints';
@@ -8,9 +7,17 @@ import VarifiedUsername from '../VarifiedUsername';
 const Card = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
-  const { date: when, lat, lng, species, userId, description } = sighting.attributes;
+  const {
+    date: when,
+    lat,
+    lng,
+    nearestLocation,
+    species,
+    userId,
+    description,
+    username,
+  } = sighting.attributes;
 
-  const { location } = useNearestLocation(lat, lng);
   return (
     <StyledCardContainer>
       <ImageWrapper $height={480} $noImage={noImage}>
@@ -25,10 +32,10 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
           </InfoWrapper>
           <InfoWrapper>
             <span>Where: </span>
-            {location}
+            {nearestLocation}
           </InfoWrapper>
           <InfoWrapper>
-            <VarifiedUsername userId={userId} />
+            <VarifiedUsername userId={userId} backupUsername={username} />
           </InfoWrapper>
           <p>
             <span>Description: </span>

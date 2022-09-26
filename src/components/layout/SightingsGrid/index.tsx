@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
 import API, {
-  andFilterPublicOnly,
   andFilterUnvarified,
-  andFilterVarified,
   andSortByDate,
   includingImagesQuery,
   sightingsEndpoint,
 } from '../../../constants/api';
-import { UserInterface, useUserState } from '../../../context/UserContext';
+import { useUserState } from '../../../context/UserContext';
 import useSightings from '../../../hooks/useSightings';
-import createMySightingsEndpoint from '../../../utils/createMySightingsEndpoint';
+import findMySightingsUrl, { findSightingsUrl } from '../../../utils/findMySightingsUrl';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Loader from '../../common/Loader';
 import ModerationSightingsCard from '../../common/ModerationSightingsCard';
@@ -28,25 +26,10 @@ const SightingsGrid = ({
 }) => {
   const { userInfo } = useUserState();
 
-  const findUrl = (userInfo: Partial<UserInterface | null>) => {
-    if (!userInfo) {
-      return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterVarified}&${andFilterPublicOnly}`;
-    }
-    return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterVarified}`;
-  };
-
-  const findMySightingsUrl = () => {
-    if (userInfo?.id) {
-      return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterVarified}&${createMySightingsEndpoint(
-        userInfo.id
-      )}`;
-    }
-  };
-
-  const foundUrl = findUrl(userInfo);
+  const foundUrl = findSightingsUrl(userInfo);
   const moderationUrl = `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterUnvarified}`;
   const { sightings, error, isLoading } = useSightings(
-    moderation ? moderationUrl : mySightings ? findMySightingsUrl() : foundUrl
+    moderation ? moderationUrl : mySightings ? findMySightingsUrl(userInfo) : foundUrl
   );
 
   if (error) {
@@ -74,7 +57,7 @@ const SightingsGrid = ({
         <p style={{ padding: 30 }}>
           {moderation
             ? 'There are no sightings to moderate at the moment.'
-            : `You haven't got any sightings yet.`}
+            : `No sightings yet.`}
         </p>
       </SightingsContainer>
     );
@@ -88,19 +71,13 @@ const SightingsGrid = ({
           {sightings &&
             moderation &&
             sightings.map((sighting, index) => (
-              <ModerationSightingsCard
-                key={index}
-                sighting={sighting}
-              ></ModerationSightingsCard>
+              <ModerationSightingsCard key={index} sighting={sighting}></ModerationSightingsCard>
             ))}
           {sightings &&
             !moderation &&
             sightings.map((sighting, index) => (
               <Link to={`/sighting/${sighting.id}`}>
-                <SightingsCard
-                  key={index}
-                  sighting={sighting}
-                ></SightingsCard>
+                <SightingsCard key={index} sighting={sighting}></SightingsCard>
               </Link>
             ))}
         </StyledGridContainer>

@@ -44,7 +44,6 @@ const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }) => {
           defaultValue={moment(currentEvent.attributes.date)}
           showTime
           disabledDate={disabledDate}
-          onChange={(e) => console.log(e)}
         />
       </Form.Item>
       <label htmlFor="location">Where is the event?</label>

@@ -1,44 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { SightingInterface } from './useSightings';
 
-export interface SightingInterface {
-  id: number;
-  attributes: {
-    createdAt: string;
-    date: string;
-    description: string;
-    lat: number;
-    lng: number;
-    photos: {
-      data: [
-        {
-          id: number;
-          attributes: {
-            formats: {
-              small: {
-                url: string;
-              };
-              medium: {
-                url: string;
-              };
-              thumbnail: {
-                url: string;
-              };
-            };
-            url: string;
-          };
-        }
-      ];
-    };
-    public: boolean;
-    species: string;
-    updatedAt: string;
-    userId: string;
-    varified: boolean;
-    username: string;
-    userStatus: 'admin' | 'novis' | 'bronze' | 'silver' | 'gold';
-  };
-}
 
 const useSingleSighting = (url: string) => {
   const [sighting, setSightings] = useState<SightingInterface | null>(null);

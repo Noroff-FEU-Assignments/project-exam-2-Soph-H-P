@@ -35,7 +35,6 @@ const EventsForm = () => {
           format={'dddd Do MM YYYY - HH:mm'}
           showTime
           disabledDate={disabledDate}
-          onChange={(e) => console.log(e)}
         />
       </Form.Item>
       <label htmlFor="location">Where is the event?</label>

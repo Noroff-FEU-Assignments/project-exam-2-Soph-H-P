@@ -24,7 +24,6 @@ const useAddSightingToUser = (userId: string) => {
         sightings: user.sightings === null ? 1 : user.sightings + 1,
       };
       const response = await axios.put(`${API}${userEndpoint}/${userId}`, data, { headers });
-      console.log(response);
       setsightingIsAdded('This user has been updated');
     } catch (error: unknown) {
       setError('We seem to be having trouble saving the changes, please try again later');

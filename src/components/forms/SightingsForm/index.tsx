@@ -60,7 +60,6 @@ const SightingsForm = () => {
               format={'dddd Do MM YYYY - HH:mm'}
               showTime
               disabledDate={disabledDate}
-              onChange={(e) => console.log(e)}
             />
           </Form.Item>
           <label htmlFor="description">Description</label>

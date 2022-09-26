@@ -21,7 +21,6 @@ const useUser = (form?: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.put(`${API}${userEndpoint}/${id}`, data, { headers });
-      console.log(response);
       setFormIsSubmitted('This user has been updated');
       form && form.resetFields();
     } catch (error: unknown) {
@@ -39,7 +38,6 @@ const useUser = (form?: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.delete(`${API}${userEndpoint}/${id}`, { headers: headers });
-      console.log(response);
       setFormIsSubmitted('This event has been deleted');
       form && form.resetFields();
     } catch (error: unknown) {

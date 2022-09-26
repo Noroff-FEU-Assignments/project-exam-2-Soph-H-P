@@ -18,9 +18,7 @@ const useDeleteEvent = () => {
       const response = await axios.delete(`${API}${eventsEndpoint}/${id} `, {
         headers: headers,
       });
-      console.log(response);
     } catch (error: unknown) {
-      console.log('error', error);
       if (axios.isAxiosError(error)) {
         if (!error?.response) {
           console.log('No Server Response');

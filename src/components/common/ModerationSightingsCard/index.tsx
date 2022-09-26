@@ -16,9 +16,8 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
   const imageId = noImage ? undefined : sighting.attributes.photos.data[0].id;
-  const { date: when, lat, lng, species, description, userId } = sighting.attributes;
+  const { date: when, nearestLocation, species, description, userId, username } = sighting.attributes;
 
-  const { location } = useNearestLocation(lat, lng);
   const { deleteSighting } = useDeleteSighting();
   const { varifySighting } = useVarifySighting();
   const { addSightingToUser } = useAddSightingToUser(userId);
@@ -49,10 +48,10 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
       </p>
       <p>
         <span>Where: </span>
-        {location}
+        {nearestLocation}
       </p>
       <InfoWrapper>
-        <VarifiedUsername userId={userId} />
+        <VarifiedUsername userId={userId} backupUsername={username} />
       </InfoWrapper>
       <>
         <p style={{ alignItems: 'start', flexDirection: 'column' }}>

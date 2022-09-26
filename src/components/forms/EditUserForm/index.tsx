@@ -25,7 +25,6 @@ const EditUserForm = ({ userId }: { userId: string }) => {
     useUser(form);
 
   const handleChange = (e: any) => {
-    console.log(e);
     const value = e === true ? 'admin' : 'member';
     form.setFieldsValue({
       userRole: value,

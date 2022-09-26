@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import API, { userEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
@@ -11,14 +11,14 @@ const useGetUser = () => {
   const { authToken } = useAuthState();
 
   const getUser = async (id: string) => {
-    if (id) {
+    if (id && authToken) {
       const url = `${API}${userEndpoint}/${id}`;
       try {
         const headers = {
           Authorization: `Bearer ${authToken}`,
         };
 
-        const response = await axios.get(url, { headers: headers });
+        const response = await axios.get(url, { headers });
         if (response.status === 200) {
           setUser(response.data);
         } else {

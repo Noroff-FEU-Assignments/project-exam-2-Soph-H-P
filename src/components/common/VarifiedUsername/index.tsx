@@ -4,7 +4,13 @@ import { useUserState } from '../../../context/UserContext';
 import useGetUser from '../../../hooks/useGetUser';
 import StatusIcon from '../StatusIcon';
 
-const VarifiedUsername = ({ userId }: { userId: string }) => {
+const VarifiedUsername = ({
+  userId,
+  backupUsername,
+}: {
+  userId: string;
+  backupUsername: string;
+}) => {
   const { user, getUser } = useGetUser();
   const { userInfo } = useUserState();
   useEffect(() => {
@@ -30,7 +36,12 @@ const VarifiedUsername = ({ userId }: { userId: string }) => {
         </p>
       );
     } else if (!userInfo) {
-      return null;
+      return (
+        <p>
+          <span>Sighted by: </span>
+          {backupUsername ? backupUsername : 'Anonymous'}
+        </p>
+      );
     } else if (!user) {
       return (
         <p>

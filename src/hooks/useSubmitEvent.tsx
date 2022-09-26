@@ -18,7 +18,6 @@ const useSubmitEvent = (form: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.post(API + eventsEndpoint, { data }, { headers });
-      console.log(response);
       setFormIsSubmitted("This event has been added");
       form.resetFields();
     } catch (error: unknown) {
@@ -36,7 +35,6 @@ const useSubmitEvent = (form: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.put(`${API}${eventsEndpoint}/${id}`, { data }, { headers });
-      console.log(response);
       setFormIsSubmitted("This event has been updated");
       form.resetFields();
     } catch (error: unknown) {
@@ -48,14 +46,12 @@ const useSubmitEvent = (form: FormInstance) => {
   };
 
   const deleteEvent = async (id: number) => {
-    console.log(authToken);
     setIsDeleting(true);
     try {
       const headers = {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.delete(`${API}${eventsEndpoint}/${id}`, { headers: headers });
-      console.log(response);
       setFormIsSubmitted("This event has been deleted");
       form.resetFields();
     } catch (error: unknown) {
