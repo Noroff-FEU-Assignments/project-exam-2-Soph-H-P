@@ -11,6 +11,10 @@ export const StyledSelect = styled(Select)`
     padding: 10px 11px !important;
   }
 
+  .ant-select-selection-item {
+    text-transform: capitalize;
+  }
+
   @media (max-width: 500px) {
     .ant-select-selector,
     .ant-select-selection-search > input {

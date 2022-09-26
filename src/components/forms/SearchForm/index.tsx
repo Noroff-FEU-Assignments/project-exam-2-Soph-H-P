@@ -4,6 +4,18 @@ import { birdsOnlyUrl } from '../../../constants/api';
 import useSightings from '../../../hooks/useSightings';
 import { StyledSearchForm, StyledSelect } from './index.styled';
 import { SearchOutlined } from '@ant-design/icons';
+import { NotFoundContainer } from '../SpeciesInput/index.styled';
+import LogoImage from '../../../svgs/LogoImage';
+
+
+const SpeciesNotFound = () => {
+  return (
+    <NotFoundContainer>
+      <LogoImage />
+      <p>That species has not yet been sighted.</p>
+    </NotFoundContainer>
+  );
+};
 
 const SearchForm = ({
   setSearchValue,
@@ -55,6 +67,7 @@ const SearchForm = ({
           placeholder="Search for a bird"
           onChange={handleChange}
           style={{ width: '100%' }}
+          notFoundContent={<SpeciesNotFound />}
         >
           {singleListSightings.map((species, index) => {
             return (

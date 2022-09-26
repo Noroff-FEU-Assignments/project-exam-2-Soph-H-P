@@ -14,6 +14,11 @@ const LocationMarker = ({
   setPosition: Dispatch<SetStateAction<LatLngLiteral | null>>;
 }) => {
   const map = useMapEvents({
+    dblclick() {
+      map.on('dblclick', (e) => {
+        setPosition(null);
+      });
+    },
     click() {
       map.on('click', (e) => {
         setPosition(e.latlng);

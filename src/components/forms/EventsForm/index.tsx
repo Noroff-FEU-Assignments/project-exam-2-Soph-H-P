@@ -49,7 +49,7 @@ const EventsForm = () => {
         <Input placeholder="Everyone welcome" />
       </Form.Item>
 
-      <Button loading={isSubmitting} type="primary" htmlType="submit" className="login-form-button">
+      <Button loading={isSubmitting} type="primary" htmlType="submit" size="large">
         {isSubmitting ? 'Submitting' : 'Submit'}
       </Button>
       {formError && <FormMessage error={true}>{formError}</FormMessage>}

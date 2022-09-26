@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import API, { sightingsEndpoint } from '../constants/api';
 
 import axios from 'axios';
@@ -10,7 +10,8 @@ import useNearestLocation from './useNearestLocation';
 const useSubmitSightingsForm = (
   form: FormInstance,
   setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>,
-  setPosition: Dispatch<React.SetStateAction<LatLngLiteral | null>>
+  setPosition: Dispatch<React.SetStateAction<LatLngLiteral | null>>,
+  position: LatLngLiteral | null
 ) => {
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -18,16 +19,20 @@ const useSubmitSightingsForm = (
   const { uploadImage } = useUploadImage();
   const { location, findNearestLocation, locationError } = useNearestLocation();
 
+  useEffect(() => {
+    if (position) {
+      findNearestLocation(position.lat, position.lng);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [position]);
+
   const submitForm = async (data: any, image: File | undefined) => {
     setIsSubmitting(true);
-
-    try {
-      //finds and adds nearest location to the sighting
-      findNearestLocation(data.lat, data.lng);
+    if (location) {
+      //adds nearest location to the sighting
       data.nearestLocation = location;
-      if (!locationError) {
+      try {
         const response = await axios.post(API + sightingsEndpoint, { data });
-        console.log(response);
         if (image) {
           await uploadImage(image, response.data.data.id);
           setFileList([]);
@@ -35,14 +40,18 @@ const useSubmitSightingsForm = (
         }
         setFormIsSubmitted(true);
         form.resetFields();
+      } catch (error: unknown) {
+        setFormError(
+          'We seem to be having trouble sending your sighting at the moment, please try again later'
+        );
+        console.log(error);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (error: unknown) {
+    } else if (locationError) {
       setFormError(
-        'We seem to be having trouble sending your message at the moment, please try again later'
+        'We seem to be having trouble sending your sighting at the moment, please try again later'
       );
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 

@@ -25,6 +25,7 @@ const RegisterForm = () => {
             setUserInfo(null);
             navigate('/');
           }}
+          size="large"
         >
           Logout
         </Button>
@@ -78,11 +79,11 @@ const RegisterForm = () => {
       </Form.Item>
       {registerError && <FormError>{registerError}</FormError>}
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button type="primary" htmlType="submit" size="large">
           {isSubmitting ? 'Registering...' : 'Register'}
         </Button>
-        Or{' '}
-        <Button onClick={() => navigate('/login')} type="ghost">
+        <span>or</span>
+        <Button onClick={() => navigate('/login')} type="ghost" size="large">
           Sign in
         </Button>
       </Form.Item>

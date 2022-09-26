@@ -39,9 +39,20 @@ export const StyledForm = styled(Form)<{ $isEventsForm?: boolean; $isUserEdit?: 
     padding: 15px;
   }
 
-  button[type='submit'],
-  .ant-btn.ant-btn-ghost.ant-btn-dangerous {
-    margin: 10px auto;
+  .ant-row.ant-form-item-row {
+    width: 100%;
+    margin-top: 10px;
+
+    .ant-form-item-control-input-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+  }
+
+  button {
+    margin: 0 auto;
   }
 
   .ant-switch-handle {

@@ -65,7 +65,7 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
             color={theme.colors.secondaryColor}
             onClick={handleVarifySighting}
           />
-          <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Yes" cancelText="No">
+          <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Delete sighting" cancelText="Cancel">
             <RoundButton
               type="primary"
               icon={<CloseSvg />}

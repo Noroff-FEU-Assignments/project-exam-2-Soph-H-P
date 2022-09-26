@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import theme from './theme';
 
-
 const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
@@ -37,6 +36,18 @@ const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         color: ${theme.colors.darkFontColor};
+    }
+
+    .ant-btn:hover, .ant-btn:focus, .ant-btn:active {
+        color: ${theme.colors.brightWhite} ;
+        background: ${theme.colors.darkFontColor} ;
+    }
+
+    .ant-btn.ant-btn-ghost.ant-btn-dangerous {
+        background: none;
+    }
+    .ant-btn.ant-btn-ghost.ant-btn-dangerous:hover {
+        background: ${theme.colors.errorColor} ;
     }
 
     @media (max-width: 700px) {

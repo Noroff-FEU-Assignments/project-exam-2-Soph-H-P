@@ -8,7 +8,6 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
   const { date: when, nearestLocation, species, userId, username } = sighting.attributes;
 
-
   return (
     <StyledCardContainer>
       <ImageWrapper $height={160} $noImage={noImage}>
@@ -24,7 +23,7 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
         {nearestLocation}
       </InfoWrapper>
       <InfoWrapper>
-        <VarifiedUsername userId={userId}  backupUsername={username}/>
+        <VarifiedUsername userId={userId} backupUsername={username} />
       </InfoWrapper>
     </StyledCardContainer>
   );

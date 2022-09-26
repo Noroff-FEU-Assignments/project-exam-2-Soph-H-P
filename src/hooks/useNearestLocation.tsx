@@ -16,6 +16,7 @@ const useNearestLocation = () => {
       if (response.status === 200) {
         setLocation(foundLocation);
       }
+
     } catch (error) {
       console.log(error);
       setLocationError(

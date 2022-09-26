@@ -11,7 +11,11 @@ export const StyledModal = styled(Modal)`
     font-size: 21px;
   }
 
-  span {
+  p > span {
     font-weight: 700;
   }
+
+  .ant-btn.ant-btn-ghost.ant-btn-dangerous {
+    margin-top: 20px;
+}
 `;

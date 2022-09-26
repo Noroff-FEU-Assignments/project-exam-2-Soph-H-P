@@ -22,7 +22,8 @@ const SightingsForm = () => {
   const { formError, formIsSubmitted, isSubmitting, submitForm } = useSubmitSightingsForm(
     form,
     setFileList,
-    setPosition
+    setPosition,
+    position
   );
   const { userInfo } = useUserState();
 
@@ -56,11 +57,7 @@ const SightingsForm = () => {
             name="date"
             rules={[{ required: true, message: 'Please tell us when you saw this bird' }]}
           >
-            <DatePicker
-              format={'dddd Do MM YYYY - HH:mm'}
-              showTime
-              disabledDate={disabledDate}
-            />
+            <DatePicker format={'dddd Do MM YYYY - HH:mm'} showTime disabledDate={disabledDate} />
           </Form.Item>
           <label htmlFor="description">Description</label>
           <Form.Item
@@ -111,8 +108,12 @@ const SightingsForm = () => {
           <label htmlFor="location">Where did you see it?</label>
           <LocationInput position={position} setPosition={setPosition} />
 
-          <Form.Item name="lat" style={{ display: 'none' }}>
-            <Input placeholder="latitude" disabled />
+          <Form.Item
+            style={{ marginTop: -30 }}
+            name="lat"
+            rules={[{ required: true, message: 'Please show where you saw the bird' }]}
+          >
+            <Input placeholder="latitude" disabled style={{ display: 'none' }} />
           </Form.Item>
 
           <Form.Item name="lng" style={{ display: 'none' }}>
@@ -122,7 +123,7 @@ const SightingsForm = () => {
           <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
         </div>
       </StyledFormContainer>
-      <Button loading={isSubmitting} type="primary" htmlType="submit" className="login-form-button">
+      <Button loading={isSubmitting} type="primary" htmlType="submit" size="large"> 
         {isSubmitting ? 'Submitting' : 'Submit'}
       </Button>
       {formError && <FormMessage error={true}>{formError}</FormMessage>}

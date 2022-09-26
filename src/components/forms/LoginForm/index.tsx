@@ -17,7 +17,6 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
-
   if (authToken)
     return (
       <StyledForm>
@@ -29,6 +28,7 @@ const LoginForm = () => {
             setUserInfo(null);
             navigate('/');
           }}
+          size="large"
         >
           Logout
         </Button>
@@ -68,11 +68,11 @@ const LoginForm = () => {
       </Form.Item> */}
       {loginError && <FormError>{loginError}</FormError>}
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button type="primary" htmlType="submit" size="large">
           {isSubmitting ? 'Logging in...' : 'Login'}
         </Button>
-        Or{' '}
-        <Button onClick={() => navigate('/register')} type="ghost">
+        <span>or</span>
+        <Button onClick={() => navigate('/register')} type="ghost" size="large">
           Register now
         </Button>
       </Form.Item>

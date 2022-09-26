@@ -49,7 +49,7 @@ const ContectForm = () => {
         </FormError>
       )}
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button type="primary" htmlType="submit" size="large">
           {isSending ? 'Sending...' : 'Send'}
         </Button>
       </Form.Item>

@@ -93,12 +93,18 @@ const EditUserForm = ({ userId }: { userId: string }) => {
         {formError && <FormError>{formError}</FormError>}
         {formIsSubmitted && <FormMessage>Event has been saved</FormMessage>}
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" size="large">
             {isSubmitting ? 'Saving...' : 'Save changes'}
           </Button>
         </Form.Item>
-        <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Yes" cancelText="No">
-          <Button danger={true} type="ghost" className="login-form-button">
+        <Popconfirm
+          placement="top"
+          title={text}
+          onConfirm={confirm}
+          okText="Delete user"
+          cancelText="Cancel"
+        >
+          <Button danger={true} type="ghost">
             {isDeleting ? 'Deleting...' : 'Delete user'}
           </Button>
         </Popconfirm>

@@ -1,5 +1,5 @@
 import { StyledForm } from '../StyledForm/index.styled';
-import { Button, DatePicker, Form, Input } from 'antd';
+import { Button, DatePicker, Form, Input, message, Popconfirm } from 'antd';
 import { RangePickerProps } from 'antd/lib/date-picker';
 import moment from 'moment';
 import FormMessage from '../FormMessage';
@@ -16,6 +16,13 @@ const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }) => {
   const disabledDate: RangePickerProps['disabledDate'] = (current) => {
     // Prevents user from selecting a past day
     return current && current < moment().endOf('day');
+  };
+
+  const text = 'Are you sure you want to delete this sighting?';
+
+  const confirm = () => {
+    message.info('Sighting deleted');
+    deleteEvent(currentEvent.id);
   };
 
   return (
@@ -63,18 +70,18 @@ const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }) => {
         <Input placeholder="Everyone welcome" />
       </Form.Item>
 
-      <Button loading={isSubmitting} type="primary" htmlType="submit" className="login-form-button">
+      <Button loading={isSubmitting} type="primary" htmlType="submit" size="large">
         {isSubmitting ? 'Saving' : 'Save changes'}
       </Button>
+      <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Delete now" cancelText="Cancel">
       <Button
         loading={isDeleting}
         type="ghost"
         danger={true}
-        className="login-form-button"
-        onClick={() => deleteEvent(currentEvent.id)}
       >
         {isDeleting ? 'Deleting' : 'Delete'}
       </Button>
+      </Popconfirm>
       {formError && <FormMessage error={true}>{formError}</FormMessage>}
       {formIsSubmitted && <FormMessage>Event has been saved</FormMessage>}
     </StyledForm>

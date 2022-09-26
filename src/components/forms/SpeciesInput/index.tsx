@@ -72,7 +72,6 @@ const SpeciesInput = () => {
           }
           filterSort={(optionA, optionB) =>
             (optionA!.children as unknown as string)
-              .toLowerCase()
               .localeCompare((optionB!.children as unknown as string).toLowerCase())
           }
           notFoundContent={<SpeciesNotFound />}
