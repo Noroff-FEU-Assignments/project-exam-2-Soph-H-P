@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export const StyledGridContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
   height: fit-content;
+  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(max(260px, 200px), 1fr));
+  gap: 10px;
 
   h1 {
     width: 100%;

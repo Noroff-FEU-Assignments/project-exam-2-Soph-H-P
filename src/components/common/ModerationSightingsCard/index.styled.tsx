@@ -8,9 +8,9 @@ export const StyledCardContainer = styled.div`
   border-radius: 10px;
   width: 260px;
   padding: 10px;
-  height: max-content;
-  margin: 10px;
+  margin: 10px auto;
   color: ${theme.colors.darkFontColor};
+  height: 100%;
 
   h2 {
     text-transform: capitalize;
@@ -73,6 +73,7 @@ export const ButtonContainer = styled.div`
   padding: 10px;
   display: flex;
   justify-content: space-around;
+  margin-top: auto;
 `;
 
 export const InfoWrapper = styled.div`

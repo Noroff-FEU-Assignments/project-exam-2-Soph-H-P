@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import API, {
   andFilterUnvarified,
   andSortByDate,
@@ -36,7 +35,7 @@ const SightingsGrid = ({
     return (
       <SightingsContainer>
         <PageTitle>{title}</PageTitle>
-        <ApiErrorMessage hasGif={true} message={error}></ApiErrorMessage>
+        <ApiErrorMessage hasGif={true} message={error} />
       </SightingsContainer>
     );
   }
@@ -55,9 +54,7 @@ const SightingsGrid = ({
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
         <p style={{ padding: 30 }}>
-          {moderation
-            ? 'There are no sightings to moderate at the moment.'
-            : `No sightings yet.`}
+          {moderation ? 'There are no sightings to moderate at the moment.' : `No sightings yet.`}
         </p>
       </SightingsContainer>
     );
@@ -67,20 +64,18 @@ const SightingsGrid = ({
     return (
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
-        <StyledGridContainer>
-          {sightings &&
-            moderation &&
-            sightings.map((sighting, index) => (
-              <ModerationSightingsCard key={index} sighting={sighting}></ModerationSightingsCard>
-            ))}
-          {sightings &&
-            !moderation &&
-            sightings.map((sighting, index) => (
-              <Link to={`/sighting/${sighting.id}`}>
-                <SightingsCard key={index} sighting={sighting}></SightingsCard>
-              </Link>
-            ))}
-        </StyledGridContainer>
+        <div>
+          <StyledGridContainer>
+            {sightings &&
+              moderation &&
+              sightings.map((sighting, index) => (
+                <ModerationSightingsCard key={index} sighting={sighting} />
+              ))}
+            {sightings &&
+              !moderation &&
+              sightings.map((sighting, index) => <SightingsCard key={index} sighting={sighting} />)}
+          </StyledGridContainer>
+        </div>
       </SightingsContainer>
     );
   }

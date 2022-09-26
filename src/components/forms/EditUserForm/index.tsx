@@ -17,7 +17,6 @@ const EditUserForm = ({ userId }: { userId: string }) => {
 
   useEffect(() => {
     getUser(userId);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
@@ -92,7 +91,7 @@ const EditUserForm = ({ userId }: { userId: string }) => {
         />
         {formError && <FormError>{formError}</FormError>}
         {formIsSubmitted && <FormMessage>Event has been saved</FormMessage>}
-        <Form.Item>
+        <Form.Item style={{marginTop: 20}}>
           <Button type="primary" htmlType="submit" size="large">
             {isSubmitting ? 'Saving...' : 'Save changes'}
           </Button>

@@ -13,8 +13,10 @@ const VarifiedUsername = ({
 }) => {
   const { user, getUser } = useGetUser();
   const { userInfo } = useUserState();
+
   useEffect(() => {
     getUser(userId);
+    console.log(user);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 

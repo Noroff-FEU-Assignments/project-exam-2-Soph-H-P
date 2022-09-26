@@ -24,7 +24,7 @@ const RoundButton = ({
       size={'large'}
       type={type}
       danger={danger}
-    ></StyledButton>
+    />
   );
 };
 

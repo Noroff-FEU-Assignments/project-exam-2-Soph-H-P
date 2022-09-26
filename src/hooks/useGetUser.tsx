@@ -10,6 +10,7 @@ const useGetUser = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { authToken } = useAuthState();
 
+
   const getUser = async (id: string) => {
     if (id && authToken) {
       const url = `${API}${userEndpoint}/${id}`;

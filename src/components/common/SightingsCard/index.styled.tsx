@@ -10,7 +10,7 @@ export const StyledCardContainer = styled.div`
   padding: 10px;
   cursor: pointer;
   height: max-content;
-  margin: 10px;
+  margin: 10px auto;
   color: ${theme.colors.darkFontColor};
 
   h2 {
@@ -27,13 +27,10 @@ export const StyledCardContainer = styled.div`
     box-shadow: ${theme.effects.cardShadow};
   }
 
-  a {
-    text-decoration: underline;
+  a:hover {
+    color: ${theme.colors.darkFontColor};
   }
 
-  a:hover {
-    color: ${theme.colors.primaryColor};
-  }
 `;
 
 export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`
@@ -72,5 +69,13 @@ export const InfoWrapper = styled.div`
   a {
     display: flex;
     align-items: start;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: ${theme.colors.primaryColor};
   }
 `;

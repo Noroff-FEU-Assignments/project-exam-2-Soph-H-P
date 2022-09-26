@@ -11,12 +11,12 @@ const ModerateSightings = () => {
   useEffect(() => {
     if (!userInfo || userInfo?.userRole !== 'admin') {
       navigate('/');
-    } 
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo]);
 
   return (
-    <PageContainer>
+    <PageContainer style={{ width: '100%' }}>
       <SightingsGrid moderation={true} title={'Moderate Sightings'} />
     </PageContainer>
   );
