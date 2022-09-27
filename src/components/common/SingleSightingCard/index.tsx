@@ -7,7 +7,7 @@ import RoundButton from '../buttons/RoundButton';
 import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({ sighting }: { sighting: SightingInterface }) => {
+const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
   const {
@@ -65,4 +65,4 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
   );
 };
 
-export default Card;
+export default SingleSightingCard;

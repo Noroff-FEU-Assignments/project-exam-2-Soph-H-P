@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useUserState } from '../context/UserContext';
 import EditSightingsForm from '../components/forms/EditSightingsForm';
+import MetaData from '../components/common/MetaData';
 
 const EditSighting = () => {
   const { id } = useParams();
@@ -18,6 +19,10 @@ const EditSighting = () => {
 
   return (
     <PageContainer $containsForm={true} $hasBird={true}>
+      <MetaData
+        title="Edit sighting | Birds of Østfold"
+        description="As admin you can edit user sightnigs, here you can change the species, the image and the description."
+      />
       {id && <EditSightingsForm sightingId={id} />}
     </PageContainer>
   );

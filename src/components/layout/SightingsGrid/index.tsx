@@ -44,7 +44,7 @@ const SightingsGrid = ({
     return (
       <SightingsContainer>
         <PageTitle>{title}</PageTitle>
-        <Loader size={300} light={true} />
+        <Loader size={100} light={true} />
       </SightingsContainer>
     );
   }

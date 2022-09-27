@@ -89,8 +89,8 @@ const MapWithLocationPoints = ({
         {title && <h2>{title}</h2>}
         <StyledMapContainer
           style={{ height: height, width: '100%' }}
-          center={{ lat: 59.464007, lng: 10.6318 }}
-          zoom={10}
+          center={{ lat: 59.446820, lng: 11.167907 }}
+          zoom={9}
           scrollWheelZoom={true}
         >
           <TileLayer
