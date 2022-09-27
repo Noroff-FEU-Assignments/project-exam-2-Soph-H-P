@@ -1,7 +1,7 @@
 import { MapContainer, Marker } from 'react-leaflet';
 import styled from 'styled-components';
 
-export const StyledMapContainer = styled(MapContainer)<{ $height?: number }>`
+export const StyledMapContainer = styled(MapContainer)<{ $height?: number | string }>`
   border-radius: 10px;
   height: ${({ $height }) => ($height ? $height : 250)}px;
   width: 100%;

@@ -86,7 +86,7 @@ const EventsCalendar = () => {
           currentEvent={currentEvent}
         />
       )}
-      {(userInfo?.userRole === 'admin' && windowWidth >= 800) ||
+      {(userInfo?.userRole === 'admin' && windowWidth >= 900) ||
       (!userInfo && windowWidth >= 700) ||
       (userInfo?.userRole !== 'admin' && windowWidth >= 700) ? (
         <>

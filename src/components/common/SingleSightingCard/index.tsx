@@ -3,6 +3,9 @@ import { SightingInterface } from '../../../hooks/useSightings';
 import { ImageWrapper, InfoWrapper, SplitCard, StyledCardContainer } from './index.styled';
 import MapWithLocationPoints from '../mapComponents/MapWithLocationPoints';
 import VarifiedUsername from '../VarifiedUsername';
+import RoundButton from '../buttons/RoundButton';
+import EditSvg from '../../../svgs/EditSvg';
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
@@ -17,6 +20,9 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
     description,
     username,
   } = sighting.attributes;
+
+  const navigate = useNavigate();
+  
 
   return (
     <StyledCardContainer>
@@ -37,13 +43,13 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
           <InfoWrapper>
             <VarifiedUsername userId={userId} backupUsername={username} />
           </InfoWrapper>
-          <p>
+          <p  style={{ alignItems: 'start', flexDirection: 'column' }}>
             <span>Description: </span>
             {description}
           </p>
         </div>
         <MapWithLocationPoints
-          height={200}
+          height={'100%'}
           singleLat={lat}
           singleLng={lng}
           singleSpecies={species}
@@ -51,6 +57,11 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
           sightingId={sighting.id}
         />
       </SplitCard>
+      <RoundButton
+        type="primary"
+        icon={<EditSvg />}
+        onClick={() => navigate(`/admin/edit-sighting/${sighting.id}`)}
+      />
     </StyledCardContainer>
   );
 };

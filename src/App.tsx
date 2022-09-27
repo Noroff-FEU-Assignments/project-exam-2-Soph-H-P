@@ -42,7 +42,7 @@ function App() {
                 <Route path="/my-sightings" element={<MySightings />} />
                 <Route path="/admin/moderate-sightings" element={<ModerateSightings />} />
                 <Route path="/admin/edit-users/:id" element={<EditUsers />} />
-                <Route path="/admin/edit-sighting" element={<EditSighting />} />
+                <Route path="/admin/edit-sighting/:id" element={<EditSighting />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

@@ -6,6 +6,8 @@ export const StyledCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
+  padding: 10px;
+  position: relative;
 
   h2 {
     text-transform: capitalize;
@@ -16,11 +18,24 @@ export const StyledCardContainer = styled.div`
     display: flex;
     align-items: end;
     margin-bottom: 5px;
+    max-width: 370px;
   }
 
   span {
     font-weight: 700;
     margin-right: 5px;
+  }
+
+  button {
+    align-self: end;
+    margin-bottom: -10px;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 600px) {
+    h2 {
+      font-size: 28px;
+    }
   }
 `;
 
@@ -64,6 +79,7 @@ export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`
 export const SplitCard = styled.div`
   display: flex;
   flex-direction: row;
+  height: max-content;
 
   & > div:first-of-type {
     min-width: 60%;

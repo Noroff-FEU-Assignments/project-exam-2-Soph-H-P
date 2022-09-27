@@ -34,8 +34,9 @@ export const CalendarContainer = styled.div<{ $isAdmin?: boolean }>`
 
   .ant-picker-cell-inner.ant-picker-calendar-date {
     border-radius: 10px;
-    margin: 12px;
+    margin: 5px;
     box-shadow: ${theme.effects.cardShadow};
+    height: 100px;
   }
 
   .ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-today.ant-picker-cell-selected
@@ -64,7 +65,6 @@ export const CalendarContainer = styled.div<{ $isAdmin?: boolean }>`
 
     .ant-picker-cell-inner.ant-picker-calendar-date {
       margin: 2px;
-      height: 100px;
     }
 
     h1 {
@@ -80,7 +80,6 @@ export const CalendarContainer = styled.div<{ $isAdmin?: boolean }>`
 
         .ant-picker-cell-inner.ant-picker-calendar-date {
           margin: 2px;
-          height: 100px;
         }
 
         h1 {
