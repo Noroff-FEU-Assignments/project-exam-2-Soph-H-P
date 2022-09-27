@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import theme from '../../../styles/theme';
 import noImage from '../../../imgs/noImage.png';
 
-export const StyledCardContainer = styled.div`
+export const StyledCardContainer = styled.div<{ $isVarified: boolean }>`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -12,6 +12,8 @@ export const StyledCardContainer = styled.div`
   height: 100%;
   margin: 10px auto;
   color: ${theme.colors.darkFontColor};
+  position: relative;
+  overflow: hidden;
 
   h2 {
     text-transform: capitalize;
@@ -31,6 +33,28 @@ export const StyledCardContainer = styled.div`
     color: ${theme.colors.darkFontColor};
   }
 
+  ${({ $isVarified }) =>
+    !$isVarified &&
+    css`
+      border: ${theme.colors.errorColor} 2px solid;
+
+      :before {
+        content: 'Pending Moderation';
+        font-family: ${theme.text.headingFont};
+        position: absolute;
+        top: -11px;
+        right: -93px;
+        width: 250px;
+        text-align: center;
+        transform: rotate(45deg);
+        background: ${theme.colors.errorColor};
+        padding: 30px 50px 10px 50px;
+        color: ${theme.colors.brightWhite};
+        font-size: 17px;
+        font-weight: 400;
+        z-index: 100;
+      }
+    `}
 `;
 
 export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`

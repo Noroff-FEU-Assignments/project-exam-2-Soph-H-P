@@ -4,7 +4,7 @@ import BackgroundBirdSvg from '../../../svgs/BackgroundBirdSvg.svg';
 
 export const PageContainer = styled.div<{
   $isSplit?: boolean;
-  $hasBird?: boolean;
+  $hasBird?: boolean | number;
   $containsForm?: boolean;
   $notFullHeight?: boolean;
   $isReversed?: boolean;
@@ -39,7 +39,7 @@ export const PageContainer = styled.div<{
   ${({ $hasBird, $containsForm }) =>
     $hasBird &&
     css`
-      @media (min-width: ${$containsForm ? '1000px' : '1300px'}) {
+      @media (min-width: ${$containsForm && $hasBird !== 1300 ? '1000px' : '1300px'}) {
         &::after {
           content: '';
           position: fixed;
@@ -61,8 +61,6 @@ export const PageContainer = styled.div<{
 
       @media (max-width: 700px) {
         flex-direction: ${$isReversed ? 'column-reverse' : 'column'};
-
-
 
         & > div {
           width: 100%;

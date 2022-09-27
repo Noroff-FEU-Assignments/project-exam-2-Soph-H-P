@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
-  const { date: when, nearestLocation, species, userId, username } = sighting.attributes;
+  const { date: when, nearestLocation, species, userId, username, varified } = sighting.attributes;
 
   return (
-    <StyledCardContainer>
+    <StyledCardContainer $isVarified={varified}>
       <Link to={`/sighting/${sighting.id}`}>
         <ImageWrapper $height={160} $noImage={noImage}>
           <img src={imageSrc} alt={species} />

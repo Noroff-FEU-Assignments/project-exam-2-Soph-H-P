@@ -6,8 +6,11 @@ import VarifiedUsername from '../VarifiedUsername';
 import RoundButton from '../buttons/RoundButton';
 import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
+import { useUserState } from '../../../context/UserContext';
+import { useEffect } from 'react';
 
 const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
+  const { userInfo } = useUserState();
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
   const {
@@ -19,12 +22,25 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
     userId,
     description,
     username,
+    varified,
   } = sighting.attributes;
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (userInfo) {
+      if (userInfo.userRole === 'admin' || parseInt(userId) === userInfo.id) {
+        return;
+      } else {
+        navigate('/');
+      }
+    }
+    navigate('/');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, userInfo]);
+
   return (
-    <StyledCardContainer>
+    <StyledCardContainer $isVarified={varified}>
       <ImageWrapper $height={480} $noImage={noImage}>
         <img src={imageSrc} alt={species} />
       </ImageWrapper>
@@ -56,11 +72,13 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
           sightingId={sighting.id}
         />
       </SplitCard>
-      <RoundButton
-        type="primary"
-        icon={<EditSvg />}
-        onClick={() => navigate(`/admin/edit-sighting/${sighting.id}`)}
-      />
+      {userInfo?.userRole === 'admin' && (
+        <RoundButton
+          type="primary"
+          icon={<EditSvg />}
+          onClick={() => navigate(`/admin/edit-sighting/${sighting.id}`)}
+        />
+      )}
     </StyledCardContainer>
   );
 };

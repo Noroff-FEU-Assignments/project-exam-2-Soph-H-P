@@ -11,7 +11,7 @@ export const findSightingsUrl = (userInfo: Partial<UserInterface | null>) => {
 
 const findMySightingsUrl = (userInfo: Partial<UserInterface | null>) => {
   if (userInfo?.id) {
-    return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterVarified}&${createMySightingsEndpoint(
+    return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${createMySightingsEndpoint(
       userInfo.id
     )}`;
   }

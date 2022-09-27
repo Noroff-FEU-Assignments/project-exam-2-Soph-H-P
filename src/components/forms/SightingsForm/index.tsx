@@ -47,7 +47,7 @@ const SightingsForm = () => {
       form={form}
       initialValues={{ remember: true }}
       onFinish={(data) => submitForm(data, image)}
-      style={{ width: 800 }}
+      style={{ width: 800}}
     >
       <PageTitle>Add Sighting</PageTitle>
       <StyledFormContainer>
