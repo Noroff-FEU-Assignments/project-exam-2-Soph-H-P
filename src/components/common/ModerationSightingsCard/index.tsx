@@ -12,8 +12,15 @@ import useAddSightingToUser from '../../../hooks/useAddSightingToUser';
 import VarifiedUsername from '../VarifiedUsername';
 import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
+import { Dispatch, SetStateAction } from 'react';
 
-const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
+const ModerationSightingsCard = ({
+  sighting,
+  setVisibleSightings,
+}: {
+  sighting: SightingInterface;
+  setVisibleSightings: Dispatch<SetStateAction<SightingInterface[] | null>>;
+}) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
   const imageId = noImage ? undefined : sighting.attributes.photos.data[0].id;
@@ -32,9 +39,16 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
 
   const text = 'Are you sure you want to delete this sighting?';
 
+  const removeSighting = (id: number) => {
+    setVisibleSightings((currentSightings) => {
+      return currentSightings?.filter((sighting) => sighting.id !== id) || null;
+    });
+  };
+
   const confirm = () => {
     message.info('Sighting deleted');
     deleteSighting(sighting.id, imageId);
+    removeSighting(sighting.id);
   };
 
   const handleVarifySighting = () => {
@@ -42,6 +56,7 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
     if (userId !== null) {
       addSightingToUser(userId);
     }
+    removeSighting(sighting.id);
   };
 
   return (

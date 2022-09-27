@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import API, {
   andFilterUnvarified,
   andSortByDate,
@@ -5,7 +6,7 @@ import API, {
   sightingsEndpoint,
 } from '../../../constants/api';
 import { useUserState } from '../../../context/UserContext';
-import useSightings from '../../../hooks/useSightings';
+import useSightings, { SightingInterface } from '../../../hooks/useSightings';
 import findMySightingsUrl, { findSightingsUrl } from '../../../utils/findMySightingsUrl';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Loader from '../../common/Loader';
@@ -30,6 +31,11 @@ const SightingsGrid = ({
   const { sightings, error, isLoading } = useSightings(
     moderation ? moderationUrl : mySightings ? findMySightingsUrl(userInfo) : foundUrl
   );
+  const [visibleSightings, setVisibleSightings] = useState<SightingInterface[] | null>(null);
+
+  useEffect(() => {
+    setVisibleSightings(sightings);
+  }, [sightings]);
 
   if (error) {
     return (
@@ -66,10 +72,10 @@ const SightingsGrid = ({
         <PageTitle>{title}</PageTitle>
         <div>
           <StyledGridContainer $moderation={moderation}>
-            {sightings &&
+            {visibleSightings &&
               moderation &&
-              sightings.map((sighting, index) => (
-                <ModerationSightingsCard key={index} sighting={sighting} />
+              visibleSightings.map((sighting, index) => (
+                <ModerationSightingsCard key={index} sighting={sighting} setVisibleSightings={setVisibleSightings}/>
               ))}
             {sightings &&
               !moderation &&
