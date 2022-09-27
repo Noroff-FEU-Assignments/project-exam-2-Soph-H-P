@@ -58,7 +58,7 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
         />
       </div>
       <p>
-        <span>Sighted: </span>
+        <span>When: </span>
         {findTimeAgo(when)}
       </p>
       <p>

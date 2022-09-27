@@ -24,14 +24,14 @@ const VarifiedUsername = ({
       return (
         <>
           <span>Who: </span>
-          <Link to={`/admin/edit-users/${userId}`}>
+          <Link to={`/admin/edit-users/${userId}`} style={{display: 'flex', alignItems: 'end'}}>
             {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
           </Link>
         </>
       );
     } else if (userInfo?.userRole && user) {
       return (
-        <p>
+        <p style={{display: 'flex', alignItems: 'end'}}>
           <span>Who: </span>
           {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
         </p>

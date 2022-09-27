@@ -44,7 +44,7 @@ const SightingsGrid = ({
     return (
       <SightingsContainer>
         <PageTitle>{title}</PageTitle>
-        <Loader size={200} light={true} />
+        <Loader size={300} light={true} />
       </SightingsContainer>
     );
   }
@@ -80,7 +80,7 @@ const SightingsGrid = ({
     );
   }
 
-  return null;
+  return <SightingsContainer $moderation={moderation} />;
 };
 
 export default SightingsGrid;

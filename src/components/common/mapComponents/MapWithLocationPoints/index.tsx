@@ -1,5 +1,5 @@
-import { Popup, TileLayer } from 'react-leaflet';
-import { StyledMapContainer, StyledMarker } from '../LocationInput/index.styled';
+import { TileLayer } from 'react-leaflet';
+import { StyledMapContainer, StyledMarker, StyledPopup } from '../LocationInput/index.styled';
 import useSightings from '../../../../hooks/useSightings';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -19,10 +19,10 @@ const PopupText = ({
   sightingId: number;
 }) => {
   return (
-    <Popup>
+    <StyledPopup>
       <Link to={`/sighting/${sightingId}`}>{species}</Link>
       <p>Last seen {findTimeAgo(date)}</p>
-    </Popup>
+    </StyledPopup>
   );
 };
 

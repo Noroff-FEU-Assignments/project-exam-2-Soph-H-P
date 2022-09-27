@@ -1,4 +1,4 @@
-import { MapContainer, Marker } from 'react-leaflet';
+import { MapContainer, Marker, Popup } from 'react-leaflet';
 import styled from 'styled-components';
 
 export const StyledMapContainer = styled(MapContainer)<{
@@ -17,4 +17,10 @@ export const StyledMapContainer = styled(MapContainer)<{
 
 export const StyledMarker = styled(Marker)<{ $color?: number }>`
   opacity: ${({ $color }) => ($color ? $color : 1)};
+`;
+
+export const StyledPopup = styled(Popup)`
+  a {
+    text-transform: capitalize;
+  }
 `;

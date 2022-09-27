@@ -17,7 +17,7 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
         </ImageWrapper>
         <h2>{species}</h2>
         <InfoWrapper>
-          <span>Sighted: </span>
+          <span>When: </span>
           {findTimeAgo(when)}
         </InfoWrapper>
         <InfoWrapper>

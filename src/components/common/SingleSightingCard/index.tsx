@@ -22,7 +22,6 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
   } = sighting.attributes;
 
   const navigate = useNavigate();
-  
 
   return (
     <StyledCardContainer>
@@ -33,7 +32,7 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
         <div>
           <h2>{species}</h2>
           <InfoWrapper>
-            <span>Sighted: </span>
+            <span>When: </span>
             {findTimeAgo(when)}
           </InfoWrapper>
           <InfoWrapper>
@@ -43,7 +42,7 @@ const Card = ({ sighting }: { sighting: SightingInterface }) => {
           <InfoWrapper>
             <VarifiedUsername userId={userId} backupUsername={username} />
           </InfoWrapper>
-          <p  style={{ alignItems: 'start', flexDirection: 'column' }}>
+          <p style={{ alignItems: 'start', flexDirection: 'column' }}>
             <span>Description: </span>
             {description}
           </p>
