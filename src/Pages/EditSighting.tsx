@@ -18,7 +18,7 @@ const EditSighting = () => {
   }, [id]);
 
   return (
-    <PageContainer $containsForm={true} $hasBird={true}>
+    <PageContainer $containsForm={true} $hasBird={1300}>
       <MetaData
         title="Edit sighting | Birds of Østfold"
         description="As admin you can edit user sightnigs, here you can change the species, the image and the description."

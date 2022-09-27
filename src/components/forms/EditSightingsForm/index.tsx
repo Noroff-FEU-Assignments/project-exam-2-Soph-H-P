@@ -94,6 +94,7 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
         form={form}
         initialValues={{ remember: true }}
         onFinish={(data) => updateSighting(data, sighting.id, image)}
+        style={{ width: 800}}
       >
         <PageTitle>Edit or Delete Sighting</PageTitle>
         <StyledFormContainer>

@@ -55,7 +55,7 @@ const SightingsGrid = ({
     );
   }
 
-  if (sightings && sightings.length <= 0) {
+  if ((sightings && sightings.length <= 0) || (visibleSightings && visibleSightings.length <= 0)) {
     return (
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
@@ -75,7 +75,11 @@ const SightingsGrid = ({
             {visibleSightings &&
               moderation &&
               visibleSightings.map((sighting, index) => (
-                <ModerationSightingsCard key={index} sighting={sighting} setVisibleSightings={setVisibleSightings}/>
+                <ModerationSightingsCard
+                  key={index}
+                  sighting={sighting}
+                  setVisibleSightings={setVisibleSightings}
+                />
               ))}
             {sightings &&
               !moderation &&

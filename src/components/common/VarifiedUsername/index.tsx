@@ -20,18 +20,18 @@ const VarifiedUsername = ({
   }, [userId]);
 
   const getUsername = () => {
-    if (userInfo?.userRole === 'admin' && user) {
+    if (userInfo?.userRole === 'admin' && user && userId) {
       return (
         <>
           <span>Who: </span>
-          <Link to={`/admin/edit-users/${userId}`} style={{display: 'flex', alignItems: 'end'}}>
+          <Link to={`/admin/edit-users/${userId}`} style={{ display: 'flex', alignItems: 'end' }}>
             {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
           </Link>
         </>
       );
-    } else if (userInfo?.userRole && user) {
+    } else if (userInfo?.userRole && user && userId) {
       return (
-        <p style={{display: 'flex', alignItems: 'end'}}>
+        <p style={{ display: 'flex', alignItems: 'end' }}>
           <span>Who: </span>
           {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
         </p>
@@ -43,7 +43,7 @@ const VarifiedUsername = ({
           {backupUsername ? backupUsername : 'Anonymous'}
         </p>
       );
-    } else if (!user) {
+    } else if (!user || !userId) {
       return (
         <p>
           <span>Who: </span>Anonymous
