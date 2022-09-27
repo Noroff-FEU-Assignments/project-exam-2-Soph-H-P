@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import theme from '../../../styles/theme';
 
 export const StyledForm = styled(Form)<{ $isEventsForm?: boolean; $isUserEdit?: boolean }>`
-  min-width: 500px;
+  width: 500px;
   max-width: 100%;
   margin: 0px auto;
   background: ${theme.colors.brightWhite};

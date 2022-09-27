@@ -9,7 +9,7 @@ export const StyledCardContainer = styled.div`
   width: 260px;
   padding: 10px;
   cursor: pointer;
-  height: max-content;
+  height: 100%;
   margin: 10px auto;
   color: ${theme.colors.darkFontColor};
 

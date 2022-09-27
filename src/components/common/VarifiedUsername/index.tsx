@@ -23,7 +23,7 @@ const VarifiedUsername = ({
     if (userInfo?.userRole === 'admin' && user) {
       return (
         <>
-          <span>Sighted by: </span>
+          <span>Who: </span>
           <Link to={`/admin/edit-users/${userId}`}>
             {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
           </Link>
@@ -32,21 +32,21 @@ const VarifiedUsername = ({
     } else if (userInfo?.userRole && user) {
       return (
         <p>
-          <span>Sighted by: </span>
+          <span>Who: </span>
           {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
         </p>
       );
     } else if (!userInfo) {
       return (
         <p>
-          <span>Sighted by: </span>
+          <span>Who: </span>
           {backupUsername ? backupUsername : 'Anonymous'}
         </p>
       );
     } else if (!user) {
       return (
         <p>
-          <span>Sighted by: </span>Anonymous
+          <span>Who: </span>Anonymous
         </p>
       );
     }

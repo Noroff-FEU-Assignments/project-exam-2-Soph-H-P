@@ -47,6 +47,7 @@ const SightingsForm = () => {
       form={form}
       initialValues={{ remember: true }}
       onFinish={(data) => submitForm(data, image)}
+      style={{ width: 800 }}
     >
       <PageTitle>Add Sighting</PageTitle>
       <StyledFormContainer>
@@ -123,7 +124,7 @@ const SightingsForm = () => {
           <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
         </div>
       </StyledFormContainer>
-      <Button loading={isSubmitting} type="primary" htmlType="submit" size="large"> 
+      <Button loading={isSubmitting} type="primary" htmlType="submit" size="large">
         {isSubmitting ? 'Submitting' : 'Submit'}
       </Button>
       {formError && <FormMessage error={true}>{formError}</FormMessage>}
