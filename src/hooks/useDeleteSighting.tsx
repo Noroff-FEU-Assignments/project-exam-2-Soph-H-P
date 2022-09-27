@@ -6,7 +6,8 @@ import useUploadImage from './useUploadImage';
 
 const useDeleteSighting = () => {
   const [error, setError] = useState<string | null>('');
-  const [isDeleting, setIsDeleting] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false)
   const { authToken } = useAuthState();
   const { deleteImage } = useUploadImage();
   const deleteSighting = async (id: number, imageId?: number) => {
@@ -39,10 +40,11 @@ const useDeleteSighting = () => {
       }
     } finally {
       setIsDeleting(false);
+      setIsDeleted(true)
     }
   };
 
-  return { deleteSighting, error, isDeleting };
+  return { deleteSighting, error, isDeleting, isDeleted };
 };
 
 export default useDeleteSighting;

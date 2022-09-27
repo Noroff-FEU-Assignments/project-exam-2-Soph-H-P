@@ -6,18 +6,21 @@ import { FormInstance, UploadFile } from 'antd';
 import useUploadImage from './useUploadImage';
 import { LatLngLiteral } from 'leaflet';
 import useNearestLocation from './useNearestLocation';
+import { useAuthState } from '../context/AuthContext';
 
 const useSubmitSightingsForm = (
   form: FormInstance,
   setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>,
-  setPosition: Dispatch<React.SetStateAction<LatLngLiteral | null>>,
-  position: LatLngLiteral | null
+  setPosition?: Dispatch<React.SetStateAction<LatLngLiteral | null>>,
+  position?: LatLngLiteral | null
 ) => {
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { uploadImage } = useUploadImage();
   const { location, findNearestLocation, locationError } = useNearestLocation();
+  const { authToken } = useAuthState();
 
   useEffect(() => {
     if (position) {
@@ -26,9 +29,9 @@ const useSubmitSightingsForm = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
-  const submitForm = async (data: any, image: File | undefined) => {
+  const submitForm = async (data: any, image?: File) => {
     setIsSubmitting(true);
-    if (location) {
+    if (location && setPosition) {
       //adds nearest location to the sighting
       data.nearestLocation = location;
       try {
@@ -55,7 +58,35 @@ const useSubmitSightingsForm = (
     }
   };
 
-  return { formIsSubmitted, formError, isSubmitting, submitForm };
+  const updateSighting = async (data: any, sightingId: number, image?: File, ) => {
+    setIsSaving(true);
+
+    try {
+      const headers = {
+        Authorization: `Bearer ${authToken}`,
+      };
+      const response = await axios.put(
+        `${API}${sightingsEndpoint}/${sightingId} `,
+        { data },
+        { headers }
+      );
+      console.log(response);
+      if (image) {
+        await uploadImage(image, response.data.data.id);
+        setFileList([]);
+      }
+      setFormIsSubmitted(true);
+    } catch (error: unknown) {
+      setFormError(
+        'We seem to be having trouble sending your sighting at the moment, please try again later'
+      );
+      console.log(error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return { formIsSubmitted, formError, isSubmitting, submitForm, updateSighting, isSaving };
 };
 
 export default useSubmitSightingsForm;

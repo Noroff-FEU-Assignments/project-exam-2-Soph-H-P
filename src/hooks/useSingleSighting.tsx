@@ -8,7 +8,7 @@ const useSingleSighting = (url: string) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  const getSightings = async () => {
+  const getSighting = async () => {
     try {
       const response = await axios.get(url);
       if (response.status === 200) {
@@ -25,12 +25,12 @@ const useSingleSighting = (url: string) => {
   };
 
   useEffect(() => {
-    getSightings();
+    getSighting();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
-  return { sighting, error, isLoading, getSightings };
+  return { sighting, error, isLoading, getSighting };
 };
 
 export default useSingleSighting;

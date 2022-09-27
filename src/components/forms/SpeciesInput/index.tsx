@@ -16,7 +16,7 @@ const SpeciesNotFound = () => {
   );
 };
 
-const SpeciesInput = () => {
+const SpeciesInput = ({ initialValue }: { initialValue?: string }) => {
   const [species, setSpecies] = useState('');
   const inputRef = useRef<InputRef>(null);
   const { sightings } = useSightings(birdsOnlyUrl);
@@ -60,8 +60,12 @@ const SpeciesInput = () => {
 
   return (
     <>
-      <label htmlFor="species">What bird did you see?</label>
-      <Form.Item name="species" rules={[{ required: true, message: 'Please tell us the species' }]}>
+      <label htmlFor="species">{initialValue ? 'Bird species' : 'What bird did you see?'}</label>
+      <Form.Item
+        initialValue={initialValue && initialValue}
+        name="species"
+        rules={[{ required: true, message: 'Please tell us the species' }]}
+      >
         <StyledSelect
           showSearch
           style={{ width: '100%' }}
@@ -71,8 +75,9 @@ const SpeciesInput = () => {
             (option!.children as unknown as string).includes(input.toLowerCase())
           }
           filterSort={(optionA, optionB) =>
-            (optionA!.children as unknown as string)
-              .localeCompare((optionB!.children as unknown as string).toLowerCase())
+            (optionA!.children as unknown as string).localeCompare(
+              (optionB!.children as unknown as string).toLowerCase()
+            )
           }
           notFoundContent={<SpeciesNotFound />}
           autoClearSearchValue={false}
