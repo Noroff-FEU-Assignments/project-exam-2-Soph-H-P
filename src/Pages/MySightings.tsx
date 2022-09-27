@@ -12,8 +12,6 @@ const MySightings = () => {
     navigate('/');
   }
 
-  console.log(authToken)
-
   return (
     <PageContainer $isSplit={true} style={{ width: '100%' }}>
       <SightingsGrid mySightings={true} title={'My sightings'} />
