@@ -10,7 +10,7 @@ import { useAuthState } from '../context/AuthContext';
 
 const useSubmitSightingsForm = (
   form: FormInstance,
-  setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>,
+  setFileList: Dispatch<SetStateAction<UploadFile<File>[]>>,
   setPosition?: Dispatch<React.SetStateAction<LatLngLiteral | null>>,
   position?: LatLngLiteral | null
 ) => {
@@ -58,7 +58,7 @@ const useSubmitSightingsForm = (
     }
   };
 
-  const updateSighting = async (data: any, sightingId: number, image?: File, ) => {
+  const updateSighting = async (data: any, sightingId: number, image?: File) => {
     setIsSaving(true);
 
     try {

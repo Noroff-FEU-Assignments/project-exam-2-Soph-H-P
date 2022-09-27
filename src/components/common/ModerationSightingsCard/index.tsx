@@ -49,7 +49,7 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
       <ImageWrapper $height={160} $noImage={noImage}>
         <img src={imageSrc} alt={species} />
       </ImageWrapper>
-      <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h2>{species}</h2>
         <RoundButton
           type="primary"
@@ -68,34 +68,32 @@ const ModerationSightingsCard = ({ sighting }: { sighting: SightingInterface }) 
       <InfoWrapper>
         <VarifiedUsername userId={userId} backupUsername={username} />
       </InfoWrapper>
-      <>
-        <p style={{ alignItems: 'start', flexDirection: 'column' }}>
-          <span>Description: </span>
-          {description}
-        </p>
-        <ButtonContainer>
+      <p style={{ alignItems: 'start', flexDirection: 'column' }}>
+        <span>Description: </span>
+        {description}
+      </p>
+      <ButtonContainer>
+        <RoundButton
+          type="primary"
+          icon={<CheckSvg />}
+          color={theme.colors.secondaryColor}
+          onClick={handleVarifySighting}
+        />
+        <Popconfirm
+          placement="top"
+          title={text}
+          onConfirm={confirm}
+          okText="Delete sighting"
+          cancelText="Cancel"
+        >
           <RoundButton
             type="primary"
-            icon={<CheckSvg />}
-            color={theme.colors.secondaryColor}
-            onClick={handleVarifySighting}
+            icon={<CloseSvg />}
+            color={theme.colors.errorColor}
+            danger={true}
           />
-          <Popconfirm
-            placement="top"
-            title={text}
-            onConfirm={confirm}
-            okText="Delete sighting"
-            cancelText="Cancel"
-          >
-            <RoundButton
-              type="primary"
-              icon={<CloseSvg />}
-              color={theme.colors.errorColor}
-              danger={true}
-            />
-          </Popconfirm>
-        </ButtonContainer>
-      </>
+        </Popconfirm>
+      </ButtonContainer>
     </StyledCardContainer>
   );
 };

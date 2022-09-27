@@ -5,7 +5,7 @@ import { StyledForm } from '../StyledForm/index.styled';
 import FormError from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import useRegisterUser from '../../../hooks/useRegisterUser';
+import useRegisterUser, { RegisterFormInterface } from '../../../hooks/useRegisterUser';
 
 const RegisterForm = () => {
   const { authToken, setAuthToken } = useAuthState();
@@ -33,7 +33,7 @@ const RegisterForm = () => {
     );
 
   return (
-    <StyledForm form={form} initialValues={{ remember: true }} onFinish={submitForm}>
+    <StyledForm form={form} initialValues={{ remember: true }} onFinish={(data) => submitForm(data as RegisterFormInterface)}>
       <label htmlFor="username">Username</label>
       <Form.Item
         name="username"

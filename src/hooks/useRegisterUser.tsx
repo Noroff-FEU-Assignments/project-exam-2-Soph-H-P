@@ -6,6 +6,12 @@ import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
 import { useUserState } from '../context/UserContext';
 
+export interface RegisterFormInterface {
+  username: string;
+  email: string;
+  password: string;
+}
+
 const useRegisterUser = (form: FormInstance) => {
   const [registerError, setRegisterError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,16 +19,19 @@ const useRegisterUser = (form: FormInstance) => {
   const { setUserInfo } = useUserState();
   const navigate = useNavigate();
 
-  const submitForm = async (data: any) => {
+  const submitForm = async (data: RegisterFormInterface) => {
     setIsSubmitting(true);
     setRegisterError(null);
 
     try {
-      const convertToFormData = (data: any) => {
+      const convertToFormData = (data: RegisterFormInterface) => {
         const formData = new FormData();
+        //@ts-ignore: string cannot be used as key
         Object.keys(data).forEach((key) => formData.append(key, data[key]));
+        console.log(data);
         return formData;
       };
+
       const body = convertToFormData(data);
 
       const response = await axios.post(API + registerUrlEndpoint, body);

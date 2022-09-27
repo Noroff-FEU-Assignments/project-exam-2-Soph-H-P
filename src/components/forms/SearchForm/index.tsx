@@ -7,6 +7,9 @@ import { SearchOutlined } from '@ant-design/icons';
 import { NotFoundContainer } from '../SpeciesInput/index.styled';
 import LogoImage from '../../../svgs/LogoImage';
 
+interface SearchFormInterface {
+  search: string[] | [];
+}
 
 const SpeciesNotFound = () => {
   return (
@@ -47,25 +50,25 @@ const SearchForm = ({
     return null;
   }
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: string[] | []) => {
     form.setFieldsValue({
       search: e,
     });
     setSearchValue(e);
   };
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: SearchFormInterface) => {
     setSearchValue(values.search);
   };
 
   return (
-    <StyledSearchForm onFinish={onFinish} form={form}>
+    <StyledSearchForm onFinish={(values) => onFinish(values as SearchFormInterface)} form={form}>
       <Form.Item name="search">
         <StyledSelect
           mode="multiple"
           size={'large'}
           placeholder="Search for a bird"
-          onChange={handleChange}
+          onChange={(e) => handleChange(e as string[])}
           style={{ width: '100%' }}
           notFoundContent={<SpeciesNotFound />}
         >

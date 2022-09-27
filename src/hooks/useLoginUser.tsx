@@ -6,6 +6,11 @@ import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
 import { useUserState } from '../context/UserContext';
 
+export interface LoginFormInterface {
+  identifier: string;
+  password: string;
+}
+
 const useLoginUser = (form: FormInstance) => {
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,10 +18,9 @@ const useLoginUser = (form: FormInstance) => {
   const { setUserInfo } = useUserState();
   const navigate = useNavigate();
 
-  const submitForm = async (data: any) => {
+  const submitForm = async (data: LoginFormInterface) => {
     setIsSubmitting(true);
     setLoginError(null);
-
     try {
       const response = await axios.post(API + accessTokenUrlEndpoint, data);
       setAuthToken(response.data.jwt);

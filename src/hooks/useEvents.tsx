@@ -14,7 +14,6 @@ export interface EventInterface {
 }
 
 const useEvents = (url?: string) => {
-  // const [sightings, setSightings] = useState<SightingInterface[] | null>(null);
   const [events, setEvents] = useState<EventInterface[] | null>();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);

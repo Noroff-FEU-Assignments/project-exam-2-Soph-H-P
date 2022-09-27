@@ -10,8 +10,8 @@ const UploadInput = ({
   setFileList,
   setImage,
 }: {
-  fileList: UploadFile<any>[];
-  setFileList: Dispatch<SetStateAction<UploadFile<any>[]>>;
+  fileList: UploadFile<File>[];
+  setFileList: Dispatch<SetStateAction<UploadFile<File>[]>>;
   setImage: Dispatch<SetStateAction<File | undefined>>;
 }) => {
   const [previewOpen, setPreviewOpen] = useState(false);

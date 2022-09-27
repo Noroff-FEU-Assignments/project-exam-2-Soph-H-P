@@ -23,7 +23,7 @@ const EditUserForm = ({ userId }: { userId: string }) => {
   const { formIsSubmitted, formError, isSubmitting, submitUpdateForm, deleteUser, isDeleting } =
     useUser(form);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: boolean) => {
     const value = e === true ? 'admin' : 'member';
     form.setFieldsValue({
       userRole: value,

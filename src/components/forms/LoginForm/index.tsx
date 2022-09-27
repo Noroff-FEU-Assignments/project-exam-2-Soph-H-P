@@ -5,7 +5,7 @@ import { StyledForm } from '../StyledForm/index.styled';
 import FormError from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import useLoginUser from '../../../hooks/useLoginUser';
+import useLoginUser, { LoginFormInterface } from '../../../hooks/useLoginUser';
 import PageTitle from '../../common/typography/PageTitle';
 
 const LoginForm = () => {
@@ -36,7 +36,11 @@ const LoginForm = () => {
     );
 
   return (
-    <StyledForm initialValues={{ remember: true }} onFinish={submitForm} form={form}>
+    <StyledForm
+      initialValues={{ remember: true }}
+      onFinish={(data) => submitForm(data as LoginFormInterface)}
+      form={form}
+    >
       <PageTitle>Log in</PageTitle>
       <label htmlFor="identifier">Email</label>
       <Form.Item
