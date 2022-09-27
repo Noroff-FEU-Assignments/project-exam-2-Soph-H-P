@@ -1,31 +1,35 @@
-const findTimeAgo = (when: string, hours?: boolean) => {
-  const whenAsDate = new Date(when);
-  const timeNow = new Date();
-  const whenAsTime = whenAsDate.getTime();
-  const nowAsTime = timeNow.getTime();
-  //find hours, days, weeks, months, years difference
-  const difference = parseInt(((nowAsTime - whenAsTime) / 1000 / 60 / 60).toFixed(0));
-  const differenceDays = parseInt((difference / 24).toFixed(0));
-  const differenceWeeks = parseInt((differenceDays / 7).toFixed(0));
-  const differenceMonths = parseInt((differenceWeeks / 4).toFixed(0));
-  const differenceYears = parseInt((differenceMonths / 12).toFixed(0));
+import moment from 'moment';
 
-  if (hours) {
-    return difference;
+const createReadableTimeDifference = (time: number, measure: string) => {
+  if (time === 1) {
+    return `${time} ${measure} ago`;
   }
+  return `${time} ${measure}s ago`;
+};
+
+const findTimeAgo = (when: string) => {
+  const whenAsDate = moment(when);
+  const timeNow = moment();
+  const difference = parseInt(moment.duration(timeNow.diff(whenAsDate)).asHours().toFixed(0));
+  const differenceDays = parseInt(moment.duration(timeNow.diff(whenAsDate)).asDays().toFixed(0));
+  const differenceWeeks = parseInt(moment.duration(timeNow.diff(whenAsDate)).asWeeks().toFixed(0));
+  const differenceMonths = parseInt(
+    moment.duration(timeNow.diff(whenAsDate)).asMonths().toFixed(0)
+  );
+  const differenceYears = parseInt(moment.duration(timeNow.diff(whenAsDate)).asYears().toFixed(0));
 
   if (difference <= 0) {
     return 'Just now';
   } else if (difference <= 24) {
-    return `${difference} hours ago`;
-  } else if (differenceDays <= 7) {
-    return `${differenceDays} days ago`;
-  } else if (differenceWeeks <= 4) {
-    return `${differenceWeeks} weeks ago`;
-  } else if (differenceMonths <= 12) {
-    return `${differenceMonths} months ago`;
+    return createReadableTimeDifference(difference, 'hour');
+  } else if (differenceDays < 7) {
+    return createReadableTimeDifference(differenceDays, 'day');
+  } else if (differenceWeeks < 4) {
+    return createReadableTimeDifference(differenceWeeks, 'week');
+  } else if (differenceMonths < 12) {
+    return createReadableTimeDifference(differenceMonths, 'month');
   } else {
-    return `${differenceYears} years ago`;
+    return createReadableTimeDifference(differenceYears, 'year');
   }
 };
 
