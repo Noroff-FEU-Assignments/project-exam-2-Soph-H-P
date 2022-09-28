@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons';
+import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
 import { Modal, Upload, UploadFile, UploadProps } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { RcFile } from 'antd/lib/upload';
@@ -52,8 +52,8 @@ const UploadInput = ({
 
   const uploadButton = (
     <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
+      <FileImageOutlined style={{ fontSize: '30px' }} />
+      <div style={{ marginTop: 8 }}>Click or drag image here</div>
     </div>
   );
 
