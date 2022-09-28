@@ -29,6 +29,10 @@ export const PageContainer = styled.div<{
       margin: 0;
       padding: 0;
       background: none;
+
+      @media (max-width: 500px) {
+        padding: 0px;
+      }
     `}
   ${({ $notFullHeight }) =>
     $notFullHeight &&

@@ -8,6 +8,8 @@ import findTimeAgo from '../../../../utils/findTimeAgo';
 import Loader from '../../Loader';
 import { Link } from 'react-router-dom';
 import ApiErrorMessage from '../../ApiErrorMessage';
+import { Button } from 'antd';
+import { useRef } from 'react';
 
 const PopupText = ({
   species,
@@ -74,6 +76,7 @@ const MapWithLocationPoints = ({
   sightingId?: number;
 }) => {
   const { sightings, error, isLoading } = useSightings(url);
+  const mapRef = useRef<L.Map | null>(null);
 
   if (isLoading && url) {
     return <Loader size={100} />;
@@ -83,16 +86,34 @@ const MapWithLocationPoints = ({
     return <ApiErrorMessage message="Oops something went wrong. Unable to find recent sightings" />;
   }
 
+  const handleFindLocation = () => {
+    mapRef?.current?.locate({
+      setView: true,
+    });
+  };
+
   if (url) {
     return (
       <>
         {title && <h2>{title}</h2>}
         <StyledMapContainer
           style={{ height: height, width: '100%' }}
-          center={{ lat: 59.446820, lng: 11.167907 }}
+          center={{ lat: 59.44682, lng: 11.167907 }}
           zoom={9}
           scrollWheelZoom={true}
+          ref={mapRef}
         >
+          <Button
+            onClick={handleFindLocation}
+            style={{
+              zIndex: '1000',
+              position: 'absolute',
+              top: title ? '5px' : '60px',
+              right: title ? '5px' : '10px',
+            }}
+          >
+            My location
+          </Button>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
