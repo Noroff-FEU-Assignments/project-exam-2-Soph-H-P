@@ -1,15 +1,15 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import { SightingInterface } from '../../../hooks/useSightings';
 import { InfoWrapper, SplitCard, StyledCardContainer } from './index.styled';
-import MapWithLocationPoints from '../mapComponents/MapWithLocationPoints';
+import MapWithLocationPoints from '../../mapComponents/MapWithLocationPoints';
 import VarifiedUsername from '../VarifiedUsername';
-import RoundButton from '../buttons/RoundButton';
+import RoundButton from '../../common/buttons/RoundButton';
 import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
 import { useUserState } from '../../../context/UserContext';
 import { useEffect } from 'react';
 import MembersOnly from '../MembersOnly';
-import ImageWithWrapper from '../ImageWithWrapper';
+import ImageWithWrapper from '../../common/ImageWithWrapper';
 
 const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
   const { userInfo } = useUserState();

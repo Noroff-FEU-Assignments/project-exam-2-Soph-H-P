@@ -3,7 +3,7 @@ import { SightingInterface } from '../../../hooks/useSightings';
 import { ButtonContainer, InfoWrapper, StyledCardContainer } from './index.styled';
 import theme from '../../../styles/theme';
 import CheckSvg from '../../../svgs/CheckSvg';
-import RoundButton from '../buttons/RoundButton';
+import RoundButton from '../../common/buttons/RoundButton';
 import CloseSvg from '../../../svgs/CloseSvg';
 import useDeleteSighting from '../../../hooks/useDeleteSighting';
 import useVarifySighting from '../../../hooks/useVarifySighting';
@@ -14,7 +14,7 @@ import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
 import { Dispatch, SetStateAction } from 'react';
 import MembersOnly from '../MembersOnly';
-import ImageWithWrapper from '../ImageWithWrapper';
+import ImageWithWrapper from '../../common/ImageWithWrapper';
 
 const ModerationSightingsCard = ({
   sighting,

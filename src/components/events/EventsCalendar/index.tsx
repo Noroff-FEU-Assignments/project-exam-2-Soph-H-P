@@ -7,11 +7,11 @@ import API, { eventsEndpoint } from '../../../constants/api';
 import moment from 'moment';
 import { EventInterface } from '../../../hooks/useEvents';
 import datesAreSame from '../../../utils/datesAreSame';
-import EventModal from '../EventModal';
+import EventModal from '../../modals/EventModal';
 import { CalendarContainer } from './index.styled';
 import { useUserState } from '../../../context/UserContext';
-import EditEventModal from '../EditEventModal';
-import PageTitle from '../typography/PageTitle';
+import EditEventModal from '../../modals/EditEventModal';
+import PageTitle from '../../typography/PageTitle';
 import EventCard from '../EventCard';
 
 const EventsCalendar = () => {

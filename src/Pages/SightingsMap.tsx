@@ -1,4 +1,4 @@
-import MapWithSearch from '../components/common/mapComponents/MapWithSearch';
+import MapWithSearch from '../components/mapComponents/MapWithSearch';
 import MetaData from '../components/common/MetaData';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 

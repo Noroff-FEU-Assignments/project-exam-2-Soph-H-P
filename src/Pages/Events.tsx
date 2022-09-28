@@ -1,4 +1,4 @@
-import EventsCalendar from '../components/common/EventsCalendar';
+import EventsCalendar from '../components/events/EventsCalendar';
 import MetaData from '../components/common/MetaData';
 import EventsForm from '../components/forms/EventsForm';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';

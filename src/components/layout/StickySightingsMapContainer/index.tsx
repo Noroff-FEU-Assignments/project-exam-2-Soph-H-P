@@ -3,7 +3,7 @@ import { useUserState } from '../../../context/UserContext';
 import createMySightingsEndpoint from '../../../utils/createMySightingsEndpoint';
 import createPastDayQuery from '../../../utils/createPastDayQuery';
 import Cta from '../../common/Cta';
-import MapWithLocationPoints from '../../common/mapComponents/MapWithLocationPoints';
+import MapWithLocationPoints from '../../mapComponents/MapWithLocationPoints';
 import { StickyContainer } from './index.sightings';
 
 const StickySightingsMapContainer = ({ isMySightings }: { isMySightings?: boolean }) => {

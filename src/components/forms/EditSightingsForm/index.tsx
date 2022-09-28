@@ -8,7 +8,7 @@ import UploadInput from '../UploadInput';
 import { useUserState } from '../../../context/UserContext';
 import FormMessage from '../FormMessage';
 import SpeciesInput from '../SpeciesInput';
-import PageTitle from '../../common/typography/PageTitle';
+import PageTitle from '../../typography/PageTitle';
 import { StyledFormContainer } from './index.styled';
 import API, { includingImagesQuery, sightingsEndpoint } from '../../../constants/api';
 import useSingleSighting from '../../../hooks/useSingleSighting';
@@ -18,7 +18,7 @@ import ApiErrorMessage from '../../common/ApiErrorMessage';
 import { PageContainer } from '../../layout/PageContainer/index.styled';
 import useDeleteSighting from '../../../hooks/useDeleteSighting';
 import { Link, useNavigate } from 'react-router-dom';
-import LocationInput from '../../common/mapComponents/LocationInput';
+import LocationInput from '../../mapComponents/LocationInput';
 
 const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
   const [form] = Form.useForm();

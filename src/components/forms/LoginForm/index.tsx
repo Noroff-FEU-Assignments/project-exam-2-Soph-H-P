@@ -6,7 +6,7 @@ import FormMessage from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useLoginUser, { LoginFormInterface } from '../../../hooks/useLoginUser';
-import PageTitle from '../../common/typography/PageTitle';
+import PageTitle from '../../typography/PageTitle';
 
 const LoginForm = () => {
   const [form] = Form.useForm();

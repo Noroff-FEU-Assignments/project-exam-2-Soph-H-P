@@ -4,7 +4,7 @@ import { Popup, TileLayer, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Button } from 'antd';
 import { StyledMapContainer, StyledMarker } from './index.styled';
-import mapPin from '../../../../svgs/mapPin.svg';
+import mapPin from '../../../svgs/mapPin.svg';
 
 const LocationMarker = ({
   position,

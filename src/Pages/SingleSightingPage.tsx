@@ -4,7 +4,7 @@ import ApiErrorMessage from '../components/common/ApiErrorMessage';
 import Cta from '../components/common/Cta';
 import Loader from '../components/common/Loader';
 import MetaData from '../components/common/MetaData';
-import SingleSightingCard from '../components/common/SingleSightingCard';
+import SingleSightingCard from '../components/sightingsCards/SingleSightingCard';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import API, { includingImagesQuery, sightingsEndpoint } from '../constants/api';
 import useSingleSighting from '../hooks/useSingleSighting';

@@ -1,13 +1,13 @@
 import { TileLayer } from 'react-leaflet';
 import { StyledMapContainer, StyledMarker, StyledPopup } from '../LocationInput/index.styled';
-import useSightings from '../../../../hooks/useSightings';
+import useSightings from '../../../hooks/useSightings';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import mapPin from '../../../../svgs/mapPin.svg';
-import findTimeAgo from '../../../../utils/findTimeAgo';
-import Loader from '../../Loader';
+import mapPin from '../../../svgs/mapPin.svg';
+import findTimeAgo from '../../../utils/findTimeAgo';
+import Loader from '../../common/Loader';
 import { Link } from 'react-router-dom';
-import ApiErrorMessage from '../../ApiErrorMessage';
+import ApiErrorMessage from '../../common/ApiErrorMessage';
 import { Button } from 'antd';
 import { useRef } from 'react';
 

@@ -8,10 +8,10 @@ import { useEffect, useState } from 'react';
 import UploadInput from '../UploadInput';
 import { useUserState } from '../../../context/UserContext';
 import FormMessage from '../FormMessage';
-import LocationInput from '../../common/mapComponents/LocationInput';
+import LocationInput from '../../mapComponents/LocationInput';
 import { LatLngLiteral } from 'leaflet';
 import SpeciesInput from '../SpeciesInput';
-import PageTitle from '../../common/typography/PageTitle';
+import PageTitle from '../../typography/PageTitle';
 import { StyledFormContainer } from './index.styled';
 
 const SightingsForm = () => {

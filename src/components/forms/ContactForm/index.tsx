@@ -3,7 +3,7 @@ import FormMessage from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import useSubmitContactForm from '../../../hooks/useSubmitContactForm';
-import PageTitle from '../../common/typography/PageTitle';
+import PageTitle from '../../typography/PageTitle';
 
 const ContectForm = () => {
   const [form] = Form.useForm();

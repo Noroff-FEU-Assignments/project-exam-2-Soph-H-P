@@ -10,9 +10,9 @@ import useSightings, { SightingInterface } from '../../../hooks/useSightings';
 import findMySightingsUrl, { findSightingsUrl } from '../../../utils/findMySightingsUrl';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Loader from '../../common/Loader';
-import ModerationSightingsCard from '../../common/ModerationSightingsCard';
-import SightingsCard from '../../common/SightingsCard';
-import PageTitle from '../../common/typography/PageTitle';
+import ModerationSightingsCard from '../../sightingsCards/ModerationSightingsCard';
+import SightingsCard from '../../sightingsCards/SightingsCard';
+import PageTitle from '../../typography/PageTitle';
 import { SightingsContainer, StyledGridContainer } from './index.styled';
 
 const SightingsGrid = ({
