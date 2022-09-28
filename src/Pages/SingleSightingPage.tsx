@@ -47,7 +47,7 @@ const SingleSightingPage = () => {
   }
   if (sighting) {
     return (
-      <PageContainer $hasBird={true} $notFullHeight={true} style={{ maxWidth: 800 }}>
+      <PageContainer $hasBird={true} $notFullHeight={true} style={{ maxWidth: '100%', width: 700 }}>
         <MetaData
           title={`${sighting.attributes.species} | Birds of Østfold`}
           description={`Here is the information about the sighting of ${sighting.attributes.species}`}

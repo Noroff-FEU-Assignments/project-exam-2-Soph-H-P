@@ -22,9 +22,12 @@ export const StyledImageWrapper = styled.div<{
     object-fit: cover;
   }
 
-  ${({ $noImage }) =>
+  ${({ $noImage, $height, $width }) =>
     $noImage &&
     css`
+      height: ${$height};
+      width: ${$width};
+
       &::after {
         content: 'No image available';
         position: absolute;

@@ -8,7 +8,7 @@ import ImageWithWrapper from '../../common/ImageWithWrapper';
 
 const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
-  const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
+  const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.formats.small.url;
   const {
     date: when,
     nearestLocation,
@@ -26,7 +26,13 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
       $isVarified={varified}
       onClick={() => navigate(`/sighting/${sighting.id}`)}
     >
-      <ImageWithWrapper height="160px" width="100%" noImage={noImage} src={imageSrc} alt={species}/>
+      <ImageWithWrapper
+        height="160px"
+        width="100%"
+        noImage={noImage}
+        src={imageSrc}
+        alt={species}
+      />
       <h2>{species}</h2>
       <InfoWrapper>
         <span>When: </span>

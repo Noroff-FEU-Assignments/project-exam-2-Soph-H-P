@@ -24,7 +24,7 @@ const ModerationSightingsCard = ({
   setVisibleSightings: Dispatch<SetStateAction<SightingInterface[] | null>>;
 }) => {
   const noImage = !sighting.attributes.photos.data;
-  const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
+  const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.formats.small.url;
   const imageId = noImage ? undefined : sighting.attributes.photos.data[0].id;
   const {
     date: when,

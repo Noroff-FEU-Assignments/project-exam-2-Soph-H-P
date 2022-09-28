@@ -71,7 +71,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
           </p>
         </div>
         <MapWithLocationPoints
-          height={'100%'}
+          height={'250px'}
           singleLat={lat}
           singleLng={lng}
           singleSpecies={species}

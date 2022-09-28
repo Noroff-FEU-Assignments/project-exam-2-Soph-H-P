@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledImageWrapper } from './index.styled';
 
 const ImageWithWrapper = ({
