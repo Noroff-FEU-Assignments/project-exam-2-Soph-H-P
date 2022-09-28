@@ -16,7 +16,7 @@ const useAddSightingToUser = () => {
 
     try {
       const headers = {
-        Authorization: `Bearer ${authToken + 'dfgdfgd'}`,
+        Authorization: `Bearer ${authToken}`,
       };
       const userResponse = await axios.get(`${API}${userEndpoint}/${userId}`, {
         headers,
