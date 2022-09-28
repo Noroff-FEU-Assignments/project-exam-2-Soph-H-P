@@ -48,7 +48,7 @@ const SightingsGrid = ({
 
   if (isLoading) {
     return (
-      <SightingsContainer>
+      <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
         <Loader size={100} light={true} />
       </SightingsContainer>
