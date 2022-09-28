@@ -1,4 +1,4 @@
-import { FileImageOutlined, UploadOutlined } from '@ant-design/icons';
+import { FileImageOutlined } from '@ant-design/icons';
 import { Modal, Upload, UploadFile, UploadProps } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import { RcFile } from 'antd/lib/upload';
