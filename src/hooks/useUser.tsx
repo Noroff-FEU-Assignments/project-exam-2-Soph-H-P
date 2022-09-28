@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import API, { eventsEndpoint, userEndpoint } from '../constants/api';
+import API, { userEndpoint } from '../constants/api';
 
 import axios from 'axios';
 import { FormInstance } from 'antd';
@@ -21,7 +21,9 @@ const useUser = (form?: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.put(`${API}${userEndpoint}/${id}`, data, { headers });
-      setFormIsSubmitted('This user has been updated');
+      if (response) {
+        setFormIsSubmitted('This user has been updated');
+      }
       form && form.resetFields();
     } catch (error: unknown) {
       setFormError('We seem to be having trouble saving the changes, please try again later');
@@ -38,7 +40,9 @@ const useUser = (form?: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.delete(`${API}${userEndpoint}/${id}`, { headers: headers });
-      setFormIsSubmitted('This event has been deleted');
+      if (response) {
+        setFormIsSubmitted('This event has been deleted');
+      }
       form && form.resetFields();
     } catch (error: unknown) {
       setFormError('We seem to be having trouble deleting this event, please try again later');

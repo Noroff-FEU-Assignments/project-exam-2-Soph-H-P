@@ -5,7 +5,8 @@ import { useAuthState } from '../context/AuthContext';
 
 const useVarifySighting = () => {
   const [error, setError] = useState<string | null>('');
-  const [isVarifying, setIsVarifying] = useState(true);
+  const [isVarifying, setIsVarifying] = useState(false);
+  const [isVarified, setIsVarified] = useState(false);
   const { authToken } = useAuthState();
 
   const varifySighting = async (id: number) => {
@@ -21,6 +22,9 @@ const useVarifySighting = () => {
 
      
       const response = await axios.put(`${API}${sightingsEndpoint}/${id}`, { data }, { headers });
+      if(response) {
+        setIsVarified(true)
+      }
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {
@@ -40,7 +44,7 @@ const useVarifySighting = () => {
     }
   };
 
-  return { varifySighting, error, isVarifying };
+  return { varifySighting, error, isVarifying, isVarified };
 };
 
 export default useVarifySighting;

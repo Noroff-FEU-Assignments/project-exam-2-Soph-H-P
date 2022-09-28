@@ -38,7 +38,7 @@ const ModerationSightingsCard = ({
   const navigate = useNavigate();
   const { deleteSighting } = useDeleteSighting();
   const { varifySighting } = useVarifySighting();
-  const { addSightingToUser } = useAddSightingToUser(userId);
+  const { addSightingToUser } = useAddSightingToUser();
 
   const text = 'Are you sure you want to delete this sighting?';
 

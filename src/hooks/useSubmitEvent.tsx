@@ -18,7 +18,9 @@ const useSubmitEvent = (form: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.post(API + eventsEndpoint, { data }, { headers });
-      setFormIsSubmitted("This event has been added");
+      if (response) {
+        setFormIsSubmitted('This event has been added');
+      }
       form.resetFields();
     } catch (error: unknown) {
       setFormError('We seem to be having trouble adding your event, please try again later');
@@ -35,7 +37,9 @@ const useSubmitEvent = (form: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.put(`${API}${eventsEndpoint}/${id}`, { data }, { headers });
-      setFormIsSubmitted("This event has been updated");
+      if (response) {
+        setFormIsSubmitted('This event has been updated');
+      }
       form.resetFields();
     } catch (error: unknown) {
       setFormError('We seem to be having trouble saving the changes, please try again later');
@@ -52,7 +56,9 @@ const useSubmitEvent = (form: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.delete(`${API}${eventsEndpoint}/${id}`, { headers: headers });
-      setFormIsSubmitted("This event has been deleted");
+      if (response) {
+        setFormIsSubmitted('This event has been deleted');
+      }
       form.resetFields();
     } catch (error: unknown) {
       setFormError('We seem to be having trouble deleting this event, please try again later');

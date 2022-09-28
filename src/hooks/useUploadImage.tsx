@@ -63,7 +63,16 @@ const useUploadImage = () => {
     }
   };
 
-  return { imageIsUploaded, uploadError, isUploading, uploadImage, deleteImage, isDeleting };
+  return {
+    imageIsUploaded,
+    uploadError,
+    isUploading,
+    uploadImage,
+    deleteImage,
+    isDeleting,
+    imageIsDeleted,
+    deleteError,
+  };
 };
 
 export default useUploadImage;
