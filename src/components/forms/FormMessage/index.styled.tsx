@@ -17,4 +17,14 @@ export const StyledFormMessage = styled.span<{ $error?: boolean }>`
     width: 50px;
     margin-right: 20px;
   }
+
+  a {
+    text-decoration: underline;
+    margin-left: 20px;
+  }
+
+  a:hover {
+    color: ${theme.colors.primaryColor};
+    text-decoration: none;
+  }
 `;

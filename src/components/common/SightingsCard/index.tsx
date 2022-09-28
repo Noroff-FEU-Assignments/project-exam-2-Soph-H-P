@@ -3,11 +3,20 @@ import { SightingInterface } from '../../../hooks/useSightings';
 import { ImageWrapper, InfoWrapper, StyledCardContainer } from './index.styled';
 import VarifiedUsername from '../VarifiedUsername';
 import { useNavigate } from 'react-router-dom';
+import MembersOnly from '../MembersOnly';
 
 const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;
-  const { date: when, nearestLocation, species, userId, username, varified } = sighting.attributes;
+  const {
+    date: when,
+    nearestLocation,
+    species,
+    userId,
+    username,
+    varified,
+    public: isPublic,
+  } = sighting.attributes;
 
   const navigate = useNavigate();
 
@@ -31,6 +40,7 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
       <InfoWrapper>
         <VarifiedUsername userId={userId} backupUsername={username} />
       </InfoWrapper>
+      {!isPublic && <MembersOnly />}
     </StyledCardContainer>
   );
 };

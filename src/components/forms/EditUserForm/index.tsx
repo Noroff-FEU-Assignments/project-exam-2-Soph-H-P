@@ -1,5 +1,4 @@
 import { StyledForm } from '../StyledForm/index.styled';
-import FormError from '../FormMessage';
 import { Button, Form, Input, Switch, message, Popconfirm } from 'antd';
 import useUser from '../../../hooks/useUser';
 import FormMessage from '../FormMessage';
@@ -89,7 +88,7 @@ const EditUserForm = ({ userId }: { userId: string }) => {
           unCheckedChildren="Admin"
           onChange={handleChange}
         />
-        {formError && <FormError>{formError}</FormError>}
+        {formError && <FormMessage error={true}>{formError}</FormMessage>}
         {formIsSubmitted && <FormMessage>Event has been saved</FormMessage>}
         <Form.Item style={{marginTop: 20}}>
           <Button type="primary" htmlType="submit" size="large">

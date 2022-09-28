@@ -13,6 +13,7 @@ import VarifiedUsername from '../VarifiedUsername';
 import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
 import { Dispatch, SetStateAction } from 'react';
+import MembersOnly from '../MembersOnly';
 
 const ModerationSightingsCard = ({
   sighting,
@@ -31,6 +32,7 @@ const ModerationSightingsCard = ({
     description,
     userId,
     username,
+    public: isPublic,
   } = sighting.attributes;
   const navigate = useNavigate();
   const { deleteSighting } = useDeleteSighting();
@@ -109,6 +111,7 @@ const ModerationSightingsCard = ({
           />
         </Popconfirm>
       </ButtonContainer>
+      {!isPublic && <MembersOnly />}
     </StyledCardContainer>
   );
 };

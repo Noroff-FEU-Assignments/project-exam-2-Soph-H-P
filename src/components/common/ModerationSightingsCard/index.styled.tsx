@@ -11,6 +11,7 @@ export const StyledCardContainer = styled.div`
   margin: 10px auto;
   color: ${theme.colors.darkFontColor};
   height: 100%;
+  position: relative;
 
   h2 {
     text-transform: capitalize;

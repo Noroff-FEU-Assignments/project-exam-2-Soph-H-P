@@ -45,7 +45,7 @@ const useRegisterUser = (form: FormInstance) => {
         if (!error?.response) {
           console.log('No Server Response');
           setRegisterError(
-            'Looks like there is a problem with our server, please check and try again.'
+            'Looks like there is a problem with our server, please try again later.'
           );
         } else if (error.response?.status === 400 || error.response?.status === 403) {
           setRegisterError(
@@ -55,7 +55,7 @@ const useRegisterUser = (form: FormInstance) => {
           );
         } else {
           setRegisterError(
-            'Sorry we seem to be have trouble logging you in at the moment, please try again later.'
+            'Sorry we seem to be have trouble registering you at the moment, please try again later.'
           );
         }
       }

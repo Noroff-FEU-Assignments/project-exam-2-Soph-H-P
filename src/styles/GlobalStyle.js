@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
     html, body  {
         min-height: 100vh;
+        font-size: 16px;
     }
     
     #root {
@@ -58,6 +59,10 @@ const GlobalStyle = createGlobalStyle`
 
 
       @media (max-width: 500px) {
+        html, body  {
+            font-size: 14px;
+        }
+
         .ant-picker-datetime-panel {
           flex-direction: column;
         }

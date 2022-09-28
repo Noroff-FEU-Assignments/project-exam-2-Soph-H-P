@@ -29,12 +29,12 @@ const useDeleteSighting = () => {
       if (axios.isAxiosError(error)) {
         if (!error?.response) {
           console.log('No Server Response');
-          setError('Looks like there is a problem with our server, please check and try again.');
+          setError('Looks like there is a problem with our server, please try again later.');
         } else if (error.response?.status === 400 || error.response?.status === 403) {
-          setError('Looks like your username or password is wrong, please check and try again.');
+          setError('Sorry we seem to be have trouble deleting that sighting at the moment, please try again later.');
         } else {
           setError(
-            'Sorry we seem to be have trouble logging you in at the moment, please try again later.'
+            'Sorry we seem to be have trouble deleting that sighting at the moment, please try again later.'
           );
         }
       }

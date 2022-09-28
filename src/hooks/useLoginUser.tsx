@@ -35,11 +35,11 @@ const useLoginUser = (form: FormInstance) => {
         if (!error?.response) {
           console.log('No Server Response');
           setLoginError(
-            'Looks like there is a problem with our server, please check and try again.'
+            'Looks like there is a problem with our server, please check and try again. Or register if you are new here.'
           );
         } else if (error.response?.status === 400 || error.response?.status === 403) {
           setLoginError(
-            'Looks like your username or password is wrong, please check and try again.'
+            'Looks like your username or password is wrong, please check and try again. Or register if you are new here.'
           );
         } else {
           setLoginError(

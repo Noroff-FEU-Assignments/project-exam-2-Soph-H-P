@@ -2,7 +2,7 @@ import { useAuthState } from '../../../context/AuthContext';
 import { useUserState } from '../../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { StyledForm } from '../StyledForm/index.styled';
-import FormError from '../FormMessage';
+import FormMessage from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useLoginUser, { LoginFormInterface } from '../../../hooks/useLoginUser';
@@ -70,7 +70,7 @@ const LoginForm = () => {
           Forgot password
         </a>
       </Form.Item> */}
-      {loginError && <FormError>{loginError}</FormError>}
+      {loginError && <FormMessage error={true}>{loginError}</FormMessage>}
       <Form.Item>
         <Button type="primary" htmlType="submit" size="large">
           {isSubmitting ? 'Logging in...' : 'Login'}

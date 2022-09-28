@@ -1,5 +1,5 @@
 import { StyledForm } from '../StyledForm/index.styled';
-import FormError from '../FormMessage';
+import FormMessage from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import useSubmitContactForm from '../../../hooks/useSubmitContactForm';
@@ -42,11 +42,11 @@ const ContectForm = () => {
         <TextArea rows={4} placeholder="Message character limit 250" maxLength={250} />
       </Form.Item>
 
-      {formError && <FormError>{formError}</FormError>}
+      {formError && <FormMessage error={true}>{formError}</FormMessage>}
       {messageIsSent && (
-        <FormError>
+        <FormMessage>
           Your message has been sent. Please expect a reply in 2 - 3 working days.
-        </FormError>
+        </FormMessage>
       )}
       <Form.Item>
         <Button type="primary" htmlType="submit" size="large">

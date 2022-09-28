@@ -17,7 +17,7 @@ import Cta from '../../common/Cta';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import { PageContainer } from '../../layout/PageContainer/index.styled';
 import useDeleteSighting from '../../../hooks/useDeleteSighting';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LocationInput from '../../common/mapComponents/LocationInput';
 
 const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
@@ -153,7 +153,7 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
         </Popconfirm>
         {formError && <FormMessage error={true}>{formError}</FormMessage>}
         {deleteError && <FormMessage error={true}>{deleteError}</FormMessage>}
-        {formIsSubmitted && <FormMessage>This sighting has been updated</FormMessage>}
+        {formIsSubmitted && <FormMessage>This sighting has been updated.  <Link to={`/sighting/${sighting.id}`}>View updated sighting</Link></FormMessage>}
       </StyledForm>
     );
   }

@@ -8,6 +8,7 @@ import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
 import { useUserState } from '../../../context/UserContext';
 import { useEffect } from 'react';
+import MembersOnly from '../MembersOnly';
 
 const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
   const { userInfo } = useUserState();
@@ -23,6 +24,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
     description,
     username,
     varified,
+    public: isPublic
   } = sighting.attributes;
 
   const navigate = useNavigate();
@@ -79,6 +81,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
           onClick={() => navigate(`/admin/edit-sighting/${sighting.id}`)}
         />
       )}
+      {!isPublic && <MembersOnly isLongView={true}/>}
     </StyledCardContainer>
   );
 };

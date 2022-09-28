@@ -2,7 +2,7 @@ import { useAuthState } from '../../../context/AuthContext';
 import { useUserState } from '../../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { StyledForm } from '../StyledForm/index.styled';
-import FormError from '../FormMessage';
+import FormMessage from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useRegisterUser, { RegisterFormInterface } from '../../../hooks/useRegisterUser';
@@ -77,7 +77,7 @@ const RegisterForm = () => {
           iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
         />
       </Form.Item>
-      {registerError && <FormError>{registerError}</FormError>}
+      {registerError && <FormMessage error={true}>{registerError}</FormMessage>}
       <Form.Item>
         <Button type="primary" htmlType="submit" size="large">
           {isSubmitting ? 'Registering...' : 'Register'}
