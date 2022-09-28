@@ -83,7 +83,7 @@ const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }) => {
       </Button>
       </Popconfirm>
       {formError && <FormMessage error={true}>{formError}</FormMessage>}
-      {formIsSubmitted && <FormMessage>Event has been saved</FormMessage>}
+      {formIsSubmitted && <FormMessage>{formIsSubmitted}</FormMessage>}
     </StyledForm>
   );
 };

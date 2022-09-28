@@ -26,7 +26,7 @@ const SingleSightingPage = () => {
 
   if (error) {
     return (
-      <PageContainer>
+      <PageContainer $notFullHeight={true} style={{ maxWidth: '100%', width: 700 }}>
         <MetaData title={`Error | Birds of Østfold`} description={error} />
         <ApiErrorMessage message={error} hasGif={true} />
         <Cta toHome={true} />
@@ -36,7 +36,7 @@ const SingleSightingPage = () => {
 
   if (isLoading) {
     return (
-      <PageContainer style={{ minWidth: 300 }}>
+      <PageContainer $notFullHeight={true} style={{ maxWidth: '100%', width: 700, height: 400 }}>
         <MetaData
           title="Loading... | Birds of Østfold"
           description="Hang tight we are just loading the page"
