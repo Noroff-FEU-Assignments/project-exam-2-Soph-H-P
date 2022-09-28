@@ -13,12 +13,14 @@ import { LatLngLiteral } from 'leaflet';
 import SpeciesInput from '../SpeciesInput';
 import PageTitle from '../../typography/PageTitle';
 import { StyledFormContainer } from './index.styled';
+import { Link } from 'react-router-dom';
 
 const SightingsForm = () => {
   const [form] = Form.useForm();
   const [image, setImage] = useState<File | undefined>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [position, setPosition] = useState<LatLngLiteral | null>(null);
+  const [newSightingId, setNewSightingId] = useState<number | null>(null);
   const { formError, formIsSubmitted, isSubmitting, submitForm } = useSubmitSightingsForm(
     form,
     setFileList,
@@ -46,8 +48,8 @@ const SightingsForm = () => {
     <StyledForm
       form={form}
       initialValues={{ remember: true }}
-      onFinish={(data) => submitForm(data, image)}
-      style={{ width: 800}}
+      onFinish={(data) => submitForm(data, setNewSightingId, image)}
+      style={{ width: 800 }}
     >
       <PageTitle>Add Sighting</PageTitle>
       <StyledFormContainer>
@@ -128,11 +130,21 @@ const SightingsForm = () => {
         {isSubmitting ? 'Submitting' : 'Submit'}
       </Button>
       {formError && <FormMessage error={true}>{formError}</FormMessage>}
-      {formIsSubmitted && (
+      {formIsSubmitted && userInfo && userInfo.userRole === 'admin' && (
         <FormMessage>
-          {userInfo && userInfo.userRole === 'admin'
-            ? 'Your sighting has been submitted'
-            : 'Your sighting has been submitted and will be visible after it is accepted by a moderator.'}
+          Your sighting has been submitted
+          <Link to={`/sighting/${newSightingId}`}>View new sighting</Link>
+        </FormMessage>
+      )}
+      {formIsSubmitted && userInfo && userInfo.userRole !== 'admin' && (
+        <FormMessage>
+          Your sighting has been submitted and will be visible after it is accepted by a moderator.
+          <Link to={`/sighting/${newSightingId}`}>View new sighting</Link>
+        </FormMessage>
+      )}
+      {formIsSubmitted && !userInfo && (
+        <FormMessage>
+          Your sighting has been submitted and will be visible after it is accepted by a moderator.
         </FormMessage>
       )}
     </StyledForm>

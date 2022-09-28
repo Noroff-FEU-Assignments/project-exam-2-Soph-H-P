@@ -31,7 +31,11 @@ const useSubmitSightingsForm = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);
 
-  const submitForm = async (data: any, image?: File) => {
+  const submitForm = async (
+    data: any,
+    setNewSightingId: Dispatch<SetStateAction<number | null>>,
+    image?: File
+  ) => {
     setIsSubmitting(true);
     if (location && setPosition) {
       //adds nearest location to the sighting
@@ -42,6 +46,10 @@ const useSubmitSightingsForm = (
           await uploadImage(image, response.data.data.id);
           setFileList([]);
           setPosition(null);
+        }
+
+        if (response.status === 200) {
+          setNewSightingId(response.data.data.id);
         }
         setFormIsSubmitted(true);
         form.resetFields();
