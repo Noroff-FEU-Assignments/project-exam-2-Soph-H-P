@@ -35,14 +35,16 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
   const { sighting, isLoading, error } = useSingleSighting(url);
 
   useEffect(() => {
-    setFileList([
-      {
-        uid: '-1',
-        name: sighting?.attributes.species || '',
-        status: 'done',
-        url: sighting?.attributes.photos.data[0].attributes.url,
-      },
-    ]);
+    if (sighting?.attributes.photos.data) {
+      setFileList([
+        {
+          uid: '-1',
+          name: sighting?.attributes.species || '',
+          status: 'done',
+          url: sighting?.attributes.photos.data[0].attributes.url,
+        },
+      ]);
+    }
   }, [sighting]);
 
   useEffect(() => {
@@ -78,7 +80,7 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
       photos,
       public: isPublic,
     } = sighting.attributes;
-    const imageId = photos.data[0].id;
+    const imageId = (photos.data && photos.data[0].id )|| undefined;
 
     const when = moment(date);
 
@@ -94,7 +96,7 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
         form={form}
         initialValues={{ remember: true }}
         onFinish={(data) => updateSighting(data, sighting.id, image)}
-        style={{ width: 800}}
+        style={{ width: 800 }}
       >
         <PageTitle>Edit or Delete Sighting</PageTitle>
         <StyledFormContainer>
@@ -153,7 +155,12 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
         </Popconfirm>
         {formError && <FormMessage error={true}>{formError}</FormMessage>}
         {deleteError && <FormMessage error={true}>{deleteError}</FormMessage>}
-        {formIsSubmitted && <FormMessage>This sighting has been updated.  <Link to={`/sighting/${sighting.id}`}>View updated sighting</Link></FormMessage>}
+        {formIsSubmitted && (
+          <FormMessage>
+            This sighting has been updated.{' '}
+            <Link to={`/sighting/${sighting.id}`}>View updated sighting</Link>
+          </FormMessage>
+        )}
       </StyledForm>
     );
   }
