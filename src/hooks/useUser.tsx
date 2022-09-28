@@ -21,7 +21,7 @@ const useUser = (form?: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.put(`${API}${userEndpoint}/${id}`, data, { headers });
-      if (response) {
+      if (response.status === 200) {
         setFormIsSubmitted('This user has been updated');
       }
       form && form.resetFields();
@@ -40,7 +40,7 @@ const useUser = (form?: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.delete(`${API}${userEndpoint}/${id}`, { headers: headers });
-      if (response) {
+      if (response.status === 200) {
         setFormIsSubmitted('This event has been deleted');
       }
       form && form.resetFields();

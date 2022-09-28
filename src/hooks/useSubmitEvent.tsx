@@ -18,7 +18,7 @@ const useSubmitEvent = (form: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.post(API + eventsEndpoint, { data }, { headers });
-      if (response) {
+      if (response.status === 200) {
         setFormIsSubmitted('This event has been added');
       }
       form.resetFields();
@@ -37,7 +37,7 @@ const useSubmitEvent = (form: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.put(`${API}${eventsEndpoint}/${id}`, { data }, { headers });
-      if (response) {
+      if (response.status === 200) {
         setFormIsSubmitted('This event has been updated');
       }
       form.resetFields();
@@ -56,7 +56,7 @@ const useSubmitEvent = (form: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.delete(`${API}${eventsEndpoint}/${id}`, { headers: headers });
-      if (response) {
+      if (response.status === 200) {
         setFormIsSubmitted('This event has been deleted');
       }
       form.resetFields();
