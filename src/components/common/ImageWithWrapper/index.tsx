@@ -6,14 +6,16 @@ const ImageWithWrapper = ({
   alt,
   height,
   width,
+  noImage,
 }: {
   src: string;
   alt: string;
   height: string;
   width: string;
+  noImage?: boolean;
 }) => {
   return (
-    <StyledImageWrapper $height={height} $width={width}>
+    <StyledImageWrapper $height={height} $width={width} $noImage={noImage}>
       <img src={src} alt={alt} />
     </StyledImageWrapper>
   );

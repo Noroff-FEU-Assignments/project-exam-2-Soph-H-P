@@ -1,9 +1,10 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import { SightingInterface } from '../../../hooks/useSightings';
-import { ImageWrapper, InfoWrapper, StyledCardContainer } from './index.styled';
+import { InfoWrapper, StyledCardContainer } from './index.styled';
 import VarifiedUsername from '../VarifiedUsername';
 import { useNavigate } from 'react-router-dom';
 import MembersOnly from '../MembersOnly';
+import ImageWithWrapper from '../ImageWithWrapper';
 
 const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
   const noImage = !sighting.attributes.photos.data;
@@ -25,9 +26,7 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
       $isVarified={varified}
       onClick={() => navigate(`/sighting/${sighting.id}`)}
     >
-      <ImageWrapper $height={160} $noImage={noImage}>
-        <img src={imageSrc} alt={species} />
-      </ImageWrapper>
+      <ImageWithWrapper height="160px" width="100%" noImage={noImage} src={imageSrc} alt={species}/>
       <h2>{species}</h2>
       <InfoWrapper>
         <span>When: </span>

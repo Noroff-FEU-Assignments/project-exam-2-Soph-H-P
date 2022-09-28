@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 import theme from '../../../styles/theme';
-import noImage from '../../../imgs/noImage.png';
 
-export const StyledCardContainer = styled.div<{$isVarified: boolean}>`
+export const StyledCardContainer = styled.div<{ $isVarified: boolean }>`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -33,29 +32,28 @@ export const StyledCardContainer = styled.div<{$isVarified: boolean}>`
     margin-top: 10px;
   }
 
-
   ${({ $isVarified }) =>
-  !$isVarified &&
-  css`
-    border: ${theme.colors.errorColor} 2px solid;
+    !$isVarified &&
+    css`
+      border: ${theme.colors.errorColor} 2px solid;
 
-    :before {
-      content: 'Pending Moderation';
-      font-family: ${theme.text.headingFont};
-      position: absolute;
-      top: -11px;
-      right: -93px;
-      width: 250px;
-      text-align: center;
-      transform: rotate(45deg);
-      background: ${theme.colors.errorColor};
-      padding: 30px 50px 10px 50px;
-      color: ${theme.colors.brightWhite};
-      font-size: 17px;
-      font-weight: 400;
-      z-index: 100;
-    }
-  `}
+      :before {
+        content: 'Pending Moderation';
+        font-family: ${theme.text.headingFont};
+        position: absolute;
+        top: -11px;
+        right: -93px;
+        width: 250px;
+        text-align: center;
+        transform: rotate(45deg);
+        background: ${theme.colors.errorColor};
+        padding: 30px 50px 10px 50px;
+        color: ${theme.colors.brightWhite};
+        font-size: 17px;
+        font-weight: 400;
+        z-index: 100;
+      }
+    `}
 
   @media (max-width: 600px) {
     h2 {
@@ -63,42 +61,8 @@ export const StyledCardContainer = styled.div<{$isVarified: boolean}>`
     }
   }
 
-`;
-
-export const ImageWrapper = styled.div<{ $height: number; $noImage: boolean }>`
-  height: ${({ $height }) => $height}px;
-  width: 60vw;
-  max-width: 720px;
-  overflow: hidden;
-  border-radius: 10px;
-  position: relative;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  ${({ $noImage }) =>
-    $noImage &&
-    css`
-      background: url(${noImage}) center / cover no-repeat;
-
-      &::after {
-        content: 'No image available';
-        position: absolute;
-        top: 20px;
-        left: 25px;
-        font-size: 21px;
-        color: ${theme.colors.brightWhite};
-      }
-    `}
-
-  img {
-    width: 100%;
-  }
-
-  @media (max-width: 700px) {
-    width: 100%;
-    height: 250px;
+  @media (max-width: 500px) {
+    margin-top: -20px;
   }
 `;
 

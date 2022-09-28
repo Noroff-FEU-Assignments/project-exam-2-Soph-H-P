@@ -1,6 +1,6 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import { SightingInterface } from '../../../hooks/useSightings';
-import { ButtonContainer, ImageWrapper, InfoWrapper, StyledCardContainer } from './index.styled';
+import { ButtonContainer, InfoWrapper, StyledCardContainer } from './index.styled';
 import theme from '../../../styles/theme';
 import CheckSvg from '../../../svgs/CheckSvg';
 import RoundButton from '../buttons/RoundButton';
@@ -14,6 +14,7 @@ import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
 import { Dispatch, SetStateAction } from 'react';
 import MembersOnly from '../MembersOnly';
+import ImageWithWrapper from '../ImageWithWrapper';
 
 const ModerationSightingsCard = ({
   sighting,
@@ -63,9 +64,7 @@ const ModerationSightingsCard = ({
 
   return (
     <StyledCardContainer>
-      <ImageWrapper $height={160} $noImage={noImage}>
-        <img src={imageSrc} alt={species} />
-      </ImageWrapper>
+      <ImageWithWrapper height="160px" width="100%" noImage={noImage} src={imageSrc} alt={species}/>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h2>{species}</h2>
         <RoundButton

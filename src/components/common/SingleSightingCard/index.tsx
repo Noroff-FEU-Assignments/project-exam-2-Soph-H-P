@@ -1,6 +1,6 @@
 import findTimeAgo from '../../../utils/findTimeAgo';
 import { SightingInterface } from '../../../hooks/useSightings';
-import { ImageWrapper, InfoWrapper, SplitCard, StyledCardContainer } from './index.styled';
+import { InfoWrapper, SplitCard, StyledCardContainer } from './index.styled';
 import MapWithLocationPoints from '../mapComponents/MapWithLocationPoints';
 import VarifiedUsername from '../VarifiedUsername';
 import RoundButton from '../buttons/RoundButton';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserState } from '../../../context/UserContext';
 import { useEffect } from 'react';
 import MembersOnly from '../MembersOnly';
+import ImageWithWrapper from '../ImageWithWrapper';
 
 const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
   const { userInfo } = useUserState();
@@ -24,7 +25,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
     description,
     username,
     varified,
-    public: isPublic
+    public: isPublic,
   } = sighting.attributes;
 
   const navigate = useNavigate();
@@ -38,14 +39,18 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
       }
     }
     navigate('/');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, userInfo]);
 
   return (
     <StyledCardContainer $isVarified={varified}>
-      <ImageWrapper $height={480} $noImage={noImage}>
-        <img src={imageSrc} alt={species} />
-      </ImageWrapper>
+      <ImageWithWrapper
+        height="480px"
+        width="100%"
+        noImage={noImage}
+        src={imageSrc}
+        alt={species}
+      />
       <SplitCard>
         <div>
           <h2>{species}</h2>
@@ -81,7 +86,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
           onClick={() => navigate(`/admin/edit-sighting/${sighting.id}`)}
         />
       )}
-      {!isPublic && <MembersOnly isLongView={true}/>}
+      {!isPublic && <MembersOnly isLongView={true} />}
     </StyledCardContainer>
   );
 };
