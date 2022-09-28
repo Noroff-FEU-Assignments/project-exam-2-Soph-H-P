@@ -36,20 +36,14 @@ const VarifiedUsername = ({
           {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
         </p>
       );
-    } else if (!userInfo) {
+    } else if (!user || !userInfo) {
       return (
         <p>
           <span>Who: </span>
           {backupUsername ? backupUsername : 'Anonymous'}
         </p>
       );
-    } else if (!user || !userId) {
-      return (
-        <p>
-          <span>Who: </span>Anonymous
-        </p>
-      );
-    }
+    } 
   };
 
   return <>{getUsername()}</>;

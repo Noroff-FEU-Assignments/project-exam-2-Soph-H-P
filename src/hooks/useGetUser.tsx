@@ -3,13 +3,14 @@ import axios from 'axios';
 import API, { userEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
 import { UserInterface } from '../context/UserContext';
+import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
 const useGetUser = () => {
   const [user, setUser] = useState<UserInterface | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const { authToken } = useAuthState();
-
+  const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
   const getUser = async (id: string) => {
     if (id && authToken) {
@@ -27,9 +28,10 @@ const useGetUser = () => {
             'Oops something went wrong. We are having trouble finding that user at the moment'
           );
         }
-      } catch (error) {
-        console.log(error);
-        setError(
+      } catch (error: unknown) {
+        checkUnauthorizedUser(
+          error,
+          setError,
           'Oops something went wrong. We are having trouble finding that user at the moment'
         );
       } finally {

@@ -2,19 +2,21 @@ import axios from 'axios';
 import { useState } from 'react';
 import API, { userEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
+import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
 const useAddSightingToUser = () => {
   const [sightingIsAdded, setsightingIsAdded] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isAddingSighting, setIsSubmittingSighting] = useState(false);
   const { authToken } = useAuthState();
+  const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
   const addSightingToUser = async (userId: string) => {
     setIsSubmittingSighting(true);
 
     try {
       const headers = {
-        Authorization: `Bearer ${authToken}`,
+        Authorization: `Bearer ${authToken + 'dfgdfgd'}`,
       };
       const userResponse = await axios.get(`${API}${userEndpoint}/${userId}`, {
         headers,
@@ -28,8 +30,11 @@ const useAddSightingToUser = () => {
         setsightingIsAdded('This user has been updated');
       }
     } catch (error: unknown) {
-      setError('We seem to be having trouble saving the changes, please try again later');
-      console.log(error);
+      checkUnauthorizedUser(
+        error,
+        setError,
+        'We seem to be having trouble saving the changes, please try again later'
+      );
     } finally {
       setIsSubmittingSighting(false);
     }

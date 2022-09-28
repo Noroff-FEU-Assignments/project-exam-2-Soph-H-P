@@ -7,6 +7,7 @@ import useUploadImage from './useUploadImage';
 import { LatLngLiteral } from 'leaflet';
 import useNearestLocation from './useNearestLocation';
 import { useAuthState } from '../context/AuthContext';
+import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
 const useSubmitSightingsForm = (
   form: FormInstance,
@@ -21,6 +22,7 @@ const useSubmitSightingsForm = (
   const { uploadImage } = useUploadImage();
   const { location, findNearestLocation, locationError } = useNearestLocation();
   const { authToken } = useAuthState();
+  const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
   useEffect(() => {
     if (position) {
@@ -44,10 +46,11 @@ const useSubmitSightingsForm = (
         setFormIsSubmitted(true);
         form.resetFields();
       } catch (error: unknown) {
-        setFormError(
+        checkUnauthorizedUser(
+          error,
+          setFormError,
           'We seem to be having trouble sending your sighting at the moment, please try again later'
         );
-        console.log(error);
       } finally {
         setIsSubmitting(false);
       }
@@ -70,17 +73,17 @@ const useSubmitSightingsForm = (
         { data },
         { headers }
       );
-      console.log(response);
       if (image) {
         await uploadImage(image, response.data.data.id);
         setFileList([]);
       }
       setFormIsSubmitted(true);
     } catch (error: unknown) {
-      setFormError(
+      checkUnauthorizedUser(
+        error,
+        setFormError,
         'We seem to be having trouble sending your sighting at the moment, please try again later'
       );
-      console.log(error);
     } finally {
       setIsSaving(false);
     }

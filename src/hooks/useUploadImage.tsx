@@ -3,6 +3,7 @@ import API, { uploadImageUrlEndpoint } from '../constants/api';
 
 import axios from 'axios';
 import { useAuthState } from '../context/AuthContext';
+import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
 const useUploadImage = () => {
   const [imageIsUploaded, setImageIsUploaded] = useState(false);
@@ -12,6 +13,7 @@ const useUploadImage = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const { authToken } = useAuthState();
+  const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
   const uploadImage = async (image: any, sightingId: string) => {
     setIsUploading(true);
@@ -54,10 +56,11 @@ const useUploadImage = () => {
         setImageIsDeleted(true);
       }
     } catch (error: unknown) {
-      setDeleteError(
+      checkUnauthorizedUser(
+        error,
+        setDeleteError,
         'We seem to be having trouble uploading your image at the moment, please try again later'
       );
-      console.log(error);
     } finally {
       setIsDeleting(false);
     }

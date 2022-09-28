@@ -2,12 +2,14 @@ import { useState } from 'react';
 import axios from 'axios';
 import API, { sightingsEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
+import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
 const useVarifySighting = () => {
   const [error, setError] = useState<string | null>('');
   const [isVarifying, setIsVarifying] = useState(false);
   const [isVarified, setIsVarified] = useState(false);
   const { authToken } = useAuthState();
+  const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
   const varifySighting = async (id: number) => {
     setIsVarifying(true);
@@ -20,25 +22,16 @@ const useVarifySighting = () => {
         varified: true,
       };
 
-     
       const response = await axios.put(`${API}${sightingsEndpoint}/${id}`, { data }, { headers });
-      if(response) {
-        setIsVarified(true)
+      if (response) {
+        setIsVarified(true);
       }
     } catch (error: unknown) {
-      console.log('error', error);
-      if (axios.isAxiosError(error)) {
-        if (!error?.response) {
-          console.log('No Server Response');
-          setError('Looks like there is a problem with our server, please try again later.');
-        } else if (error.response?.status === 400 || error.response?.status === 403) {
-          setError('There seems to be trouble varifying this sighting, please try again later.');
-        } else {
-          setError(
-            'There seems to be trouble varifying this sighting, please try again later.'
-          );
-        }
-      }
+      checkUnauthorizedUser(
+        error,
+        setError,
+        'There seems to be trouble varifying this sighting, please try again later.'
+      );
     } finally {
       setIsVarifying(false);
     }

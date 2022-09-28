@@ -5,6 +5,7 @@ import axios from 'axios';
 import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
 const useUser = (form?: FormInstance) => {
   const [formIsSubmitted, setFormIsSubmitted] = useState<string | null>(null);
@@ -13,6 +14,7 @@ const useUser = (form?: FormInstance) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const { authToken } = useAuthState();
   const navigate = useNavigate();
+  const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
   const submitUpdateForm = async (data: any, id: string) => {
     setIsSubmitting(true);
@@ -26,8 +28,11 @@ const useUser = (form?: FormInstance) => {
       }
       form && form.resetFields();
     } catch (error: unknown) {
-      setFormError('We seem to be having trouble saving the changes, please try again later');
-      console.log(error);
+      checkUnauthorizedUser(
+        error,
+        setFormError,
+        'We seem to be having trouble saving the changes, please try again later'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -45,8 +50,11 @@ const useUser = (form?: FormInstance) => {
       }
       form && form.resetFields();
     } catch (error: unknown) {
-      setFormError('We seem to be having trouble deleting this event, please try again later');
-      console.log(error);
+      checkUnauthorizedUser(
+        error,
+        setFormError,
+        'We seem to be having trouble deleting this event, please try again later'
+      );
     } finally {
       setIsDeleting(false);
       navigate('/');

@@ -3,13 +3,15 @@ import axios from 'axios';
 import API, { sightingsEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
 import useUploadImage from './useUploadImage';
+import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
 const useDeleteSighting = () => {
   const [error, setError] = useState<string | null>('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false)
+  const [isDeleted, setIsDeleted] = useState(false);
   const { authToken } = useAuthState();
   const { deleteImage } = useUploadImage();
+  const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
   const deleteSighting = async (id: number, imageId?: number) => {
     setIsDeleting(true);
     setError(null);
@@ -25,22 +27,14 @@ const useDeleteSighting = () => {
         deleteImage(imageId);
       }
     } catch (error: unknown) {
-      console.log('error', error);
-      if (axios.isAxiosError(error)) {
-        if (!error?.response) {
-          console.log('No Server Response');
-          setError('Looks like there is a problem with our server, please try again later.');
-        } else if (error.response?.status === 400 || error.response?.status === 403) {
-          setError('Sorry we seem to be have trouble deleting that sighting at the moment, please try again later.');
-        } else {
-          setError(
-            'Sorry we seem to be have trouble deleting that sighting at the moment, please try again later.'
-          );
-        }
-      }
+      checkUnauthorizedUser(
+        error,
+        setError,
+        'Sorry we seem to be have trouble deleting that sighting at the moment, please try again later.'
+      );
     } finally {
       setIsDeleting(false);
-      setIsDeleted(true)
+      setIsDeleted(true);
     }
   };
 

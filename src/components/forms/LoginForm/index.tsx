@@ -73,7 +73,7 @@ const LoginForm = () => {
       {loginError && <FormMessage error={true}>{loginError}</FormMessage>}
       <Form.Item>
         <Button type="primary" htmlType="submit" size="large">
-          {isSubmitting ? 'Logging in...' : 'Login'}
+          {isSubmitting ? 'Logging in...' : 'Log in'}
         </Button>
         <span>or</span>
         <Button onClick={() => navigate('/register')} type="ghost" size="large">
