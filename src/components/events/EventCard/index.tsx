@@ -3,6 +3,20 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { EventInterface } from '../../../hooks/useEvents';
 import { DateContainer, EventCardWrapper } from './index.styled';
 
+/**
+ * The events card displays a signle event showing the user the date of the
+ * event plus the details. When clicked on an admin user will be shown the edit event
+ * modal
+ *
+ *
+ * @param {Object} props
+ * @param {EventInterface} props.event the event that will be displayed
+ * @param {Dispatch<SetStateAction<boolean>>} props.setIsOpen true or false to display the editing modal
+ * @param {Dispatch<SetStateAction<EventInterface | null | undefined>>} props.setCurrentEvent sets the event that will be displayed in the modal
+ * @example <EventCard event={event} setIsOpen={setIsOpen} setCurrentEvent={setCurrentEvent} />
+ * @returns {React.ReactElement}
+ */
+
 const EventCard = ({
   event,
   setIsOpen,
@@ -11,7 +25,7 @@ const EventCard = ({
   event: EventInterface;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   setCurrentEvent: Dispatch<SetStateAction<EventInterface | null | undefined>>;
-}) => {
+}): React.ReactElement => {
   return (
     <EventCardWrapper
       onClick={() => {

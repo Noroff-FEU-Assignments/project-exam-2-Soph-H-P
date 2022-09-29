@@ -6,15 +6,25 @@ import useEvents from '../../../hooks/useEvents';
 import API, { eventsEndpoint } from '../../../constants/api';
 import moment from 'moment';
 import { EventInterface } from '../../../hooks/useEvents';
-import datesAreSame from '../../../utils/datesAreSame';
 import EventModal from '../../modals/EventModal';
 import { CalendarContainer } from './index.styled';
 import { useUserState } from '../../../context/UserContext';
 import EditEventModal from '../../modals/EditEventModal';
 import PageTitle from '../../typography/PageTitle';
 import EventCard from '../EventCard';
+import getListData from '../../../utils/createEventListData';
 
-const EventsCalendar = () => {
+/**
+ * The events calender listens for the page width and at desktop size will render
+ * a full calendar. For mobile size devices a simple list of events is created
+ * There is also a modal that when opened displays the event to a general user 
+ * and to the admin displays the edit event form
+ *
+ * @example <EventsCalendar />
+ * @returns {React.ReactElement}
+ */
+
+const EventsCalendar = (): React.ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentEvent, setCurrentEvent] = useState<EventInterface | null>();
   const url = `${API}${eventsEndpoint}`;
@@ -33,28 +43,9 @@ const EventsCalendar = () => {
     return () => window.removeEventListener('resize', handleResizeWindow);
   }, []);
 
-  const getListData = (value: Moment) => {
-    const listData: { type: string; content: string; event: EventInterface }[] = [];
-    if (events) {
-      events.forEach((event) => {
-        const date = new Date(event.attributes.date);
-        const momentDate = moment(date);
-        const eventTime = moment(momentDate).format('hh:mm');
-        if (datesAreSame(value, momentDate)) {
-          const thing = {
-            type: 'success',
-            content: `${event.attributes.eventTitle} at ${eventTime}`,
-            event: event,
-          };
-          listData.push(thing);
-        }
-      });
-    }
-    return listData;
-  };
 
   const dateCellRender = (value: Moment) => {
-    const listData = getListData(value);
+    const listData = getListData(value, events);
     return (
       <ul className="events">
         {listData &&
