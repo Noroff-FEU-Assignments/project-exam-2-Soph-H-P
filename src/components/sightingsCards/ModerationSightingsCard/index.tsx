@@ -16,13 +16,24 @@ import { Dispatch, SetStateAction } from 'react';
 import MembersOnly from '../MembersOnly';
 import ImageWithWrapper from '../../common/ImageWithWrapper';
 
+/**
+ * Creates a card that shows a sighting with moderation options for the admin user
+ * including edit, delete and varify
+ *
+ * @param {Object} props
+ * @param {boolean} props.sighting the sighting that should be on the card
+ * @param {boolean} props.setVisibleSightings allows the sighting to be removed
+ * @example <ModerationSightingsCard sighting={sighting} setVisibleSightings={setVisibleSightings} />
+ * @returns {React.ReactElement}
+ */
+
 const ModerationSightingsCard = ({
   sighting,
   setVisibleSightings,
 }: {
   sighting: SightingInterface;
   setVisibleSightings: Dispatch<SetStateAction<SightingInterface[] | null>>;
-}) => {
+}): React.ReactElement => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.formats.small.url;
   const imageId = noImage ? undefined : sighting.attributes.photos.data[0].id;
@@ -64,7 +75,13 @@ const ModerationSightingsCard = ({
 
   return (
     <StyledCardContainer>
-      <ImageWithWrapper height="160px" width="100%" noImage={noImage} src={imageSrc} alt={species}/>
+      <ImageWithWrapper
+        height="160px"
+        width="100%"
+        noImage={noImage}
+        src={imageSrc}
+        alt={species}
+      />
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <h2>{species}</h2>
         <RoundButton

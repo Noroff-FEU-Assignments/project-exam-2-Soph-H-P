@@ -11,7 +11,18 @@ import { useEffect } from 'react';
 import MembersOnly from '../MembersOnly';
 import ImageWithWrapper from '../../common/ImageWithWrapper';
 
-const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
+/**
+ * Creates a card that shows a sighting in more details
+ * only allows unvarified sightings to be seen by admins or those that created
+ * the sighting
+ *
+ * @param {Object} props
+ * @param {boolean} props.sighting the sighting that should be on the card
+ * @example <SingleSightingCard sighting={sighting} />
+ * @returns {React.ReactElement}
+ */
+
+const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }): React.ReactElement => {
   const { userInfo } = useUserState();
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;

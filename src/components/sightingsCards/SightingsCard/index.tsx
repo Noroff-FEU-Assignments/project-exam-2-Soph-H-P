@@ -6,7 +6,17 @@ import { useNavigate } from 'react-router-dom';
 import MembersOnly from '../MembersOnly';
 import ImageWithWrapper from '../../common/ImageWithWrapper';
 
-const SightingsCard = ({ sighting }: { sighting: SightingInterface }) => {
+
+/**
+ * Creates a card that shows a sighting 
+ *
+ * @param {Object} props
+ * @param {boolean} props.sighting the sighting that should be on the card
+ * @example <SightingsCard sighting={sighting} />
+ * @returns {React.ReactElement}
+ */
+
+const SightingsCard = ({ sighting }: { sighting: SightingInterface }): React.ReactElement => {
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.formats.small.url;
   const {
