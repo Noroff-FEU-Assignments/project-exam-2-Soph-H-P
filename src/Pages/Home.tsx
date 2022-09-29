@@ -11,7 +11,7 @@ const Home = () => {
         description="Take a look here to see what bird species have been seen most recently and where. This may just help you to spot that elusive species you have been looking for."
       />
       <SightingsGrid title={'Recent Sightings'} />
-      {/* <StickySightingsMapContainer /> */}
+      <StickySightingsMapContainer />
     </PageContainer>
   );
 };
