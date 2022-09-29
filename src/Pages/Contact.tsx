@@ -2,7 +2,13 @@ import MetaData from '../components/common/MetaData';
 import ContactForm from '../components/forms/ContactForm';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 
-const Contact = () => {
+/**
+ * Main page component for the Contact page
+ * @example <Contact />
+ * @returns {React.ReactElement}
+ */
+
+const Contact = (): React.ReactElement => {
   return (
     <PageContainer $containsForm={true} $hasBird={true}>
       <MetaData

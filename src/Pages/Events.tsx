@@ -4,6 +4,15 @@ import EventsForm from '../components/forms/EventsForm';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import { useUserState } from '../context/UserContext';
 
+/**
+ * Main page component for the Events page, this page renders
+ * an events calender compoenent and the events form
+ * if the user is an admin user
+ *
+ * @example <EditUsers />
+ * @returns {React.ReactElement}
+ */
+
 const Events = () => {
   const { userInfo } = useUserState();
 

@@ -4,7 +4,15 @@ import PageTitle from '../components/typography/PageTitle';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import owl from '../imgs/owl.jpg';
 
-const NotFound = () => {
+/**
+ * Main page component for if a page is not found, this displays
+ * a message and funny image to the user to show that the page
+ * does not exist
+ * @example <NotFound />
+ * @returns {React.ReactElement}
+ */
+
+const NotFound = (): React.ReactElement => {
   return (
     <PageContainer $hasBird={true} $notFullHeight={true}>
       <MetaData

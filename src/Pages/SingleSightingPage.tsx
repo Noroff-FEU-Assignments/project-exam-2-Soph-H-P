@@ -9,7 +9,19 @@ import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import API, { includingImagesQuery, sightingsEndpoint } from '../constants/api';
 import useSingleSighting from '../hooks/useSingleSighting';
 
-const SingleSightingPage = () => {
+/**
+ * Main page component for displaying singular bird sightings, 
+ * it collects the id perameter from the url and makes a request to 
+ * get that specific sighting using the useSingleSighting hook.
+ * if there is no id then the user is rerouted to the home page. 
+ * if there is an error an error message is rendered
+ * there is a loading state displaying a loader
+ * when the sighting has been retrieved a SightingsCard is rendered
+ * @example <SingleSightingsPage />
+ * @returns {React.ReactElement}
+ */
+
+const SingleSightingPage = (): React.ReactElement => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -56,7 +68,13 @@ const SingleSightingPage = () => {
       </PageContainer>
     );
   }
-  return null;
+  return (
+    <PageContainer $notFullHeight={true} style={{ maxWidth: '100%', width: 700 }}>
+      <MetaData title={`Error | Birds of Østfold`} description={error} />
+      <ApiErrorMessage message={'Oops something seems to have gone wrong.'} hasGif={true} />
+      <Cta toHome={true} />
+    </PageContainer>
+  );
 };
 
 export default SingleSightingPage;

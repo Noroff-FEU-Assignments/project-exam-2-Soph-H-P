@@ -5,7 +5,15 @@ import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import SightingsGrid from '../components/layout/SightingsGrid';
 import { useUserState } from '../context/UserContext';
 
-const ModerateSightings = () => {
+/**
+ * Main page component for the Moderating sightings, this page should
+ * only be accessed by admin users and with therefore reroute all non-
+ * admin users to the home page
+ * @example <ModerateSightings />
+ * @returns {React.ReactElement}
+ */
+
+const ModerateSightings = (): React.ReactElement => {
   const { userInfo } = useUserState();
   const navigate = useNavigate();
 

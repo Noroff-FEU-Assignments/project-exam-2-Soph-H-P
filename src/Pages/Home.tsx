@@ -3,7 +3,15 @@ import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import SightingsGrid from '../components/layout/SightingsGrid';
 import StickySightingsMapContainer from '../components/layout/StickySightingsMapContainer';
 
-const Home = () => {
+/**
+ * Main page component for the Home page, this is a 
+ * page renders a component of recent sighitngs and also 
+ * a component with cta and a map of recent sightings
+ * @example <Home />
+ * @returns {React.ReactElement}
+ */
+
+const Home = (): React.ReactElement => {
   return (
     <PageContainer $isSplit={true} style={{ width: '100%' }}>
       <MetaData

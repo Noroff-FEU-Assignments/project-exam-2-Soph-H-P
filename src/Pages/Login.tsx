@@ -2,7 +2,16 @@ import MetaData from '../components/common/MetaData';
 import LoginForm from '../components/forms/LoginForm';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 
-const Login = () => {
+/**
+ * Main page component for the Login page, renders 
+ * a login form component
+ * 
+ * @example <Login />
+ * @returns {React.ReactElement}
+ */
+
+
+const Login = (): React.ReactElement => {
   return (
     <PageContainer $containsForm={true} $hasBird={true}>
       <MetaData

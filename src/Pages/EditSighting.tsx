@@ -5,7 +5,16 @@ import { useUserState } from '../context/UserContext';
 import EditSightingsForm from '../components/forms/EditSightingsForm';
 import MetaData from '../components/common/MetaData';
 
-const EditSighting = () => {
+/**
+ * Main page component for the Edit sightings page, this is a 
+ * page that should only be accessed by admin users and therefore 
+ * will reroute a non admin user back to the homepage.
+ * @example <EditSighting />
+ * @returns {React.ReactElement}
+ */
+
+
+const EditSighting = (): React.ReactElement => {
   const { id } = useParams();
   const { userInfo } = useUserState();
   const navigate = useNavigate();

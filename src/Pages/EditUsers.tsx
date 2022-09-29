@@ -5,7 +5,16 @@ import { useUserState } from '../context/UserContext';
 import EditUserForm from '../components/forms/EditUserForm';
 import MetaData from '../components/common/MetaData';
 
-const EditUsers = () => {
+/**
+ * Main page component for the Edit users page, this is a 
+ * page that should only be accessed by admin users and therefore 
+ * will reroute a non admin user back to the homepage.
+ * @example <EditUsers />
+ * @returns {React.ReactElement}
+ */
+
+
+const EditUsers = (): React.ReactElement => {
   const { id } = useParams();
   const { userInfo } = useUserState();
   const navigate = useNavigate();

@@ -6,7 +6,15 @@ import SightingsGrid from '../components/layout/SightingsGrid';
 import StickySightingsMapContainer from '../components/layout/StickySightingsMapContainer';
 import { useAuthState } from '../context/AuthContext';
 
-const MySightings = () => {
+/**
+ * Main page component for the users personal sightings, this page should
+ * only be accessed by registered users and will therefore reroute 
+ * any users that are not logged in.
+ * @example <MySightings />
+ * @returns {React.ReactElement}
+ */
+
+const MySightings = (): React.ReactElement => {
   const navigate = useNavigate();
   const { authToken } = useAuthState();
 

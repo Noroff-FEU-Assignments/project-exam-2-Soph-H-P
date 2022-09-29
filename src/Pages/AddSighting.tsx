@@ -2,7 +2,13 @@ import MetaData from '../components/common/MetaData';
 import SightingsForm from '../components/forms/SightingsForm';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 
-const AddSighting = () => {
+/**
+ * Add sighting component creates add sighting page
+ * @example <AddSighting />
+ * @returns {React.ReactElement}
+ */
+
+const AddSighting = (): React.ReactElement => {
   return (
     <PageContainer $containsForm={true} $hasBird={1300}>
       <MetaData
