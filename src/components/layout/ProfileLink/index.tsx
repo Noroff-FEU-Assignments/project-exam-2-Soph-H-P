@@ -3,7 +3,7 @@ import ProfileSvg from '../../../svgs/ProfileSvg';
 import { ProfileContainer } from './index.styled';
 import { UserInterface } from '../../../context/UserContext';
 
-const ProfileLink = ({ userInfo }: { userInfo: Partial<UserInterface | null> }) => {
+const ProfileLink = ({ userInfo }: { userInfo: UserInterface | null }) => {
   return (
     <ProfileContainer>
       <ProfileSvg />

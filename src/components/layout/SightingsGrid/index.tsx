@@ -1,13 +1,8 @@
+import { Button } from 'antd';
 import { useEffect, useState } from 'react';
-import API, {
-  andFilterUnvarified,
-  andSortByDate,
-  includingImagesQuery,
-  sightingsEndpoint,
-} from '../../../constants/api';
 import { useUserState } from '../../../context/UserContext';
 import useSightings, { SightingInterface } from '../../../hooks/useSightings';
-import findMySightingsUrl, { findSightingsUrl } from '../../../utils/findMySightingsUrl';
+import createPaginationSightingUrl from '../../../utils/createPaginationSightingsUrl';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Loader from '../../common/Loader';
 import ModerationSightingsCard from '../../sightingsCards/ModerationSightingsCard';
@@ -26,15 +21,36 @@ const SightingsGrid = ({
 }) => {
   const { userInfo } = useUserState();
 
-  const foundUrl = findSightingsUrl(userInfo);
-  const moderationUrl = `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterUnvarified}`;
-  const { sightings, error, isLoading } = useSightings(
-    moderation ? moderationUrl : mySightings ? findMySightingsUrl(userInfo) : foundUrl
-  );
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [url, setUrl] = useState<string>('');
   const [visibleSightings, setVisibleSightings] = useState<SightingInterface[] | null>(null);
+  const { sightings, error, isLoading, paginationData } = useSightings(url);
+
+  const handleViewMore = () => {
+    if (paginationData) {
+      if (paginationData.page + 1 <= paginationData.pageCount)
+        setCurrentPage(paginationData.page + 1);
+    }
+  };
 
   useEffect(() => {
-    setVisibleSightings(sightings);
+    setUrl(createPaginationSightingUrl(currentPage, 12, userInfo, moderation, mySightings));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (visibleSightings === null) {
+      setVisibleSightings(sightings);
+    }
+    if (sightings && visibleSightings) {
+      //Prevents sightings being added multiple times
+      if (
+        !visibleSightings.some((sighting: SightingInterface) => sighting.id === sightings[0].id)
+      ) {
+        setVisibleSightings([...visibleSightings, ...sightings]);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sightings]);
 
   if (error) {
@@ -46,7 +62,7 @@ const SightingsGrid = ({
     );
   }
 
-  if (isLoading) {
+  if (isLoading && !visibleSightings) {
     return (
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
@@ -55,7 +71,7 @@ const SightingsGrid = ({
     );
   }
 
-  if ((sightings && sightings.length <= 0) || (visibleSightings && visibleSightings.length <= 0)) {
+  if ((!isLoading && !visibleSightings) || (visibleSightings && visibleSightings.length <= 0)) {
     return (
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
@@ -66,7 +82,7 @@ const SightingsGrid = ({
     );
   }
 
-  if (sightings && sightings.length >= 1) {
+  if (paginationData && visibleSightings && visibleSightings.length >= 1) {
     return (
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
@@ -81,11 +97,17 @@ const SightingsGrid = ({
                   setVisibleSightings={setVisibleSightings}
                 />
               ))}
-            {sightings &&
+            {visibleSightings &&
               !moderation &&
-              sightings.map((sighting, index) => <SightingsCard key={index} sighting={sighting} />)}
+              visibleSightings.map((sighting, index) => (
+                <SightingsCard key={index} sighting={sighting} />
+              ))}
           </StyledGridContainer>
         </div>
+        {isLoading && <Loader size={100} light={false} />}
+        {paginationData.page < paginationData.pageCount && (
+          <Button onClick={handleViewMore}>View More</Button>
+        )}
       </SightingsContainer>
     );
   }

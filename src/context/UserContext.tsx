@@ -15,8 +15,8 @@ export interface UserInterface {
 }
 
 const UserContext = createContext({
-  userInfo: {} as Partial<UserInterface | null>,
-  setUserInfo: {} as Dispatch<SetStateAction<Partial<UserInterface | null>>>,
+  userInfo: {} as UserInterface | null,
+  setUserInfo: {} as Dispatch<SetStateAction<UserInterface | null>>,
 });
 
 const UserStateProvider = ({ children }: { children: React.ReactNode }) => {
