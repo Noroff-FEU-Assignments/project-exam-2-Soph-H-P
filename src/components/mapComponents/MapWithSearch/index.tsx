@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import API, {
-  andFilterVarified,
-  sightingsEndpoint,
-} from '../../../constants/api';
+import API, { andFilterVarified, sightingsEndpoint } from '../../../constants/api';
 import createSearchQuery from '../../../utils/createSearchQuery';
 import SearchForm from '../../forms/SearchForm';
 import MapWithLocationPoints from '../MapWithLocationPoints';
+
+/**
+ * Renders a map with a search input to filter the bird species shown on the map
+ * @example <MapWithSearch />
+ * @returns {React.ReactElement}
+ */
 
 const MapWithSearch = () => {
   const url = `${API}${sightingsEndpoint}?${andFilterVarified}`;
@@ -14,7 +17,7 @@ const MapWithSearch = () => {
 
   useEffect(() => {
     const newSearchQuery = createSearchQuery(searchValue);
-    setSearchUrl(`${url}${newSearchQuery}`)
+    setSearchUrl(`${url}${newSearchQuery}`);
   }, [searchValue, url]);
 
   return (

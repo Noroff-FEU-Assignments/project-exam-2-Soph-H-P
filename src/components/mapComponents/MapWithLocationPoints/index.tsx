@@ -56,6 +56,17 @@ const LocationMarker = ({
   );
 };
 
+/**
+ * Creates a map element with location points mapped
+ * if the url is supplied then the sightings locations are collected from there
+ * otherwise the single data are supplied and a single point os plotted on the map
+ *
+ * @param {Object} props
+ * @example <MapWithLocationPoints height={250} url={url}/>
+ * returns a map 250px in height with sightings mapped from the given url
+ * @returns {React.ReactElement}
+ */
+
 const MapWithLocationPoints = ({
   height,
   url,
@@ -74,7 +85,7 @@ const MapWithLocationPoints = ({
   singleSpecies?: string;
   singleDate?: string;
   sightingId?: number;
-}) => {
+}): React.ReactElement => {
   const { sightings, error, isLoading } = useSightings(url);
   const mapRef = useRef<L.Map | null>(null);
 

@@ -6,13 +6,27 @@ import { Button } from 'antd';
 import { StyledMapContainer, StyledMarker } from './index.styled';
 import mapPin from '../../../svgs/mapPin.svg';
 
+/**
+ * The Location Marker takes a postion from the map and adds the latitude and longitude values
+ *
+ * the set state allows the position to be updated
+ *
+ *@param {Object} props
+ *@param { LatLngLiteral | null} props.position the value to be initially set
+ *@param {Dispatch<SetStateAction<LatLngLiteral | null>>} props.setPosition to set the state of the position if supplied
+ *
+ * @example <LocationMarker position={position} />
+ * returns a map pin in the right position
+ * @returns {React.ReactElement | null}
+ */
+
 const LocationMarker = ({
   position,
   setPosition,
 }: {
   position: LatLngExpression | null;
   setPosition?: Dispatch<SetStateAction<LatLngLiteral | null>>;
-}) => {
+}): React.ReactElement | null => {
   const map = useMapEvents({
     dblclick() {
       map.on('dblclick', (e) => {
@@ -39,13 +53,28 @@ const LocationMarker = ({
   );
 };
 
+/**
+ * The Location Input takes a point from the map and adds the latitude and longitude values
+ * to inputs that are then added to the form
+ *
+ * the set state allows the form value to be updated
+ *
+ *@param {Object} props
+ *@param { LatLngLiteral | null} props.position the value to be initially set
+ *@param {Dispatch<SetStateAction<LatLngLiteral | null>>} props.setPosition to set the state of the position if supplied
+ *
+ * @example <LocationInput position={position} />
+ * returns a map element with the position marked on the map
+ * @returns {React.ReactElement}
+ */
+
 const LocationInput = ({
   position,
   setPosition,
 }: {
   position: LatLngLiteral | null;
   setPosition?: Dispatch<SetStateAction<LatLngLiteral | null>>;
-}) => {
+}): React.ReactElement | null => {
   const mapRef = useRef<L.Map | null>(null);
 
   if (setPosition) {
