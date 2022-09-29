@@ -12,7 +12,15 @@ import ModerateSvg from '../../../svgs/ModerateSvg';
 import { Dispatch, SetStateAction } from 'react';
 import RecentSvg from '../../../svgs/RecentSvg';
 
-export const DesktopNavigationLinks = () => {
+/**
+ * Creates an nav element for desktop displaying the correct links depending on user status
+ *
+ *
+ * @example <DesktopNavigationLinks />
+ * @returns {React.ReactElement}
+ */
+
+export const DesktopNavigationLinks = (): React.ReactElement => {
   const { authToken } = useAuthState();
   const { userInfo } = useUserState();
 
@@ -43,11 +51,20 @@ export const DesktopNavigationLinks = () => {
   );
 };
 
+/**
+ * Creates an nav element for mobile displaying the correct links depending on user status
+ * the setIsOpen state setter allows the menu to be opened and closed from the menu button
+ *
+ * @param { Dispatch<SetStateAction<boolean>>} setIsOpen
+ * @example <MobileNavigationLinks isOpen={isOpen} />
+ * @returns {React.ReactElement}
+ */
+
 export const MobileNavigationLinks = ({
   setIsOpen,
 }: {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
+}): React.ReactElement => {
   const { authToken } = useAuthState();
   const { userInfo } = useUserState();
 

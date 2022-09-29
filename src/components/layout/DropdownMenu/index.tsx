@@ -59,9 +59,17 @@ const menuItems = [
   },
 ];
 
-export const DropdownMenuItems = (userRole: string) => {
+/**
+ * Creates an antd menu item for the dropdown menu on desktop adjusts which links are available
+ * depending on user status
+ *
+ * @param {string} userRole
+ * @example DropdownMenuItems('public')
+ * @returns {React.ReactElement}
+ */
+
+export const DropdownMenuItems = (userRole: string): React.ReactElement => {
   const itemsArray = menuItems.filter((item) => item.visibility.includes(userRole));
 
   return <Menu items={itemsArray} />;
 };
-

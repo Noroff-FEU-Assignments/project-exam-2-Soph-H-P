@@ -10,6 +10,26 @@ import SightingsCard from '../../sightingsCards/SightingsCard';
 import PageTitle from '../../typography/PageTitle';
 import { SightingsContainer, StyledGridContainer } from './index.styled';
 
+/**
+ * Sightings grid sets visible sightings state based on the sightings fetched from the api
+ * the url is decided depending on whether moderation or my sightings is passed.
+ * This sightings state allows more sightings to be fetched from the api.
+ * It also allows the sightings to be removed from sight when they are either accepted
+ * or rejected by an admin
+ *
+ * @param {Object} props
+ * @param {string} props.title
+ * @param {boolean | undefined} props.moderation
+ * @param {boolean | undefined} props.mySightings
+ * @example
+ * <SightingsGrid title={title} moderation={true}/>
+ * returns sightings grid with a title and displays sightings for moderation
+ * @example
+ * <SightingsGrid title={title} mySightings={true}/>
+ * returns sightings grid with a title and displays sightings for a particular users
+ * @returns {React.ReactElement}
+ */
+
 const SightingsGrid = ({
   title,
   moderation,
@@ -18,7 +38,7 @@ const SightingsGrid = ({
   title: string;
   moderation?: boolean;
   mySightings?: boolean;
-}) => {
+}): React.ReactElement => {
   const { userInfo } = useUserState();
 
   const [currentPage, setCurrentPage] = useState<number>(1);

@@ -6,10 +6,20 @@ import Cta from '../../common/Cta';
 import MapWithLocationPoints from '../../mapComponents/MapWithLocationPoints';
 import { StickyContainer } from './index.sightings';
 
-const StickySightingsMapContainer = ({ isMySightings }: { isMySightings?: boolean }) => {
+/**
+ * Creates an element that sticks to the top as the uer scrolls
+ * This contains a map with points of recent sightings
+ * if isMySightings then the points on the map will only display those
+ * that belong to that user
+ *
+ * @param { boolean | undefined} isMySightings
+ * @example <StickySightingsMapContainer isMySightings={isMySightings} />
+ * @returns {React.ReactElement}
+ */
+
+const StickySightingsMapContainer = ({ isMySightings }: { isMySightings?: boolean }): React.ReactElement => {
   const { userInfo } = useUserState();
   const url = `${API}${sightingsEndpoint}?${andSortByDate}&${andFilterVarified}&${createPastDayQuery()}`;
-
 
   const findMySightingsUrl = () => {
     if (userInfo?.id) {
@@ -18,7 +28,6 @@ const StickySightingsMapContainer = ({ isMySightings }: { isMySightings?: boolea
       )}`;
     }
   };
-
 
   return (
     <StickyContainer>

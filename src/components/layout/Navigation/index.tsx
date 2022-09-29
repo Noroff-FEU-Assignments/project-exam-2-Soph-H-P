@@ -6,10 +6,17 @@ import MenuSvg from '../../../svgs/MenuSvg';
 import RoundButton from '../../common/buttons/RoundButton';
 import Logo from '../Logo';
 import { DesktopNavigationLinks, MobileNavigationLinks } from '../NavigationLinks';
-
 import { StyledLogo, NavContainer, MobileNav, DesktopNav } from './index.styled';
 
-const Navagation = () => {
+/**
+ * Creates an navigation for mobile and desktop displaying the correct type after listening
+ * to the window width.
+ * isOpen state either displays or hides the mobile menu on click
+ * @example <Navagation />
+ * @returns {React.ReactElement}
+ */
+
+const Navagation = (): React.ReactElement => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isOpen, setIsOpen] = useState(false);
 
