@@ -6,7 +6,23 @@ import RecentIcon from '../../../svgs/RecentIcon';
 
 import { CtaContainer } from './index.styled';
 
-const Cta = ({ toHome }: { toHome?: boolean }) => {
+/**
+ * This is a cta component that displays a message and a button
+ * the default reroutes the user to the add sightings page
+ * using the toHome prop the user will be rerouted home
+ *
+ * @param {Object} props
+ * @param {boolean | undefined} props.toHome if true takes the user home
+ * @example
+ *  returns cta to send the user to the homepage
+ *  <Cta toHome={true}/>
+ * @example 
+ * returns cta that sends the user to the add sightings page
+ * <Cta />
+ * @returns {React.ReactElement}
+ */
+
+const Cta = ({ toHome }: { toHome?: boolean }): React.ReactElement => {
   if (toHome) {
     return (
       <CtaContainer>
