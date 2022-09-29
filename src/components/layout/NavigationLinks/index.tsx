@@ -10,14 +10,9 @@ import AddSvg from '../../../svgs/AddSvg';
 import BinocularsSvg from '../../../svgs/BinocularsSvg';
 import ModerateSvg from '../../../svgs/ModerateSvg';
 import { Dispatch, SetStateAction } from 'react';
-import NotificationsIcon from '../../../svgs/NotificationsIcon';
 import RecentSvg from '../../../svgs/RecentSvg';
 
-export const DesktopNavigationLinks = ({
-  setIsOpen,
-}: {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
+export const DesktopNavigationLinks = () => {
   const { authToken } = useAuthState();
   const { userInfo } = useUserState();
 
@@ -41,11 +36,6 @@ export const DesktopNavigationLinks = ({
       </Dropdown>
       <StyledNavLink to="/events">Events</StyledNavLink>
       <StyledNavLink to="/contact">Contact</StyledNavLink>
-      {/* {userInfo?.userRole === 'admin' && (
-        <StyledNavLink to="/admin/moderate-sightings">
-          <NotificationsIcon />
-        </StyledNavLink>
-      )} */}
       <StyledNavLink to="/login">
         {authToken ? <ProfileLink userInfo={userInfo} /> : 'Login'}
       </StyledNavLink>

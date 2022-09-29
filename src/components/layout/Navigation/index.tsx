@@ -49,7 +49,7 @@ const Navagation = () => {
       )}
       {windowWidth >= 701 && (
         <DesktopNav>
-          <DesktopNavigationLinks setIsOpen={setIsOpen} />
+          <DesktopNavigationLinks />
         </DesktopNav>
       )}
     </NavContainer>

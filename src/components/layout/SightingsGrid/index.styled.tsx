@@ -10,14 +10,6 @@ export const StyledGridContainer = styled.div<{ $moderation?: boolean }>`
   h1 {
     width: 100%;
   }
-
-  ${({ $moderation }) =>
-    $moderation &&
-    css`
-      @media (min-width: 1000px) {
-        grid-template-columns: repeat(auto-fit, minmax(max(260px, 200px), 300px));
-      }
-    `}
 `;
 
 export const SightingsContainer = styled.div<{ $moderation?: boolean }>`
@@ -32,4 +24,9 @@ export const SightingsContainer = styled.div<{ $moderation?: boolean }>`
       max-width: 1200px;
       margin: 0 auto;
     `}
+
+  & > button {
+    width: max-content;
+    margin: 40px auto;
+  }
 `;

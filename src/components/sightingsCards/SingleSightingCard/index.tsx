@@ -31,14 +31,13 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userInfo) {
-      if (userInfo.userRole === 'admin' || parseInt(userId) === userInfo.id) {
+    if ((!varified && userInfo) || (!varified && !userInfo)) {
+      if (userInfo?.userRole === 'admin' || parseInt(userId) === userInfo?.id) {
         return;
       } else {
         navigate('/');
       }
     }
-    navigate('/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, userInfo]);
 

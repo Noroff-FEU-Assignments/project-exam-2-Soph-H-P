@@ -106,7 +106,9 @@ const SightingsGrid = ({
         </div>
         {isLoading && <Loader size={100} light={false} />}
         {paginationData.page < paginationData.pageCount && (
-          <Button onClick={handleViewMore}>View More</Button>
+          <Button size="large" onClick={handleViewMore}>
+            View More
+          </Button>
         )}
       </SightingsContainer>
     );

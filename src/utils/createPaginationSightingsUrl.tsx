@@ -16,7 +16,7 @@ const createPaginationSightingUrl = (
   mySightings?: boolean
 ): string => {
   if (moderation) {
-    return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterUnvarified}pagination[page]=${pageNumber}&pagination[pageSize]=${numberToShow}`;
+    return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${andFilterUnvarified}&pagination[page]=${pageNumber}&pagination[pageSize]=${numberToShow}`;
   }
 
   if (mySightings && userInfo) {

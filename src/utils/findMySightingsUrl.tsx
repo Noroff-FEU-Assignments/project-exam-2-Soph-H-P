@@ -1,5 +1,4 @@
 import API, { andSortByDate, includingImagesQuery, sightingsEndpoint } from '../constants/api';
-import { UserInterface } from '../context/UserContext';
 import createMySightingsEndpoint from './createMySightingsEndpoint';
 
 const findMySightingsUrl = (
