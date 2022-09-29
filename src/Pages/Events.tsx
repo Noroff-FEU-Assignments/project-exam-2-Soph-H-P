@@ -20,7 +20,7 @@ const Events = () => {
     <PageContainer $isReversed={true} $isSplit={userInfo?.userRole === 'admin' ? true : false}>
       <MetaData
         title="Events | Birds of Østfold"
-        description="Take a look at what is going on for bird spotters in your local area."
+        metaDescription="Take a look at what is going on for bird spotters in your local area."
       />
       <EventsCalendar />
       {userInfo?.userRole === 'admin' && <EventsForm />}

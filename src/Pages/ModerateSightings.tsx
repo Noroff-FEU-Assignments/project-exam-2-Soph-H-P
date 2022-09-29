@@ -28,7 +28,7 @@ const ModerateSightings = (): React.ReactElement => {
     <PageContainer style={{ width: '100%' }}>
       <MetaData
         title="Moderate sightings | Birds of Østfold"
-        description="Here as an admin you are able to accept or reject incoming sightings. This gives you full control"
+        metaDescription="Here as an admin you are able to accept or reject incoming sightings. This gives you full control"
       />
       <SightingsGrid moderation={true} title={'Moderate Sightings'} />
     </PageContainer>

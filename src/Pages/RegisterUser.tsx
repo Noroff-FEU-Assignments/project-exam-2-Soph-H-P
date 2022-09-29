@@ -14,7 +14,7 @@ const RegisterUser = (): React.ReactElement => {
     <PageContainer $containsForm={true} $hasBird={true}>
       <MetaData
         title="Register | Birds of Østfold"
-        description="Register here to keep a track of your sightings and see sightings that are only available for members"
+        metaDescription="Register here to keep a track of your sightings and see sightings that are only available for members"
       />
       <RegisterForm />
     </PageContainer>

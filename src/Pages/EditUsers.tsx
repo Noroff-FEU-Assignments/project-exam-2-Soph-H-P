@@ -6,13 +6,12 @@ import EditUserForm from '../components/forms/EditUserForm';
 import MetaData from '../components/common/MetaData';
 
 /**
- * Main page component for the Edit users page, this is a 
- * page that should only be accessed by admin users and therefore 
+ * Main page component for the Edit users page, this is a
+ * page that should only be accessed by admin users and therefore
  * will reroute a non admin user back to the homepage.
  * @example <EditUsers />
  * @returns {React.ReactElement}
  */
-
 
 const EditUsers = (): React.ReactElement => {
   const { id } = useParams();
@@ -29,7 +28,7 @@ const EditUsers = (): React.ReactElement => {
     <PageContainer $containsForm={true} $hasBird={true}>
       <MetaData
         title="Edit user | Birds of Østfold"
-        description="As admin you can edit users, here you can grant admin access and change usernames."
+        metaDescription="As admin you can edit users, here you can grant admin access and change usernames."
       />
       {id && <EditUserForm userId={id} />}
     </PageContainer>

@@ -12,7 +12,7 @@ import { PageContainer } from '../components/layout/PageContainer/index.styled';
 const SightingsMap = (): React.ReactElement => {
   return (
     <PageContainer $hasBird={false} style={{ padding: 0, margin: 0, position: 'relative' }}>
-      <MetaData title="Sightings map | Birds of Østfold" description="" />
+      <MetaData title="Sightings map | Birds of Østfold" metaDescription="Map pinpointing bird sightings in your local area" />
       <MapWithSearch />
     </PageContainer>
   );

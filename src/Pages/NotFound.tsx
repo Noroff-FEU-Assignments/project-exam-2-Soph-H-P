@@ -17,7 +17,7 @@ const NotFound = (): React.ReactElement => {
     <PageContainer $hasBird={true} $notFullHeight={true}>
       <MetaData
         title="Not found | Birds of Østfold"
-        description="Looks like the page you are looking for doesn't exist"
+        metaDescription="Looks like the page you are looking for doesn't exist"
       />
       <PageTitle>Page Not Found</PageTitle>
       <ImageWithWrapper src={owl} alt="hiding owl" width="250px" height="400px" />

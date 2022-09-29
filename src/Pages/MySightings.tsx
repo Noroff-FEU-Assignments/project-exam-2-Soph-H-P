@@ -8,7 +8,7 @@ import { useAuthState } from '../context/AuthContext';
 
 /**
  * Main page component for the users personal sightings, this page should
- * only be accessed by registered users and will therefore reroute 
+ * only be accessed by registered users and will therefore reroute
  * any users that are not logged in.
  * @example <MySightings />
  * @returns {React.ReactElement}
@@ -29,7 +29,7 @@ const MySightings = (): React.ReactElement => {
     <PageContainer $isSplit={true} style={{ width: '100%' }}>
       <MetaData
         title="My sightings | Birds of Østfold"
-        description="Have a look at all the birds you have seen and recorded here"
+        metaDescription="Have a look at all the birds you have seen and recorded here"
       />
       <SightingsGrid mySightings={true} title={'My sightings'} />
       <StickySightingsMapContainer isMySightings={true} />

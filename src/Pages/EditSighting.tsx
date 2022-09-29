@@ -6,13 +6,12 @@ import EditSightingsForm from '../components/forms/EditSightingsForm';
 import MetaData from '../components/common/MetaData';
 
 /**
- * Main page component for the Edit sightings page, this is a 
- * page that should only be accessed by admin users and therefore 
+ * Main page component for the Edit sightings page, this is a
+ * page that should only be accessed by admin users and therefore
  * will reroute a non admin user back to the homepage.
  * @example <EditSighting />
  * @returns {React.ReactElement}
  */
-
 
 const EditSighting = (): React.ReactElement => {
   const { id } = useParams();
@@ -30,7 +29,7 @@ const EditSighting = (): React.ReactElement => {
     <PageContainer $containsForm={true} $hasBird={1300}>
       <MetaData
         title="Edit sighting | Birds of Østfold"
-        description="As admin you can edit user sightnigs, here you can change the species, the image and the description."
+        metaDescription="As admin you can edit user sightnigs, here you can change the species, the image and the description."
       />
       {id && <EditSightingsForm sightingId={id} />}
     </PageContainer>

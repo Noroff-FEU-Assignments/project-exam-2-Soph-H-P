@@ -13,7 +13,7 @@ const AddSighting = (): React.ReactElement => {
     <PageContainer $containsForm={true} $hasBird={1300}>
       <MetaData
         title="Add sighting | Birds of Østfold"
-        description="Add a recent sighting of a bird here this will help others to see what you have been up to, and also perhaps also see this bird."
+        metaDescription="Add a recent sighting of a bird here this will help others to see what you have been up to, and also perhaps also see this bird."
       />
       <SightingsForm />
     </PageContainer>
