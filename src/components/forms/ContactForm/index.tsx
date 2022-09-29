@@ -5,7 +5,15 @@ import TextArea from 'antd/lib/input/TextArea';
 import useSubmitContactForm from '../../../hooks/useSubmitContactForm';
 import PageTitle from '../../typography/PageTitle';
 
-const ContectForm = () => {
+/**
+ * The Contact form uses antd forms to take user information and send it to the admin email
+ * uses useSubmitContactForm to send the s
+ *
+ * @example <ContectForm />
+ * @returns {React.ReactElement}
+ */
+
+const ContectForm = (): React.ReactElement => {
   const [form] = Form.useForm();
 
   const { messageIsSent, formError, isSending, submitForm } = useSubmitContactForm(form);

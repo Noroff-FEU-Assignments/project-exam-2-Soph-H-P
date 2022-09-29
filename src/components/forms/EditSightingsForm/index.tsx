@@ -20,7 +20,19 @@ import useDeleteSighting from '../../../hooks/useDeleteSighting';
 import { Link, useNavigate } from 'react-router-dom';
 import LocationInput from '../../mapComponents/LocationInput';
 
-const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
+/**
+ * The Edit sightings form takes the id of a sighting and uses this to get the
+ * sightings data from the api. This is then used to populate the form which can then
+ * be edited by admin members
+ *
+ *@param {Object} props
+ *@param {string} props.sightingId
+ *
+ * @example <EditSightingsForm sightingsId={id} />
+ * @returns {React.ReactElement}
+ */
+
+const EditSightingsForm = ({ sightingId }: { sightingId: string }): React.ReactElement => {
   const [form] = Form.useForm();
   const [image, setImage] = useState<File | undefined>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -80,7 +92,7 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
       photos,
       public: isPublic,
     } = sighting.attributes;
-    const imageId = (photos.data && photos.data[0].id )|| undefined;
+    const imageId = (photos.data && photos.data[0].id) || undefined;
 
     const when = moment(date);
 
@@ -165,7 +177,7 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }) => {
     );
   }
 
-  return null;
+  return <StyledForm />;
 };
 
 export default EditSightingsForm;

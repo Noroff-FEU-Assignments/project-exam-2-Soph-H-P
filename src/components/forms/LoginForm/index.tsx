@@ -8,7 +8,16 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useLoginUser, { LoginFormInterface } from '../../../hooks/useLoginUser';
 import PageTitle from '../../typography/PageTitle';
 
-const LoginForm = () => {
+/**
+ * Login form component renders a form taking the users email and password
+ * this is then sent for authentication. If the user is already logged in
+ * it displays a message to say they are logged in and the option to log out
+ *
+ * @example <LoginForm />
+ * @returns {React.ReactElement}
+ */
+
+const LoginForm = (): React.ReactElement => {
   const [form] = Form.useForm();
   const { authToken, setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();

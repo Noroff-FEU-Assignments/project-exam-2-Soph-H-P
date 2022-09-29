@@ -5,6 +5,25 @@ import { RcFile } from 'antd/lib/upload';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { StyledFormItem } from './index.styled';
 
+
+/**
+ * The Upload input uses the antd upload component it takes a list of files that is updated
+ * when the user adds an image 
+ * the crop component sets the image ratio currently to 2/3
+ * there is a timeout function for uploading the image to prevent the element constantly 
+ * showing a loading state.
+ *
+ *
+ *@param {Object} props
+ *@param {UploadFile<File>[]} props.fileList
+ *@param {Dispatch<SetStateAction<UploadFile<File>[]>>} props.setFileList
+ *@param {Dispatch<SetStateAction<File | undefined>>} props.setImage
+ *
+ * @example  <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
+ * @returns {React.ReactElement}
+ */
+
+
 const UploadInput = ({
   fileList,
   setFileList,
@@ -13,7 +32,7 @@ const UploadInput = ({
   fileList: UploadFile<File>[];
   setFileList: Dispatch<SetStateAction<UploadFile<File>[]>>;
   setImage: Dispatch<SetStateAction<File | undefined>>;
-}) => {
+}): React.ReactElement => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');

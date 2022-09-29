@@ -4,19 +4,23 @@ import { PlusOutlined } from '@ant-design/icons';
 import useSightings from '../../../hooks/useSightings';
 import { birdsOnlyUrl } from '../../../constants/api';
 import createSingleSpeciesList from '../../../utils/createSingleSpeciesList';
-import { NotFoundContainer, StyledSelect } from './index.styled';
-import LogoImage from '../../../svgs/LogoImage';
+import { StyledSelect } from './index.styled';
+import { SpeciesNotFound } from '../SearchForm';
 
-const SpeciesNotFound = () => {
-  return (
-    <NotFoundContainer>
-      <LogoImage />
-      <p>That species is not in the list yet, please add it below.</p>
-    </NotFoundContainer>
-  );
-};
+/**
+ * The Species Input creates a list of birds from all the current sightings, it
+ * then displayes matching options depending on the users search terms if there is not
+ * a bird that matches the search the user can then add this to the list and select it
+ *
+ *
+ *@param {Object} props
+ *@param {string| undefined} props.initialValue the value to be initially set if supplied
+ *
+ * @example <SpeciesInput initialValue="Magpie" />
+ * @returns {React.ReactElement | null}
+ */
 
-const SpeciesInput = ({ initialValue }: { initialValue?: string }) => {
+const SpeciesInput = ({ initialValue }: { initialValue?: string }): React.ReactElement | null => {
   const [species, setSpecies] = useState('');
   const inputRef = useRef<InputRef>(null);
   const { sightings } = useSightings(birdsOnlyUrl);
@@ -79,7 +83,7 @@ const SpeciesInput = ({ initialValue }: { initialValue?: string }) => {
               (optionB!.children as unknown as string).toLowerCase()
             )
           }
-          notFoundContent={<SpeciesNotFound />}
+          notFoundContent={<SpeciesNotFound add={true} />}
           autoClearSearchValue={false}
           dropdownRender={(menu) => (
             <>

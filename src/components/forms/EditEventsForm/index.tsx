@@ -7,11 +7,22 @@ import theme from '../../../styles/theme';
 import useSubmitEvent from '../../../hooks/useSubmitEvent';
 import { EventInterface } from '../../../hooks/useEvents';
 
-const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }) => {
+/**
+ * The Edit events form takes an event as a prop which is used to populate the form
+ * with the current sighting information which can then be edited and then saved
+ * using the useSubmitEvent hook
+ * 
+ *@param {Object} props
+ *@param {EventInterface} props.currentEvent
+ *
+ * @example <EditEventsForm currentEvent={currentEvent} />
+ * @returns {React.ReactElement}
+ */
+
+const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }): React.ReactElement => {
   const [form] = Form.useForm();
   const { formError, formIsSubmitted, isSubmitting, submitUpdateForm, deleteEvent, isDeleting } =
     useSubmitEvent(form);
-
 
   const disabledDate: RangePickerProps['disabledDate'] = (current) => {
     // Prevents user from selecting a past day
@@ -47,7 +58,7 @@ const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }) => {
         rules={[{ required: true, message: 'Please add the date' }]}
       >
         <DatePicker
-        format={'dddd Do MM YYYY - HH:mm'} 
+          format={'dddd Do MM YYYY - HH:mm'}
           defaultValue={moment(currentEvent.attributes.date)}
           showTime
           disabledDate={disabledDate}
@@ -73,14 +84,16 @@ const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }) => {
       <Button loading={isSubmitting} type="primary" htmlType="submit" size="large">
         {isSubmitting ? 'Saving' : 'Save changes'}
       </Button>
-      <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Delete now" cancelText="Cancel">
-      <Button
-        loading={isDeleting}
-        type="ghost"
-        danger={true}
+      <Popconfirm
+        placement="top"
+        title={text}
+        onConfirm={confirm}
+        okText="Delete now"
+        cancelText="Cancel"
       >
-        {isDeleting ? 'Deleting' : 'Delete'}
-      </Button>
+        <Button loading={isDeleting} type="ghost" danger={true}>
+          {isDeleting ? 'Deleting' : 'Delete'}
+        </Button>
       </Popconfirm>
       {formError && <FormMessage error={true}>{formError}</FormMessage>}
       {formIsSubmitted && <FormMessage>{formIsSubmitted}</FormMessage>}

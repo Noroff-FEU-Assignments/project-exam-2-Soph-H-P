@@ -7,15 +7,32 @@ import { SearchOutlined } from '@ant-design/icons';
 import { NotFoundContainer } from '../SpeciesInput/index.styled';
 import LogoImage from '../../../svgs/LogoImage';
 
+/**
+ * The Search form creates a list of birds from all the current sightings, it
+ * then displayes matching options depending on the users search terms
+ *
+ * there is a state shown when there are no matching options in the list
+ *
+ *@param {Object} props
+ *@param {Dispatch<SetStateAction<string[] | null>>} props.setSearchValue state setter for the search value
+ *
+ * @example <SearchForm setSearchValue={setSearchValue} />
+ * @returns {React.ReactElement}
+ */
+
 interface SearchFormInterface {
   search: string[] | [];
 }
 
-const SpeciesNotFound = () => {
+export const SpeciesNotFound = ({ add }: { add?: boolean }): React.ReactElement => {
   return (
     <NotFoundContainer>
       <LogoImage />
-      <p>That species has not yet been sighted.</p>
+      <p>
+        {add
+          ? 'That species is not in the list yet, please add it below.'
+          : 'That species has not yet been sighted.'}{' '}
+      </p>
     </NotFoundContainer>
   );
 };
@@ -24,7 +41,7 @@ const SearchForm = ({
   setSearchValue,
 }: {
   setSearchValue: Dispatch<SetStateAction<string[] | null>>;
-}) => {
+}): React.ReactElement | null => {
   const { Option } = Select;
   const [form] = Form.useForm();
   const { sightings } = useSightings(birdsOnlyUrl);

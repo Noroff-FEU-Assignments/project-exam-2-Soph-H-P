@@ -9,7 +9,19 @@ import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Cta from '../../common/Cta';
 import { useEffect } from 'react';
 
-const EditUserForm = ({ userId }: { userId: string }) => {
+/**
+ * The Edit user form takes the id of a user and uses this to get the
+ * user data from the api. This is then used to populate the form which can then
+ * be edited by admin members. Mainly used to change the admin status of users
+ *
+ *@param {Object} props
+ *@param {string} props.userId
+ *
+ * @example <EditUserForm userId={id} />
+ * @returns {React.ReactElement}
+ */
+
+const EditUserForm = ({ userId }: { userId: string }): React.ReactElement => {
   const [form] = Form.useForm();
 
   const { user, error, isLoading, getUser } = useGetUser();
@@ -90,7 +102,7 @@ const EditUserForm = ({ userId }: { userId: string }) => {
         />
         {formError && <FormMessage error={true}>{formError}</FormMessage>}
         {formIsSubmitted && <FormMessage>Event has been saved</FormMessage>}
-        <Form.Item style={{marginTop: 20}}>
+        <Form.Item style={{ marginTop: 20 }}>
           <Button type="primary" htmlType="submit" size="large">
             {isSubmitting ? 'Saving...' : 'Save changes'}
           </Button>
@@ -110,7 +122,7 @@ const EditUserForm = ({ userId }: { userId: string }) => {
     );
   }
 
-  return null;
+  return <StyledForm />;
 };
 
 export default EditUserForm;

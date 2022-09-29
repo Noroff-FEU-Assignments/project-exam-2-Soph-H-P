@@ -15,7 +15,15 @@ import PageTitle from '../../typography/PageTitle';
 import { StyledFormContainer } from './index.styled';
 import { Link } from 'react-router-dom';
 
-const SightingsForm = () => {
+/**
+ * Sightings form component renders a form taking information form a user of a bird sighting
+ *
+ *
+ * @example <SightingsForm />
+ * @returns {React.ReactElement}
+ */
+
+const SightingsForm = (): React.ReactElement => {
   const [form] = Form.useForm();
   const [image, setImage] = useState<File | undefined>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);

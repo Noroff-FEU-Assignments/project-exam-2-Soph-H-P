@@ -7,7 +7,15 @@ import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useRegisterUser, { RegisterFormInterface } from '../../../hooks/useRegisterUser';
 
-const RegisterForm = () => {
+/**
+ * Register form component renders a form taking the users email, username and password
+ * this contains rules to ensure the details given are correct.
+ *
+ * @example <RegisterForm />
+ * @returns {React.ReactElement}
+ */
+
+const RegisterForm = (): React.ReactElement => {
   const { authToken, setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();
 
@@ -33,7 +41,11 @@ const RegisterForm = () => {
     );
 
   return (
-    <StyledForm form={form} initialValues={{ remember: true }} onFinish={(data) => submitForm(data as RegisterFormInterface)}>
+    <StyledForm
+      form={form}
+      initialValues={{ remember: true }}
+      onFinish={(data) => submitForm(data as RegisterFormInterface)}
+    >
       <label htmlFor="username">Username</label>
       <Form.Item
         name="username"

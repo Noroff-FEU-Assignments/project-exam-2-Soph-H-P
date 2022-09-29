@@ -5,7 +5,14 @@ import moment from 'moment';
 import FormMessage from '../FormMessage';
 import useSubmitEvent from '../../../hooks/useSubmitEvent';
 
-const EventsForm = () => {
+/**
+ * Events form component allows admin users to add events
+ *
+ * @example <EventsForm />
+ * @returns {React.ReactElement}
+ */
+
+const EventsForm = (): React.ReactElement => {
   const [form] = Form.useForm();
   const { formError, formIsSubmitted, isSubmitting, submitForm } = useSubmitEvent(form);
 
@@ -31,11 +38,7 @@ const EventsForm = () => {
       </Form.Item>
       <label htmlFor="date">When is the event?</label>
       <Form.Item name="date" rules={[{ required: true, message: 'Please add the date' }]}>
-        <DatePicker
-          format={'dddd Do MM YYYY - HH:mm'}
-          showTime
-          disabledDate={disabledDate}
-        />
+        <DatePicker format={'dddd Do MM YYYY - HH:mm'} showTime disabledDate={disabledDate} />
       </Form.Item>
       <label htmlFor="location">Where is the event?</label>
       <Form.Item name="location" rules={[{ required: true, message: 'Please add the location' }]}>
