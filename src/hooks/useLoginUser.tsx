@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import API, { accessTokenUrlEndpoint } from '../constants/api';
 import axios from 'axios';
 import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
-import { useUserState } from '../context/UserContext';
 import useUserProfile from './useUserProfile';
 
 export interface LoginFormInterface {
@@ -16,7 +14,6 @@ const useLoginUser = (form: FormInstance) => {
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setAuthToken } = useAuthState();
-  const navigate = useNavigate();
   const { getMyUserProfile } = useUserProfile();
 
   const submitForm = async (data: LoginFormInterface) => {

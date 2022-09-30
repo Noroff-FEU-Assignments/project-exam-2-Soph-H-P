@@ -4,7 +4,7 @@ import API, {
   includingImagesQuery,
   sightingsEndpoint,
 } from '../constants/api';
-import { ProfileInterface, UserInterface } from '../context/UserContext';
+import { ProfileInterface } from '../context/UserContext';
 import findMySightingsUrl from './findMySightingsUrl';
 import findSightingsUrl from './findSightingsUrl';
 

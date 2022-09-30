@@ -8,7 +8,6 @@ import { useAuthState } from '../context/AuthContext';
 const useUserProfile = () => {
   const [creationError, setCreationError] = useState<string | null>(null);
   const [isFinished, setIsFinished] = useState(false);
-  const [profile, setprofile] = useState(null);
   const { setUserInfo } = useUserState();
   const { authToken } = useAuthState();
   const navigate = useNavigate();

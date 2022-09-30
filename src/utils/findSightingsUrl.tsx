@@ -5,7 +5,7 @@ import API, {
   includingImagesQuery,
   sightingsEndpoint,
 } from '../constants/api';
-import { ProfileInterface, UserInterface } from '../context/UserContext';
+import { ProfileInterface } from '../context/UserContext';
 
 const findSightingsUrl = (
   userInfo: ProfileInterface | null,
