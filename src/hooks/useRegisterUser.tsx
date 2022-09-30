@@ -5,7 +5,7 @@ import axios from 'axios';
 import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
 import { useUserState } from '../context/UserContext';
-import useCreateUserProfile from './useCreateUserProfile';
+import useUserProfile from './useUserProfile';
 
 export interface RegisterFormInterface {
   username: string;
@@ -19,7 +19,7 @@ const useRegisterUser = (form: FormInstance) => {
   const { setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();
   const navigate = useNavigate();
-  const { createProfile } = useCreateUserProfile();
+  const { createProfile } = useUserProfile();
 
   const submitForm = async (data: RegisterFormInterface) => {
     setIsSubmitting(true);
@@ -41,7 +41,6 @@ const useRegisterUser = (form: FormInstance) => {
         user: response.data.user.id,
         userRole: response.data.user.userRole,
         username: response.data.user.username,
-        userId: response.data.user.id.toString(),
       };
 
 
@@ -49,8 +48,8 @@ const useRegisterUser = (form: FormInstance) => {
 
       setAuthToken(response.data.jwt);
       setUserInfo(response.data.user);
-      // form.resetFields();
-      // navigate('/');
+      form.resetFields();
+      navigate('/');
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {

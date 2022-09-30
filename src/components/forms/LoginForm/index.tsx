@@ -7,6 +7,7 @@ import { Button, Form, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useLoginUser, { LoginFormInterface } from '../../../hooks/useLoginUser';
 import PageTitle from '../../typography/PageTitle';
+import useUserProfile from '../../../hooks/useUserProfile';
 
 /**
  * Login form component renders a form taking the users email and password
@@ -21,6 +22,7 @@ const LoginForm = (): React.ReactElement => {
   const [form] = Form.useForm();
   const { authToken, setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();
+
 
   const { loginError, isSubmitting, submitForm } = useLoginUser(form);
 

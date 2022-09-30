@@ -98,6 +98,13 @@ const SightingsForm = (): React.ReactElement => {
                     <Input disabled />
                   </Form.Item>
                   <Form.Item
+                    name="user"
+                    initialValue={userInfo.profileId}
+                    style={{ display: 'none' }}
+                  >
+                    <Input disabled />
+                  </Form.Item>
+                  <Form.Item
                     name="username"
                     initialValue={userInfo.username}
                     style={{ display: 'none' }}

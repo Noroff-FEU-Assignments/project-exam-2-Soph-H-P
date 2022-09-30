@@ -5,7 +5,7 @@ export interface ProfileInterface {
   user: number;
   userRole: string;
   username: string;
-  userId: string;
+  profileId: string;
 }
 
 export interface UserInterface {

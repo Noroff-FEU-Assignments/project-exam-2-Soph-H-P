@@ -11,7 +11,7 @@ const useVarifySighting = () => {
   const { authToken } = useAuthState();
   const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
-  const varifySighting = async (id: number) => {
+  const varifySighting = async (id: number, userId: number) => {
     setIsVarifying(true);
     setError(null);
     try {
@@ -20,6 +20,7 @@ const useVarifySighting = () => {
       };
       const data = {
         varified: true,
+        profile: userId,
       };
 
       const response = await axios.put(`${API}${sightingsEndpoint}/${id}`, { data }, { headers });

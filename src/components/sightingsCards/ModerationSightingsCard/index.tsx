@@ -78,9 +78,9 @@ const ModerationSightingsCard = ({
   };
 
   const handleVarifySighting = () => {
-    varifySighting(sighting.id);
     if (userId !== null) {
-      addSightingToUser(userId);
+      varifySighting(sighting.id, parseInt(userId));
+      // addSightingToUser(userId);
     }
     removeSighting(sighting.id);
   };
