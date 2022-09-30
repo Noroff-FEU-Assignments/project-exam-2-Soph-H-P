@@ -2,12 +2,14 @@ import { useState } from 'react';
 import API, { profileUrlEndpoint } from '../constants/api';
 import axios from 'axios';
 import { ProfileInterface, useUserState } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const useUserProfile = () => {
   const [creationError, setCreationError] = useState<string | null>(null);
-  const [isCreated, setIsCreated] = useState(false);
+  const [isFinished, setIsFinishedd] = useState(false);
   const { setUserInfo } = useUserState();
-
+  const navigate = useNavigate();
+  
   const getUserProfile = async (userId: number, username: string) => {
     try {
       const response = await axios.get(
@@ -22,6 +24,12 @@ const useUserProfile = () => {
         profileId: profile.id as string,
       };
       setUserInfo(profileData)
+      setIsFinishedd(true)
+      if (profile.attributes.userRole === 'admin') {
+        navigate('/admin/moderate-sightings');
+      } else {
+        navigate('/');
+      }
     } catch (error) {
       setCreationError(
         'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
@@ -55,11 +63,11 @@ const useUserProfile = () => {
         }
       }
     } finally {
-      setIsCreated(true);
+      setIsFinishedd(true);
     }
   };
 
-  return { creationError, isCreated, createProfile, getUserProfile };
+  return { creationError, isFinished, createProfile, getUserProfile };
 };
 
 export default useUserProfile;

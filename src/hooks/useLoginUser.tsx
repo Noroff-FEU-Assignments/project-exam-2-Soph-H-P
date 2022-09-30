@@ -19,8 +19,6 @@ const useLoginUser = (form: FormInstance) => {
   const navigate = useNavigate();
   const { getUserProfile } = useUserProfile();
 
-
-
   const submitForm = async (data: LoginFormInterface) => {
     setIsSubmitting(true);
     setLoginError(null);
@@ -29,11 +27,6 @@ const useLoginUser = (form: FormInstance) => {
       setAuthToken(response.data.jwt);
       getUserProfile(response.data.user.id, response.data.user.username);
       form.resetFields();
-      if (response.data.user.userRole === 'admin') {
-        navigate('/admin/moderate-sightings');
-      } else {
-        navigate('/');
-      }
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {
