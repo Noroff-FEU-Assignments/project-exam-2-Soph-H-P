@@ -17,7 +17,7 @@ const useLoginUser = (form: FormInstance) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setAuthToken } = useAuthState();
   const navigate = useNavigate();
-  const { getUserProfile } = useUserProfile();
+  const { getMyUserProfile } = useUserProfile();
 
   const submitForm = async (data: LoginFormInterface) => {
     setIsSubmitting(true);
@@ -25,7 +25,7 @@ const useLoginUser = (form: FormInstance) => {
     try {
       const response = await axios.post(API + accessTokenUrlEndpoint, data);
       setAuthToken(response.data.jwt);
-      getUserProfile(response.data.user.id, response.data.user.username);
+      getMyUserProfile(response.data.user.id, response.data.user.username);
       form.resetFields();
     } catch (error: unknown) {
       console.log('error', error);

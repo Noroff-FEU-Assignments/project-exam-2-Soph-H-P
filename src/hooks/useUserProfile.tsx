@@ -1,16 +1,81 @@
 import { useState } from 'react';
 import API, { profileUrlEndpoint } from '../constants/api';
 import axios from 'axios';
-import { ProfileInterface, useUserState } from '../context/UserContext';
+import { useUserState } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { useAuthState } from '../context/AuthContext';
 
 const useUserProfile = () => {
   const [creationError, setCreationError] = useState<string | null>(null);
-  const [isFinished, setIsFinishedd] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  const [profile, setprofile] = useState(null);
   const { setUserInfo } = useUserState();
+  const { authToken } = useAuthState();
   const navigate = useNavigate();
-  
-  const getUserProfile = async (userId: number, username: string) => {
+
+  const updateUserProfile = async (username: string, data: any) => {
+    try {
+      const response = await axios.get(
+        `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`
+      );
+      const profile = response.data.data[0];
+      try {
+        const headers = {
+          Authorization: `Bearer ${authToken}`,
+        };
+        const updateResponse = await axios.put(
+          `${API}${profileUrlEndpoint}/${profile.id}`,
+          { data },
+          {
+            headers,
+          }
+        );
+        if (updateResponse.status === 200) {
+          setIsFinished(true);
+        }
+      } catch (error) {
+        setCreationError(
+          'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+        );
+      }
+      setIsFinished(true);
+    } catch (error) {
+      setCreationError(
+        'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+      );
+    }
+  };
+
+  const deleteUserProfile = async (username: string) => {
+    try {
+      const response = await axios.get(
+        `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`
+      );
+
+      const profile = response.data.data[0];
+      try {
+        const headers = {
+          Authorization: `Bearer ${authToken}`,
+        };
+        const deleteResponse = await axios.delete(`${API}${profileUrlEndpoint}/${profile.id}`, {
+          headers,
+        });
+        if (deleteResponse.status === 200) {
+          setIsFinished(true);
+        }
+      } catch (error) {
+        setCreationError(
+          'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+        );
+      }
+    } catch (error) {
+      setCreationError(
+        'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+      );
+    }
+  };
+
+  const getMyUserProfile = async (userId: number, username: string) => {
     try {
       const response = await axios.get(
         `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`
@@ -23,8 +88,8 @@ const useUserProfile = () => {
         username: username,
         profileId: profile.id as string,
       };
-      setUserInfo(profileData)
-      setIsFinishedd(true)
+      setUserInfo(profileData);
+      setIsFinished(true);
       if (profile.attributes.userRole === 'admin') {
         navigate('/admin/moderate-sightings');
       } else {
@@ -63,11 +128,18 @@ const useUserProfile = () => {
         }
       }
     } finally {
-      setIsFinishedd(true);
+      setIsFinished(true);
     }
   };
 
-  return { creationError, isFinished, createProfile, getUserProfile };
+  return {
+    creationError,
+    isFinished,
+    createProfile,
+    getMyUserProfile,
+    deleteUserProfile,
+    updateUserProfile,
+  };
 };
 
 export default useUserProfile;
