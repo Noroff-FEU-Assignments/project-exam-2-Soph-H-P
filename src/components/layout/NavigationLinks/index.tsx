@@ -23,9 +23,6 @@ import RecentSvg from '../../../svgs/RecentSvg';
 export const DesktopNavigationLinks = (): React.ReactElement => {
   const { authToken } = useAuthState();
   const { userInfo } = useUserState();
-
-  console.log(userInfo);
-
   return (
     <NavLinksContainer>
       <Dropdown

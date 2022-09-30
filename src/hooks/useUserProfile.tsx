@@ -112,6 +112,7 @@ const useUserProfile = () => {
       const response = await axios.post(API + profileUrlEndpoint, { data }, { headers });
       data.profileId = response.data.data.id;
       setUserInfo(data);
+      console.log(data);
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {

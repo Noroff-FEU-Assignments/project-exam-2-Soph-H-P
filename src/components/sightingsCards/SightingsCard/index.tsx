@@ -21,7 +21,7 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }): React.Rea
     date: when,
     nearestLocation,
     species,
-    userId,
+    profileId,
     username,
     varified,
     public: isPublic,
@@ -54,7 +54,7 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }): React.Rea
         {nearestLocation}
       </InfoWrapper>
       <InfoWrapper>
-        <VarifiedUsername userId={userId} backupUsername={username} />
+        <VarifiedUsername profileId={profileId} backupUsername={username} />
       </InfoWrapper>
       {!isPublic && <MembersOnly />}
     </StyledCardContainer>

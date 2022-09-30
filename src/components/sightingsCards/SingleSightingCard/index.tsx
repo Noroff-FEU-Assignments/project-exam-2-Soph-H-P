@@ -33,6 +33,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }): Reac
     nearestLocation,
     species,
     userId,
+    profileId,
     description,
     username,
     varified,
@@ -73,7 +74,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }): Reac
             {nearestLocation}
           </InfoWrapper>
           <InfoWrapper>
-            <VarifiedUsername userId={userId} backupUsername={username} />
+            <VarifiedUsername profileId={profileId} backupUsername={username} />
           </InfoWrapper>
           <p style={{ alignItems: 'start', flexDirection: 'column' }}>
             <span>Description: </span>

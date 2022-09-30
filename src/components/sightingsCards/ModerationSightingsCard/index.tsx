@@ -46,6 +46,7 @@ const ModerationSightingsCard = ({
     species,
     description,
     userId,
+    profileId,
     username,
     public: isPublic,
   } = sighting.attributes;
@@ -100,7 +101,7 @@ const ModerationSightingsCard = ({
         {nearestLocation}
       </p>
       <InfoWrapper>
-        <VarifiedUsername userId={userId} backupUsername={username} />
+        <VarifiedUsername profileId={profileId} backupUsername={username} />
       </InfoWrapper>
       <p style={{ alignItems: 'start', flexDirection: 'column' }}>
         <span>Description: </span>
