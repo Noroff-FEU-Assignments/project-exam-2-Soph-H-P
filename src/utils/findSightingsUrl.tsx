@@ -5,10 +5,10 @@ import API, {
   includingImagesQuery,
   sightingsEndpoint,
 } from '../constants/api';
-import { UserInterface } from '../context/UserContext';
+import { ProfileInterface, UserInterface } from '../context/UserContext';
 
 const findSightingsUrl = (
-  userInfo: UserInterface | null,
+  userInfo: ProfileInterface | null,
   pageNumber: number,
   numberToShow: number
 ): string => {

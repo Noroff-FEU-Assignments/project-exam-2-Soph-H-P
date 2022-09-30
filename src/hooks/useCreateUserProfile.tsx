@@ -1,54 +1,36 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API, { registerUrlEndpoint } from '../constants/api';
+import API, { profileUrlEndpoint, registerUrlEndpoint } from '../constants/api';
 import axios from 'axios';
 import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
-import { useUserState } from '../context/UserContext';
-import useCreateUserProfile from './useCreateUserProfile';
+import { ProfileInterface, useUserState } from '../context/UserContext';
 
-export interface RegisterFormInterface {
-  username: string;
-  email: string;
-  password: string;
-}
 
-const useRegisterUser = (form: FormInstance) => {
+
+const useCreateUserProfile = () => {
   const [registerError, setRegisterError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [profileId, setProfileId] = useState<string | null>(null);
   const { setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();
-  const navigate = useNavigate();
-  const { createProfile } = useCreateUserProfile();
 
-  const submitForm = async (data: RegisterFormInterface) => {
-    setIsSubmitting(true);
+  const createProfile = async (data: ProfileInterface, jwtToken: string) => {
+    setIsCreating(true);
     setRegisterError(null);
 
     try {
-      const convertToFormData = (data: RegisterFormInterface) => {
-        const formData = new FormData();
-        //@ts-ignore: string cannot be used as key
-        Object.keys(data).forEach((key) => formData.append(key, data[key]));
-        console.log(data);
-        return formData;
+      const headers = {
+        Authorization: `Bearer ${jwtToken}`,
       };
 
-      const body = convertToFormData(data);
+      const response = await axios.post(API + profileUrlEndpoint, { data }, { headers });
 
-      const response = await axios.post(API + registerUrlEndpoint, body);
-      const profileData = {
-        user: response.data.user.id,
-        userRole: response.data.user.userRole,
-        username: response.data.user.username,
-        userId: response.data.user.id.toString(),
-      };
+    
+      console.log(response);
 
-
-      createProfile(profileData, response.data.jwt);
-
-      setAuthToken(response.data.jwt);
-      setUserInfo(response.data.user);
+      // setAuthToken(response.data.jwt);
+      setUserInfo(data);
       // form.resetFields();
       // navigate('/');
     } catch (error: unknown) {
@@ -79,11 +61,11 @@ const useRegisterUser = (form: FormInstance) => {
         }
       }
     } finally {
-      setIsSubmitting(false);
+      setIsCreating(false);
     }
   };
 
-  return { registerError, isSubmitting, submitForm };
+  return { registerError, setIsCreating, createProfile };
 };
 
-export default useRegisterUser;
+export default useCreateUserProfile;

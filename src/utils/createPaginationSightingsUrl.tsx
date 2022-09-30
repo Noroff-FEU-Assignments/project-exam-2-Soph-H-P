@@ -4,14 +4,14 @@ import API, {
   includingImagesQuery,
   sightingsEndpoint,
 } from '../constants/api';
-import { UserInterface } from '../context/UserContext';
+import { ProfileInterface, UserInterface } from '../context/UserContext';
 import findMySightingsUrl from './findMySightingsUrl';
 import findSightingsUrl from './findSightingsUrl';
 
 const createPaginationSightingUrl = (
   pageNumber: number,
   numberToShow: number,
-  userInfo: UserInterface | null,
+  userInfo: ProfileInterface | null,
   moderation?: boolean,
   mySightings?: boolean
 ): string => {
@@ -20,7 +20,7 @@ const createPaginationSightingUrl = (
   }
 
   if (mySightings && userInfo) {
-    return findMySightingsUrl(userInfo.id, pageNumber, numberToShow);
+    return findMySightingsUrl(userInfo.user, pageNumber, numberToShow);
   }
 
   return findSightingsUrl(userInfo, pageNumber, numberToShow);

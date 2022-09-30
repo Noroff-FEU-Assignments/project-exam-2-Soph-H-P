@@ -43,7 +43,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }): Reac
 
   useEffect(() => {
     if ((!varified && userInfo) || (!varified && !userInfo)) {
-      if (userInfo?.userRole === 'admin' || parseInt(userId) === userInfo?.id) {
+      if (userInfo?.userRole === 'admin' || parseInt(userId) === userInfo?.user) {
         return;
       } else {
         navigate('/');

@@ -22,9 +22,9 @@ const StickySightingsMapContainer = ({ isMySightings }: { isMySightings?: boolea
   const url = `${API}${sightingsEndpoint}?${andSortByDate}&${andFilterVarified}&${createPastDayQuery()}`;
 
   const findMySightingsUrl = () => {
-    if (userInfo?.id) {
+    if (userInfo?.user) {
       return `${API}${sightingsEndpoint}?${andSortByDate}&${andFilterVarified}&${createMySightingsEndpoint(
-        userInfo.id
+        userInfo.user
       )}`;
     }
   };
