@@ -9,11 +9,11 @@ import { useUserState } from '../context/UserContext';
  * an events calender compoenent and the events form
  * if the user is an admin user
  *
- * @example <EditUsers />
+ * @example <Events />
  * @returns {React.ReactElement}
  */
 
-const Events = () => {
+const Events = (): React.ReactElement => {
   const { userInfo } = useUserState();
 
   return (

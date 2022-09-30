@@ -1,25 +1,25 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Navagation from './components/layout/Navigation';
-import AddSighting from './pages/AddSighting';
-import Contact from './pages/Contact';
-import EditSighting from './pages/EditSighting';
-import EditUsers from './pages/EditUsers';
-import Events from './pages/Events';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import ModerateSightings from './pages/ModerateSightings';
-import MySightings from './pages/MySightings';
-import SightingsMap from './pages/SightingsMap';
-import SingleSightingPage from './pages/SingleSightingPage';
+import AddSighting from './Pages/AddSighting';
+import Contact from './Pages/Contact';
+import EditSighting from './Pages/EditSighting';
+import EditUsers from './Pages/EditUsers';
+import Events from './Pages/Events';
+import Login from './Pages/Login';
+import Home from './Pages/Home';
+import ModerateSightings from './Pages/ModerateSightings';
+import MySightings from './Pages/MySightings';
+import SightingsMap from './Pages/SightingsMap';
+import SingleSightingPage from './Pages/SingleSightingPage';
 import GlobalStyle from './styles/GlobalStyle';
 import theme from './styles/theme';
 import './antd-theme/antd-customised.css';
 import { AuthStateProvider } from './context/AuthContext';
 import { UserStateProvider } from './context/UserContext';
-import RegisterUser from './pages/RegisterUser';
+import RegisterUser from './Pages/RegisterUser';
 import Footer from './components/layout/Footer';
-import NotFound from './pages/NotFound';
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
