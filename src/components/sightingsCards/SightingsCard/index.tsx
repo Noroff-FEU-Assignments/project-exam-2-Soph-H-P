@@ -6,9 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import MembersOnly from '../MembersOnly';
 import ImageWithWrapper from '../../common/ImageWithWrapper';
 
-
 /**
- * Creates a card that shows a sighting 
+ * Creates a card that shows a sighting
  *
  * @param {Object} props
  * @param {boolean} props.sighting the sighting that should be on the card
@@ -17,8 +16,6 @@ import ImageWithWrapper from '../../common/ImageWithWrapper';
  */
 
 const SightingsCard = ({ sighting }: { sighting: SightingInterface }): React.ReactElement => {
-  const noImage = !sighting.attributes.photos.data;
-  const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.formats.small.url;
   const {
     date: when,
     nearestLocation,
@@ -28,8 +25,22 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }): React.Rea
     varified,
     public: isPublic,
   } = sighting.attributes;
-
   const navigate = useNavigate();
+
+  const findImageUrl = (sighting: SightingInterface) => {
+    if (sighting.attributes.photos.data) {
+      if (sighting.attributes.photos.data[0].attributes.formats.small) {
+        return sighting.attributes.photos.data[0].attributes.formats.small.url;
+      }
+      return sighting.attributes.photos.data[0].attributes.url;
+    } else {
+      return '';
+    }
+  };
+
+  findImageUrl(sighting);
+  const imageSrc = findImageUrl(sighting);
+  const noImage = imageSrc === '';
 
   return (
     <StyledCardContainer

@@ -47,6 +47,13 @@ const useRegisterUser = (form: FormInstance) => {
           setRegisterError(
             'Looks like there is a problem with our server, please try again later.'
           );
+        } else if (
+          // @ts-ignore: unknown object
+          error.response?.data.error.message === 'An error occurred during account creation'
+        ) {
+          setRegisterError(
+            'Oops something went wrong. It may be that that username is taken, please try another.'
+          );
         } else if (error.response?.status === 400 || error.response?.status === 403) {
           setRegisterError(
             'Oops something went wrong. ' +

@@ -34,8 +34,20 @@ const ModerationSightingsCard = ({
   sighting: SightingInterface;
   setVisibleSightings: Dispatch<SetStateAction<SightingInterface[] | null>>;
 }): React.ReactElement => {
-  const noImage = !sighting.attributes.photos.data;
-  const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.formats.small.url;
+  const findImageUrl = (sighting: SightingInterface) => {
+    if (sighting.attributes.photos.data) {
+      if (sighting.attributes.photos.data[0].attributes.formats.small) {
+        return sighting.attributes.photos.data[0].attributes.formats.small.url;
+      }
+      return sighting.attributes.photos.data[0].attributes.url;
+    } else {
+      return '';
+    }
+  };
+
+  findImageUrl(sighting);
+  const imageSrc = findImageUrl(sighting);
+  const noImage = imageSrc === '';
   const imageId = noImage ? undefined : sighting.attributes.photos.data[0].id;
   const {
     date: when,
