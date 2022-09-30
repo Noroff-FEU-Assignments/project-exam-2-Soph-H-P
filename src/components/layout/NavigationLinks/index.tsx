@@ -24,6 +24,8 @@ export const DesktopNavigationLinks = (): React.ReactElement => {
   const { authToken } = useAuthState();
   const { userInfo } = useUserState();
 
+  console.log(userInfo);
+
   return (
     <NavLinksContainer>
       <Dropdown
@@ -45,7 +47,7 @@ export const DesktopNavigationLinks = (): React.ReactElement => {
       <StyledNavLink to="/events">Events</StyledNavLink>
       <StyledNavLink to="/contact">Contact</StyledNavLink>
       <StyledNavLink to="/login">
-        {authToken ? <ProfileLink userInfo={userInfo} /> : 'Login'}
+        {authToken && userInfo ? <ProfileLink userInfo={userInfo} /> : 'Login'}
       </StyledNavLink>
     </NavLinksContainer>
   );

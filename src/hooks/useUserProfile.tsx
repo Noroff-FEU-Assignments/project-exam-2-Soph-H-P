@@ -46,8 +46,8 @@ const useUserProfile = () => {
       };
 
       const response = await axios.post(API + profileUrlEndpoint, { data }, { headers });
-      const newUserInfo = (data.profileId = response.data.id);
-      setUserInfo(newUserInfo);
+      data.profileId = response.data.data.id;
+      setUserInfo(data);
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {

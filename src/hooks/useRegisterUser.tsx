@@ -4,7 +4,6 @@ import API, { registerUrlEndpoint } from '../constants/api';
 import axios from 'axios';
 import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
-import { useUserState } from '../context/UserContext';
 import useUserProfile from './useUserProfile';
 
 export interface RegisterFormInterface {
@@ -17,7 +16,6 @@ const useRegisterUser = (form: FormInstance) => {
   const [registerError, setRegisterError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setAuthToken } = useAuthState();
-  const { setUserInfo } = useUserState();
   const navigate = useNavigate();
   const { createProfile } = useUserProfile();
 
@@ -30,7 +28,6 @@ const useRegisterUser = (form: FormInstance) => {
         const formData = new FormData();
         //@ts-ignore: string cannot be used as key
         Object.keys(data).forEach((key) => formData.append(key, data[key]));
-        console.log(data);
         return formData;
       };
 
@@ -47,7 +44,6 @@ const useRegisterUser = (form: FormInstance) => {
       createProfile(profileData, response.data.jwt);
 
       setAuthToken(response.data.jwt);
-      setUserInfo(response.data.user);
       form.resetFields();
       navigate('/');
     } catch (error: unknown) {
