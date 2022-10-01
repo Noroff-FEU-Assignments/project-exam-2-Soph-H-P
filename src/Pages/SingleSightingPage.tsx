@@ -17,7 +17,7 @@ import useSingleSighting from '../hooks/useSingleSighting';
  * if there is an error an error message is rendered
  * there is a loading state displaying a loader
  * when the sighting has been retrieved a SightingsCard is rendered
- * @example <SingleSightingsPage />
+ * @example <SingleSightingPage />
  * @returns {React.ReactElement}
  */
 

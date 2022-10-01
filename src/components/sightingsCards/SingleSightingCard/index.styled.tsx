@@ -81,6 +81,10 @@ export const SplitCard = styled.div`
     & > div:first-of-type {
       min-width: 100%;
     }
+    & > div:last-of-type {
+      min-width: 100%;
+      margin-top: 20px;
+    }
   }
 `;
 
