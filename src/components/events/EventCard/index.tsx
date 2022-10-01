@@ -41,7 +41,7 @@ const EventCard = ({
         <h2>{event.attributes.eventTitle}</h2>
         <p>
           <span>When: </span>
-          {moment(event.attributes.date).format('dddd - hh:mm')}
+          {moment(event.attributes.date).format('dddd - HH:mm')}
         </p>
         <p>
           <span>Where: </span>

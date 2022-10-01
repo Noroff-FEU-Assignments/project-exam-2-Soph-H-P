@@ -1,25 +1,41 @@
 import { StyledForm } from '../StyledForm/index.styled';
 import { Button, DatePicker, Form, Input, message, Popconfirm } from 'antd';
 import { RangePickerProps } from 'antd/lib/date-picker';
+import type { Moment } from 'moment';
 import moment from 'moment';
 import FormMessage from '../FormMessage';
 import theme from '../../../styles/theme';
 import useSubmitEvent from '../../../hooks/useSubmitEvent';
 import { EventInterface } from '../../../hooks/useEvents';
+import { Dispatch } from 'react';
 
 /**
  * The Edit events form takes an event as a prop which is used to populate the form
  * with the current sighting information which can then be edited and then saved
  * using the useSubmitEvent hook
- * 
+ *
  *@param {Object} props
  *@param {EventInterface} props.currentEvent
  *
  * @example <EditEventsForm currentEvent={currentEvent} />
  * @returns {React.ReactElement}
+ *
  */
 
-const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }): React.ReactElement => {
+interface EventData {
+  eventTitle: string;
+  date: string;
+  location: string;
+  participants: string;
+}
+
+const EditEventsForm = ({
+  currentEvent,
+  setVisibleEvents,
+}: {
+  currentEvent: EventInterface;
+  setVisibleEvents: Dispatch<React.SetStateAction<EventInterface[] | null | undefined>>;
+}): React.ReactElement => {
   const [form] = Form.useForm();
   const { formError, formIsSubmitted, isSubmitting, submitUpdateForm, deleteEvent, isDeleting } =
     useSubmitEvent(form);
@@ -34,12 +50,40 @@ const EditEventsForm = ({ currentEvent }: { currentEvent: EventInterface }): Rea
   const confirm = () => {
     message.info('Sighting deleted');
     deleteEvent(currentEvent.id);
+    setVisibleEvents((events) => {
+      return events?.filter((event) => event.id !== currentEvent.id) || null;
+    });
+  };
+
+  const handleFinish = (data: EventData) => {
+    submitUpdateForm(data, currentEvent.id)
+    setVisibleEvents((events) => {
+      const updatedEvents = events?.map((event) => {
+        if (event.id === currentEvent.id) {
+          return {
+            ...event,
+            attributes: {
+              ...event.attributes,
+              eventTitle: data.eventTitle,
+              location: data.location,
+              participants: data.participants,
+              date: data.date,
+            },
+          };
+        } else {
+          return event;
+        }
+      });
+      return updatedEvents;
+    });
   };
 
   return (
     <StyledForm
       form={form}
-      onFinish={(data) => submitUpdateForm(data, currentEvent.id)}
+      onFinish={(data: any) => {
+        handleFinish(data);
+      }}
       style={{ width: '100%', background: theme.colors.primaryHighlightColor }}
     >
       <h1>Edit this event</h1>

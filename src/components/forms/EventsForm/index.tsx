@@ -4,6 +4,8 @@ import { RangePickerProps } from 'antd/lib/date-picker';
 import moment from 'moment';
 import FormMessage from '../FormMessage';
 import useSubmitEvent from '../../../hooks/useSubmitEvent';
+import { Dispatch } from 'react';
+import { EventInterface } from '../../../hooks/useEvents';
 
 /**
  * Events form component allows admin users to add events
@@ -12,7 +14,11 @@ import useSubmitEvent from '../../../hooks/useSubmitEvent';
  * @returns {React.ReactElement}
  */
 
-const EventsForm = (): React.ReactElement => {
+const EventsForm = ({
+  setVisibleEvents,
+}: {
+  setVisibleEvents: Dispatch<React.SetStateAction<EventInterface[] | null | undefined>>;
+}): React.ReactElement => {
   const [form] = Form.useForm();
   const { formError, formIsSubmitted, isSubmitting, submitForm } = useSubmitEvent(form);
 
@@ -25,7 +31,9 @@ const EventsForm = (): React.ReactElement => {
     <StyledForm
       form={form}
       initialValues={{ remember: true }}
-      onFinish={(data) => submitForm(data)}
+      onFinish={(data) => {
+        submitForm(data, setVisibleEvents);
+      }}
       $isEventsForm={true}
     >
       <h1>Add a new event</h1>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import type { BadgeProps } from 'antd';
 import { Badge, Calendar } from 'antd';
 import type { Moment } from 'moment';
@@ -17,18 +17,22 @@ import getListData from '../../../utils/createEventListData';
 /**
  * The events calender listens for the page width and at desktop size will render
  * a full calendar. For mobile size devices a simple list of events is created
- * There is also a modal that when opened displays the event to a general user 
+ * There is also a modal that when opened displays the event to a general user
  * and to the admin displays the edit event form
  *
  * @example <EventsCalendar />
  * @returns {React.ReactElement}
  */
 
-const EventsCalendar = (): React.ReactElement => {
+const EventsCalendar = ({
+  visibleEvents,
+  setVisibleEvents,
+}: {
+  visibleEvents: EventInterface[] | null;
+  setVisibleEvents: Dispatch<React.SetStateAction<EventInterface[] | null | undefined>>;
+}): React.ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentEvent, setCurrentEvent] = useState<EventInterface | null>();
-  const url = `${API}${eventsEndpoint}`;
-  const { events } = useEvents(url);
   const startOfMonth = moment();
   const endOfMonth = moment();
   const { userInfo } = useUserState();
@@ -43,9 +47,8 @@ const EventsCalendar = (): React.ReactElement => {
     return () => window.removeEventListener('resize', handleResizeWindow);
   }, []);
 
-
   const dateCellRender = (value: Moment) => {
-    const listData = getListData(value, events);
+    const listData = getListData(value, visibleEvents);
     return (
       <ul className="events">
         {listData &&
@@ -75,6 +78,7 @@ const EventsCalendar = (): React.ReactElement => {
           isOpen={isOpen}
           handleCancel={() => setIsOpen(false)}
           currentEvent={currentEvent}
+          setVisibleEvents={setVisibleEvents}
         />
       )}
       {(userInfo?.userRole === 'admin' && windowWidth >= 900) ||
@@ -96,8 +100,8 @@ const EventsCalendar = (): React.ReactElement => {
         </>
       ) : (
         <>
-          {events &&
-            events.map((event) => {
+          {visibleEvents &&
+            visibleEvents.map((event) => {
               return (
                 <EventCard event={event} setIsOpen={setIsOpen} setCurrentEvent={setCurrentEvent} />
               );

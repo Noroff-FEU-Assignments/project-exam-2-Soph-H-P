@@ -63,7 +63,7 @@ const SightingsGrid = ({
       setVisibleSightings(sightings);
     }
     if (sightings && visibleSightings) {
-      //Prevents sightings being added multiple times
+      //Prevents sightings ever being added multiple times
       if (
         !visibleSightings.some((sighting: SightingInterface) => sighting.id === sightings[0].id)
       ) {

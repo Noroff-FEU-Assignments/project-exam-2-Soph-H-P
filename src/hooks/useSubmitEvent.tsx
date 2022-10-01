@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { Dispatch, useState } from 'react';
 import API, { eventsEndpoint } from '../constants/api';
 import axios from 'axios';
 import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
+import { EventInterface } from './useEvents';
 
 const useSubmitEvent = (form: FormInstance) => {
   const [formIsSubmitted, setFormIsSubmitted] = useState<string | null>(null);
@@ -13,7 +14,10 @@ const useSubmitEvent = (form: FormInstance) => {
   const { authToken } = useAuthState();
   const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
-  const submitForm = async (data: any) => {
+  const submitForm = async (
+    data: any,
+    setVisibleEvents: Dispatch<React.SetStateAction<EventInterface[] | null | undefined>>
+  ) => {
     setIsSubmitting(true);
     try {
       const headers = {
@@ -21,7 +25,9 @@ const useSubmitEvent = (form: FormInstance) => {
       };
       const response = await axios.post(API + eventsEndpoint, { data }, { headers });
       if (response.status === 200) {
-        setFormIsSubmitted('This event has been added');
+        setVisibleEvents(
+          (visibleEvents) => visibleEvents && [...visibleEvents, response.data.data]
+        );
       }
       form.resetFields();
     } catch (error: unknown) {

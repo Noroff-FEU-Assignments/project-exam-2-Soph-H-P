@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { EventInterface } from '../../../hooks/useEvents';
 import EditEventsForm from '../../forms/EditEventsForm';
 import { StyledModal } from './index.styled';
@@ -18,14 +19,17 @@ const EditEventModal = ({
   isOpen,
   handleCancel,
   currentEvent,
+  setVisibleEvents,
 }: {
   isOpen: boolean;
   handleCancel: () => void;
+  setVisibleEvents: Dispatch<React.SetStateAction<EventInterface[] | null | undefined>>;
   currentEvent?: EventInterface | null;
+  
 }): React.ReactElement => {
   return (
     <StyledModal visible={isOpen} title={null} footer={null} onCancel={handleCancel}>
-      {currentEvent && <EditEventsForm currentEvent={currentEvent} />}
+      {currentEvent && <EditEventsForm currentEvent={currentEvent} setVisibleEvents={setVisibleEvents} />}
     </StyledModal>
   );
 };
