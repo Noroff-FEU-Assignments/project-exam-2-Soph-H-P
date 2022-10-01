@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import API, { includingSightings, profileUrlEndpoint } from '../constants/api';
 
 export interface SightingInterface {
   id: number;
