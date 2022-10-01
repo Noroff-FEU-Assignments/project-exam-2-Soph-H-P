@@ -20,7 +20,7 @@ const createPaginationSightingUrl = (
   }
 
   if (mySightings && userInfo) {
-    return findMySightingsUrl(userInfo.user, pageNumber, numberToShow);
+    return findMySightingsUrl(userInfo.profileId);
   }
 
   return findSightingsUrl(userInfo, pageNumber, numberToShow);

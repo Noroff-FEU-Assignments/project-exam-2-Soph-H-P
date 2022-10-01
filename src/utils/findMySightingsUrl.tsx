@@ -1,16 +1,7 @@
-import API, { andSortByDate, includingImagesQuery, sightingsEndpoint } from '../constants/api';
-import createMySightingsEndpoint from './createMySightingsEndpoint';
+import API, { andSortByDate, includingSightings, profileUrlEndpoint } from '../constants/api';
 
-const findMySightingsUrl = (
-  userId: number,
-  pageNumber: number,
-  numberToShow: number
-): string => {
-    const paginationEndpoint = `pagination[page]=${pageNumber}&pagination[pageSize]=${numberToShow}`;
-
-    return `${API}${sightingsEndpoint}?${includingImagesQuery}&${andSortByDate}&${createMySightingsEndpoint(
-      userId
-    )}&${paginationEndpoint}`;
+const findMySightingsUrl = (profileId: string): string => {
+  return `${API}${profileUrlEndpoint}/${profileId}?${includingSightings}&${andSortByDate}`;
 };
 
 export default findMySightingsUrl;

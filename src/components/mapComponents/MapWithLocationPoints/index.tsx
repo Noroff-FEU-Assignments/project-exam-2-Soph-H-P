@@ -76,6 +76,7 @@ const MapWithLocationPoints = ({
   singleSpecies,
   singleDate,
   sightingId,
+  isMySightings,
 }: {
   height: number | string;
   url?: string;
@@ -85,8 +86,9 @@ const MapWithLocationPoints = ({
   singleSpecies?: string;
   singleDate?: string;
   sightingId?: number;
+  isMySightings?: boolean;
 }): React.ReactElement => {
-  const { sightings, error, isLoading } = useSightings(url);
+  const { sightings, error, isLoading } = useSightings(url, isMySightings);
   const mapRef = useRef<L.Map | null>(null);
 
   if (isLoading && url) {

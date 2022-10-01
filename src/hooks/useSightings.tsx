@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API, { includingSightings, profileUrlEndpoint } from '../constants/api';
 
 export interface SightingInterface {
   id: number;
@@ -48,20 +49,33 @@ interface PaginationData {
   total: number;
 }
 
-const useSightings = (url?: string) => {
+const useSightings = (url?: string, mySightings?: boolean) => {
   const [sightings, setSightings] = useState<SightingInterface[] | null>(null);
   const [paginationData, setPaginationData] = useState<PaginationData | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(sightings);
+  }, [sightings]);
 
   const getSightings = async () => {
     if (url) {
       try {
         setIsLoading(true);
         const response = await axios.get(url);
+
+        mySightings ? console.log('just min') : console.log('all of them');
+
         if (response.status === 200) {
-          setSightings(response.data.data);
-          setPaginationData(response.data.meta.pagination);
+          if (mySightings) {
+            // console.log(response.data.data.attributes.sightings.data);
+            setSightings(response.data.data.attributes.sightings.data);
+          } else {
+            // console.log(response.data.data);
+            setSightings(response.data.data);
+            setPaginationData(response.data.meta.pagination);
+          }
         }
       } catch (error) {
         console.log(error);
