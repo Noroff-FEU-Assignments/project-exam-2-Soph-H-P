@@ -13,6 +13,7 @@ export const birdsOnlyUrl = `${API}${sightingsEndpoint}?filters[varified][$eq]=t
 
 export const includeAll = 'populate=*';
 export const includingImagesQuery = 'populate=photos';
+export const includingSightings = 'populate=sightings,sightings.photos';
 export const andSortByDate = 'sort=date%3Adesc';
 export const andFilterVarified = 'filters[varified][$eq]=true';
 export const andFilterUnvarified = 'filters[varified][$eq]=false';

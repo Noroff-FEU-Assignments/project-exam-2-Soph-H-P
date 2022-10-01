@@ -1,7 +1,7 @@
 import API, { andFilterVarified, andSortByDate, sightingsEndpoint } from '../../../constants/api';
 import { useUserState } from '../../../context/UserContext';
-import createMySightingsEndpoint from '../../../utils/createMySightingsEndpoint';
 import createPastDayQuery from '../../../utils/createPastDayQuery';
+import findMySightingsUrl from '../../../utils/findMySightingsUrl';
 import Cta from '../../common/Cta';
 import MapWithLocationPoints from '../../mapComponents/MapWithLocationPoints';
 import { StickyContainer } from './index.sightings';
@@ -17,27 +17,26 @@ import { StickyContainer } from './index.sightings';
  * @returns {React.ReactElement}
  */
 
-const StickySightingsMapContainer = ({ isMySightings }: { isMySightings?: boolean }): React.ReactElement => {
+const StickySightingsMapContainer = ({
+  isMySightings,
+}: {
+  isMySightings?: boolean;
+}): React.ReactElement => {
   const { userInfo } = useUserState();
   const url = `${API}${sightingsEndpoint}?${andSortByDate}&${andFilterVarified}&${createPastDayQuery()}`;
-
-  const findMySightingsUrl = () => {
-    if (userInfo?.user) {
-      return `${API}${sightingsEndpoint}?${andSortByDate}&${andFilterVarified}&${createMySightingsEndpoint(
-        userInfo.user
-      )}`;
-    }
-  };
 
   return (
     <StickyContainer>
       <div>
         <Cta />
-        <MapWithLocationPoints
-          url={isMySightings ? findMySightingsUrl() : url}
-          title={isMySightings ? 'My sightings' : 'Sightings in the last 24 hours'}
-          height={400}
-        />
+        {userInfo && (
+          <MapWithLocationPoints
+            url={isMySightings ? findMySightingsUrl(userInfo.profileId) : url}
+            title={isMySightings ? 'My sightings' : 'Sightings in the last 24 hours'}
+            height={400}
+            isMySightings={isMySightings}
+          />
+        )}
       </div>
     </StickyContainer>
   );

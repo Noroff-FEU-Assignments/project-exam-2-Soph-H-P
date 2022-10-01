@@ -44,7 +44,7 @@ const SightingsGrid = ({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [url, setUrl] = useState<string>('');
   const [visibleSightings, setVisibleSightings] = useState<SightingInterface[] | null>(null);
-  const { sightings, error, isLoading, paginationData } = useSightings(url);
+  const { sightings, error, isLoading, paginationData } = useSightings(url, mySightings);
 
   const handleViewMore = () => {
     if (paginationData) {
@@ -59,6 +59,8 @@ const SightingsGrid = ({
   }, [currentPage]);
 
   useEffect(() => {
+    console.log(sightings);
+    console.log(visibleSightings);
     if (visibleSightings === null) {
       setVisibleSightings(sightings);
     }
@@ -72,6 +74,10 @@ const SightingsGrid = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sightings]);
+
+  useEffect(() => {
+    console.log(visibleSightings);
+  }, [visibleSightings]);
 
   if (error) {
     return (
@@ -102,7 +108,7 @@ const SightingsGrid = ({
     );
   }
 
-  if (paginationData && visibleSightings && visibleSightings.length >= 1) {
+  if (visibleSightings && visibleSightings.length >= 1) {
     return (
       <SightingsContainer $moderation={moderation}>
         <PageTitle>{title}</PageTitle>
@@ -125,7 +131,7 @@ const SightingsGrid = ({
           </StyledGridContainer>
         </div>
         {isLoading && <Loader size={100} light={false} />}
-        {paginationData.page < paginationData.pageCount && (
+        {paginationData && paginationData.page < paginationData.pageCount && (
           <Button size="large" onClick={handleViewMore}>
             View More
           </Button>

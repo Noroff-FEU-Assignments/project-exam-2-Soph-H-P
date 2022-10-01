@@ -66,6 +66,29 @@ const GlobalStyle = createGlobalStyle`
         .ant-picker-datetime-panel {
           flex-direction: column;
         }
+
+        .ant-picker-time-panel-column {
+            display: flex;
+            width: 280px;
+            height: 50px;
+        }
+
+        .ant-picker-time-panel .ant-picker-content {
+            height: auto;
+            flex-direction: column;
+        }
+
+        .ant-picker-time-panel-column > li.ant-picker-time-panel-cell .ant-picker-time-panel-cell-inner {
+            padding: 5px !important;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .ant-space-item > .ant-input.ant-input-status-success {
+            font-size: 16px !important;
+        }   
       }
 
 `;

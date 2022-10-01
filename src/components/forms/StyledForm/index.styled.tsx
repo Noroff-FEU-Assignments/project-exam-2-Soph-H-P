@@ -114,7 +114,7 @@ export const StyledForm = styled(Form)<{ $isEventsForm?: boolean; $isUserEdit?: 
     .ant-input,
     .ant-picker-input > input,
     label {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 
