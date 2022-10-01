@@ -1,13 +1,24 @@
 import moment from 'moment';
 
-const createReadableTimeDifference = (time: number, measure: string) => {
+/**
+ * creates a readable description of measure of time
+ * @param {number} time
+ * @param {string} measure
+ * @returns {string}
+ */
+const createReadableTimeDifference = (time: number, measure: string): string => {
   if (time === 1) {
     return `${time} ${measure} ago`;
   }
   return `${time} ${measure}s ago`;
 };
 
-const findTimeAgo = (when: string) => {
+/**
+ * depending on the length of time ago the time is described in hours, days, weeks, months and years
+ * @param {string} when
+ * @returns {string}
+ */
+const findTimeAgo = (when: string): string => {
   const whenAsDate = moment(when);
   const timeNow = moment();
   const difference = parseInt(moment.duration(timeNow.diff(whenAsDate)).asHours().toFixed(0));

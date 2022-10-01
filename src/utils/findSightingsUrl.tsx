@@ -7,6 +7,13 @@ import API, {
 } from '../constants/api';
 import { ProfileInterface } from '../context/UserContext';
 
+/**
+ * creates a url that allows pagination of sightings
+ * @param {ProfileInterface|null} userInfo
+ * @param {number} pageNumber
+ * @param {number} numberToShow
+ * @returns {string}
+ */
 const findSightingsUrl = (
   userInfo: ProfileInterface | null,
   pageNumber: number,
