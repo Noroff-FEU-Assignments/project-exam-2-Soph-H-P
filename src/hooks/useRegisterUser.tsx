@@ -45,8 +45,8 @@ const useRegisterUser = (form: FormInstance) => {
       createProfile(profileData, response.data.jwt);
 
       setAuthToken(response.data.jwt);
-      // form.resetFields();
-      // navigate('/');
+      form.resetFields();
+      navigate('/');
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {
