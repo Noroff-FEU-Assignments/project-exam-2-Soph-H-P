@@ -4,7 +4,18 @@ import API, { sightingsEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
-const useVarifySighting = () => {
+/**
+ * useSubmitSightingsForm returns a function that is used to varifu iser sightings
+ * @example varifySighting(id)
+ * @returns { varifySighting, error, isVarifying, isVarified }
+ */
+
+const useVarifySighting = (): {
+  varifySighting: (id: number) => Promise<void>;
+  error: string | null;
+  isVarifying: boolean;
+  isVarified: boolean;
+} => {
   const [error, setError] = useState<string | null>('');
   const [isVarifying, setIsVarifying] = useState(false);
   const [isVarified, setIsVarified] = useState(false);
@@ -22,7 +33,6 @@ const useVarifySighting = () => {
         varified: true,
       };
 
-      console.log(data);
       const response = await axios.put(`${API}${sightingsEndpoint}/${id}`, { data }, { headers });
       if (response) {
         setIsVarified(true);

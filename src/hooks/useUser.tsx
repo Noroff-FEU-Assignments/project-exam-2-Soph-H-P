@@ -8,7 +8,26 @@ import { useNavigate } from 'react-router-dom';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 import useUserProfile from './useUserProfile';
 
-const useUser = (form?: FormInstance) => {
+/**
+ * useSubmitSightingsForm returns two functions
+ * submitUpdateForm which handles updating user information including username
+ * and admin status, this also updates the connected profile
+ * deleteUser deletes the user and the connected profile
+ * @example submitForm(data, setVisibleEvents)
+ * @param {FormInstance} form the form which is being submitted
+ * @returns { formIsSubmitted, formError, isSubmitting, submitUpdateForm, deleteUser, isDeleting}
+ */
+
+const useUser = (
+  form?: FormInstance
+): {
+  formIsSubmitted: string | null;
+  formError: string | null;
+  isSubmitting: boolean;
+  submitUpdateForm: (data: any, id: string) => Promise<void>;
+  deleteUser: (id: string) => Promise<void>;
+  isDeleting: boolean;
+} => {
   const [formIsSubmitted, setFormIsSubmitted] = useState<string | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);

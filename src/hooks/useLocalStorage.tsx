@@ -1,6 +1,17 @@
 import { useState } from 'react';
 
-const useLocalStorage = (key: string, initialValue: string | null) => {
+/**
+ * useLocalStorage takes a key and a value and can either store or retrieve values from local storage
+ * @param {any} key
+ * @param {any} initialValue
+ * @example  const [userInfo, setUserInfo] = useLocalStorage('user', null);
+ * @returns {storedValue, setValue}
+ */
+
+const useLocalStorage = (
+  key: any,
+  initialValue: any
+): [storedValue: any, setValue: React.Dispatch<any>] => {
   const [storedValue, setStoredValue] = useState(() => {
     if (typeof window === 'undefined') {
       return initialValue;

@@ -5,7 +5,25 @@ import axios from 'axios';
 import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
-const useUploadImage = () => {
+/**
+ * useUploadImage returns two functions
+ * uploadImage which handles adding a new image to the media library and the connecting it to the
+ * the correct sighting
+ * deleteImage deletes the image from the media library
+ * @example uploadImage(image, sightingId)
+ * @returns { imageIsUploaded, uploadError, isUploading, uploadImage, deleteImage, imageIsDeleted, deleteError, isDeleting}
+ */
+
+const useUploadImage = (): {
+  imageIsUploaded: boolean;
+  uploadError: string | null;
+  isUploading: boolean;
+  uploadImage: (image: any, sightingId: string) => Promise<void>;
+  isDeleting: boolean;
+  deleteImage: (imageId: number) => Promise<void>;
+  imageIsDeleted: boolean;
+  deleteError: string | null;
+} => {
   const [imageIsUploaded, setImageIsUploaded] = useState(false);
   const [imageIsDeleted, setImageIsDeleted] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);

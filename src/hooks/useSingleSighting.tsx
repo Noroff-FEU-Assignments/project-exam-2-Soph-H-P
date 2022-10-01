@@ -2,8 +2,22 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { SightingInterface } from './useSightings';
 
+/**
+ * useSingleSighting returns a function getSighting which sets a sighting state that is also returned.
+ * This state can be used to provide a sighting for the single sighting page.
+ * There is also pagination data returned which allows for fetching more sightings.
+ * @example getSighting()
+ * @returns {getSighting, error, isLoading, sighting}
+ */
 
-const useSingleSighting = (url: string) => {
+const useSingleSighting = (
+  url: string
+): {
+  getSighting: () => Promise<void>;
+  error: string;
+  isLoading: boolean;
+  sighting: SightingInterface | null;
+} => {
   const [sighting, setSightings] = useState<SightingInterface | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);

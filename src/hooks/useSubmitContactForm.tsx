@@ -4,7 +4,23 @@ import { sendContactFormUrl } from '../constants/api';
 import axios from 'axios';
 import { FormInstance } from 'antd';
 
-const useSubmitContactForm = (form: FormInstance) => {
+/**
+ * useSubmitContactForm returns a function submitForm which takes user contact details and message
+ * from the user
+ * currently this is sent to the admin email address
+ * @example submitForm(data)
+ * @param {FormInstance} form the form which is being submitted
+ * @returns {submitForm, formError, isSending, messageIsSent}
+ */
+
+const useSubmitContactForm = (
+  form: FormInstance
+): {
+  submitForm: (data: any) => Promise<void>;
+  formError: string | null;
+  isSending: boolean;
+  messageIsSent: boolean;
+} => {
   const [messageIsSent, setMessageIsSent] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [isSending, setIsSending] = useState(false);

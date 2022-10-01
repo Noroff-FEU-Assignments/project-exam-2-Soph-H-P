@@ -12,7 +12,21 @@ export interface RegisterFormInterface {
   password: string;
 }
 
-const useRegisterUser = (form: FormInstance) => {
+/**
+ * useRegisterUser returns a function submitForm which takes user registration details and authenticates them 
+ * a profile is also created and linked to the user. The authentication token is set allowing the user to 
+ * be logged in. 
+ * The form element allows the feilds to be reset on success
+ * @example submitForm(data)
+ * @param {FormInstance} form the form which is being submitted
+ * @returns {submitForm, registerError, isSubmitting}
+ */
+
+const useRegisterUser = (form: FormInstance): {
+  submitForm: (data: RegisterFormInterface) => Promise<void>;
+  registerError: string | null;
+  isSubmitting: boolean;
+} => {
   const [registerError, setRegisterError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setAuthToken } = useAuthState();

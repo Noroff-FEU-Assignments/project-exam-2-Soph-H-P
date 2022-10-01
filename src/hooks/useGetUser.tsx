@@ -10,7 +10,19 @@ interface UserDataInterface {
   sightings: number;
 }
 
-const useGetUser = () => {
+/**
+ * useGetUser returns a function getUser which sets an user state that is also returned.
+ * This state can be used to provide users information
+ * @example getUser()
+ * @returns {getUser, error, isLoading, user}
+ */
+
+const useGetUser = (): {
+  getUser: (id: string) => Promise<void>;
+  error: string | null;
+  isLoading: boolean;
+  user: UserDataInterface | null;
+} => {
   const [user, setUser] = useState<UserDataInterface | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
