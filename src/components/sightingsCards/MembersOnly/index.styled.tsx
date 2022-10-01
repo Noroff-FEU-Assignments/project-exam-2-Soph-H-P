@@ -14,7 +14,7 @@ export const StyledMembersOnlyTag = styled.div`
   padding: 2px;
 
   p {
-    margin: 0px 5px 0px 5px;
+    margin: 0px 5px !important;
     font-size: 16px;
     font-weight: 300;
   }
