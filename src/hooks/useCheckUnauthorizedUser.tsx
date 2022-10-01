@@ -5,7 +5,20 @@ import axios from 'axios';
 import { Dispatch, SetStateAction } from 'react';
 import { notification } from 'antd';
 
-const useCheckUnauthorizedUser = () => {
+/**
+ * This hook returns a function that will allow you to check whether a user is authorised to make a request
+ * if the user is not authorized they will be logged out.
+ * @example checkUnauthorizedUser(error, setError, message)
+ * @returns {checkUnauthorizedUser}
+ */
+
+const useCheckUnauthorizedUser = (): {
+  checkUnauthorizedUser: (
+    error: unknown,
+    setError: Dispatch<SetStateAction<string | null>> | Dispatch<SetStateAction<string>>,
+    message: string
+  ) => void;
+} => {
   const navigate = useNavigate();
   const { setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();

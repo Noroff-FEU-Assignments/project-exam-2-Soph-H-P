@@ -6,7 +6,31 @@ import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 import { EventInterface } from './useEvents';
 
-const useSubmitEvent = (form: FormInstance) => {
+/**
+ * useSubmitEvent returns a number of functions
+ * submitForm which handles adding a new event and also sets the visible events so the
+ * user can see it instantly
+ * submitUpdateform allows updates the current event with new data from the user
+ * deleteEvent deletes the event
+ * @example submitForm(data, setVisibleEvents)
+ * @param {FormInstance} form the form which is being submitted
+ * @returns { formIsSubmitted, formError, isSubmitting, submitForm, submitUpdateForm, deleteEvent, isDeleting}
+ */
+
+const useSubmitEvent = (
+  form: FormInstance
+): {
+  formIsSubmitted: string | null;
+  formError: string | null;
+  isSubmitting: boolean;
+  submitForm: (
+    data: any,
+    setVisibleEvents: Dispatch<React.SetStateAction<EventInterface[] | null | undefined>>
+  ) => Promise<void>;
+  submitUpdateForm: (data: any, id: number) => Promise<void>;
+  deleteEvent: (id: number) => Promise<void>;
+  isDeleting: boolean;
+} => {
   const [formIsSubmitted, setFormIsSubmitted] = useState<string | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);

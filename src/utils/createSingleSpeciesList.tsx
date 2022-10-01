@@ -1,6 +1,15 @@
 import { SightingInterface } from '../hooks/useSightings';
 
-const createSingleSpeciesList = (sightings: SightingInterface[]) => {
+/**
+ * creates a list of each species logged so far, this is to be used in the
+ * dropdown search to help users find sightings, and to prevent spelling errors when
+ * logging a new sighting.
+ * @param {SightingInterface[]} sightings
+ * @example createSingleSpeciesList(sightings)
+ * @returns {string[]}
+ */
+
+const createSingleSpeciesList = (sightings: SightingInterface[]): string[] => {
   const speciesList: string[] = [];
   sightings.forEach((sighting) => {
     if (speciesList.length === 0) {

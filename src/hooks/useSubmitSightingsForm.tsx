@@ -9,12 +9,36 @@ import useNearestLocation from './useNearestLocation';
 import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
+/**
+ * useSubmitSightingsForm returns two functions
+ * submitForm which handles adding a new sighting it also uses the response and sighting id
+ * to then upload the image if there is one and connect it to the sighting.
+ * updateSighting updates the sighting and the image if there is one.
+ * @example submitForm(data, setNewSightingId)
+ * @param {FormInstance} form the form which is being submitted
+ * @param {Dispatch<SetStateAction<UploadFile<File>[]>>} setFileList state setter for images added to sighting
+ * @param {Dispatch<React.SetStateAction<LatLngLiteral | null>>} setPosition state setter for adding the position
+ * @param {LatLngLiteral | null} position the location coordinates
+ * @returns { formIsSubmitted, formError, isSubmitting, submitForm, updateSighting, isSaving}
+ */
+
 const useSubmitSightingsForm = (
   form: FormInstance,
   setFileList: Dispatch<SetStateAction<UploadFile<File>[]>>,
   setPosition?: Dispatch<React.SetStateAction<LatLngLiteral | null>>,
   position?: LatLngLiteral | null
-) => {
+): {
+  formIsSubmitted: boolean;
+  formError: string | null;
+  isSubmitting: boolean;
+  submitForm: (
+    data: any,
+    setNewSightingId: Dispatch<SetStateAction<number | null>>,
+    image?: File
+  ) => Promise<void>;
+  updateSighting: (data: any, sightingId: number, image?: File) => Promise<void>;
+  isSaving: boolean;
+} => {
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);

@@ -5,7 +5,24 @@ import { useUserState } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from '../context/AuthContext';
 
-const useUserProfile = () => {
+/**
+ * useSubmitSightingsForm returns a number of functions for manipulating the user profile
+ * updateUserProfile which handles updating user profile
+ * deleteUserProfile deletes the user profile
+ * createProfile creates a new profile used when a new user registers
+ * getMyUserProfile gets the user profile used when the user logs in
+ * @example updateUserProfile(username, data)
+ * @returns { creationError, isFinished, createProfile, getMyUserProfile, deleteUserProfile, updateUserProfile}
+ */
+
+const useUserProfile = (): {
+  creationError: string | null;
+  isFinished: boolean;
+  createProfile: (data: any, jwtToken: string) => Promise<void>;
+  getMyUserProfile: (userId: number, username: string) => Promise<void>;
+  deleteUserProfile: (username: string) => Promise<void>;
+  updateUserProfile: (username: string, data: any) => Promise<void>;
+} => {
   const [creationError, setCreationError] = useState<string | null>(null);
   const [isFinished, setIsFinished] = useState(false);
   const { setUserInfo } = useUserState();

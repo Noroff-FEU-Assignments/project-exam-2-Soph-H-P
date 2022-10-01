@@ -2,7 +2,20 @@ import axios from 'axios';
 import { useState } from 'react';
 import createReverseLocationUrl from '../utils/createReverseLocationUrl';
 
-const useNearestLocation = () => {
+/**
+ * useNearestLocation returns a function findNearestLocation which sets an location state
+ * this then supplies the name of the nearest place based on the lat and lng coordinates
+ * @example findNearestLocation()
+ * @returns {findNearestLocation, locationError, isLoading, location}
+ */
+
+
+const useNearestLocation = (): {
+  findNearestLocation: (lat: number, lng: number) => Promise<void>;
+  locationError: string | null;
+  isLoading: boolean;
+  location: string | null;
+} => {
   const [location, setLocation] = useState<string | null>(null);
   const [locationError, setLocationError] = useState('');
   const [isLoading, setIsLoading] = useState(true);

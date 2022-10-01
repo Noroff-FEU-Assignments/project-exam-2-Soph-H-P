@@ -13,7 +13,22 @@ export interface EventInterface {
   id: number;
 }
 
-const useEvents = (url?: string) => {
+/**
+ * useEvents returns a function getEvents which sets an event state that is also returned.
+ * This state can be used to provide events for components
+ * @example getEvents()
+ * @param {string} url where the events will come from
+ * @returns {getEvents, error, isLoading, events}
+ */
+
+const useEvents = (
+  url?: string
+): {
+  getEvents: () => Promise<void>;
+  error: string | null;
+  isLoading: boolean;
+  events: EventInterface[] | null | undefined;
+} => {
   const [events, setEvents] = useState<EventInterface[] | null>();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);

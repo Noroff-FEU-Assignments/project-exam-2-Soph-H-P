@@ -3,7 +3,19 @@ import moment from 'moment';
 import { EventInterface } from '../hooks/useEvents';
 import datesAreSame from './datesAreSame';
 
-const getListData = (value: Moment, events?: EventInterface[] | null) => {
+/**
+ * Makes a list of data that is used by the calendar element on the events page
+ * this list is mapped to display events to users.
+ * @param {Moment} value
+ * @param {EventInterface[] | null} events
+ * @example getListData(date, events)
+ * @returns {listData: {type: string;content: string; event: EventInterface;}[]}
+ */
+
+const getListData = (
+  value: Moment,
+  events?: EventInterface[] | null
+): { type: string; content: string; event: EventInterface }[] => {
   const listData: { type: string; content: string; event: EventInterface }[] = [];
   if (events) {
     events.forEach((event) => {

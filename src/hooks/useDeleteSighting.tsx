@@ -5,13 +5,26 @@ import { useAuthState } from '../context/AuthContext';
 import useUploadImage from './useUploadImage';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
-const useDeleteSighting = () => {
+/**
+ * useDeleteSighting returns a function deleteSighting that can be used to delete a sighting using ths sighting id 
+ * if there is an image associated with the sighting this is also deleted.
+ *
+ * @returns {deleteSighting, error, isDeleting, isDeleted}
+ */
+
+const useDeleteSighting = (): {
+  deleteSighting: (id: number, imageId?: number) => Promise<void>;
+  error: string | null;
+  isDeleting: boolean;
+  isDeleted: boolean;
+} => {
   const [error, setError] = useState<string | null>('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
   const { authToken } = useAuthState();
   const { deleteImage } = useUploadImage();
   const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
+
   const deleteSighting = async (id: number, imageId?: number) => {
     setIsDeleting(true);
     setError(null);

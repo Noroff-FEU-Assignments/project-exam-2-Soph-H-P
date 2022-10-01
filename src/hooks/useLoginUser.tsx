@@ -10,7 +10,23 @@ export interface LoginFormInterface {
   password: string;
 }
 
-const useLoginUser = (form: FormInstance) => {
+/**
+ * useLoginUser returns a function submitForm which takes user login details and authenticates them
+ * a profile is also fetched and set in local storage as userInfo. The authentication token is set allowing the user to
+ * be logged in.
+ * The form element allows the feilds to be reset on success
+ * @example submitForm(data)
+ * @param {FormInstance} form the form which is being submitted
+ * @returns {submitForm, loginError, isSubmitting}
+ */
+
+const useLoginUser = (
+  form: FormInstance
+): {
+  submitForm: (data: LoginFormInterface) => Promise<void>;
+  loginError: string | null;
+  isSubmitting: boolean;
+} => {
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setAuthToken } = useAuthState();

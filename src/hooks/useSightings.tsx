@@ -48,12 +48,28 @@ interface PaginationData {
   total: number;
 }
 
-const useSightings = (url?: string, mySightings?: boolean) => {
+/**
+ * useSightings returns a function getSightings which sets a list of sightings that is also returned.
+ * This state can be used to provide sightings for components.
+ * There is also pagination data returned which allows for fetching more sightings.
+ * @example getSightings(url)
+ * @returns {getSightings, error, isLoading, sightings, paginationData}
+ */
+
+const useSightings = (
+  url?: string,
+  mySightings?: boolean
+): {
+  getSightings: () => Promise<void>;
+  error: string | null;
+  isLoading: boolean;
+  sightings: SightingInterface[] | null;
+  paginationData: PaginationData | null;
+} => {
   const [sightings, setSightings] = useState<SightingInterface[] | null>(null);
   const [paginationData, setPaginationData] = useState<PaginationData | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
 
   const getSightings = async () => {
     if (url) {
