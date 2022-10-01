@@ -16,6 +16,7 @@ export const PageContainer = styled.div<{
   border-radius: 20px;
   margin: 0px auto;
   padding: 20px;
+  width: 100%;
 
   @media (max-width: 500px) {
     margin: 0px;

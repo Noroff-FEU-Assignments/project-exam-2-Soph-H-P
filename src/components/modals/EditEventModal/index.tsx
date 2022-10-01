@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch } from 'react';
 import { EventInterface } from '../../../hooks/useEvents';
 import EditEventsForm from '../../forms/EditEventsForm';
 import { StyledModal } from './index.styled';

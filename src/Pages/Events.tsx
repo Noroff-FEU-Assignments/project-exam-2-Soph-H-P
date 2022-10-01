@@ -6,6 +6,7 @@ import { useUserState } from '../context/UserContext';
 import useEvents, { EventInterface } from '../hooks/useEvents';
 import API, { eventsEndpoint } from '../constants/api';
 import { useEffect, useState } from 'react';
+import Loader from '../components/common/Loader';
 
 /**
  * Main page component for the Events page, this page renders
@@ -19,7 +20,7 @@ import { useEffect, useState } from 'react';
 const Events = (): React.ReactElement => {
   const { userInfo } = useUserState();
   const url = `${API}${eventsEndpoint}`;
-  const { events } = useEvents(url);
+  const { events, isLoading } = useEvents(url);
   const [visibleEvents, setVisibleEvents] = useState<EventInterface[] | null | undefined>(null);
 
   useEffect(() => {
@@ -35,12 +36,11 @@ const Events = (): React.ReactElement => {
         title="Events | Birds of Østfold"
         metaDescription="Take a look at what is going on for bird spotters in your local area."
       />
+      {isLoading && <Loader size={100} />}
       {visibleEvents && (
         <>
           <EventsCalendar visibleEvents={visibleEvents} setVisibleEvents={setVisibleEvents} />
-          {userInfo?.userRole === 'admin' && (
-            <EventsForm setVisibleEvents={setVisibleEvents} />
-          )}
+          {userInfo?.userRole === 'admin' && <EventsForm setVisibleEvents={setVisibleEvents} />}
         </>
       )}
     </PageContainer>

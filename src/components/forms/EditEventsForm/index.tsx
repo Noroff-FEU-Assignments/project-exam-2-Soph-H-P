@@ -1,7 +1,6 @@
 import { StyledForm } from '../StyledForm/index.styled';
 import { Button, DatePicker, Form, Input, message, Popconfirm } from 'antd';
 import { RangePickerProps } from 'antd/lib/date-picker';
-import type { Moment } from 'moment';
 import moment from 'moment';
 import FormMessage from '../FormMessage';
 import theme from '../../../styles/theme';

@@ -25,7 +25,7 @@ const ModerateSightings = (): React.ReactElement => {
   }, [userInfo]);
 
   return (
-    <PageContainer style={{ width: '100%' }}>
+    <PageContainer>
       <MetaData
         title="Moderate sightings | Birds of Østfold"
         metaDescription="Here as an admin you are able to accept or reject incoming sightings. This gives you full control"

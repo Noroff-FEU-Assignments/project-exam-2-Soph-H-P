@@ -26,7 +26,7 @@ const MySightings = (): React.ReactElement => {
   }, [authToken]);
 
   return (
-    <PageContainer $isSplit={true} style={{ width: '100%' }}>
+    <PageContainer $isSplit={true}>
       <MetaData
         title="My sightings | Birds of Østfold"
         metaDescription="Have a look at all the birds you have seen and recorded here"

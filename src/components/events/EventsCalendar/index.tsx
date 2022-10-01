@@ -2,8 +2,6 @@ import React, { Dispatch, useEffect, useState } from 'react';
 import type { BadgeProps } from 'antd';
 import { Badge, Calendar } from 'antd';
 import type { Moment } from 'moment';
-import useEvents from '../../../hooks/useEvents';
-import API, { eventsEndpoint } from '../../../constants/api';
 import moment from 'moment';
 import { EventInterface } from '../../../hooks/useEvents';
 import EventModal from '../../modals/EventModal';
