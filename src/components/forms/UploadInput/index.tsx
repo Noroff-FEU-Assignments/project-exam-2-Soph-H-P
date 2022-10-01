@@ -43,7 +43,7 @@ const UploadInput = ({
 
     setTimeout(() => {
       onSuccess('ok');
-    }, 10);
+    }, 100);
   };
 
   const getBase64 = (file: RcFile): Promise<string> =>
