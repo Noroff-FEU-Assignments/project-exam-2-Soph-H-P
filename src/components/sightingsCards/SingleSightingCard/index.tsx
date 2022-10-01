@@ -33,6 +33,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }): Reac
     nearestLocation,
     species,
     userId,
+    profileId,
     description,
     username,
     varified,
@@ -43,7 +44,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }): Reac
 
   useEffect(() => {
     if ((!varified && userInfo) || (!varified && !userInfo)) {
-      if (userInfo?.userRole === 'admin' || parseInt(userId) === userInfo?.id) {
+      if (userInfo?.userRole === 'admin' || parseInt(userId) === userInfo?.user) {
         return;
       } else {
         navigate('/');
@@ -73,7 +74,7 @@ const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }): Reac
             {nearestLocation}
           </InfoWrapper>
           <InfoWrapper>
-            <VarifiedUsername userId={userId} backupUsername={username} />
+            <VarifiedUsername profileId={profileId} backupUsername={username} />
           </InfoWrapper>
           <p style={{ alignItems: 'start', flexDirection: 'column' }}>
             <span>Description: </span>

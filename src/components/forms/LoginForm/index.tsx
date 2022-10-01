@@ -22,6 +22,7 @@ const LoginForm = (): React.ReactElement => {
   const { authToken, setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();
 
+
   const { loginError, isSubmitting, submitForm } = useLoginUser(form);
 
   const navigate = useNavigate();

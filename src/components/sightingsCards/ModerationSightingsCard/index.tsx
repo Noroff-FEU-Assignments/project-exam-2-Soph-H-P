@@ -8,13 +8,13 @@ import CloseSvg from '../../../svgs/CloseSvg';
 import useDeleteSighting from '../../../hooks/useDeleteSighting';
 import useVarifySighting from '../../../hooks/useVarifySighting';
 import { message, Popconfirm } from 'antd';
-import useAddSightingToUser from '../../../hooks/useAddSightingToUser';
 import VarifiedUsername from '../VarifiedUsername';
 import EditSvg from '../../../svgs/EditSvg';
 import { useNavigate } from 'react-router-dom';
 import { Dispatch, SetStateAction } from 'react';
 import MembersOnly from '../MembersOnly';
 import ImageWithWrapper from '../../common/ImageWithWrapper';
+import findImageUrl from '../../../utils/findImageUrl';
 
 /**
  * Creates a card that shows a sighting with moderation options for the admin user
@@ -34,16 +34,7 @@ const ModerationSightingsCard = ({
   sighting: SightingInterface;
   setVisibleSightings: Dispatch<SetStateAction<SightingInterface[] | null>>;
 }): React.ReactElement => {
-  const findImageUrl = (sighting: SightingInterface) => {
-    if (sighting.attributes.photos.data) {
-      if (sighting.attributes.photos.data[0].attributes.formats.small) {
-        return sighting.attributes.photos.data[0].attributes.formats.small.url;
-      }
-      return sighting.attributes.photos.data[0].attributes.url;
-    } else {
-      return '';
-    }
-  };
+
 
   findImageUrl(sighting);
   const imageSrc = findImageUrl(sighting);
@@ -55,13 +46,13 @@ const ModerationSightingsCard = ({
     species,
     description,
     userId,
+    profileId,
     username,
     public: isPublic,
   } = sighting.attributes;
   const navigate = useNavigate();
   const { deleteSighting } = useDeleteSighting();
   const { varifySighting } = useVarifySighting();
-  const { addSightingToUser } = useAddSightingToUser();
 
   const text = 'Are you sure you want to delete this sighting?';
 
@@ -78,9 +69,8 @@ const ModerationSightingsCard = ({
   };
 
   const handleVarifySighting = () => {
-    varifySighting(sighting.id);
     if (userId !== null) {
-      addSightingToUser(userId);
+      varifySighting(sighting.id);
     }
     removeSighting(sighting.id);
   };
@@ -111,7 +101,7 @@ const ModerationSightingsCard = ({
         {nearestLocation}
       </p>
       <InfoWrapper>
-        <VarifiedUsername userId={userId} backupUsername={username} />
+        <VarifiedUsername profileId={profileId} backupUsername={username} />
       </InfoWrapper>
       <p style={{ alignItems: 'start', flexDirection: 'column' }}>
         <span>Description: </span>

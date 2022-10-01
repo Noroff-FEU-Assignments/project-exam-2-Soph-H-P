@@ -34,6 +34,7 @@ export interface SightingInterface {
     species: string;
     updatedAt: string;
     userId: string;
+    profileId: string;
     varified: boolean;
     username: string;
     nearestLocation: string;

@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import axios from 'axios';
-import API, { userEndpoint } from '../constants/api';
+import API, { profileUrlEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
-import { UserInterface } from '../context/UserContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
+interface UserDataInterface {
+  userRole: string;
+  username: string;
+  sightings: number;
+}
+
 const useGetUser = () => {
-  const [user, setUser] = useState<UserInterface | null>(null);
+  const [user, setUser] = useState<UserDataInterface | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const { authToken } = useAuthState();
@@ -14,7 +19,7 @@ const useGetUser = () => {
 
   const getUser = async (id: string) => {
     if (id && authToken) {
-      const url = `${API}${userEndpoint}/${id}`;
+      const url = `${API}${profileUrlEndpoint}/${id}?populate=sightings`;
       try {
         const headers = {
           Authorization: `Bearer ${authToken}`,
@@ -22,7 +27,13 @@ const useGetUser = () => {
 
         const response = await axios.get(url, { headers });
         if (response.status === 200) {
-          setUser(response.data);
+          const user = response.data.data.attributes;
+          const userData = {
+            userRole: user.userRole,
+            username: user.username,
+            sightings: user.sightings.data.length,
+          };
+          setUser(userData);
         } else {
           setError(
             'Oops something went wrong. We are having trouble finding that user at the moment'

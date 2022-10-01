@@ -5,6 +5,7 @@ import VarifiedUsername from '../VarifiedUsername';
 import { useNavigate } from 'react-router-dom';
 import MembersOnly from '../MembersOnly';
 import ImageWithWrapper from '../../common/ImageWithWrapper';
+import findImageUrl from '../../../utils/findImageUrl';
 
 /**
  * Creates a card that shows a sighting
@@ -20,23 +21,12 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }): React.Rea
     date: when,
     nearestLocation,
     species,
-    userId,
+    profileId,
     username,
     varified,
     public: isPublic,
   } = sighting.attributes;
   const navigate = useNavigate();
-
-  const findImageUrl = (sighting: SightingInterface) => {
-    if (sighting.attributes.photos.data) {
-      if (sighting.attributes.photos.data[0].attributes.formats.small) {
-        return sighting.attributes.photos.data[0].attributes.formats.small.url;
-      }
-      return sighting.attributes.photos.data[0].attributes.url;
-    } else {
-      return '';
-    }
-  };
 
   findImageUrl(sighting);
   const imageSrc = findImageUrl(sighting);
@@ -64,7 +54,7 @@ const SightingsCard = ({ sighting }: { sighting: SightingInterface }): React.Rea
         {nearestLocation}
       </InfoWrapper>
       <InfoWrapper>
-        <VarifiedUsername userId={userId} backupUsername={username} />
+        <VarifiedUsername profileId={profileId} backupUsername={username} />
       </InfoWrapper>
       {!isPublic && <MembersOnly />}
     </StyledCardContainer>

@@ -4,12 +4,14 @@ export const sendContactFormUrl =
 
 export const accessTokenUrlEndpoint = '/auth/local';
 export const registerUrlEndpoint = '/auth/local/register';
+export const profileUrlEndpoint = '/profiles';
 export const sightingsEndpoint = '/sightings';
 export const eventsEndpoint = '/events';
 export const userEndpoint = '/users';
 export const uploadImageUrlEndpoint = '/upload/';
-export const birdsOnlyUrl = `${API}${sightingsEndpoint}?filters[varified][$eq]=true&&fields[0]=species`;
+export const birdsOnlyUrl = `${API}${sightingsEndpoint}?filters[varified][$eq]=true&fields[0]=species`;
 
+export const includeAll = 'populate=*';
 export const includingImagesQuery = 'populate=photos';
 export const andSortByDate = 'sort=date%3Adesc';
 export const andFilterVarified = 'filters[varified][$eq]=true';

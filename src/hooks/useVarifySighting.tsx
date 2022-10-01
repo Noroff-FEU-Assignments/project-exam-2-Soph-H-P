@@ -22,6 +22,7 @@ const useVarifySighting = () => {
         varified: true,
       };
 
+      console.log(data);
       const response = await axios.put(`${API}${sightingsEndpoint}/${id}`, { data }, { headers });
       if (response) {
         setIsVarified(true);

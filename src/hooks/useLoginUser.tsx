@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import API, { accessTokenUrlEndpoint } from '../constants/api';
 import axios from 'axios';
 import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
-import { useUserState } from '../context/UserContext';
+import useUserProfile from './useUserProfile';
 
 export interface LoginFormInterface {
   identifier: string;
@@ -15,8 +14,7 @@ const useLoginUser = (form: FormInstance) => {
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setAuthToken } = useAuthState();
-  const { setUserInfo } = useUserState();
-  const navigate = useNavigate();
+  const { getMyUserProfile } = useUserProfile();
 
   const submitForm = async (data: LoginFormInterface) => {
     setIsSubmitting(true);
@@ -24,11 +22,8 @@ const useLoginUser = (form: FormInstance) => {
     try {
       const response = await axios.post(API + accessTokenUrlEndpoint, data);
       setAuthToken(response.data.jwt);
-      setUserInfo(response.data.user);
+      getMyUserProfile(response.data.user.id, response.data.user.username);
       form.resetFields();
-      if (response.data.user.userRole === "admin") {
-        navigate('/admin/moderate-sightings');
-      }
     } catch (error: unknown) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {

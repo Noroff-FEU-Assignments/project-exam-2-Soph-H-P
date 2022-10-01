@@ -88,11 +88,25 @@ const SightingsForm = (): React.ReactElement => {
           </Form.Item>
           {userInfo && (
             <>
-              {userInfo.id && (
+              {userInfo.user && (
                 <>
                   <Form.Item
                     name="userId"
-                    initialValue={userInfo.id.toString()}
+                    initialValue={userInfo.user.toString()}
+                    style={{ display: 'none' }}
+                  >
+                    <Input disabled />
+                  </Form.Item>
+                  <Form.Item
+                    name="profileId"
+                    initialValue={userInfo.profileId.toString()}
+                    style={{ display: 'none' }}
+                  >
+                    <Input disabled />
+                  </Form.Item>
+                  <Form.Item
+                    name="profile"
+                    initialValue={userInfo.profileId}
                     style={{ display: 'none' }}
                   >
                     <Input disabled />

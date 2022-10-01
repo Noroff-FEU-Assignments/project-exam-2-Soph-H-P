@@ -16,31 +16,31 @@ import StatusIcon from '../StatusIcon';
  */
 
 const VarifiedUsername = ({
-  userId,
+  profileId,
   backupUsername,
 }: {
-  userId: string;
+  profileId: string;
   backupUsername: string;
 }): React.ReactElement => {
   const { user, getUser } = useGetUser();
   const { userInfo } = useUserState();
 
   useEffect(() => {
-    getUser(userId);
+    getUser(profileId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }, [profileId]);
 
   const getUsername = () => {
-    if (userInfo?.userRole === 'admin' && user && userId) {
+    if (userInfo?.userRole === 'admin' && user && profileId) {
       return (
         <>
           <span>Who: </span>
-          <Link to={`/admin/edit-users/${userId}`} style={{ display: 'flex', alignItems: 'end' }}>
+          <Link to={`/admin/edit-users/${profileId}`} style={{ display: 'flex', alignItems: 'end' }}>
             {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
           </Link>
         </>
       );
-    } else if (userInfo?.userRole && user && userId) {
+    } else if (userInfo?.userRole && user && profileId) {
       return (
         <p style={{ display: 'flex', alignItems: 'end' }}>
           <span>Who: </span>

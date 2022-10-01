@@ -6,6 +6,7 @@ import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
+import useUserProfile from './useUserProfile';
 
 const useUser = (form?: FormInstance) => {
   const [formIsSubmitted, setFormIsSubmitted] = useState<string | null>(null);
@@ -15,6 +16,7 @@ const useUser = (form?: FormInstance) => {
   const { authToken } = useAuthState();
   const navigate = useNavigate();
   const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
+  const { deleteUserProfile, updateUserProfile } = useUserProfile();
 
   const submitUpdateForm = async (data: any, id: string) => {
     setIsSubmitting(true);
@@ -23,7 +25,10 @@ const useUser = (form?: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.put(`${API}${userEndpoint}/${id}`, data, { headers });
+
       if (response.status === 200) {
+        console.log(response.data.username);
+        updateUserProfile(response.data.username, data);
         setFormIsSubmitted('This user has been updated');
       }
       form && form.resetFields();
@@ -45,6 +50,8 @@ const useUser = (form?: FormInstance) => {
         Authorization: `Bearer ${authToken}`,
       };
       const response = await axios.delete(`${API}${userEndpoint}/${id}`, { headers: headers });
+      console.log(response.data.username);
+      deleteUserProfile(response.data.username);
       if (response.status === 200) {
         setFormIsSubmitted('This event has been deleted');
       }

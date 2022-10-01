@@ -59,7 +59,7 @@ const RegisterForm = (): React.ReactElement => {
             message: 'Please input your username',
           },
           {
-            max: 20,
+            max: 15,
             message: 'Cannot be more than 15 characters',
           },
         ]}
