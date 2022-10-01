@@ -43,6 +43,7 @@ function App() {
                 <Route path="/admin/moderate-sightings" element={<ModerateSightings />} />
                 <Route path="/admin/edit-users/:id" element={<EditUsers />} />
                 <Route path="/admin/edit-sighting/:id" element={<EditSighting />} />
+                <Route path="/404" element={<NotFound />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
