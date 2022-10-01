@@ -32,9 +32,11 @@ interface EventData {
 const EditEventsForm = ({
   currentEvent,
   setVisibleEvents,
+  setIsOpen,
 }: {
   currentEvent: EventInterface;
   setVisibleEvents: Dispatch<React.SetStateAction<EventInterface[] | null | undefined>>;
+  setIsOpen: Dispatch<React.SetStateAction<boolean>>;
 }): React.ReactElement => {
   const [form] = Form.useForm();
   const { formError, formIsSubmitted, isSubmitting, submitUpdateForm, deleteEvent, isDeleting } =
@@ -53,10 +55,11 @@ const EditEventsForm = ({
     setVisibleEvents((events) => {
       return events?.filter((event) => event.id !== currentEvent.id) || null;
     });
+    setIsOpen(false);
   };
 
   const handleFinish = (data: EventData) => {
-    submitUpdateForm(data, currentEvent.id)
+    submitUpdateForm(data, currentEvent.id);
     setVisibleEvents((events) => {
       const updatedEvents = events?.map((event) => {
         if (event.id === currentEvent.id) {

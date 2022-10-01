@@ -76,6 +76,7 @@ const EventsCalendar = ({
       {userInfo?.userRole === 'admin' && isOpen && (
         <EditEventModal
           isOpen={isOpen}
+          setIsOpen={setIsOpen}
           handleCancel={() => setIsOpen(false)}
           currentEvent={currentEvent}
           setVisibleEvents={setVisibleEvents}

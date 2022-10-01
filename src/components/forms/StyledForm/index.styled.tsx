@@ -124,8 +124,9 @@ export const StyledForm = styled(Form)<{ $isEventsForm?: boolean; $isUserEdit?: 
       width: 40%;
       background: ${theme.colors.primaryHighlightColor};
       margin-left: 10px;
+      padding: 20px;
 
-      @media (max-width: 800px) {
+      @media (max-width: 900px) {
         width: 100%;
         margin-left: 10px;
       }
