@@ -16,6 +16,13 @@ export const MobileNav = styled.nav`
   display: flex;
   align-items: center;
   padding-right: 5px;
+
+  button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1500;
+  }
 `;
 
 export const StyledLogo = styled(NavLink)`

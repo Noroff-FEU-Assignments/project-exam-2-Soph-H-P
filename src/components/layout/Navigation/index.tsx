@@ -43,9 +43,9 @@ const Navagation = (): React.ReactElement => {
             onClick={() => setIsOpen(!isOpen)}
           />
           <Drawer
-            drawerStyle={{ backgroundColor: theme.colors.primaryColor, padding: '30px 0px' }}
+            drawerStyle={{ backgroundColor: theme.colors.primaryColor, padding: '80px 0px 30px 0px' }}
             headerStyle={{ display: 'none' }}
-            style={{ top: '50px' }}
+            style={{ top: '0px' }}
             placement="right"
             onClose={() => setIsOpen(false)}
             visible={isOpen}
