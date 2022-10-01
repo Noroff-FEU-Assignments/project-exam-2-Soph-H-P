@@ -55,24 +55,16 @@ const useSightings = (url?: string, mySightings?: boolean) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(sightings);
-  }, [sightings]);
 
   const getSightings = async () => {
     if (url) {
       try {
         setIsLoading(true);
         const response = await axios.get(url);
-
-        mySightings ? console.log('just min') : console.log('all of them');
-
         if (response.status === 200) {
           if (mySightings) {
-            // console.log(response.data.data.attributes.sightings.data);
             setSightings(response.data.data.attributes.sightings.data);
           } else {
-            // console.log(response.data.data);
             setSightings(response.data.data);
             setPaginationData(response.data.meta.pagination);
           }

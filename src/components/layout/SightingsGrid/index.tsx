@@ -59,8 +59,6 @@ const SightingsGrid = ({
   }, [currentPage]);
 
   useEffect(() => {
-    console.log(sightings);
-    console.log(visibleSightings);
     if (visibleSightings === null) {
       setVisibleSightings(sightings);
     }
@@ -74,10 +72,6 @@ const SightingsGrid = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sightings]);
-
-  useEffect(() => {
-    console.log(visibleSightings);
-  }, [visibleSightings]);
 
   if (error) {
     return (
