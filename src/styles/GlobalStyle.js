@@ -66,6 +66,10 @@ const GlobalStyle = createGlobalStyle`
         .ant-picker-datetime-panel {
           flex-direction: column;
         }
+
+        .ant-space-item > .ant-input.ant-input-status-success {
+            font-size: 16px !important;
+        }   
       }
 
 `;

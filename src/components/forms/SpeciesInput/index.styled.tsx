@@ -18,11 +18,16 @@ export const StyledSelect = styled(Select)`
   @media (max-width: 500px) {
     .ant-select-selector,
     .ant-select-selection-search > input {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 `;
 
 export const NotFoundContainer = styled.div`
   text-align: center;
+  @media (max-width: 500px) {
+    svg {
+      display: none;
+    }
+  }
 `;
