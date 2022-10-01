@@ -69,6 +69,17 @@ const SightingsGrid = ({
       ) {
         setVisibleSightings([...visibleSightings, ...sightings]);
       }
+      if (mySightings) {
+        //sort order of my sightings descending
+        setVisibleSightings(
+          visibleSightings.sort((firstDate, secondDate) => {
+            const firstDateValue = new Date(firstDate.attributes.date);
+            const secondDateValue = new Date(secondDate.attributes.date);
+            //@ts-ignore: date type
+            return secondDateValue - firstDateValue;
+          })
+        );
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sightings]);
