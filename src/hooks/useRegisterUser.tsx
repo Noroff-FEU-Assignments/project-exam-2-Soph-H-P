@@ -20,7 +20,7 @@ export interface RegisterFormInterface {
  * The form element allows the feilds to be reset on success
  * @example submitForm(data)
  * @param {FormInstance} form the form which is being submitted
- * @returns {submitForm, registerError, isSubmitting}
+ * @returns {submitForm, registerError, isSubmitting, isSubmitted}
  */
 
 const useRegisterUser = (
@@ -29,9 +29,11 @@ const useRegisterUser = (
   submitForm: (data: RegisterFormInterface) => Promise<void>;
   registerError: string | null;
   isSubmitting: boolean;
+  isSubmitted: boolean;
 } => {
   const [registerError, setRegisterError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { setAuthToken } = useAuthState();
   const navigate = useNavigate();
   const { createProfile } = useUserProfile();
@@ -57,13 +59,15 @@ const useRegisterUser = (
         username: response.data.user.username,
         userId: response.data.user.id.toString(),
       };
-      console.log(profileData);
 
       createProfile(profileData, response.data.jwt);
 
       setAuthToken(response.data.jwt);
       form.resetFields();
-      navigate('/');
+      setIsSubmitted(true)
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
     } catch (error) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {
@@ -97,7 +101,7 @@ const useRegisterUser = (
     }
   };
 
-  return { registerError, isSubmitting, submitForm };
+  return { registerError, isSubmitting, submitForm, isSubmitted };
 };
 
 export default useRegisterUser;

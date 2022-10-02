@@ -7,10 +7,9 @@ export const StyledFormMessage = styled.span<{ $error?: boolean }>`
   margin: 30px 0px 20px 0px;
   padding: 10px;
   background-color: ${({ $error }) =>
-    $error ? theme.colors.errorColor : theme.colors.secondaryHighlightColor};
+    $error ? theme.colors.errorColor : theme.colors.primaryColor};
   border-radius: 7px;
-  color: ${({ $error }) =>
-    $error ? theme.colors.brightWhite : theme.colors.darkFontColor};
+  color: ${theme.colors.brightWhite};
   display: flex;
   align-items: center;
 

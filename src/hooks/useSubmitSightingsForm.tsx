@@ -26,7 +26,7 @@ const useSubmitSightingsForm = (
   form: FormInstance,
   setFileList: Dispatch<SetStateAction<UploadFile<File>[]>>,
   setPosition?: Dispatch<React.SetStateAction<LatLngLiteral | null>>,
-  position?: LatLngLiteral | null,
+  position?: LatLngLiteral | null
 ): {
   formIsSubmitted: boolean;
   formError: string | null;
@@ -34,16 +34,21 @@ const useSubmitSightingsForm = (
   submitForm: (
     data: any,
     setNewSightingId: Dispatch<SetStateAction<number | null>>,
-    image?: File,
+    image?: File
   ) => Promise<void>;
-  updateSighting: (data: any, sightingId: number, image?: File) => Promise<void>;
+  updateSighting: (
+    data: any,
+    sightingId: number,
+    previousImageId?: number,
+    image?: File
+  ) => Promise<void>;
   isSaving: boolean;
 } => {
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { uploadImage } = useUploadImage();
+  const { uploadImage, deleteImage } = useUploadImage();
   const { location, findNearestLocation, locationError } = useNearestLocation();
   const { authToken } = useAuthState();
   const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
@@ -58,7 +63,7 @@ const useSubmitSightingsForm = (
   const submitForm = async (
     data: any,
     setNewSightingId: Dispatch<SetStateAction<number | null>>,
-    image?: File,
+    image?: File
   ) => {
     setIsSubmitting(true);
     if (location && setPosition) {
@@ -81,19 +86,24 @@ const useSubmitSightingsForm = (
         checkUnauthorizedUser(
           error,
           setFormError,
-          'We seem to be having trouble sending your sighting at the moment, please try again later',
+          'We seem to be having trouble sending your sighting at the moment, please try again later'
         );
       } finally {
         setIsSubmitting(false);
       }
     } else if (locationError) {
       setFormError(
-        'We seem to be having trouble sending your sighting at the moment, please try again later',
+        'We seem to be having trouble sending your sighting at the moment, please try again later'
       );
     }
   };
 
-  const updateSighting = async (data: any, sightingId: number, image?: File) => {
+  const updateSighting = async (
+    data: any,
+    sightingId: number,
+    previousImageId?: number,
+    image?: File
+  ) => {
     setIsSaving(true);
 
     try {
@@ -103,9 +113,12 @@ const useSubmitSightingsForm = (
       const response = await axios.put(
         `${API}${sightingsEndpoint}/${sightingId} `,
         { data },
-        { headers },
+        { headers }
       );
       if (image) {
+        if (previousImageId) {
+          await deleteImage(previousImageId);
+        }
         await uploadImage(image, response.data.data.id);
         setFileList([]);
       }
@@ -114,7 +127,7 @@ const useSubmitSightingsForm = (
       checkUnauthorizedUser(
         error,
         setFormError,
-        'We seem to be having trouble sending your sighting at the moment, please try again later',
+        'We seem to be having trouble sending your sighting at the moment, please try again later'
       );
     } finally {
       setIsSaving(false);

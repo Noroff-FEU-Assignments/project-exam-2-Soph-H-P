@@ -63,6 +63,7 @@ const useSubmitEvent = (
       );
     } finally {
       setIsSubmitting(false);
+      setFormIsSubmitted('This event has been saved')
     }
   };
 

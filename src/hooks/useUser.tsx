@@ -46,7 +46,6 @@ const useUser = (
       const response = await axios.put(`${API}${userEndpoint}/${id}`, data, { headers });
 
       if (response.status === 200) {
-        console.log(response.data.username);
         updateUserProfile(response.data.username, data);
         setFormIsSubmitted('This user has been updated');
       }
@@ -71,7 +70,6 @@ const useUser = (
       const response = await axios.delete(`${API}${userEndpoint}/${id}`, {
         headers: headers,
       });
-      console.log(response.data.username);
       deleteUserProfile(response.data.username);
       if (response.status === 200) {
         setFormIsSubmitted('This event has been deleted');

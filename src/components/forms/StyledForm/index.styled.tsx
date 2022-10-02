@@ -49,13 +49,15 @@ export const StyledForm = styled(Form)<{
 
     .ant-form-item-control-input-content {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       align-items: center;
     }
   }
 
   button {
-    margin: 0 auto;
+    margin: 10px auto;
+    min-width: 150px;
   }
 
   .ant-switch-handle {

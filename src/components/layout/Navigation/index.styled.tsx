@@ -18,7 +18,7 @@ export const MobileNav = styled.nav`
 
   button {
     position: fixed;
-    top: 10px;
+    top: 5px;
     right: 10px;
     z-index: 1500;
   }

@@ -6,6 +6,7 @@ export const CalendarContainer = styled.div<{ $isAdmin?: boolean }>`
   width: 100%;
   max-width: 1200px;
   padding: 10px;
+  margin: 0 auto; 
 
   .events {
     margin: 0;
