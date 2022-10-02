@@ -1,24 +1,34 @@
-import { StyledForm } from '../StyledForm/index.styled';
-import { Button, DatePicker, Form, Input, message, Popconfirm, Switch, UploadFile } from 'antd';
+import {
+  Button,
+  DatePicker,
+  Form,
+  Input,
+  message,
+  Popconfirm,
+  Switch,
+  UploadFile,
+} from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import useSubmitSightingsForm from '../../../hooks/useSubmitSightingsForm';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import UploadInput from '../UploadInput';
+import { Link, useNavigate } from 'react-router-dom';
+
+import API, { includingImagesQuery, sightingsEndpoint } from '../../../constants/api';
 import { useUserState } from '../../../context/UserContext';
+import useDeleteSighting from '../../../hooks/useDeleteSighting';
+import useSingleSighting from '../../../hooks/useSingleSighting';
+import useSubmitSightingsForm from '../../../hooks/useSubmitSightingsForm';
+import ApiErrorMessage from '../../common/ApiErrorMessage';
+import Cta from '../../common/Cta';
+import Loader from '../../common/Loader';
+import { PageContainer } from '../../layout/PageContainer/index.styled';
+import LocationInput from '../../mapComponents/LocationInput';
+import PageTitle from '../../typography/PageTitle';
 import FormMessage from '../FormMessage';
 import SpeciesInput from '../SpeciesInput';
-import PageTitle from '../../typography/PageTitle';
+import { StyledForm } from '../StyledForm/index.styled';
+import UploadInput from '../UploadInput';
 import { StyledFormContainer } from './index.styled';
-import API, { includingImagesQuery, sightingsEndpoint } from '../../../constants/api';
-import useSingleSighting from '../../../hooks/useSingleSighting';
-import Loader from '../../common/Loader';
-import Cta from '../../common/Cta';
-import ApiErrorMessage from '../../common/ApiErrorMessage';
-import { PageContainer } from '../../layout/PageContainer/index.styled';
-import useDeleteSighting from '../../../hooks/useDeleteSighting';
-import { Link, useNavigate } from 'react-router-dom';
-import LocationInput from '../../mapComponents/LocationInput';
 
 /**
  * The Edit sightings form takes the id of a sighting and uses this to get the
@@ -32,15 +42,24 @@ import LocationInput from '../../mapComponents/LocationInput';
  * @returns {React.ReactElement}
  */
 
-const EditSightingsForm = ({ sightingId }: { sightingId: string }): React.ReactElement => {
+const EditSightingsForm = ({
+  sightingId,
+}: {
+  sightingId: string;
+}): React.ReactElement => {
   const [form] = Form.useForm();
   const [image, setImage] = useState<File | undefined>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const { formError, isSaving, updateSighting, formIsSubmitted } = useSubmitSightingsForm(
     form,
-    setFileList
+    setFileList,
   );
-  const { deleteSighting, isDeleting, error: deleteError, isDeleted } = useDeleteSighting();
+  const {
+    deleteSighting,
+    isDeleting,
+    error: deleteError,
+    isDeleted,
+  } = useDeleteSighting();
   const { userInfo } = useUserState();
   const navigate = useNavigate();
   const url = `${API}${sightingsEndpoint}/${sightingId}?${includingImagesQuery}`;
@@ -107,7 +126,7 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }): React.ReactE
       <StyledForm
         form={form}
         initialValues={{ remember: true }}
-        onFinish={(data) => updateSighting(data, sighting.id, image)}
+        onFinish={data => updateSighting(data, sighting.id, image)}
         style={{ width: 800 }}
       >
         <PageTitle>Edit or Delete Sighting</PageTitle>
@@ -116,7 +135,11 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }): React.ReactE
             <SpeciesInput initialValue={species} />
             <label htmlFor="date">It was seen</label>
             <Form.Item name="date">
-              <DatePicker defaultValue={when} format={'dddd Do MM YYYY - HH:mm'} disabled />
+              <DatePicker
+                defaultValue={when}
+                format={'dddd Do MM YYYY - HH:mm'}
+                disabled
+              />
             </Form.Item>
             <label htmlFor="description">Description</label>
             <Form.Item
@@ -124,7 +147,11 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }): React.ReactE
               name="description"
               rules={[{ required: true, message: 'Please tell us about the sighting' }]}
             >
-              <TextArea rows={4} placeholder="Description character limit 250" maxLength={250} />
+              <TextArea
+                rows={4}
+                placeholder="Description character limit 250"
+                maxLength={250}
+              />
             </Form.Item>
             <label htmlFor="public">Who should see this sighting?</label>
             <Form.Item valuePropName="checked" name="public">
@@ -137,7 +164,11 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }): React.ReactE
             {userInfo && (
               <>
                 {userInfo.userRole === 'admin' && (
-                  <Form.Item name="varified" initialValue={true} style={{ display: 'none' }}>
+                  <Form.Item
+                    name="varified"
+                    initialValue={true}
+                    style={{ display: 'none' }}
+                  >
                     <Input disabled />
                   </Form.Item>
                 )}
@@ -148,7 +179,11 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }): React.ReactE
           <div>
             <label htmlFor="location">It was seen near: {nearestLocation}</label>
             <LocationInput position={{ lat: lat, lng: lng }} />
-            <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
+            <UploadInput
+              setImage={setImage}
+              fileList={fileList}
+              setFileList={setFileList}
+            />
           </div>
         </StyledFormContainer>
         <Button loading={isSaving} type="primary" htmlType="submit" size="large">
@@ -161,7 +196,12 @@ const EditSightingsForm = ({ sightingId }: { sightingId: string }): React.ReactE
           okText="Delete now"
           cancelText="Cancel"
         >
-          <Button loading={isDeleting} type="ghost" danger={true} style={{ marginTop: 20 }}>
+          <Button
+            loading={isDeleting}
+            type="ghost"
+            danger={true}
+            style={{ marginTop: 20 }}
+          >
             {isDeleting ? 'Deleting' : 'Delete'}
           </Button>
         </Popconfirm>

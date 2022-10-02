@@ -1,9 +1,10 @@
-import { PageContainer } from '../components/layout/PageContainer/index.styled';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useUserState } from '../context/UserContext';
-import EditUserForm from '../components/forms/EditUserForm';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import MetaData from '../components/common/MetaData';
+import EditUserForm from '../components/forms/EditUserForm';
+import { PageContainer } from '../components/layout/PageContainer/index.styled';
+import { useUserState } from '../context/UserContext';
 
 /**
  * Main page component for the Edit users page, this is a

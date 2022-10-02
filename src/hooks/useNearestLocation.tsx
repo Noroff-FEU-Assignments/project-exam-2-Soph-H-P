@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+
 import createReverseLocationUrl from '../utils/createReverseLocationUrl';
 
 /**
@@ -8,7 +9,6 @@ import createReverseLocationUrl from '../utils/createReverseLocationUrl';
  * @example findNearestLocation()
  * @returns {findNearestLocation, locationError, isLoading, location}
  */
-
 
 const useNearestLocation = (): {
   findNearestLocation: (lat: number, lng: number) => Promise<void>;
@@ -25,15 +25,15 @@ const useNearestLocation = (): {
       const url = createReverseLocationUrl(lat, lng);
 
       const response = await axios.get(url);
-      const foundLocation = response.data.results[0].city || response.data.results[0].name;
+      const foundLocation =
+        response.data.results[0].city || response.data.results[0].name;
       if (response.status === 200) {
         setLocation(foundLocation);
       }
-
     } catch (error) {
       console.log(error);
       setLocationError(
-        'We are having trouble finding your location, please try again later'
+        'We are having trouble finding your location, please try again later',
       );
     } finally {
       setIsLoading(false);

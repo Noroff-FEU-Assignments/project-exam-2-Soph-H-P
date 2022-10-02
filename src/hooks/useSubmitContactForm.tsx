@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { sendContactFormUrl } from '../constants/api';
-
-import axios from 'axios';
 import { FormInstance } from 'antd';
+import axios from 'axios';
+import { useState } from 'react';
+
+import { sendContactFormUrl } from '../constants/api';
 
 /**
  * useSubmitContactForm returns a function submitForm which takes user contact details and message
@@ -14,7 +14,7 @@ import { FormInstance } from 'antd';
  */
 
 const useSubmitContactForm = (
-  form: FormInstance
+  form: FormInstance,
 ): {
   submitForm: (data: any) => Promise<void>;
   formError: string | null;
@@ -29,7 +29,7 @@ const useSubmitContactForm = (
     setIsSending(true);
     const convertToFormData = (data: any) => {
       const formData = new FormData();
-      Object.keys(data).forEach((key) => formData.append(key, data[key]));
+      Object.keys(data).forEach(key => formData.append(key, data[key]));
       return formData;
     };
     const body = convertToFormData(data);
@@ -39,9 +39,9 @@ const useSubmitContactForm = (
         setMessageIsSent(true);
         form.resetFields();
       }
-    } catch (error: unknown) {
+    } catch (error) {
       setFormError(
-        'We seem to be having trouble sending your message at the moment, please try again later'
+        'We seem to be having trouble sending your message at the moment, please try again later',
       );
       console.log(error);
     } finally {

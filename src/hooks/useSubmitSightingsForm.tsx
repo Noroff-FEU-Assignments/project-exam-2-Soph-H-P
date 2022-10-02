@@ -1,13 +1,13 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import API, { sightingsEndpoint } from '../constants/api';
-
-import axios from 'axios';
 import { FormInstance, UploadFile } from 'antd';
-import useUploadImage from './useUploadImage';
+import axios from 'axios';
 import { LatLngLiteral } from 'leaflet';
-import useNearestLocation from './useNearestLocation';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+
+import API, { sightingsEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
+import useNearestLocation from './useNearestLocation';
+import useUploadImage from './useUploadImage';
 
 /**
  * useSubmitSightingsForm returns two functions
@@ -26,7 +26,7 @@ const useSubmitSightingsForm = (
   form: FormInstance,
   setFileList: Dispatch<SetStateAction<UploadFile<File>[]>>,
   setPosition?: Dispatch<React.SetStateAction<LatLngLiteral | null>>,
-  position?: LatLngLiteral | null
+  position?: LatLngLiteral | null,
 ): {
   formIsSubmitted: boolean;
   formError: string | null;
@@ -34,7 +34,7 @@ const useSubmitSightingsForm = (
   submitForm: (
     data: any,
     setNewSightingId: Dispatch<SetStateAction<number | null>>,
-    image?: File
+    image?: File,
   ) => Promise<void>;
   updateSighting: (data: any, sightingId: number, image?: File) => Promise<void>;
   isSaving: boolean;
@@ -58,7 +58,7 @@ const useSubmitSightingsForm = (
   const submitForm = async (
     data: any,
     setNewSightingId: Dispatch<SetStateAction<number | null>>,
-    image?: File
+    image?: File,
   ) => {
     setIsSubmitting(true);
     if (location && setPosition) {
@@ -77,18 +77,18 @@ const useSubmitSightingsForm = (
         }
         setFormIsSubmitted(true);
         form.resetFields();
-      } catch (error: unknown) {
+      } catch (error) {
         checkUnauthorizedUser(
           error,
           setFormError,
-          'We seem to be having trouble sending your sighting at the moment, please try again later'
+          'We seem to be having trouble sending your sighting at the moment, please try again later',
         );
       } finally {
         setIsSubmitting(false);
       }
     } else if (locationError) {
       setFormError(
-        'We seem to be having trouble sending your sighting at the moment, please try again later'
+        'We seem to be having trouble sending your sighting at the moment, please try again later',
       );
     }
   };
@@ -103,25 +103,32 @@ const useSubmitSightingsForm = (
       const response = await axios.put(
         `${API}${sightingsEndpoint}/${sightingId} `,
         { data },
-        { headers }
+        { headers },
       );
       if (image) {
         await uploadImage(image, response.data.data.id);
         setFileList([]);
       }
       setFormIsSubmitted(true);
-    } catch (error: unknown) {
+    } catch (error) {
       checkUnauthorizedUser(
         error,
         setFormError,
-        'We seem to be having trouble sending your sighting at the moment, please try again later'
+        'We seem to be having trouble sending your sighting at the moment, please try again later',
       );
     } finally {
       setIsSaving(false);
     }
   };
 
-  return { formIsSubmitted, formError, isSubmitting, submitForm, updateSighting, isSaving };
+  return {
+    formIsSubmitted,
+    formError,
+    isSubmitting,
+    submitForm,
+    updateSighting,
+    isSaving,
+  };
 };
 
 export default useSubmitSightingsForm;

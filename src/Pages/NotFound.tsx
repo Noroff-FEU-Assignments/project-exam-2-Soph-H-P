@@ -1,7 +1,7 @@
 import ImageWithWrapper from '../components/common/ImageWithWrapper';
 import MetaData from '../components/common/MetaData';
-import PageTitle from '../components/typography/PageTitle';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
+import PageTitle from '../components/typography/PageTitle';
 import owl from '../imgs/owl.jpg';
 
 /**

@@ -1,11 +1,12 @@
-import findTimeAgo from '../../../utils/findTimeAgo';
-import { SightingInterface } from '../../../hooks/useSightings';
-import { InfoWrapper, StyledCardContainer } from './index.styled';
-import VarifiedUsername from '../VarifiedUsername';
 import { useNavigate } from 'react-router-dom';
-import MembersOnly from '../MembersOnly';
-import ImageWithWrapper from '../../common/ImageWithWrapper';
+
+import { SightingInterface } from '../../../hooks/useSightings';
 import findImageUrl from '../../../utils/findImageUrl';
+import findTimeAgo from '../../../utils/findTimeAgo';
+import ImageWithWrapper from '../../common/ImageWithWrapper';
+import MembersOnly from '../MembersOnly';
+import VarifiedUsername from '../VarifiedUsername';
+import { InfoWrapper, StyledCardContainer } from './index.styled';
 
 /**
  * Creates a card that shows a sighting
@@ -16,7 +17,11 @@ import findImageUrl from '../../../utils/findImageUrl';
  * @returns {React.ReactElement}
  */
 
-const SightingsCard = ({ sighting }: { sighting: SightingInterface }): React.ReactElement => {
+const SightingsCard = ({
+  sighting,
+}: {
+  sighting: SightingInterface;
+}): React.ReactElement => {
   const {
     date: when,
     nearestLocation,

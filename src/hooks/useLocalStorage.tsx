@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 const useLocalStorage = (
   key: any,
-  initialValue: any
+  initialValue: any,
 ): [storedValue: any, setValue: React.Dispatch<any>] => {
   const [storedValue, setStoredValue] = useState(() => {
     if (typeof window === 'undefined') {

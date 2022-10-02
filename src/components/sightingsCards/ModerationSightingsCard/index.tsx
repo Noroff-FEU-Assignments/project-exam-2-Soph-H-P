@@ -1,20 +1,21 @@
-import findTimeAgo from '../../../utils/findTimeAgo';
+import { message, Popconfirm } from 'antd';
+import { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import useDeleteSighting from '../../../hooks/useDeleteSighting';
 import { SightingInterface } from '../../../hooks/useSightings';
-import { ButtonContainer, InfoWrapper, StyledCardContainer } from './index.styled';
+import useVarifySighting from '../../../hooks/useVarifySighting';
 import theme from '../../../styles/theme';
 import CheckSvg from '../../../svgs/CheckSvg';
-import RoundButton from '../../common/buttons/RoundButton';
 import CloseSvg from '../../../svgs/CloseSvg';
-import useDeleteSighting from '../../../hooks/useDeleteSighting';
-import useVarifySighting from '../../../hooks/useVarifySighting';
-import { message, Popconfirm } from 'antd';
-import VarifiedUsername from '../VarifiedUsername';
 import EditSvg from '../../../svgs/EditSvg';
-import { useNavigate } from 'react-router-dom';
-import { Dispatch, SetStateAction } from 'react';
-import MembersOnly from '../MembersOnly';
-import ImageWithWrapper from '../../common/ImageWithWrapper';
 import findImageUrl from '../../../utils/findImageUrl';
+import findTimeAgo from '../../../utils/findTimeAgo';
+import RoundButton from '../../common/buttons/RoundButton';
+import ImageWithWrapper from '../../common/ImageWithWrapper';
+import MembersOnly from '../MembersOnly';
+import VarifiedUsername from '../VarifiedUsername';
+import { ButtonContainer, InfoWrapper, StyledCardContainer } from './index.styled';
 
 /**
  * Creates a card that shows a sighting with moderation options for the admin user
@@ -34,8 +35,6 @@ const ModerationSightingsCard = ({
   sighting: SightingInterface;
   setVisibleSightings: Dispatch<SetStateAction<SightingInterface[] | null>>;
 }): React.ReactElement => {
-
-
   findImageUrl(sighting);
   const imageSrc = findImageUrl(sighting);
   const noImage = imageSrc === '';
@@ -45,7 +44,6 @@ const ModerationSightingsCard = ({
     nearestLocation,
     species,
     description,
-    userId,
     profileId,
     username,
     public: isPublic,
@@ -57,8 +55,8 @@ const ModerationSightingsCard = ({
   const text = 'Are you sure you want to delete this sighting?';
 
   const removeSighting = (id: number) => {
-    setVisibleSightings((currentSightings) => {
-      return currentSightings?.filter((sighting) => sighting.id !== id) || null;
+    setVisibleSightings(currentSightings => {
+      return currentSightings?.filter(sighting => sighting.id !== id) || null;
     });
   };
 
@@ -69,9 +67,7 @@ const ModerationSightingsCard = ({
   };
 
   const handleVarifySighting = () => {
-    if (userId !== null) {
-      varifySighting(sighting.id);
-    }
+    varifySighting(sighting.id);
     removeSighting(sighting.id);
   };
 

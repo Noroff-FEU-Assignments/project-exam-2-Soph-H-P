@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import MetaData from '../components/common/MetaData';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
 import SightingsGrid from '../components/layout/SightingsGrid';

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export interface EventInterface {
   attributes: {
@@ -22,7 +22,7 @@ export interface EventInterface {
  */
 
 const useEvents = (
-  url?: string
+  url?: string,
 ): {
   getEvents: () => Promise<void>;
   error: string | null;
@@ -43,7 +43,7 @@ const useEvents = (
       } catch (error) {
         console.log(error);
         setError(
-          'We are having trouble finding events at the moment, please come back again later'
+          'We are having trouble finding events at the moment, please come back again later',
         );
       } finally {
         setIsLoading(false);

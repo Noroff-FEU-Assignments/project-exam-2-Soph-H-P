@@ -1,13 +1,14 @@
-import { StyledForm } from '../StyledForm/index.styled';
-import { Button, Form, Input, Switch, message, Popconfirm } from 'antd';
-import useUser from '../../../hooks/useUser';
-import FormMessage from '../FormMessage';
+import { Button, Form, Input, message, Popconfirm, Switch } from 'antd';
+import { useEffect } from 'react';
+
 import useGetUser from '../../../hooks/useGetUser';
-import Loader from '../../common/Loader';
-import { PageContainer } from '../../layout/PageContainer/index.styled';
+import useUser from '../../../hooks/useUser';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
 import Cta from '../../common/Cta';
-import { useEffect } from 'react';
+import Loader from '../../common/Loader';
+import { PageContainer } from '../../layout/PageContainer/index.styled';
+import FormMessage from '../FormMessage';
+import { StyledForm } from '../StyledForm/index.styled';
 
 /**
  * The Edit user form takes the id of a user and uses this to get the
@@ -31,8 +32,14 @@ const EditUserForm = ({ userId }: { userId: string }): React.ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
-  const { formIsSubmitted, formError, isSubmitting, submitUpdateForm, deleteUser, isDeleting } =
-    useUser(form);
+  const {
+    formIsSubmitted,
+    formError,
+    isSubmitting,
+    submitUpdateForm,
+    deleteUser,
+    isDeleting,
+  } = useUser(form);
 
   const handleChange = (e: boolean) => {
     const value = e === true ? 'admin' : 'member';
@@ -67,7 +74,7 @@ const EditUserForm = ({ userId }: { userId: string }): React.ReactElement => {
         form={form}
         initialValues={{ remember: true }}
         $isUserEdit={true}
-        onFinish={(data) => submitUpdateForm(data, userId)}
+        onFinish={data => submitUpdateForm(data, userId)}
       >
         <label htmlFor="username">Username</label>
         <Form.Item
@@ -90,7 +97,11 @@ const EditUserForm = ({ userId }: { userId: string }): React.ReactElement => {
         >
           <Input type="text" placeholder="BlueFootedSophie" />
         </Form.Item>
-        <Form.Item style={{ display: 'none' }} name="userRole" initialValue={user.userRole}>
+        <Form.Item
+          style={{ display: 'none' }}
+          name="userRole"
+          initialValue={user.userRole}
+        >
           <Input disabled />
         </Form.Item>
         <label htmlFor="switch">User role</label>

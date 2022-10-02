@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import theme from '../../../styles/theme';
 
 export const StyledFormMessage = styled.span<{ $error?: boolean }>`
@@ -8,7 +9,8 @@ export const StyledFormMessage = styled.span<{ $error?: boolean }>`
   background-color: ${({ $error }) =>
     $error ? theme.colors.errorColor : theme.colors.secondaryHighlightColor};
   border-radius: 7px;
-  color: ${({ $error }) => ($error ? theme.colors.brightWhite : theme.colors.darkFontColor)};
+  color: ${({ $error }) =>
+    $error ? theme.colors.brightWhite : theme.colors.darkFontColor};
   display: flex;
   align-items: center;
 

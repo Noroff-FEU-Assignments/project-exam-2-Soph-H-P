@@ -1,15 +1,16 @@
-import findTimeAgo from '../../../utils/findTimeAgo';
-import { SightingInterface } from '../../../hooks/useSightings';
-import { InfoWrapper, SplitCard, StyledCardContainer } from './index.styled';
-import MapWithLocationPoints from '../../mapComponents/MapWithLocationPoints';
-import VarifiedUsername from '../VarifiedUsername';
-import RoundButton from '../../common/buttons/RoundButton';
-import EditSvg from '../../../svgs/EditSvg';
-import { useNavigate } from 'react-router-dom';
-import { useUserState } from '../../../context/UserContext';
 import { useEffect } from 'react';
-import MembersOnly from '../MembersOnly';
+import { useNavigate } from 'react-router-dom';
+
+import { useUserState } from '../../../context/UserContext';
+import { SightingInterface } from '../../../hooks/useSightings';
+import EditSvg from '../../../svgs/EditSvg';
+import findTimeAgo from '../../../utils/findTimeAgo';
+import RoundButton from '../../common/buttons/RoundButton';
 import ImageWithWrapper from '../../common/ImageWithWrapper';
+import MapWithLocationPoints from '../../mapComponents/MapWithLocationPoints';
+import MembersOnly from '../MembersOnly';
+import VarifiedUsername from '../VarifiedUsername';
+import { InfoWrapper, SplitCard, StyledCardContainer } from './index.styled';
 
 /**
  * Creates a card that shows a sighting in more details
@@ -22,7 +23,11 @@ import ImageWithWrapper from '../../common/ImageWithWrapper';
  * @returns {React.ReactElement}
  */
 
-const SingleSightingCard = ({ sighting }: { sighting: SightingInterface }): React.ReactElement => {
+const SingleSightingCard = ({
+  sighting,
+}: {
+  sighting: SightingInterface;
+}): React.ReactElement => {
   const { userInfo } = useUserState();
   const noImage = !sighting.attributes.photos.data;
   const imageSrc = noImage ? '' : sighting.attributes.photos.data[0].attributes.url;

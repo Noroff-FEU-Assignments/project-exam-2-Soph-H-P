@@ -1,4 +1,5 @@
 import { Menu } from 'antd';
+
 import AddSvg from '../../../svgs/AddSvg';
 import BinocularsSvg from '../../../svgs/BinocularsSvg';
 import MapIcon from '../../../svgs/MapIcon';
@@ -69,7 +70,7 @@ const menuItems = [
  */
 
 export const DropdownMenuItems = (userRole: string): React.ReactElement => {
-  const itemsArray = menuItems.filter((item) => item.visibility.includes(userRole));
+  const itemsArray = menuItems.filter(item => item.visibility.includes(userRole));
 
   return <Menu items={itemsArray} />;
 };

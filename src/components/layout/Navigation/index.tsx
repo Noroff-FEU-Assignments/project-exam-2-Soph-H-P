@@ -1,12 +1,13 @@
 import { Drawer } from 'antd';
 import { useEffect, useState } from 'react';
+
 import theme from '../../../styles/theme';
 import CloseSvg from '../../../svgs/CloseSvg';
 import MenuSvg from '../../../svgs/MenuSvg';
 import RoundButton from '../../common/buttons/RoundButton';
 import Logo from '../Logo';
 import { DesktopNavigationLinks, MobileNavigationLinks } from '../NavigationLinks';
-import { StyledLogo, NavContainer, MobileNav, DesktopNav } from './index.styled';
+import { DesktopNav, MobileNav, NavContainer, StyledLogo } from './index.styled';
 
 /**
  * Creates an navigation for mobile and desktop displaying the correct type after listening
@@ -43,9 +44,12 @@ const Navagation = (): React.ReactElement => {
             onClick={() => setIsOpen(!isOpen)}
           />
           <Drawer
-            drawerStyle={{ backgroundColor: theme.colors.primaryColor, padding: '30px 0px' }}
+            drawerStyle={{
+              backgroundColor: theme.colors.primaryColor,
+              padding: '80px 0px 30px 0px',
+            }}
             headerStyle={{ display: 'none' }}
-            style={{ top: '50px' }}
+            style={{ top: '0px' }}
             placement="right"
             onClose={() => setIsOpen(false)}
             visible={isOpen}

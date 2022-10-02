@@ -1,5 +1,6 @@
 import { Modal } from 'antd';
 import styled from 'styled-components';
+
 import theme from '../../../styles/theme';
 
 export const StyledModal = styled(Modal)`

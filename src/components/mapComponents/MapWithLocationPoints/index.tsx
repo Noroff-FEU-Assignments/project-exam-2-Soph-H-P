@@ -1,15 +1,21 @@
-import { TileLayer } from 'react-leaflet';
-import { StyledMapContainer, StyledMarker, StyledPopup } from '../LocationInput/index.styled';
-import useSightings from '../../../hooks/useSightings';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
+import { Button } from 'antd';
+import L from 'leaflet';
+import { useRef } from 'react';
+import { TileLayer } from 'react-leaflet';
+import { Link } from 'react-router-dom';
+
+import useSightings from '../../../hooks/useSightings';
 import mapPin from '../../../svgs/mapPin.svg';
 import findTimeAgo from '../../../utils/findTimeAgo';
-import Loader from '../../common/Loader';
-import { Link } from 'react-router-dom';
 import ApiErrorMessage from '../../common/ApiErrorMessage';
-import { Button } from 'antd';
-import { useRef } from 'react';
+import Loader from '../../common/Loader';
+import {
+  StyledMapContainer,
+  StyledMarker,
+  StyledPopup,
+} from '../LocationInput/index.styled';
 
 const PopupText = ({
   species,
@@ -96,7 +102,9 @@ const MapWithLocationPoints = ({
   }
 
   if (error) {
-    return <ApiErrorMessage message="Oops something went wrong. Unable to find recent sightings" />;
+    return (
+      <ApiErrorMessage message="Oops something went wrong. Unable to find recent sightings" />
+    );
   }
 
   const handleFindLocation = () => {

@@ -1,4 +1,8 @@
-import API, { andSortByDate, includingSightings, profileUrlEndpoint } from '../constants/api';
+import API, {
+  andSortByDate,
+  includingSightings,
+  profileUrlEndpoint,
+} from '../constants/api';
 
 /**
  * creates a url used to get sightings for a particular user

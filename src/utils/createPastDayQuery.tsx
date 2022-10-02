@@ -1,5 +1,3 @@
-
-
 /**
  * creates an end point that will filter out sightings for just the past 24 hours
  * @example createPastDatQuery()

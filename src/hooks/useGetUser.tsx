@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
+
 import API, { profileUrlEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
@@ -48,14 +49,14 @@ const useGetUser = (): {
           setUser(userData);
         } else {
           setError(
-            'Oops something went wrong. We are having trouble finding that user at the moment'
+            'Oops something went wrong. We are having trouble finding that user at the moment',
           );
         }
-      } catch (error: unknown) {
+      } catch (error) {
         checkUnauthorizedUser(
           error,
           setError,
-          'Oops something went wrong. We are having trouble finding that user at the moment'
+          'Oops something went wrong. We are having trouble finding that user at the moment',
         );
       } finally {
         setIsLoading(false);

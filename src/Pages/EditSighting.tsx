@@ -1,9 +1,10 @@
-import { PageContainer } from '../components/layout/PageContainer/index.styled';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useUserState } from '../context/UserContext';
-import EditSightingsForm from '../components/forms/EditSightingsForm';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import MetaData from '../components/common/MetaData';
+import EditSightingsForm from '../components/forms/EditSightingsForm';
+import { PageContainer } from '../components/layout/PageContainer/index.styled';
+import { useUserState } from '../context/UserContext';
 
 /**
  * Main page component for the Edit sightings page, this is a

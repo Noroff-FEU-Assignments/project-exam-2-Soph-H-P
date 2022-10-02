@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
-import theme from '../../../styles/theme';
+
 import noImage from '../../../imgs/noImage.png';
+import theme from '../../../styles/theme';
 
 export const StyledImageWrapper = styled.div<{
   $height: string;

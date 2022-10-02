@@ -1,5 +1,6 @@
 import { Modal } from 'antd';
 import styled from 'styled-components';
+
 import theme from '../../../styles/theme';
 
 export const StyledModal = styled(Modal)`
@@ -17,5 +18,5 @@ export const StyledModal = styled(Modal)`
 
   .ant-btn.ant-btn-ghost.ant-btn-dangerous {
     margin-top: 20px;
-}
+  }
 `;

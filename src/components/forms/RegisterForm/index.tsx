@@ -1,11 +1,12 @@
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 import { useAuthState } from '../../../context/AuthContext';
 import { useUserState } from '../../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
-import { StyledForm } from '../StyledForm/index.styled';
-import FormMessage from '../FormMessage';
-import { Button, Form, Input } from 'antd';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useRegisterUser, { RegisterFormInterface } from '../../../hooks/useRegisterUser';
+import FormMessage from '../FormMessage';
+import { StyledForm } from '../StyledForm/index.styled';
 
 /**
  * Register form component renders a form taking the users email, username and password
@@ -44,7 +45,7 @@ const RegisterForm = (): React.ReactElement => {
     <StyledForm
       form={form}
       initialValues={{ remember: true }}
-      onFinish={(data) => submitForm(data as RegisterFormInterface)}
+      onFinish={data => submitForm(data as RegisterFormInterface)}
     >
       <label htmlFor="username">Username</label>
       <Form.Item
@@ -86,7 +87,7 @@ const RegisterForm = (): React.ReactElement => {
       >
         <Input.Password
           placeholder="password"
-          iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
         />
       </Form.Item>
       {registerError && <FormMessage error={true}>{registerError}</FormMessage>}

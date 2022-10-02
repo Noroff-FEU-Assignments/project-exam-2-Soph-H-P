@@ -1,4 +1,8 @@
-import API, { andFilterVarified, andSortByDate, sightingsEndpoint } from '../../../constants/api';
+import API, {
+  andFilterVarified,
+  andSortByDate,
+  sightingsEndpoint,
+} from '../../../constants/api';
 import { useUserState } from '../../../context/UserContext';
 import createPastDayQuery from '../../../utils/createPastDayQuery';
 import findMySightingsUrl from '../../../utils/findMySightingsUrl';

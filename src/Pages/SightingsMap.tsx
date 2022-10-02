@@ -1,6 +1,6 @@
-import MapWithSearch from '../components/mapComponents/MapWithSearch';
 import MetaData from '../components/common/MetaData';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
+import MapWithSearch from '../components/mapComponents/MapWithSearch';
 
 /**
  * Main page component for the Sightings map, this page currently renders a
@@ -11,8 +11,14 @@ import { PageContainer } from '../components/layout/PageContainer/index.styled';
 
 const SightingsMap = (): React.ReactElement => {
   return (
-    <PageContainer $hasBird={false} style={{ padding: 0, margin: 0, position: 'relative' }}>
-      <MetaData title="Sightings map | Birds of Østfold" metaDescription="Map pinpointing bird sightings in your local area" />
+    <PageContainer
+      $hasBird={false}
+      style={{ padding: 0, margin: 0, position: 'relative' }}
+    >
+      <MetaData
+        title="Sightings map | Birds of Østfold"
+        metaDescription="Map pinpointing bird sightings in your local area"
+      />
       <MapWithSearch />
     </PageContainer>
   );

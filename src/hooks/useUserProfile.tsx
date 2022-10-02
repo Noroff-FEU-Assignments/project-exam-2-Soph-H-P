@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import API, { profileUrlEndpoint } from '../constants/api';
 import axios from 'axios';
-import { useUserState } from '../context/UserContext';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import API, { profileUrlEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
+import { useUserState } from '../context/UserContext';
 
 /**
  * useSubmitSightingsForm returns a number of functions for manipulating the user profile
@@ -32,7 +33,7 @@ const useUserProfile = (): {
   const updateUserProfile = async (username: string, data: any) => {
     try {
       const response = await axios.get(
-        `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`
+        `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`,
       );
       const profile = response.data.data[0];
       try {
@@ -44,20 +45,20 @@ const useUserProfile = (): {
           { data },
           {
             headers,
-          }
+          },
         );
         if (updateResponse.status === 200) {
           setIsFinished(true);
         }
       } catch (error) {
         setCreationError(
-          'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+          'Sorry we seem to be have trouble getting that profile at the moment, please try again later.',
         );
       }
       setIsFinished(true);
     } catch (error) {
       setCreationError(
-        'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+        'Sorry we seem to be have trouble getting that profile at the moment, please try again later.',
       );
     }
   };
@@ -65,7 +66,7 @@ const useUserProfile = (): {
   const deleteUserProfile = async (username: string) => {
     try {
       const response = await axios.get(
-        `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`
+        `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`,
       );
 
       const profile = response.data.data[0];
@@ -73,20 +74,23 @@ const useUserProfile = (): {
         const headers = {
           Authorization: `Bearer ${authToken}`,
         };
-        const deleteResponse = await axios.delete(`${API}${profileUrlEndpoint}/${profile.id}`, {
-          headers,
-        });
+        const deleteResponse = await axios.delete(
+          `${API}${profileUrlEndpoint}/${profile.id}`,
+          {
+            headers,
+          },
+        );
         if (deleteResponse.status === 200) {
           setIsFinished(true);
         }
       } catch (error) {
         setCreationError(
-          'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+          'Sorry we seem to be have trouble getting that profile at the moment, please try again later.',
         );
       }
     } catch (error) {
       setCreationError(
-        'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+        'Sorry we seem to be have trouble getting that profile at the moment, please try again later.',
       );
     }
   };
@@ -94,7 +98,7 @@ const useUserProfile = (): {
   const getMyUserProfile = async (userId: number, username: string) => {
     try {
       const response = await axios.get(
-        `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`
+        `${API}${profileUrlEndpoint}?filters[username][$eq]=${username}`,
       );
 
       const profile = response.data.data[0];
@@ -113,7 +117,7 @@ const useUserProfile = (): {
       }
     } catch (error) {
       setCreationError(
-        'Sorry we seem to be have trouble getting that profile at the moment, please try again later.'
+        'Sorry we seem to be have trouble getting that profile at the moment, please try again later.',
       );
     }
   };
@@ -130,17 +134,17 @@ const useUserProfile = (): {
       data.profileId = response.data.data.id;
       setUserInfo(data);
       console.log(data);
-    } catch (error: unknown) {
+    } catch (error) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {
         if (!error?.response) {
           console.log('No Server Response');
           setCreationError(
-            'Looks like there is a problem with our server, please try again later.'
+            'Looks like there is a problem with our server, please try again later.',
           );
         } else {
           setCreationError(
-            'Sorry we seem to be have trouble creating a new profile at the moment, please try again later.'
+            'Sorry we seem to be have trouble creating a new profile at the moment, please try again later.',
           );
         }
       }

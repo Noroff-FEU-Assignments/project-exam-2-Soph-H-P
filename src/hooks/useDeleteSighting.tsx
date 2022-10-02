@@ -1,12 +1,13 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
+
 import API, { sightingsEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
-import useUploadImage from './useUploadImage';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
+import useUploadImage from './useUploadImage';
 
 /**
- * useDeleteSighting returns a function deleteSighting that can be used to delete a sighting using ths sighting id 
+ * useDeleteSighting returns a function deleteSighting that can be used to delete a sighting using ths sighting id
  * if there is an image associated with the sighting this is also deleted.
  *
  * @returns {deleteSighting, error, isDeleting, isDeleted}
@@ -39,11 +40,11 @@ const useDeleteSighting = (): {
       if (response.status === 200 && imageId) {
         deleteImage(imageId);
       }
-    } catch (error: unknown) {
+    } catch (error) {
       checkUnauthorizedUser(
         error,
         setError,
-        'Sorry we seem to be have trouble deleting that sighting at the moment, please try again later.'
+        'Sorry we seem to be have trouble deleting that sighting at the moment, please try again later.',
       );
     } finally {
       setIsDeleting(false);

@@ -11,7 +11,7 @@ import { SightingInterface } from '../hooks/useSightings';
 
 const createSingleSpeciesList = (sightings: SightingInterface[]): string[] => {
   const speciesList: string[] = [];
-  sightings.forEach((sighting) => {
+  sightings.forEach(sighting => {
     if (speciesList.length === 0) {
       speciesList.push(sighting.attributes.species);
     } else {

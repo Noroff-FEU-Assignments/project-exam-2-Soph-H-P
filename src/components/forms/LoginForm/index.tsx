@@ -1,12 +1,13 @@
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Button, Form, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 import { useAuthState } from '../../../context/AuthContext';
 import { useUserState } from '../../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
-import { StyledForm } from '../StyledForm/index.styled';
-import FormMessage from '../FormMessage';
-import { Button, Form, Input } from 'antd';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import useLoginUser, { LoginFormInterface } from '../../../hooks/useLoginUser';
 import PageTitle from '../../typography/PageTitle';
+import FormMessage from '../FormMessage';
+import { StyledForm } from '../StyledForm/index.styled';
 
 /**
  * Login form component renders a form taking the users email and password
@@ -21,7 +22,6 @@ const LoginForm = (): React.ReactElement => {
   const [form] = Form.useForm();
   const { authToken, setAuthToken } = useAuthState();
   const { setUserInfo } = useUserState();
-
 
   const { loginError, isSubmitting, submitForm } = useLoginUser(form);
 
@@ -48,7 +48,7 @@ const LoginForm = (): React.ReactElement => {
   return (
     <StyledForm
       initialValues={{ remember: true }}
-      onFinish={(data) => submitForm(data as LoginFormInterface)}
+      onFinish={data => submitForm(data as LoginFormInterface)}
       form={form}
     >
       <PageTitle>Log in</PageTitle>
@@ -72,7 +72,7 @@ const LoginForm = (): React.ReactElement => {
       >
         <Input.Password
           placeholder="password"
-          iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
         />
       </Form.Item>
       {/* <Form.Item>

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import theme from '../../../styles/theme';
 import BackgroundBirdSvg from '../../../svgs/BackgroundBirdSvg.svg';
 

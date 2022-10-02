@@ -1,4 +1,5 @@
 import moment from 'moment';
+
 import { EventInterface } from '../../../hooks/useEvents';
 import { StyledModal } from './index.styled';
 

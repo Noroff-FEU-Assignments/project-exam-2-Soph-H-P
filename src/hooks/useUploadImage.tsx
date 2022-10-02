@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import API, { uploadImageUrlEndpoint } from '../constants/api';
-
 import axios from 'axios';
+import { useState } from 'react';
+
+import API, { uploadImageUrlEndpoint } from '../constants/api';
 import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 
@@ -43,14 +43,17 @@ const useUploadImage = (): {
       formData.append('ref', 'api::sighting.sighting');
       formData.append('field', 'photos');
 
-      const imageUploadResponse = await axios.post(API + uploadImageUrlEndpoint, formData);
+      const imageUploadResponse = await axios.post(
+        API + uploadImageUrlEndpoint,
+        formData,
+      );
 
       if (imageUploadResponse.status === 200) {
         setImageIsUploaded(true);
       }
-    } catch (error: unknown) {
+    } catch (error) {
       setUploadError(
-        'We seem to be having trouble uploading your image at the moment, please try again later'
+        'We seem to be having trouble uploading your image at the moment, please try again later',
       );
       console.log(error);
     } finally {
@@ -67,17 +70,17 @@ const useUploadImage = (): {
     try {
       const imageDeleteResponse = await axios.delete(
         `${API}${uploadImageUrlEndpoint}files/${imageId}`,
-        { headers }
+        { headers },
       );
 
       if (imageDeleteResponse.status === 200) {
         setImageIsDeleted(true);
       }
-    } catch (error: unknown) {
+    } catch (error) {
       checkUnauthorizedUser(
         error,
         setDeleteError,
-        'We seem to be having trouble uploading your image at the moment, please try again later'
+        'We seem to be having trouble uploading your image at the moment, please try again later',
       );
     } finally {
       setIsDeleting(false);

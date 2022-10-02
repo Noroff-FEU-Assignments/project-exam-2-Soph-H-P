@@ -1,8 +1,9 @@
 import React from 'react';
-import ErrorSvg from '../../../svgs/ErrorSvg';
-import { StyledMessage } from './index.styled';
+
 import fallingBird from '../../../imgs/fallingBird.gif';
+import ErrorSvg from '../../../svgs/ErrorSvg';
 import ImageWithWrapper from '../ImageWithWrapper';
+import { StyledMessage } from './index.styled';
 
 /**
  * ApiErrorMessage takes a message string and displays it to
@@ -28,7 +29,12 @@ const ApiErrorMessage = ({
         <h2>{message}</h2>
       </StyledMessage>
       {hasGif && (
-        <ImageWithWrapper height="" width="400px" src={fallingBird} alt={'bird crash landing'} />
+        <ImageWithWrapper
+          height=""
+          width="400px"
+          src={fallingBird}
+          alt={'bird crash landing'}
+        />
       )}
     </>
   );

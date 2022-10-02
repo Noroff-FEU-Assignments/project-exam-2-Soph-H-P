@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { Dispatch, SetStateAction } from 'react';
+
 import { EventInterface } from '../../../hooks/useEvents';
 import { DateContainer, EventCardWrapper } from './index.styled';
 

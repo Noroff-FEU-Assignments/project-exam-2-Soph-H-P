@@ -1,9 +1,10 @@
-import { useAuthState } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { useUserState } from '../context/UserContext';
+import { notification } from 'antd';
 import axios from 'axios';
 import { Dispatch, SetStateAction } from 'react';
-import { notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuthState } from '../context/AuthContext';
+import { useUserState } from '../context/UserContext';
 
 /**
  * This hook returns a function that will allow you to check whether a user is authorised to make a request
@@ -16,7 +17,7 @@ const useCheckUnauthorizedUser = (): {
   checkUnauthorizedUser: (
     error: unknown,
     setError: Dispatch<SetStateAction<string | null>> | Dispatch<SetStateAction<string>>,
-    message: string
+    message: string,
   ) => void;
 } => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const useCheckUnauthorizedUser = (): {
   const checkUnauthorizedUser = (
     error: unknown,
     setError: Dispatch<SetStateAction<string | null>> | Dispatch<SetStateAction<string>>,
-    message: string
+    message: string,
   ) => {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 401 || error.response?.status === 403) {

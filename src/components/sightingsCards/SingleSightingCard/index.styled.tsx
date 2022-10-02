@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import theme from '../../../styles/theme';
 
 export const StyledCardContainer = styled.div<{ $isVarified: boolean }>`
@@ -80,6 +81,10 @@ export const SplitCard = styled.div`
 
     & > div:first-of-type {
       min-width: 100%;
+    }
+    & > div:last-of-type {
+      min-width: 100%;
+      margin-top: 20px;
     }
   }
 `;
