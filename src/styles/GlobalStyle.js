@@ -51,6 +51,11 @@ const GlobalStyle = createGlobalStyle`
         background: ${theme.colors.errorColor} ;
     }
 
+
+    .ant-picker-panel-container > .ant-picker-panel {
+        flex-direction: column-reverse;
+    }
+
     @media (max-width: 700px) {
         .App {
             padding: 0px;
@@ -85,6 +90,7 @@ const GlobalStyle = createGlobalStyle`
             align-items: center;
             border-radius: 5px;
         }
+
 
         .ant-space-item > .ant-input.ant-input-status-success {
             font-size: 16px !important;

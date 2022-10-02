@@ -41,8 +41,13 @@ const SpeciesInput = ({ initialValue }: { initialValue?: string }): React.ReactE
       if (singleListSightings.includes(speciesInputValue.toLowerCase())) {
       } else if (speciesInputValue.length > 1) {
         const previousValue = speciesInputValue.substring(0, speciesInputValue.length - 1);
+        console.log(previousValue);
         const filterOutPrevious = singleListSightings.filter(
-          (sighting) => sighting.toLowerCase() !== previousValue.toLowerCase()
+          // (sighting) => sighting.toLowerCase() !== previousValue.toLowerCase()
+          (sighting) => {
+           console.log(sighting, previousValue)
+            return sighting.toLowerCase() !== previousValue.toLowerCase()
+          }
         );
         setSingleListSightings(filterOutPrevious);
         setSpecies(speciesInputValue.toLowerCase());
