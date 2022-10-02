@@ -1,9 +1,9 @@
 import { Button } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import BinocularsIcon from '../../../svgs/BinocularsIcon';
 import RecentIcon from '../../../svgs/RecentIcon';
-
 import { CtaContainer } from './index.styled';
 
 /**
@@ -16,7 +16,7 @@ import { CtaContainer } from './index.styled';
  * @example
  *  returns cta to send the user to the homepage
  *  <Cta toHome={true}/>
- * @example 
+ * @example
  * returns cta that sends the user to the add sightings page
  * <Cta />
  * @returns {React.ReactElement}

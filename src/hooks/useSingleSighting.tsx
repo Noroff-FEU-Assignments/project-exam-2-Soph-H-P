@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 import { SightingInterface } from './useSightings';
 
 /**
@@ -11,7 +12,7 @@ import { SightingInterface } from './useSightings';
  */
 
 const useSingleSighting = (
-  url: string
+  url: string,
 ): {
   getSighting: () => Promise<void>;
   error: string;
@@ -31,7 +32,7 @@ const useSingleSighting = (
     } catch (error) {
       console.log(error);
       setError(
-        'Oops something went wrong. We are having trouble finding that particular sighting at the moment'
+        'Oops something went wrong. We are having trouble finding that particular sighting at the moment',
       );
     } finally {
       setIsLoading(false);

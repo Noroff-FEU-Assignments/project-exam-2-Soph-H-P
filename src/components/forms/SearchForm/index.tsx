@@ -1,11 +1,12 @@
+import { SearchOutlined } from '@ant-design/icons';
 import { Button, Form, Select } from 'antd';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+
 import { birdsOnlyUrl } from '../../../constants/api';
 import useSightings from '../../../hooks/useSightings';
-import { StyledSearchForm, StyledSelect } from './index.styled';
-import { SearchOutlined } from '@ant-design/icons';
-import { NotFoundContainer } from '../SpeciesInput/index.styled';
 import LogoImage from '../../../svgs/LogoImage';
+import { NotFoundContainer } from '../SpeciesInput/index.styled';
+import { StyledSearchForm, StyledSelect } from './index.styled';
 
 /**
  * The Search form creates a list of birds from all the current sightings, it
@@ -50,7 +51,7 @@ const SearchForm = ({
   useEffect(() => {
     if (sightings) {
       const speciesList: string[] = [];
-      sightings.forEach((sighting) => {
+      sightings.forEach(sighting => {
         if (speciesList.length === 0) {
           speciesList.push(sighting.attributes.species);
         } else {
@@ -79,13 +80,16 @@ const SearchForm = ({
   };
 
   return (
-    <StyledSearchForm onFinish={(values) => onFinish(values as SearchFormInterface)} form={form}>
+    <StyledSearchForm
+      onFinish={values => onFinish(values as SearchFormInterface)}
+      form={form}
+    >
       <Form.Item name="search">
         <StyledSelect
           mode="multiple"
           size={'large'}
           placeholder="Search for a bird"
-          onChange={(e) => handleChange(e as string[])}
+          onChange={e => handleChange(e as string[])}
           style={{ width: '100%' }}
           notFoundContent={<SpeciesNotFound />}
         >

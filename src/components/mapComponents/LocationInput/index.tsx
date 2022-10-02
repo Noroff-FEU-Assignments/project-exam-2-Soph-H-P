@@ -1,10 +1,12 @@
+import 'leaflet/dist/leaflet.css';
+
+import { Button } from 'antd';
 import L, { LatLngExpression, LatLngLiteral } from 'leaflet';
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { Popup, TileLayer, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import { Button } from 'antd';
-import { StyledMapContainer, StyledMarker } from './index.styled';
+
 import mapPin from '../../../svgs/mapPin.svg';
+import { StyledMapContainer, StyledMarker } from './index.styled';
 
 /**
  * The Location Marker takes a postion from the map and adds the latitude and longitude values
@@ -29,12 +31,12 @@ const LocationMarker = ({
 }): React.ReactElement | null => {
   const map = useMapEvents({
     dblclick() {
-      map.on('dblclick', (e) => {
+      map.on('dblclick', e => {
         setPosition && setPosition(null);
       });
     },
     click() {
-      map.on('click', (e) => {
+      map.on('click', e => {
         setPosition && setPosition(e.latlng);
       });
     },
@@ -83,7 +85,7 @@ const LocationInput = ({
         setView: true,
       });
 
-      mapRef?.current?.on('locationfound', (e) => {
+      mapRef?.current?.on('locationfound', e => {
         setPosition(e.latlng);
       });
     };

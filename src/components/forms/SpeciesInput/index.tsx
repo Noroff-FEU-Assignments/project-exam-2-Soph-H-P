@@ -1,10 +1,11 @@
 import { Form, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
-import useSightings from '../../../hooks/useSightings';
+
 import { birdsOnlyUrl } from '../../../constants/api';
+import useSightings from '../../../hooks/useSightings';
 import createSingleSpeciesList from '../../../utils/createSingleSpeciesList';
-import { StyledSelect } from './index.styled';
 import { SpeciesNotFound } from '../SearchForm';
+import { StyledSelect } from './index.styled';
 
 /**
  * The Species Input creates a list of birds from all the current sightings, it
@@ -18,7 +19,11 @@ import { SpeciesNotFound } from '../SearchForm';
  * @returns {React.ReactElement | null}
  */
 
-const SpeciesInput = ({ initialValue }: { initialValue?: string }): React.ReactElement | null => {
+const SpeciesInput = ({
+  initialValue,
+}: {
+  initialValue?: string;
+}): React.ReactElement | null => {
   const [species, setSpecies] = useState<string>('');
   const [speciesInputValue, setSpeciesInputValue] = useState<string>('');
   const { sightings } = useSightings(birdsOnlyUrl);
@@ -40,9 +45,12 @@ const SpeciesInput = ({ initialValue }: { initialValue?: string }): React.ReactE
     if (singleListSightings.length > 1) {
       if (singleListSightings.includes(speciesInputValue.toLowerCase())) {
       } else if (speciesInputValue.length > 1) {
-        const previousValue = speciesInputValue.substring(0, speciesInputValue.length - 1);
+        const previousValue = speciesInputValue.substring(
+          0,
+          speciesInputValue.length - 1,
+        );
         const filterOutPrevious = singleListSightings.filter(
-          (sighting) => sighting.toLowerCase() !== previousValue.toLowerCase()
+          sighting => sighting.toLowerCase() !== previousValue.toLowerCase(),
         );
         setSingleListSightings(filterOutPrevious);
         setSpecies(speciesInputValue.toLowerCase());
@@ -62,7 +70,9 @@ const SpeciesInput = ({ initialValue }: { initialValue?: string }): React.ReactE
 
   return (
     <>
-      <label htmlFor="species">{initialValue ? 'Bird species' : 'What bird did you see?'}</label>
+      <label htmlFor="species">
+        {initialValue ? 'Bird species' : 'What bird did you see?'}
+      </label>
       <Form.Item
         initialValue={initialValue && initialValue}
         name="species"
@@ -74,17 +84,17 @@ const SpeciesInput = ({ initialValue }: { initialValue?: string }): React.ReactE
           placeholder="Mute swan"
           optionFilterProp="children"
           filterOption={(input, option) =>
-            (option!.children as unknown as string).includes(input.toLowerCase())
+            ((option!.children as unknown) as string).includes(input.toLowerCase())
           }
           filterSort={(optionA, optionB) =>
-            (optionA!.children as unknown as string).localeCompare(
-              (optionB!.children as unknown as string).toLowerCase()
+            ((optionA!.children as unknown) as string).localeCompare(
+              ((optionB!.children as unknown) as string).toLowerCase(),
             )
           }
-          onKeyUp={(e) => onSpeciesSearchChange(e)}
+          onKeyUp={e => onSpeciesSearchChange(e)}
           notFoundContent={<SpeciesNotFound add={true} />}
           autoClearSearchValue={false}
-          dropdownRender={(menu) => <>{menu}</>}
+          dropdownRender={menu => <>{menu}</>}
         >
           {singleListSightings.map((species: string) => (
             <Option key={species}>{species}</Option>

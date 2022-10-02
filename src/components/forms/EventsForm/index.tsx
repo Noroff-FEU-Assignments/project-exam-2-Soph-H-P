@@ -1,11 +1,12 @@
-import { StyledForm } from '../StyledForm/index.styled';
 import { Button, DatePicker, Form, Input } from 'antd';
 import { RangePickerProps } from 'antd/lib/date-picker';
 import moment from 'moment';
-import FormMessage from '../FormMessage';
-import useSubmitEvent from '../../../hooks/useSubmitEvent';
 import { Dispatch } from 'react';
+
 import { EventInterface } from '../../../hooks/useEvents';
+import useSubmitEvent from '../../../hooks/useSubmitEvent';
+import FormMessage from '../FormMessage';
+import { StyledForm } from '../StyledForm/index.styled';
 
 /**
  * Events form component allows admin users to add events
@@ -22,7 +23,7 @@ const EventsForm = ({
   const [form] = Form.useForm();
   const { formError, formIsSubmitted, isSubmitting, submitForm } = useSubmitEvent(form);
 
-  const disabledDate: RangePickerProps['disabledDate'] = (current) => {
+  const disabledDate: RangePickerProps['disabledDate'] = current => {
     // Prevents user from selecting a past day
     return current && current < moment().startOf('day');
   };
@@ -31,7 +32,7 @@ const EventsForm = ({
     <StyledForm
       form={form}
       initialValues={{ remember: true }}
-      onFinish={(data) => {
+      onFinish={data => {
         submitForm(data, setVisibleEvents);
       }}
       $isEventsForm={true}
@@ -46,16 +47,28 @@ const EventsForm = ({
       </Form.Item>
       <label htmlFor="date">When is the event?</label>
       <Form.Item name="date" rules={[{ required: true, message: 'Please add the date' }]}>
-        <DatePicker format={'dddd Do MM YYYY - HH:mm'} showTime disabledDate={disabledDate} />
+        <DatePicker
+          format={'dddd Do MM YYYY - HH:mm'}
+          showTime
+          disabledDate={disabledDate}
+        />
       </Form.Item>
       <label htmlFor="location">Where is the event?</label>
-      <Form.Item name="location" rules={[{ required: true, message: 'Please add the location' }]}>
+      <Form.Item
+        name="location"
+        rules={[{ required: true, message: 'Please add the location' }]}
+      >
         <Input placeholder="Meet outside the townhall, Fredrikstad" />
       </Form.Item>
       <label htmlFor="participants">Who can join this event?</label>
       <Form.Item
         name="participants"
-        rules={[{ required: true, message: 'Please let everyone know who can come to this event' }]}
+        rules={[
+          {
+            required: true,
+            message: 'Please let everyone know who can come to this event',
+          },
+        ]}
       >
         <Input placeholder="Everyone welcome" />
       </Form.Item>

@@ -1,5 +1,6 @@
 import type { Moment } from 'moment';
 import moment from 'moment';
+
 import { EventInterface } from '../hooks/useEvents';
 import datesAreSame from './datesAreSame';
 
@@ -14,11 +15,11 @@ import datesAreSame from './datesAreSame';
 
 const getListData = (
   value: Moment,
-  events?: EventInterface[] | null
+  events?: EventInterface[] | null,
 ): { type: string; content: string; event: EventInterface }[] => {
   const listData: { type: string; content: string; event: EventInterface }[] = [];
   if (events) {
-    events.forEach((event) => {
+    events.forEach(event => {
       const date = new Date(event.attributes.date);
       const momentDate = moment(date);
       const eventTime = moment(momentDate).format('hh:mm');

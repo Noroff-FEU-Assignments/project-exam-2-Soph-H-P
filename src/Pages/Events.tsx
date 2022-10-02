@@ -1,12 +1,13 @@
-import EventsCalendar from '../components/events/EventsCalendar';
+import { useEffect, useState } from 'react';
+
+import Loader from '../components/common/Loader';
 import MetaData from '../components/common/MetaData';
+import EventsCalendar from '../components/events/EventsCalendar';
 import EventsForm from '../components/forms/EventsForm';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
+import API, { eventsEndpoint } from '../constants/api';
 import { useUserState } from '../context/UserContext';
 import useEvents, { EventInterface } from '../hooks/useEvents';
-import API, { eventsEndpoint } from '../constants/api';
-import { useEffect, useState } from 'react';
-import Loader from '../components/common/Loader';
 
 /**
  * Main page component for the Events page, this page renders
@@ -21,7 +22,9 @@ const Events = (): React.ReactElement => {
   const { userInfo } = useUserState();
   const url = `${API}${eventsEndpoint}`;
   const { events, isLoading } = useEvents(url);
-  const [visibleEvents, setVisibleEvents] = useState<EventInterface[] | null | undefined>(null);
+  const [visibleEvents, setVisibleEvents] = useState<EventInterface[] | null | undefined>(
+    null,
+  );
 
   useEffect(() => {
     if (events) {
@@ -31,7 +34,10 @@ const Events = (): React.ReactElement => {
   }, [events]);
 
   return (
-    <PageContainer $isReversed={true} $isSplit={userInfo?.userRole === 'admin' ? true : false}>
+    <PageContainer
+      $isReversed={true}
+      $isSplit={userInfo?.userRole === 'admin' ? true : false}
+    >
       <MetaData
         title="Events | Birds of Østfold"
         metaDescription="Take a look at what is going on for bird spotters in your local area."
@@ -39,8 +45,13 @@ const Events = (): React.ReactElement => {
       {isLoading && <Loader size={100} />}
       {visibleEvents && (
         <>
-          <EventsCalendar visibleEvents={visibleEvents} setVisibleEvents={setVisibleEvents} />
-          {userInfo?.userRole === 'admin' && <EventsForm setVisibleEvents={setVisibleEvents} />}
+          <EventsCalendar
+            visibleEvents={visibleEvents}
+            setVisibleEvents={setVisibleEvents}
+          />
+          {userInfo?.userRole === 'admin' && (
+            <EventsForm setVisibleEvents={setVisibleEvents} />
+          )}
         </>
       )}
     </PageContainer>

@@ -21,13 +21,36 @@ const createReadableTimeDifference = (time: number, measure: string): string => 
 const findTimeAgo = (when: string): string => {
   const whenAsDate = moment(when);
   const timeNow = moment();
-  const difference = parseInt(moment.duration(timeNow.diff(whenAsDate)).asHours().toFixed(0));
-  const differenceDays = parseInt(moment.duration(timeNow.diff(whenAsDate)).asDays().toFixed(0));
-  const differenceWeeks = parseInt(moment.duration(timeNow.diff(whenAsDate)).asWeeks().toFixed(0));
-  const differenceMonths = parseInt(
-    moment.duration(timeNow.diff(whenAsDate)).asMonths().toFixed(0)
+  const difference = parseInt(
+    moment
+      .duration(timeNow.diff(whenAsDate))
+      .asHours()
+      .toFixed(0),
   );
-  const differenceYears = parseInt(moment.duration(timeNow.diff(whenAsDate)).asYears().toFixed(0));
+  const differenceDays = parseInt(
+    moment
+      .duration(timeNow.diff(whenAsDate))
+      .asDays()
+      .toFixed(0),
+  );
+  const differenceWeeks = parseInt(
+    moment
+      .duration(timeNow.diff(whenAsDate))
+      .asWeeks()
+      .toFixed(0),
+  );
+  const differenceMonths = parseInt(
+    moment
+      .duration(timeNow.diff(whenAsDate))
+      .asMonths()
+      .toFixed(0),
+  );
+  const differenceYears = parseInt(
+    moment
+      .duration(timeNow.diff(whenAsDate))
+      .asYears()
+      .toFixed(0),
+  );
 
   if (difference <= 0) {
     return 'Just now';

@@ -1,4 +1,5 @@
-import React, { createContext, useContext, Dispatch, SetStateAction } from 'react';
+import React, { createContext, Dispatch, SetStateAction, useContext } from 'react';
+
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const AuthContext = createContext({
@@ -9,7 +10,9 @@ const AuthContext = createContext({
 const AuthStateProvider = ({ children }: { children: React.ReactNode }) => {
   const [authToken, setAuthToken] = useLocalStorage('auth', null);
   return (
-    <AuthContext.Provider value={{ authToken, setAuthToken }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ authToken, setAuthToken }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

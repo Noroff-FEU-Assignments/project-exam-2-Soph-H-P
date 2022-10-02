@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const NavContainer = styled.div`
   display: flex;
@@ -9,7 +9,6 @@ export const NavContainer = styled.div`
 export const DesktopNav = styled.nav`
   padding: 5px;
   display: flex;
-   
 `;
 
 export const MobileNav = styled.nav`

@@ -1,6 +1,6 @@
+import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { NavLink } from 'react-router-dom';
 import theme from '../../../styles/theme';
 
 export const StyledNavLink = styled(NavLink)`

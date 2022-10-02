@@ -1,4 +1,5 @@
-import React, { createContext, useContext, Dispatch, SetStateAction } from 'react';
+import React, { createContext, Dispatch, SetStateAction, useContext } from 'react';
+
 import useLocalStorage from '../hooks/useLocalStorage';
 
 export interface ProfileInterface {
@@ -28,7 +29,11 @@ const UserContext = createContext({
 
 const UserStateProvider = ({ children }: { children: React.ReactNode }) => {
   const [userInfo, setUserInfo] = useLocalStorage('user', null);
-  return <UserContext.Provider value={{ userInfo, setUserInfo }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ userInfo, setUserInfo }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 const useUserState = () => {

@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import API, { userEndpoint } from '../constants/api';
-
-import axios from 'axios';
 import { FormInstance } from 'antd';
-import { useAuthState } from '../context/AuthContext';
+import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import API, { userEndpoint } from '../constants/api';
+import { useAuthState } from '../context/AuthContext';
 import useCheckUnauthorizedUser from './useCheckUnauthorizedUser';
 import useUserProfile from './useUserProfile';
 
@@ -19,7 +19,7 @@ import useUserProfile from './useUserProfile';
  */
 
 const useUser = (
-  form?: FormInstance
+  form?: FormInstance,
 ): {
   formIsSubmitted: string | null;
   formError: string | null;
@@ -51,11 +51,11 @@ const useUser = (
         setFormIsSubmitted('This user has been updated');
       }
       form && form.resetFields();
-    } catch (error: unknown) {
+    } catch (error) {
       checkUnauthorizedUser(
         error,
         setFormError,
-        'We seem to be having trouble saving the changes, please try again later'
+        'We seem to be having trouble saving the changes, please try again later',
       );
     } finally {
       setIsSubmitting(false);
@@ -68,18 +68,20 @@ const useUser = (
       const headers = {
         Authorization: `Bearer ${authToken}`,
       };
-      const response = await axios.delete(`${API}${userEndpoint}/${id}`, { headers: headers });
+      const response = await axios.delete(`${API}${userEndpoint}/${id}`, {
+        headers: headers,
+      });
       console.log(response.data.username);
       deleteUserProfile(response.data.username);
       if (response.status === 200) {
         setFormIsSubmitted('This event has been deleted');
       }
       form && form.resetFields();
-    } catch (error: unknown) {
+    } catch (error) {
       checkUnauthorizedUser(
         error,
         setFormError,
-        'We seem to be having trouble deleting this event, please try again later'
+        'We seem to be having trouble deleting this event, please try again later',
       );
     } finally {
       setIsDeleting(false);

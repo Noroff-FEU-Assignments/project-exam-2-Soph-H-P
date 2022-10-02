@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { StyledFooter } from './index.styled';
 
 /**

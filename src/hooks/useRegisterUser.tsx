@@ -1,8 +1,9 @@
+import { FormInstance } from 'antd';
+import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import API, { registerUrlEndpoint } from '../constants/api';
-import axios from 'axios';
-import { FormInstance } from 'antd';
 import { useAuthState } from '../context/AuthContext';
 import useUserProfile from './useUserProfile';
 
@@ -13,16 +14,18 @@ export interface RegisterFormInterface {
 }
 
 /**
- * useRegisterUser returns a function submitForm which takes user registration details and authenticates them 
- * a profile is also created and linked to the user. The authentication token is set allowing the user to 
- * be logged in. 
+ * useRegisterUser returns a function submitForm which takes user registration details and authenticates them
+ * a profile is also created and linked to the user. The authentication token is set allowing the user to
+ * be logged in.
  * The form element allows the feilds to be reset on success
  * @example submitForm(data)
  * @param {FormInstance} form the form which is being submitted
  * @returns {submitForm, registerError, isSubmitting}
  */
 
-const useRegisterUser = (form: FormInstance): {
+const useRegisterUser = (
+  form: FormInstance,
+): {
   submitForm: (data: RegisterFormInterface) => Promise<void>;
   registerError: string | null;
   isSubmitting: boolean;
@@ -41,7 +44,7 @@ const useRegisterUser = (form: FormInstance): {
       const convertToFormData = (data: RegisterFormInterface) => {
         const formData = new FormData();
         //@ts-ignore: string cannot be used as key
-        Object.keys(data).forEach((key) => formData.append(key, data[key]));
+        Object.keys(data).forEach(key => formData.append(key, data[key]));
         return formData;
       };
 
@@ -61,30 +64,31 @@ const useRegisterUser = (form: FormInstance): {
       setAuthToken(response.data.jwt);
       form.resetFields();
       navigate('/');
-    } catch (error: unknown) {
+    } catch (error) {
       console.log('error', error);
       if (axios.isAxiosError(error)) {
         if (!error?.response) {
           console.log('No Server Response');
           setRegisterError(
-            'Looks like there is a problem with our server, please try again later.'
+            'Looks like there is a problem with our server, please try again later.',
           );
         } else if (
           // @ts-ignore: unknown object
-          error.response?.data.error.message === 'An error occurred during account creation'
+          error.response?.data.error.message ===
+          'An error occurred during account creation'
         ) {
           setRegisterError(
-            'Oops something went wrong. It may be that that username is taken, please try another.'
+            'Oops something went wrong. It may be that that username is taken, please try another.',
           );
         } else if (error.response?.status === 400 || error.response?.status === 403) {
           setRegisterError(
             'Oops something went wrong. ' +
               // @ts-ignore: unknown object
-              error.response.data.error.message
+              error.response.data.error.message,
           );
         } else {
           setRegisterError(
-            'Sorry we seem to be have trouble registering you at the moment, please try again later.'
+            'Sorry we seem to be have trouble registering you at the moment, please try again later.',
           );
         }
       }

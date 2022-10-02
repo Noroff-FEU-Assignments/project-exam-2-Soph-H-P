@@ -1,19 +1,20 @@
-import { StyledForm } from '../StyledForm/index.styled';
 import { Button, DatePicker, Form, Input, Switch, UploadFile } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
-import useSubmitSightingsForm from '../../../hooks/useSubmitSightingsForm';
 import { RangePickerProps } from 'antd/lib/date-picker';
+import TextArea from 'antd/lib/input/TextArea';
+import { LatLngLiteral } from 'leaflet';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import UploadInput from '../UploadInput';
-import { useUserState } from '../../../context/UserContext';
-import FormMessage from '../FormMessage';
-import LocationInput from '../../mapComponents/LocationInput';
-import { LatLngLiteral } from 'leaflet';
-import SpeciesInput from '../SpeciesInput';
-import PageTitle from '../../typography/PageTitle';
-import { StyledFormContainer } from './index.styled';
 import { Link } from 'react-router-dom';
+
+import { useUserState } from '../../../context/UserContext';
+import useSubmitSightingsForm from '../../../hooks/useSubmitSightingsForm';
+import LocationInput from '../../mapComponents/LocationInput';
+import PageTitle from '../../typography/PageTitle';
+import FormMessage from '../FormMessage';
+import SpeciesInput from '../SpeciesInput';
+import { StyledForm } from '../StyledForm/index.styled';
+import UploadInput from '../UploadInput';
+import { StyledFormContainer } from './index.styled';
 
 /**
  * Sightings form component renders a form taking information form a user of a bird sighting
@@ -33,11 +34,11 @@ const SightingsForm = (): React.ReactElement => {
     form,
     setFileList,
     setPosition,
-    position
+    position,
   );
   const { userInfo } = useUserState();
 
-  const disabledDate: RangePickerProps['disabledDate'] = (current) => {
+  const disabledDate: RangePickerProps['disabledDate'] = current => {
     // Prevents user from selecting a future day
     return current && current > moment().endOf('day');
   };
@@ -56,7 +57,7 @@ const SightingsForm = (): React.ReactElement => {
     <StyledForm
       form={form}
       initialValues={{ remember: true }}
-      onFinish={(data) => submitForm(data, setNewSightingId, image)}
+      onFinish={data => submitForm(data, setNewSightingId, image)}
       style={{ width: 800 }}
     >
       <PageTitle>Add Sighting</PageTitle>
@@ -68,14 +69,22 @@ const SightingsForm = (): React.ReactElement => {
             name="date"
             rules={[{ required: true, message: 'Please tell us when you saw this bird' }]}
           >
-            <DatePicker format={'dddd Do MM YYYY - HH:mm'} showTime disabledDate={disabledDate} />
+            <DatePicker
+              format={'dddd Do MM YYYY - HH:mm'}
+              showTime
+              disabledDate={disabledDate}
+            />
           </Form.Item>
           <label htmlFor="description">Description</label>
           <Form.Item
             name="description"
             rules={[{ required: true, message: 'Please tell us about the sighting' }]}
           >
-            <TextArea rows={4} placeholder="Description character limit 250" maxLength={250} />
+            <TextArea
+              rows={4}
+              placeholder="Description character limit 250"
+              maxLength={250}
+            />
           </Form.Item>
           <label htmlFor="public">Who should see this sighting?</label>
           <Form.Item valuePropName="checked" name="public" initialValue={true}>
@@ -121,7 +130,11 @@ const SightingsForm = (): React.ReactElement => {
                 </>
               )}
               {userInfo.userRole === 'admin' && (
-                <Form.Item name="varified" initialValue={true} style={{ display: 'none' }}>
+                <Form.Item
+                  name="varified"
+                  initialValue={true}
+                  style={{ display: 'none' }}
+                >
                   <Input disabled />
                 </Form.Item>
               )}
@@ -145,7 +158,11 @@ const SightingsForm = (): React.ReactElement => {
             <Input placeholder="longitude" disabled />
           </Form.Item>
 
-          <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
+          <UploadInput
+            setImage={setImage}
+            fileList={fileList}
+            setFileList={setFileList}
+          />
         </div>
       </StyledFormContainer>
       <Button loading={isSubmitting} type="primary" htmlType="submit" size="large">
@@ -160,13 +177,15 @@ const SightingsForm = (): React.ReactElement => {
       )}
       {formIsSubmitted && userInfo && userInfo.userRole !== 'admin' && (
         <FormMessage>
-          Your sighting has been submitted and will be visible after it is accepted by a moderator.
+          Your sighting has been submitted and will be visible after it is accepted by a
+          moderator.
           <Link to={`/sighting/${newSightingId}`}>View new sighting</Link>
         </FormMessage>
       )}
       {formIsSubmitted && !userInfo && (
         <FormMessage>
-          Your sighting has been submitted and will be visible after it is accepted by a moderator.
+          Your sighting has been submitted and will be visible after it is accepted by a
+          moderator.
         </FormMessage>
       )}
     </StyledForm>

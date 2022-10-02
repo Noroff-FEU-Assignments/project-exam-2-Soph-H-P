@@ -1,4 +1,5 @@
 import React from 'react';
+
 import theme from '../../../styles/theme';
 import StatusSvg from '../../../svgs/StatusIcon';
 import { StyledIconContainer } from './index.styled';

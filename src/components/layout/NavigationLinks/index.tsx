@@ -1,16 +1,17 @@
 import { Button, Dropdown, Space } from 'antd';
-import { useUserState } from '../../../context/UserContext';
+import { Dispatch, SetStateAction } from 'react';
+
 import { useAuthState } from '../../../context/AuthContext';
-import DownArrowSvg from '../../../svgs/DownArrowSvg';
-import { DropdownMenuItems } from '../DropdownMenu';
-import { NavLinksContainer, StyledNavLink } from './index.styled';
-import ProfileLink from '../ProfileLink';
-import MapIcon from '../../../svgs/MapIcon';
+import { useUserState } from '../../../context/UserContext';
 import AddSvg from '../../../svgs/AddSvg';
 import BinocularsSvg from '../../../svgs/BinocularsSvg';
+import DownArrowSvg from '../../../svgs/DownArrowSvg';
+import MapIcon from '../../../svgs/MapIcon';
 import ModerateSvg from '../../../svgs/ModerateSvg';
-import { Dispatch, SetStateAction } from 'react';
 import RecentSvg from '../../../svgs/RecentSvg';
+import { DropdownMenuItems } from '../DropdownMenu';
+import ProfileLink from '../ProfileLink';
+import { NavLinksContainer, StyledNavLink } from './index.styled';
 
 /**
  * Creates an nav element for desktop displaying the correct links depending on user status

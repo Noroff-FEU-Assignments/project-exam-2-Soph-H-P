@@ -1,9 +1,10 @@
-import { StyledForm } from '../StyledForm/index.styled';
-import FormMessage from '../FormMessage';
 import { Button, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
+
 import useSubmitContactForm from '../../../hooks/useSubmitContactForm';
 import PageTitle from '../../typography/PageTitle';
+import FormMessage from '../FormMessage';
+import { StyledForm } from '../StyledForm/index.styled';
 
 /**
  * The Contact form uses antd forms to take user information and send it to the admin email
@@ -22,7 +23,10 @@ const ContectForm = (): React.ReactElement => {
     <StyledForm form={form} initialValues={{ remember: true }} onFinish={submitForm}>
       <PageTitle>Contact</PageTitle>
       <label htmlFor="full-name">Name</label>
-      <Form.Item name="full-name" rules={[{ required: true, message: 'Please write your name' }]}>
+      <Form.Item
+        name="full-name"
+        rules={[{ required: true, message: 'Please write your name' }]}
+      >
         <Input placeholder="Newt Scamander" />
       </Form.Item>
       <label htmlFor="email">Email</label>
@@ -39,7 +43,10 @@ const ContectForm = (): React.ReactElement => {
         <Input placeholder="example@gmail.com" />
       </Form.Item>
       <label htmlFor="subject">Subject</label>
-      <Form.Item name="subject" rules={[{ required: true, message: 'Please add a subject' }]}>
+      <Form.Item
+        name="subject"
+        rules={[{ required: true, message: 'Please add a subject' }]}
+      >
         <Input placeholder="Where can I find..." />
       </Form.Item>
       <label htmlFor="message">Message</label>

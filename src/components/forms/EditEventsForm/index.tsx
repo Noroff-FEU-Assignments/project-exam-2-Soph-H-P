@@ -1,12 +1,13 @@
-import { StyledForm } from '../StyledForm/index.styled';
 import { Button, DatePicker, Form, Input, message, Popconfirm } from 'antd';
 import { RangePickerProps } from 'antd/lib/date-picker';
 import moment from 'moment';
-import FormMessage from '../FormMessage';
-import theme from '../../../styles/theme';
-import useSubmitEvent from '../../../hooks/useSubmitEvent';
-import { EventInterface } from '../../../hooks/useEvents';
 import { Dispatch } from 'react';
+
+import { EventInterface } from '../../../hooks/useEvents';
+import useSubmitEvent from '../../../hooks/useSubmitEvent';
+import theme from '../../../styles/theme';
+import FormMessage from '../FormMessage';
+import { StyledForm } from '../StyledForm/index.styled';
 
 /**
  * The Edit events form takes an event as a prop which is used to populate the form
@@ -38,10 +39,16 @@ const EditEventsForm = ({
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
 }): React.ReactElement => {
   const [form] = Form.useForm();
-  const { formError, formIsSubmitted, isSubmitting, submitUpdateForm, deleteEvent, isDeleting } =
-    useSubmitEvent(form);
+  const {
+    formError,
+    formIsSubmitted,
+    isSubmitting,
+    submitUpdateForm,
+    deleteEvent,
+    isDeleting,
+  } = useSubmitEvent(form);
 
-  const disabledDate: RangePickerProps['disabledDate'] = (current) => {
+  const disabledDate: RangePickerProps['disabledDate'] = current => {
     // Prevents user from selecting a past day
     return current && current < moment().endOf('day');
   };
@@ -51,16 +58,16 @@ const EditEventsForm = ({
   const confirm = () => {
     message.info('Sighting deleted');
     deleteEvent(currentEvent.id);
-    setVisibleEvents((events) => {
-      return events?.filter((event) => event.id !== currentEvent.id) || null;
+    setVisibleEvents(events => {
+      return events?.filter(event => event.id !== currentEvent.id) || null;
     });
     setIsOpen(false);
   };
 
   const handleFinish = (data: EventData) => {
     submitUpdateForm(data, currentEvent.id);
-    setVisibleEvents((events) => {
-      const updatedEvents = events?.map((event) => {
+    setVisibleEvents(events => {
+      const updatedEvents = events?.map(event => {
         if (event.id === currentEvent.id) {
           return {
             ...event,
@@ -122,7 +129,12 @@ const EditEventsForm = ({
       <Form.Item
         initialValue={currentEvent.attributes.participants}
         name="participants"
-        rules={[{ required: true, message: 'Please let everyone know who can come to this event' }]}
+        rules={[
+          {
+            required: true,
+            message: 'Please let everyone know who can come to this event',
+          },
+        ]}
       >
         <Input placeholder="Everyone welcome" />
       </Form.Item>

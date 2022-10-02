@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import ApiErrorMessage from '../components/common/ApiErrorMessage';
 import Cta from '../components/common/Cta';
 import Loader from '../components/common/Loader';
 import MetaData from '../components/common/MetaData';
-import SingleSightingCard from '../components/sightingsCards/SingleSightingCard';
 import { PageContainer } from '../components/layout/PageContainer/index.styled';
+import SingleSightingCard from '../components/sightingsCards/SingleSightingCard';
 import API, { includingImagesQuery, sightingsEndpoint } from '../constants/api';
 import useSingleSighting from '../hooks/useSingleSighting';
 
@@ -48,7 +49,10 @@ const SingleSightingPage = (): React.ReactElement => {
 
   if (isLoading) {
     return (
-      <PageContainer $notFullHeight={true} style={{ maxWidth: '100%', width: 700, height: 400 }}>
+      <PageContainer
+        $notFullHeight={true}
+        style={{ maxWidth: '100%', width: 700, height: 400 }}
+      >
         <MetaData
           title="Loading... | Birds of Østfold"
           metaDescription="Hang tight we are just loading the page"
@@ -59,7 +63,11 @@ const SingleSightingPage = (): React.ReactElement => {
   }
   if (sighting) {
     return (
-      <PageContainer $hasBird={true} $notFullHeight={true} style={{ maxWidth: '100%', width: 700 }}>
+      <PageContainer
+        $hasBird={true}
+        $notFullHeight={true}
+        style={{ maxWidth: '100%', width: 700 }}
+      >
         <MetaData
           title={`${sighting.attributes.species} | Birds of Østfold`}
           metaDescription={`Here is the information about the sighting of ${sighting.attributes.species}`}
@@ -71,7 +79,10 @@ const SingleSightingPage = (): React.ReactElement => {
   return (
     <PageContainer $notFullHeight={true} style={{ maxWidth: '100%', width: 700 }}>
       <MetaData title={`Error | Birds of Østfold`} metaDescription={error} />
-      <ApiErrorMessage message={'Oops something seems to have gone wrong.'} hasGif={true} />
+      <ApiErrorMessage
+        message={'Oops something seems to have gone wrong.'}
+        hasGif={true}
+      />
       <Cta toHome={true} />
     </PageContainer>
   );

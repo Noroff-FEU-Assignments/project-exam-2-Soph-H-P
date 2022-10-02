@@ -1,16 +1,17 @@
-import React, { Dispatch, useEffect, useState } from 'react';
 import type { BadgeProps } from 'antd';
 import { Badge, Calendar } from 'antd';
 import type { Moment } from 'moment';
 import moment from 'moment';
-import { EventInterface } from '../../../hooks/useEvents';
-import EventModal from '../../modals/EventModal';
-import { CalendarContainer } from './index.styled';
+import React, { Dispatch, useEffect, useState } from 'react';
+
 import { useUserState } from '../../../context/UserContext';
+import { EventInterface } from '../../../hooks/useEvents';
+import getListData from '../../../utils/createEventListData';
 import EditEventModal from '../../modals/EditEventModal';
+import EventModal from '../../modals/EventModal';
 import PageTitle from '../../typography/PageTitle';
 import EventCard from '../EventCard';
-import getListData from '../../../utils/createEventListData';
+import { CalendarContainer } from './index.styled';
 
 /**
  * The events calender listens for the page width and at desktop size will render

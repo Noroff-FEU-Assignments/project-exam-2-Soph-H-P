@@ -1,16 +1,16 @@
 import { FileImageOutlined } from '@ant-design/icons';
 import { Modal, Upload, UploadFile, UploadProps } from 'antd';
-import ImgCrop from 'antd-img-crop';
 import { RcFile } from 'antd/lib/upload';
+import ImgCrop from 'antd-img-crop';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { StyledFormItem } from './index.styled';
 
+import { StyledFormItem } from './index.styled';
 
 /**
  * The Upload input uses the antd upload component it takes a list of files that is updated
- * when the user adds an image 
+ * when the user adds an image
  * the crop component sets the image ratio currently to 2/3
- * there is a timeout function for uploading the image to prevent the element constantly 
+ * there is a timeout function for uploading the image to prevent the element constantly
  * showing a loading state.
  *
  *
@@ -22,7 +22,6 @@ import { StyledFormItem } from './index.styled';
  * @example  <UploadInput setImage={setImage} fileList={fileList} setFileList={setFileList} />
  * @returns {React.ReactElement}
  */
-
 
 const UploadInput = ({
   fileList,
@@ -51,7 +50,7 @@ const UploadInput = ({
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
+      reader.onerror = error => reject(error);
     });
 
   const handleCancel = () => setPreviewOpen(false);
@@ -91,7 +90,12 @@ const UploadInput = ({
           {fileList.length >= 1 ? null : uploadButton}
         </Upload>
       </ImgCrop>
-      <Modal visible={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+      <Modal
+        visible={previewOpen}
+        title={previewTitle}
+        footer={null}
+        onCancel={handleCancel}
+      >
         <img alt="example" style={{ width: '100%' }} src={previewImage} />
       </Modal>
     </StyledFormItem>

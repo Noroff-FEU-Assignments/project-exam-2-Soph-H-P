@@ -17,7 +17,7 @@ import { ProfileInterface } from '../context/UserContext';
 const findSightingsUrl = (
   userInfo: ProfileInterface | null,
   pageNumber: number,
-  numberToShow: number
+  numberToShow: number,
 ): string => {
   const paginationEndpoint = `pagination[page]=${pageNumber}&pagination[pageSize]=${numberToShow}`;
 

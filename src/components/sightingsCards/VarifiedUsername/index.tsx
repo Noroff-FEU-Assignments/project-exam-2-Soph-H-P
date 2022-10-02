@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { useUserState } from '../../../context/UserContext';
 import useGetUser from '../../../hooks/useGetUser';
 import StatusIcon from '../StatusIcon';
@@ -35,8 +36,12 @@ const VarifiedUsername = ({
       return (
         <>
           <span>Who: </span>
-          <Link to={`/admin/edit-users/${profileId}`} style={{ display: 'flex', alignItems: 'end' }}>
-            {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
+          <Link
+            to={`/admin/edit-users/${profileId}`}
+            style={{ display: 'flex', alignItems: 'end' }}
+          >
+            {user.username}{' '}
+            <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
           </Link>
         </>
       );
@@ -44,7 +49,8 @@ const VarifiedUsername = ({
       return (
         <p style={{ display: 'flex', alignItems: 'end' }}>
           <span>Who: </span>
-          {user.username} <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
+          {user.username}{' '}
+          <StatusIcon status={user.sightings || 0} userRole={user.userRole} />
         </p>
       );
     } else if (!user || !userInfo) {

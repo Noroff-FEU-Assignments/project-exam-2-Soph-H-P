@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { ProfileInterface } from '../../../context/UserContext';
 import ProfileSvg from '../../../svgs/ProfileSvg';
 import { ProfileContainer } from './index.styled';
-import { ProfileInterface } from '../../../context/UserContext';
 
 /**
  * Creates an element that displays a profile icon and and the username of the user
@@ -12,7 +13,11 @@ import { ProfileInterface } from '../../../context/UserContext';
  * @returns {React.ReactElement}
  */
 
-const ProfileLink = ({ userInfo }: { userInfo: ProfileInterface | null }): React.ReactElement => {
+const ProfileLink = ({
+  userInfo,
+}: {
+  userInfo: ProfileInterface | null;
+}): React.ReactElement => {
   return (
     <ProfileContainer>
       <ProfileSvg />

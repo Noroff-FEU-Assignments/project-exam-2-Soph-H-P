@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import API, { andFilterVarified, sightingsEndpoint } from '../../../constants/api';
 import createSearchQuery from '../../../utils/createSearchQuery';
 import SearchForm from '../../forms/SearchForm';

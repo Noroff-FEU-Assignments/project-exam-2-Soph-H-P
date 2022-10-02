@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export interface SightingInterface {
   id: number;
@@ -27,7 +27,7 @@ export interface SightingInterface {
             };
             url: string;
           };
-        }
+        },
       ];
     };
     public: boolean;
@@ -58,7 +58,7 @@ interface PaginationData {
 
 const useSightings = (
   url?: string,
-  mySightings?: boolean
+  mySightings?: boolean,
 ): {
   getSightings: () => Promise<void>;
   error: string | null;
@@ -87,7 +87,7 @@ const useSightings = (
       } catch (error) {
         console.log(error);
         setError(
-          'Oops we seem to be having trouble finding sightings at the moment, please come back again later'
+          'Oops we seem to be having trouble finding sightings at the moment, please come back again later',
         );
       } finally {
         setIsLoading(false);

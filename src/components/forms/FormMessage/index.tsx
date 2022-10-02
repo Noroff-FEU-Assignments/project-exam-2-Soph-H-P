@@ -14,7 +14,13 @@ import { StyledFormMessage } from './index.styled';
  * @returns {React.ReactElement}
  */
 
-const FormMessage = ({ error, children }: { error?: boolean; children: React.ReactNode }): React.ReactElement => {
+const FormMessage = ({
+  error,
+  children,
+}: {
+  error?: boolean;
+  children: React.ReactNode;
+}): React.ReactElement => {
   return (
     <StyledFormMessage $error={error}>
       {error ? <CloseSvg /> : <CheckSvg />}

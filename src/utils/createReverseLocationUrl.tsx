@@ -1,4 +1,4 @@
-import { reverseLocationToken, reverseLocationUrl } from "../constants/api";
+import { reverseLocationToken, reverseLocationUrl } from '../constants/api';
 
 /**
  * creates a url that contains longitude and latitude to be used
@@ -9,7 +9,7 @@ import { reverseLocationToken, reverseLocationUrl } from "../constants/api";
  * @returns {string}
  */
 const createReverseLocationUrl = (lat: number, lng: number): string => {
-    return `${reverseLocationUrl}?lat=${lat}&lon=${lng}&format=json&apiKey=${reverseLocationToken}`;
-  };
-  
-export default createReverseLocationUrl
+  return `${reverseLocationUrl}?lat=${lat}&lon=${lng}&format=json&apiKey=${reverseLocationToken}`;
+};
+
+export default createReverseLocationUrl;

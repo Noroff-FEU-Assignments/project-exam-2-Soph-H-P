@@ -17,7 +17,11 @@ const datesAreSame = (dateOne: Moment, dateTwo: Moment): boolean => {
   const dateTwoMonth = dateTwo.month();
   const dateTwoYear = dateTwo.year();
 
-  if (dateOneDay === dateTwoDay && dateOneMonth === dateTwoMonth && dateOneYear === dateTwoYear) {
+  if (
+    dateOneDay === dateTwoDay &&
+    dateOneMonth === dateTwoMonth &&
+    dateOneYear === dateTwoYear
+  ) {
     return true;
   }
   return false;
