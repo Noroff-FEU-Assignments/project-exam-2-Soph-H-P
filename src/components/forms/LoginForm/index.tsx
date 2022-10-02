@@ -75,11 +75,6 @@ const LoginForm = (): React.ReactElement => {
           iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
         />
       </Form.Item>
-      {/* <Form.Item>
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
-      </Form.Item> */}
       {loginError && <FormMessage error={true}>{loginError}</FormMessage>}
       <Form.Item>
         <Button type="primary" htmlType="submit" size="large">

@@ -9,4 +9,15 @@ export const StyledFormItem = styled.div`
     width: 180px;
     height: 180px;
   }
+
+  button {
+    min-width: unset;
+    margin: opx;
+  }
+
+  .ant-upload-list-item-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;

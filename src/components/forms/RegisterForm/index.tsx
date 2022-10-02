@@ -2,8 +2,6 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuthState } from '../../../context/AuthContext';
-import { useUserState } from '../../../context/UserContext';
 import useRegisterUser, { RegisterFormInterface } from '../../../hooks/useRegisterUser';
 import FormMessage from '../FormMessage';
 import { StyledForm } from '../StyledForm/index.styled';
@@ -17,29 +15,9 @@ import { StyledForm } from '../StyledForm/index.styled';
  */
 
 const RegisterForm = (): React.ReactElement => {
-  const { authToken, setAuthToken } = useAuthState();
-  const { setUserInfo } = useUserState();
-
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const { registerError, isSubmitting, submitForm } = useRegisterUser(form);
-
-  if (authToken)
-    return (
-      <StyledForm>
-        <p style={{ textAlign: 'center' }}>You are already logged in</p>
-        <Button
-          onClick={() => {
-            setAuthToken(null);
-            setUserInfo(null);
-            navigate('/');
-          }}
-          size="large"
-        >
-          Logout
-        </Button>
-      </StyledForm>
-    );
+  const { registerError, isSubmitting, submitForm, isSubmitted } = useRegisterUser(form);
 
   return (
     <StyledForm
@@ -91,6 +69,7 @@ const RegisterForm = (): React.ReactElement => {
         />
       </Form.Item>
       {registerError && <FormMessage error={true}>{registerError}</FormMessage>}
+      {isSubmitted && <FormMessage>Congratulations you are now a member</FormMessage>}
       <Form.Item>
         <Button type="primary" htmlType="submit" size="large">
           {isSubmitting ? 'Registering...' : 'Register'}
