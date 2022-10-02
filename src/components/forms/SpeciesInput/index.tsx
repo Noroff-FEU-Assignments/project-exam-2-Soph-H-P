@@ -86,8 +86,8 @@ const SpeciesInput = ({ initialValue }: { initialValue?: string }): React.ReactE
           autoClearSearchValue={false}
           dropdownRender={(menu) => <>{menu}</>}
         >
-          {singleListSightings.map((species: string, index) => (
-            <Option key={index}>{species}</Option>
+          {singleListSightings.map((species: string) => (
+            <Option key={species}>{species}</Option>
           ))}
         </StyledSelect>
       </Form.Item>

@@ -23,6 +23,7 @@ const useVarifySighting = (): {
   const { checkUnauthorizedUser } = useCheckUnauthorizedUser();
 
   const varifySighting = async (id: number) => {
+    console.log('we got this far');
     setIsVarifying(true);
     setError(null);
     try {

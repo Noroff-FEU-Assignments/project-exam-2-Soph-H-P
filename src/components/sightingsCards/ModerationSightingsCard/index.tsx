@@ -34,8 +34,6 @@ const ModerationSightingsCard = ({
   sighting: SightingInterface;
   setVisibleSightings: Dispatch<SetStateAction<SightingInterface[] | null>>;
 }): React.ReactElement => {
-
-
   findImageUrl(sighting);
   const imageSrc = findImageUrl(sighting);
   const noImage = imageSrc === '';
@@ -45,7 +43,6 @@ const ModerationSightingsCard = ({
     nearestLocation,
     species,
     description,
-    userId,
     profileId,
     username,
     public: isPublic,
@@ -69,9 +66,7 @@ const ModerationSightingsCard = ({
   };
 
   const handleVarifySighting = () => {
-    if (userId !== null) {
-      varifySighting(sighting.id);
-    }
+    varifySighting(sighting.id);
     removeSighting(sighting.id);
   };
 
