@@ -33,14 +33,12 @@ const StickySightingsMapContainer = ({
     <StickyContainer>
       <div>
         <Cta />
-        {userInfo && (
-          <MapWithLocationPoints
-            url={isMySightings ? findMySightingsUrl(userInfo.profileId) : url}
-            title={isMySightings ? 'My sightings' : 'Sightings in the last 24 hours'}
-            height={400}
-            isMySightings={isMySightings}
-          />
-        )}
+        <MapWithLocationPoints
+          url={isMySightings && userInfo ? findMySightingsUrl(userInfo.profileId) : url}
+          title={isMySightings ? 'My sightings' : 'Sightings in the last 24 hours'}
+          height={400}
+          isMySightings={isMySightings}
+        />
       </div>
     </StickyContainer>
   );
