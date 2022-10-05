@@ -22,6 +22,7 @@ export const StyledFormMessage = styled.span<{ $error?: boolean }>`
   a {
     text-decoration: underline;
     margin-left: 20px;
+    color: ${theme.colors.brightWhite};
   }
 
   a:hover {
