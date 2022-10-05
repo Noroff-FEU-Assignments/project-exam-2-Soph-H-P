@@ -1,6 +1,6 @@
 # Birds of Østfold
 
-![image](https://github.com/Noroff-FEU-Assignments/project-exam-2-Soph-H-P/blob/master/src/svgs/site-preview.png?raw=true)
+![image](https://github.com/Noroff-FEU-Assignments/project-exam-2-Soph-H-P/blob/main/src/assets/site-preview.png?raw=true)
 
 In this project I had to create a react app with
 [Link to live site](https://birds-of-ostfold.netlify.app/)
